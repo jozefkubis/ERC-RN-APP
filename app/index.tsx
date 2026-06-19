@@ -1,11 +1,11 @@
 import { StatusBar, StyleSheet, Text, View } from "react-native";
 
-export default function App() {
+export default function HomeScreen() {
   return (
     <>
       <StatusBar barStyle="light-content" />
       <View style={styles.container}>
-        <Text style={styles.text}>ERC-RN-APP</Text>
+        <Text style={styles.title}>ERC-RN-APP</Text>
       </View>
     </>
   );
@@ -18,9 +18,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  text: {
+  title: {
+    color: "#ffffff",
     fontSize: 20,
-    fontWeight: "bold",
-    color: "#fff",
+    fontWeight: "700",
   },
 });
