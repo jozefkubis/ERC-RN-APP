@@ -1,0 +1,40 @@
+ERC-RN-APP/
+│
+├── app/
+│   ├── _layout.tsx
+│   ├── index.tsx
+│   ├── algorithms/
+│   │   ├── index.tsx
+│   │   ├── [algorithmId].tsx
+│   │   └── runner.tsx
+│   └── settings.tsx
+│
+├── src/
+│   ├── data/
+│   │   ├── algorithms/
+│   │   │   ├── alsAdult.js
+│   │   │   └── index.js
+│   │   ├── drugs/
+│   │   └── translations/
+│   │
+│   ├── engine/
+│   │   ├── getCurrentStep.js
+│   │   ├── getNextStep.js
+│   │   └── history.js
+│   │
+│   ├── components/
+│   │   ├── algorithm/
+│   │   │   ├── DecisionStep.js
+│   │   │   ├── ActionStep.js
+│   │   │   ├── DrugStep.js
+│   │   │   └── TimerStep.js
+│   │   └── ui/
+│   │       ├── AppButton.js
+│   │       └── AppCard.js
+│   │
+│   ├── constants/
+│   │   ├── stepTypes.js
+│   │   └── colors.js
+│   │
+│   └── utils/
+│       └── translations.js
