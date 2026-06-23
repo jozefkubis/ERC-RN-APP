@@ -1,0 +1,54 @@
+src/
+│
+├── components/
+│   ├── ui/
+│   │   ├── AppButton.js
+│   │   ├── AppCard.js
+│   │   └── ScreenTitle.js
+│   │
+│   └── algorithm/
+│       ├── DecisionStep.js
+│       ├── ActionStep.js
+│       ├── DrugStep.js
+│       ├── TimerStep.js
+│       ├── WarningStep.js
+│       └── ChecklistStep.js
+│
+├── data/
+│   └── algorithms/
+│       ├── adult/
+│       │   ├── alsAdult.js
+│       │   ├── blsAdult.js
+│       │   ├── bradycardiaAdult.js
+│       │   └── tachycardiaAdult.js
+│       │
+│       ├── pediatric/
+│       │   ├── alsPediatric.js
+│       │   ├── blsPediatric.js
+│       │   └── anaphylaxisPediatric.js
+│       │
+│       ├── neonatal/
+│       │   └── newbornResuscitation.js
+│       │
+│       ├── special/
+│       │   ├── hypothermia.js
+│       │   ├── drowning.js
+│       │   └── traumaArrest.js
+│       │
+│       └── index.js
+│
+├── engine/
+│   ├── getAlgorithmById.js
+│   ├── getCurrentStep.js
+│   ├── getNextStep.js
+│   └── getPreviousStep.js
+│
+├── constants/
+│   ├── stepTypes.js
+│   ├── algorithmCategories.js
+│   └── colors.js
+│
+└── utils/
+    ├── getTranslation.js
+    ├── formatDose.js
+    └── formatTime.js
