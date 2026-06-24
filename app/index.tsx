@@ -117,6 +117,71 @@ export default function HomeScreen() {
             <Ionicons name="arrow-forward" size={23} color="#075296" />
           </View>
         </View>
+
+        <View style={styles.listSection}>
+          <View style={styles.sectionHeader}>
+            <View style={styles.sectionTitleRow}>
+              <Ionicons name="time-outline" size={22} color="#6B7483" />
+              <Text style={styles.sectionTitle}>História</Text>
+            </View>
+            <Text style={styles.sectionAction}>Zobraziť všetko</Text>
+          </View>
+
+          <View style={styles.smallCard}>
+            <View style={[styles.smallCardIcon, styles.algorithmIcon]}>
+              <Ionicons name="git-network" size={23} color="#FFFFFF" />
+            </View>
+            <View style={styles.smallCardText}>
+              <Text style={styles.smallCardTitle}>
+                ALS náhle zastavenie obehu
+              </Text>
+              <Text style={styles.smallCardSubtitle}>
+                Resuscitácia dospelých
+              </Text>
+            </View>
+            <Ionicons name="chevron-forward" size={19} color="#7A8492" />
+          </View>
+
+          <View style={styles.smallCard}>
+            <View style={[styles.smallCardIcon, styles.algorithmIcon]}>
+              <Ionicons name="git-network" size={23} color="#FFFFFF" />
+            </View>
+            <View style={styles.smallCardText}>
+              <Text style={styles.smallCardTitle}>Algoritmus anafylaxie</Text>
+              <Text style={styles.smallCardSubtitle}>Špeciálne okolnosti</Text>
+            </View>
+            <Ionicons name="chevron-forward" size={19} color="#7A8492" />
+          </View>
+        </View>
+
+        <View style={styles.listSection}>
+          <View style={styles.sectionTitleRow}>
+            <Ionicons name="star" size={22} color="#FFB000" />
+            <Text style={styles.sectionTitle}>Obľúbené</Text>
+          </View>
+
+          <View style={styles.smallCard}>
+            <View style={[styles.smallCardIcon, styles.medicineIcon]}>
+              <Ionicons name="medkit" size={22} color="#FFFFFF" />
+            </View>
+            <View style={styles.smallCardText}>
+              <Text style={styles.smallCardTitle}>Dávkovanie adrenalínu</Text>
+              <Text style={styles.smallCardSubtitle}>Databáza liekov</Text>
+            </View>
+            <Ionicons name="star" size={23} color="#FFB000" />
+          </View>
+
+          <View style={styles.smallCard}>
+            <View style={[styles.smallCardIcon, styles.timerIcon]}>
+              <Ionicons name="timer" size={23} color="#FFFFFF" />
+            </View>
+            <View style={styles.smallCardText}>
+              <Text style={styles.smallCardTitle}>KPR metronóm</Text>
+              <Text style={styles.smallCardSubtitle}>Časovače</Text>
+            </View>
+            <Ionicons name="star" size={23} color="#FFB000" />
+          </View>
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
@@ -125,7 +190,7 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "#F7F8FC",
   },
   container: {
     paddingHorizontal: 30,
@@ -262,5 +327,76 @@ const styles = StyleSheet.create({
     borderLeftColor: "transparent",
     borderRightColor: "transparent",
     borderBottomColor: "#F9DFE0",
+  },
+  listSection: {
+    width: "100%",
+    gap: 8,
+    paddingTop: 14,
+  },
+  sectionHeader: {
+    width: "100%",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    gap: 12,
+  },
+  sectionTitleRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
+  },
+  sectionTitle: {
+    color: "#10243C",
+    fontSize: 20,
+    fontWeight: "800",
+  },
+  sectionAction: {
+    color: "#075296",
+    fontSize: 13,
+    fontWeight: "700",
+  },
+  smallCard: {
+    width: "100%",
+    minHeight: 72,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 14,
+    paddingHorizontal: 14,
+    paddingVertical: 12,
+    borderWidth: 1,
+    borderColor: "#CBD3DF",
+    borderRadius: 10,
+    borderCurve: "continuous",
+    backgroundColor: "#FFFFFF",
+  },
+  smallCardIcon: {
+    width: 38,
+    height: 38,
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 19,
+  },
+  algorithmIcon: {
+    backgroundColor: "#0868C4",
+  },
+  medicineIcon: {
+    backgroundColor: "#8B6500",
+  },
+  timerIcon: {
+    backgroundColor: "#ED1C24",
+  },
+  smallCardText: {
+    flex: 1,
+    gap: 2,
+  },
+  smallCardTitle: {
+    color: "#172A43",
+    fontSize: 14,
+    fontWeight: "700",
+    lineHeight: 21,
+  },
+  smallCardSubtitle: {
+    color: "#626B79",
+    fontSize: 14,
   },
 });
