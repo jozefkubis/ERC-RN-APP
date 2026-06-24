@@ -17,31 +17,34 @@ export default function HomeScreen() {
         contentInsetAdjustmentBehavior="automatic"
         contentContainerStyle={styles.container}
       >
+        {/* Vyhľadávanie */}
         <View style={styles.searchContainer}>
-          <Ionicons name="search" size={24} color="gray" />
+          <Ionicons name="search" size={24} color="#aaacb0" />
           <TextInput
             style={styles.inputStyle}
             placeholder="Vyhľadaj postup, algoritmus..."
           />
         </View>
 
+        {/* Nadpis sekcie primárnych možností */}
         <View style={styles.primaryOptionsContainer}>
           <Ionicons
-            name="shapes-outline"
+            style={styles.primaryOptionIcon}
+            name="shapes"
             size={24}
-            color="black"
-            weight="bold"
+            color="#075296"
           />
           <Text style={styles.primaryOption}>Primárne možnosti</Text>
         </View>
 
+        {/* Primárna karta: resuscitácia dospelých */}
         <View style={[styles.cardBase, styles.card]}>
           <View style={styles.cardTopRow}>
             <View style={styles.badge}>
               <Text style={styles.badgeText}>Algoritmus</Text>
             </View>
             <View style={styles.cardIconContainer}>
-              <Ionicons name="pulse" size={44} color="#4D86BC" />
+              <Ionicons name="pulse" size={44} color="#4d86bc" />
             </View>
           </View>
 
@@ -57,6 +60,7 @@ export default function HomeScreen() {
           </View>
         </View>
 
+        {/* Primárna karta: pediatrická resuscitácia */}
         <View style={[styles.cardBase, styles.lightCard]}>
           <View style={styles.cardTopRow}>
             <View style={styles.lightBadge}>
@@ -75,6 +79,7 @@ export default function HomeScreen() {
           </View>
         </View>
 
+        {/* Primárna karta: resuscitácia novorodencov */}
         <View style={[styles.cardBase, styles.lightCard]}>
           <View style={styles.cardTopRow}>
             <View style={styles.lightBadge}>
@@ -95,6 +100,7 @@ export default function HomeScreen() {
           </View>
         </View>
 
+        {/* Primárna karta: špeciálne okolnosti */}
         <View style={[styles.cardBase, styles.lightCard]}>
           <View style={styles.cardTopRow}>
             <View style={styles.lightBadge}>
@@ -118,6 +124,7 @@ export default function HomeScreen() {
           </View>
         </View>
 
+        {/* Sekcia nedávnych algoritmov */}
         <View style={styles.listSection}>
           <View style={styles.sectionHeader}>
             <View style={styles.sectionTitleRow}>
@@ -154,6 +161,7 @@ export default function HomeScreen() {
           </View>
         </View>
 
+        {/* Sekcia obľúbených položiek */}
         <View style={styles.listSection}>
           <View style={styles.sectionTitleRow}>
             <Ionicons name="star" size={22} color="#FFB000" />
@@ -188,6 +196,7 @@ export default function HomeScreen() {
 }
 
 const styles = StyleSheet.create({
+  // Bezpečná oblasť obrazovky
   safeArea: {
     flex: 1,
     backgroundColor: "#F7F8FC",
@@ -197,22 +206,27 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
     gap: 15,
   },
+
+  // Vyhľadávanie
   searchContainer: {
     width: "100%",
     flexDirection: "row",
     gap: 10,
     alignItems: "center",
-    borderColor: "gray",
+    borderColor: "#c4c6cb",
     borderWidth: 2,
     borderRadius: 10,
     paddingHorizontal: 10,
     height: 60,
+    // boxShadow: "0 2px 4px rgba(15, 35, 60, 0.08)",
   },
   inputStyle: {
     flex: 1,
     height: 60,
     fontSize: 16,
   },
+
+  // Nadpis primárnych možností
   primaryOptionsContainer: {
     flexDirection: "row",
     alignItems: "center",
@@ -221,9 +235,14 @@ const styles = StyleSheet.create({
   primaryOption: {
     padding: 15,
     fontSize: 20,
-    color: "black",
+    color: "#10243C",
     fontWeight: "bold",
   },
+  primaryOptionIcon: {
+    fontWeight: "bold",
+  },
+
+  // Spoločné rozmery veľkých kariet
   cardBase: {
     width: "100%",
     height: 180,
@@ -233,10 +252,15 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     borderCurve: "continuous",
     overflow: "hidden",
+    boxShadow: "0 2px 4px rgba(15, 35, 60, 0.08)",
   },
+
+  // Modrá karta
   card: {
     backgroundColor: "#075296",
   },
+
+  // Spoločné riadky a ikony veľkých kariet
   cardRow: {
     width: "100%",
     flexDirection: "row",
@@ -258,6 +282,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+
+  // Odznak a text modrej karty
   badge: {
     paddingHorizontal: 13,
     paddingVertical: 6,
@@ -281,6 +307,8 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     lineHeight: 20,
   },
+
+  // Svetlé primárne karty
   lightCard: {
     borderWidth: 1,
     borderColor: "#CBD3DF",
@@ -311,6 +339,8 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: "700",
   },
+
+  // Výstražná ikona špeciálnych okolností
   warningTriangle: {
     width: 50,
     height: 50,
@@ -328,6 +358,8 @@ const styles = StyleSheet.create({
     borderRightColor: "transparent",
     borderBottomColor: "#F9DFE0",
   },
+
+  // Sekcie nedávnych a obľúbených položiek
   listSection: {
     width: "100%",
     gap: 8,
@@ -355,6 +387,8 @@ const styles = StyleSheet.create({
     fontSize: 13,
     fontWeight: "700",
   },
+
+  // Menšie položkové karty
   smallCard: {
     width: "100%",
     minHeight: 72,
@@ -368,6 +402,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderCurve: "continuous",
     backgroundColor: "#FFFFFF",
+    boxShadow: "0 2px 4px rgba(15, 35, 60, 0.08)",
   },
   smallCardIcon: {
     width: 38,
