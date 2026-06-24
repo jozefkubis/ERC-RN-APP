@@ -1,11 +1,22 @@
 import { Ionicons } from "@expo/vector-icons";
-import { StatusBar, StyleSheet, Text, TextInput, View } from "react-native";
+import {
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function HomeScreen() {
   return (
-    <>
+    <SafeAreaView style={styles.safeArea} edges={["top", "bottom"]}>
       <StatusBar barStyle="dark-content" />
-      <View style={styles.container}>
+      <ScrollView
+        contentInsetAdjustmentBehavior="automatic"
+        contentContainerStyle={styles.container}
+      >
         <View style={styles.searchContainer}>
           <Ionicons name="search" size={24} color="gray" />
           <TextInput
@@ -15,38 +26,111 @@ export default function HomeScreen() {
         </View>
 
         <View style={styles.primaryOptionsContainer}>
-          <Ionicons name="trail-sign-outline" size={24} color="black" />
+          <Ionicons
+            name="shapes-outline"
+            size={24}
+            color="black"
+            weight="bold"
+          />
           <Text style={styles.primaryOption}>Primárne možnosti</Text>
         </View>
 
-        <View style={styles.card}>
-          <View style={styles.cardCopy}>
+        <View style={[styles.cardBase, styles.card]}>
+          <View style={styles.cardTopRow}>
             <View style={styles.badge}>
-              <Text style={styles.badgeText}>Základné</Text>
+              <Text style={styles.badgeText}>Algoritmus</Text>
             </View>
+            <View style={styles.cardIconContainer}>
+              <Ionicons name="pulse" size={44} color="#4D86BC" />
+            </View>
+          </View>
 
-            <Text style={styles.cardTitle}>Resuscitácia dospelých</Text>
+          <Text style={styles.cardTitle} numberOfLines={1}>
+            Resuscitácia dospelých
+          </Text>
+
+          <View style={styles.cardRow}>
             <Text style={styles.cardDescription}>
               ALS, BLS, Post-resuscitačná starostlivosť
             </Text>
-          </View>
-
-          <View style={styles.cardIcons}>
-            <Ionicons name="pulse" size={62} color="#4D86BC" />
             <Ionicons name="arrow-forward" size={25} color="#FFFFFF" />
           </View>
         </View>
-      </View>
-    </>
+
+        <View style={[styles.cardBase, styles.lightCard]}>
+          <View style={styles.cardTopRow}>
+            <View style={styles.lightBadge}>
+              <Text style={styles.lightBadgeText}>Algoritmus</Text>
+            </View>
+            <View style={styles.cardIconContainer}>
+              <Ionicons name="happy-outline" size={50} color="#E3EBF4" />
+            </View>
+          </View>
+
+          <Text style={styles.lightCardTitle}>Pediatrická resuscitácia</Text>
+
+          <View style={styles.cardRow}>
+            <Text style={styles.lightCardDescription}>EPALS, PBLS</Text>
+            <Ionicons name="arrow-forward" size={23} color="#075296" />
+          </View>
+        </View>
+
+        <View style={[styles.cardBase, styles.lightCard]}>
+          <View style={styles.cardTopRow}>
+            <View style={styles.lightBadge}>
+              <Text style={styles.lightBadgeText}>Algoritmus</Text>
+            </View>
+            <View style={styles.cardIconContainer}>
+              <Ionicons name="medical-outline" size={48} color="#E3EBF4" />
+            </View>
+          </View>
+
+          <Text style={styles.lightCardTitle} numberOfLines={1}>
+            Resuscitácia novorodencov
+          </Text>
+
+          <View style={styles.cardRow}>
+            <Text style={styles.lightCardDescription}>NLS algoritmy</Text>
+            <Ionicons name="arrow-forward" size={23} color="#075296" />
+          </View>
+        </View>
+
+        <View style={[styles.cardBase, styles.lightCard]}>
+          <View style={styles.cardTopRow}>
+            <View style={styles.lightBadge}>
+              <Text style={styles.lightBadgeText}>Algoritmus</Text>
+            </View>
+            <View style={styles.warningTriangle}>
+              <View style={styles.warningTriangleShape} />
+              <Ionicons name="alert" size={32} color="#FFFFFF" />
+            </View>
+          </View>
+
+          <Text style={styles.lightCardTitle} numberOfLines={1}>
+            Špeciálne okolnosti
+          </Text>
+
+          <View style={styles.cardRow}>
+            <Text style={styles.lightCardDescription}>
+              Trauma, tehotenstvo, anafylaxia
+            </Text>
+            <Ionicons name="arrow-forward" size={23} color="#075296" />
+          </View>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    marginTop: 70,
-    marginHorizontal: 30,
-    alignItems: "center",
+  safeArea: {
     flex: 1,
+    backgroundColor: "#FFFFFF",
+  },
+  container: {
+    paddingHorizontal: 30,
+    paddingVertical: 16,
+    gap: 15,
   },
   searchContainer: {
     width: "100%",
@@ -67,7 +151,6 @@ const styles = StyleSheet.create({
   primaryOptionsContainer: {
     flexDirection: "row",
     alignItems: "center",
-    marginTop: 20,
     width: "100%",
   },
   primaryOption: {
@@ -76,22 +159,39 @@ const styles = StyleSheet.create({
     color: "black",
     fontWeight: "bold",
   },
-  card: {
+  cardBase: {
     width: "100%",
-    minHeight: 164,
-    flexDirection: "row",
+    height: 180,
     justifyContent: "space-between",
+    gap: 10,
     padding: 22,
     borderRadius: 12,
     borderCurve: "continuous",
-    backgroundColor: "#075296",
     overflow: "hidden",
   },
-  cardCopy: {
-    flex: 1,
-    alignItems: "flex-start",
-    gap: 10,
-    paddingRight: 12,
+  card: {
+    backgroundColor: "#075296",
+  },
+  cardRow: {
+    width: "100%",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    gap: 12,
+  },
+  cardTopRow: {
+    width: "100%",
+    height: 50,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    gap: 12,
+  },
+  cardIconContainer: {
+    width: 50,
+    height: 50,
+    alignItems: "center",
+    justifyContent: "center",
   },
   badge: {
     paddingHorizontal: 13,
@@ -110,14 +210,57 @@ const styles = StyleSheet.create({
     fontWeight: "800",
   },
   cardDescription: {
-    maxWidth: 220,
+    flex: 1,
     color: "#D7E9F8",
     fontSize: 14,
     fontWeight: "700",
     lineHeight: 20,
   },
-  cardIcons: {
-    alignItems: "flex-end",
-    justifyContent: "space-between",
+  lightCard: {
+    borderWidth: 1,
+    borderColor: "#CBD3DF",
+    backgroundColor: "#FFFFFF",
+    boxShadow: "0 2px 4px rgba(15, 35, 60, 0.08)",
+  },
+  lightBadge: {
+    alignSelf: "flex-start",
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 999,
+    backgroundColor: "#E4EFFD",
+  },
+  lightBadgeText: {
+    color: "#637083",
+    fontSize: 13,
+    fontWeight: "700",
+  },
+  lightCardTitle: {
+    flexShrink: 1,
+    color: "#10243C",
+    fontSize: 21,
+    fontWeight: "800",
+  },
+  lightCardDescription: {
+    flex: 1,
+    color: "#5C6574",
+    fontSize: 14,
+    fontWeight: "700",
+  },
+  warningTriangle: {
+    width: 50,
+    height: 50,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  warningTriangleShape: {
+    position: "absolute",
+    width: 0,
+    height: 0,
+    borderLeftWidth: 25,
+    borderRightWidth: 25,
+    borderBottomWidth: 43,
+    borderLeftColor: "transparent",
+    borderRightColor: "transparent",
+    borderBottomColor: "#F9DFE0",
   },
 });
