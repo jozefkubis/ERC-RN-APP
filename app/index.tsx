@@ -16,7 +16,25 @@ export default function HomeScreen() {
 
         <View style={styles.primaryOptionsContainer}>
           <Ionicons name="trail-sign-outline" size={24} color="black" />
-          <Text style={styles.primaryOption}>Primárne Možnosti</Text>
+          <Text style={styles.primaryOption}>Primárne možnosti</Text>
+        </View>
+
+        <View style={styles.card}>
+          <View style={styles.cardCopy}>
+            <View style={styles.badge}>
+              <Text style={styles.badgeText}>Základné</Text>
+            </View>
+
+            <Text style={styles.cardTitle}>Resuscitácia dospelých</Text>
+            <Text style={styles.cardDescription}>
+              ALS, BLS, Post-resuscitačná starostlivosť
+            </Text>
+          </View>
+
+          <View style={styles.cardIcons}>
+            <Ionicons name="pulse" size={62} color="#4D86BC" />
+            <Ionicons name="arrow-forward" size={25} color="#FFFFFF" />
+          </View>
         </View>
       </View>
     </>
@@ -57,5 +75,49 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: "black",
     fontWeight: "bold",
+  },
+  card: {
+    width: "100%",
+    minHeight: 164,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    padding: 22,
+    borderRadius: 12,
+    borderCurve: "continuous",
+    backgroundColor: "#075296",
+    overflow: "hidden",
+  },
+  cardCopy: {
+    flex: 1,
+    alignItems: "flex-start",
+    gap: 10,
+    paddingRight: 12,
+  },
+  badge: {
+    paddingHorizontal: 13,
+    paddingVertical: 6,
+    borderRadius: 999,
+    backgroundColor: "#0877D1",
+  },
+  badgeText: {
+    color: "#B9DDFF",
+    fontSize: 13,
+    fontWeight: "700",
+  },
+  cardTitle: {
+    color: "#FFFFFF",
+    fontSize: 23,
+    fontWeight: "800",
+  },
+  cardDescription: {
+    maxWidth: 220,
+    color: "#D7E9F8",
+    fontSize: 14,
+    fontWeight: "700",
+    lineHeight: 20,
+  },
+  cardIcons: {
+    alignItems: "flex-end",
+    justifyContent: "space-between",
   },
 });
