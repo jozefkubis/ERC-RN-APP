@@ -1,11 +1,23 @@
-import { StatusBar, StyleSheet, Text, View } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import { StatusBar, StyleSheet, Text, TextInput, View } from "react-native";
 
 export default function HomeScreen() {
   return (
     <>
-      <StatusBar barStyle="light-content" />
+      <StatusBar barStyle="dark-content" />
       <View style={styles.container}>
-        <Text style={styles.title}>ERC-RN-APP</Text>
+        <View style={styles.searchContainer}>
+          <Ionicons name="search" size={24} color="gray" />
+          <TextInput
+            style={styles.inputStyle}
+            placeholder="Vyhľadaj postup, algoritmus..."
+          />
+        </View>
+
+        <View style={styles.primaryOptionsContainer}>
+          <Ionicons name="trail-sign-outline" size={24} color="black" />
+          <Text style={styles.primaryOption}>Primárne Možnosti</Text>
+        </View>
       </View>
     </>
   );
@@ -13,14 +25,37 @@ export default function HomeScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: "#295dd7",
+    marginTop: 70,
+    marginHorizontal: 30,
     alignItems: "center",
-    justifyContent: "center",
+    flex: 1,
   },
-  title: {
-    color: "#ffffff",
+  searchContainer: {
+    width: "100%",
+    flexDirection: "row",
+    gap: 10,
+    alignItems: "center",
+    borderColor: "gray",
+    borderWidth: 2,
+    borderRadius: 10,
+    paddingHorizontal: 10,
+    height: 60,
+  },
+  inputStyle: {
+    flex: 1,
+    height: 60,
+    fontSize: 16,
+  },
+  primaryOptionsContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: 20,
+    width: "100%",
+  },
+  primaryOption: {
+    padding: 15,
     fontSize: 20,
-    fontWeight: "700",
+    color: "black",
+    fontWeight: "bold",
   },
 });
