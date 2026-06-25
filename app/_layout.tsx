@@ -5,12 +5,7 @@ export default function RootLayout() {
     <Stack>
       <Stack.Screen name="index" options={{ title: "ERC 2025" }} />
 
-      <Stack.Screen
-        name="algorithms/adult-resuscitation"
-        options={{ headerShown: false }}
-      />
-
-      <Stack.Screen name="algorithms/epals" options={{ headerShown: false }} />
+      <Stack.Screen name="algorithms" options={{ headerShown: false }} />
     </Stack>
   );
 }
