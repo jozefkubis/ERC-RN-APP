@@ -1,6 +1,13 @@
 import { Ionicons } from "@expo/vector-icons";
 import type { ComponentProps } from "react";
-import { StyleProp, StyleSheet, Text, View, ViewStyle } from "react-native";
+import {
+  Pressable,
+  StyleProp,
+  StyleSheet,
+  Text,
+  View,
+  ViewStyle,
+} from "react-native";
 
 type BaseCardProps = {
   topText: string;
@@ -26,43 +33,45 @@ export default function BaseCard({
   const isLight = variant === "light";
 
   return (
-    <View style={[styles.card, isLight && styles.lightCard, style]}>
-      <View style={styles.cardTopRow}>
-        <View style={[styles.badge, isLight && styles.lightBadge]}>
-          <Text style={[styles.badgeText, isLight && styles.lightBadgeText]}>
-            {topText}
-          </Text>
+    <Pressable style={({ pressed }) => pressed && styles.pressed}>
+      <View style={[styles.card, isLight && styles.lightCard, style]}>
+        <View style={styles.cardTopRow}>
+          <View style={[styles.badge, isLight && styles.lightBadge]}>
+            <Text style={[styles.badgeText, isLight && styles.lightBadgeText]}>
+              {topText}
+            </Text>
+          </View>
+
+          <View style={styles.cardIconContainer}>
+            <Ionicons
+              name={iconName}
+              size={iconSize}
+              color={iconColor ?? (isLight ? "#E3EBF4" : "#4D86BC")}
+            />
+          </View>
         </View>
 
-        <View style={styles.cardIconContainer}>
+        <Text style={[styles.cardTitle, isLight && styles.lightCardTitle]}>
+          {title}
+        </Text>
+
+        <View style={styles.cardRow}>
+          <Text
+            style={[
+              styles.cardDescription,
+              isLight && styles.lightCardDescription,
+            ]}
+          >
+            {description}
+          </Text>
           <Ionicons
-            name={iconName}
-            size={iconSize}
-            color={iconColor ?? (isLight ? "#E3EBF4" : "#4D86BC")}
+            name="arrow-forward"
+            size={25}
+            color={isLight ? "#075296" : "#FFFFFF"}
           />
         </View>
       </View>
-
-      <Text style={[styles.cardTitle, isLight && styles.lightCardTitle]}>
-        {title}
-      </Text>
-
-      <View style={styles.cardRow}>
-        <Text
-          style={[
-            styles.cardDescription,
-            isLight && styles.lightCardDescription,
-          ]}
-        >
-          {description}
-        </Text>
-        <Ionicons
-          name="arrow-forward"
-          size={25}
-          color={isLight ? "#075296" : "#FFFFFF"}
-        />
-      </View>
-    </View>
+    </Pressable>
   );
 }
 
@@ -144,5 +153,10 @@ const styles = StyleSheet.create({
   },
   lightCardDescription: {
     color: "#5C6574",
+  },
+  pressed: {
+    opacity: 0.7,
+    borderColor: "#595f64",
+    transform: [{ scale: 0.99 }],
   },
 });

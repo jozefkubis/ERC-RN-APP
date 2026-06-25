@@ -1,6 +1,6 @@
 import { Ionicons } from "@expo/vector-icons";
 import type { ComponentProps } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 
 type SmallCardProps = {
   title: string;
@@ -20,16 +20,18 @@ export default function SmallCard({
   trailingIconColor,
 }: SmallCardProps) {
   return (
-    <View style={styles.card}>
-      <View style={[styles.icon, { backgroundColor: iconBackgroundColor }]}>
-        <Ionicons name={iconName} size={23} color="#FFFFFF" />
+    <Pressable style={({ pressed }) => pressed && styles.pressed}>
+      <View style={styles.card}>
+        <View style={[styles.icon, { backgroundColor: iconBackgroundColor }]}>
+          <Ionicons name={iconName} size={23} color="#FFFFFF" />
+        </View>
+        <View style={styles.textContainer}>
+          <Text style={styles.title}>{title}</Text>
+          <Text style={styles.subtitle}>{subtitle}</Text>
+        </View>
+        <Ionicons name={trailingIcon} size={21} color={trailingIconColor} />
       </View>
-      <View style={styles.textContainer}>
-        <Text style={styles.title}>{title}</Text>
-        <Text style={styles.subtitle}>{subtitle}</Text>
-      </View>
-      <Ionicons name={trailingIcon} size={21} color={trailingIconColor} />
-    </View>
+    </Pressable>
   );
 }
 
@@ -69,5 +71,10 @@ const styles = StyleSheet.create({
   subtitle: {
     color: "#626B79",
     fontSize: 14,
+  },
+  pressed: {
+    opacity: 0.7,
+    borderColor: "#595f64",
+    transform: [{ scale: 0.99 }],
   },
 });

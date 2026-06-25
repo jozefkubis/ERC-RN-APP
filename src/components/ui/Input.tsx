@@ -1,5 +1,5 @@
 import { Ionicons } from "@expo/vector-icons";
-import type { ComponentProps } from "react";
+import { useState, type ComponentProps } from "react";
 import {
   StyleProp,
   StyleSheet,
@@ -24,8 +24,13 @@ export default function Input({
   style,
   ...textInputProps
 }: InputProps) {
+  const [isFocused, setIsFocused] = useState(false);
   return (
-    <View style={[styles.container, containerStyle]}>
+    <View
+      style={[styles.container, containerStyle, isFocused && styles.focused]}
+      onFocus={() => setIsFocused(true)}
+      onBlur={() => setIsFocused(false)}
+    >
       <Ionicons name={iconName} size={iconSize} color={iconColor} />
       <TextInput
         {...textInputProps}
@@ -54,5 +59,9 @@ const styles = StyleSheet.create({
     height: "100%",
     color: "#10243C",
     fontSize: 16,
+  },
+  focused: {
+    borderColor: "#0877D1",
+    borderWidth: 3,
   },
 });
