@@ -2,10 +2,17 @@ import BaseCard from "@/src/components/ui/BaseCard";
 import Input from "@/src/components/ui/Input";
 import SmallCard from "@/src/components/ui/SmallCard";
 import { Ionicons } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 import { ScrollView, StatusBar, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function HomeScreen() {
+  const router = useRouter();
+
+  function handleCardPress(route: string) {
+    router.push(route);
+  }
+
   return (
     <SafeAreaView style={styles.safeArea} edges={["top", "bottom"]}>
       <StatusBar barStyle="dark-content" />
@@ -29,6 +36,7 @@ export default function HomeScreen() {
           description="ALS, BLS, Post-resuscitačná starostlivosť"
           iconName="pulse"
           iconSize={44}
+          onPress={() => handleCardPress("/algorithms/Res_Adult/res_adult")}
         />
 
         {/* Primárna karta: pediatrická resuscitácia */}
@@ -39,6 +47,7 @@ export default function HomeScreen() {
           iconName="happy-outline"
           iconSize={50}
           variant="light"
+          onPress={() => handleCardPress("/algorithms/EPALS/epals")}
         />
 
         {/* Primárna karta: resuscitácia novorodencov */}
@@ -170,5 +179,4 @@ const styles = StyleSheet.create({
     fontSize: 13,
     fontWeight: "700",
   },
-
 });

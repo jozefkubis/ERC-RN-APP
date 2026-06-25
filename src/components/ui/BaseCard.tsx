@@ -18,6 +18,7 @@ type BaseCardProps = {
   iconColor?: string;
   variant?: "primary" | "light";
   style?: StyleProp<ViewStyle>;
+  onPress?: () => void;
 };
 
 export default function BaseCard({
@@ -29,11 +30,15 @@ export default function BaseCard({
   iconColor,
   variant = "primary",
   style,
+  onPress,
 }: BaseCardProps) {
   const isLight = variant === "light";
 
   return (
-    <Pressable style={({ pressed }) => pressed && styles.pressed}>
+    <Pressable
+      style={({ pressed }) => pressed && styles.pressed}
+      onPress={onPress}
+    >
       <View style={[styles.card, isLight && styles.lightCard, style]}>
         <View style={styles.cardTopRow}>
           <View style={[styles.badge, isLight && styles.lightBadge]}>
