@@ -36,7 +36,7 @@ export default function HomeScreen() {
           description="ALS, BLS, Post-resuscitačná starostlivosť"
           iconName="pulse"
           iconSize={44}
-          onPress={() => handleCardPress("/algorithms/Res_Adult/res_adult")}
+          onPress={() => handleCardPress("/algorithms/adult-resuscitation")}
         />
 
         {/* Primárna karta: pediatrická resuscitácia */}
@@ -47,7 +47,7 @@ export default function HomeScreen() {
           iconName="happy-outline"
           iconSize={50}
           variant="light"
-          onPress={() => handleCardPress("/algorithms/EPALS/epals")}
+          onPress={() => handleCardPress("/algorithms/epals")}
         />
 
         {/* Primárna karta: resuscitácia novorodencov */}
