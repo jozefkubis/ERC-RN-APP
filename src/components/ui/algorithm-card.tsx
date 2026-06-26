@@ -1,4 +1,4 @@
-import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
+import { Fontisto, Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import type { ComponentProps } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 
@@ -19,6 +19,10 @@ type AlgorithmCardProps =
   | (AlgorithmCardBaseProps & {
       iconFamily: "material-community";
       iconName: ComponentProps<typeof MaterialCommunityIcons>["name"];
+    })
+  | (AlgorithmCardBaseProps & {
+      iconFamily: "fontisto";
+      iconName: ComponentProps<typeof Fontisto>["name"];
     });
 
 export default function AlgorithmCard(props: AlgorithmCardProps) {
@@ -43,7 +47,7 @@ export default function AlgorithmCard(props: AlgorithmCardProps) {
             <View
               style={isWarningBadge ? styles.warningBadge : styles.criticalRow}
             >
-              {!isWarningBadge ? <View style={styles.criticalDot} /> : null}
+              {/* {!isWarningBadge ? <View style={styles.criticalDot} /> : null} */}
               <Text
                 style={
                   isWarningBadge ? styles.warningBadgeText : styles.criticalText
@@ -64,6 +68,8 @@ export default function AlgorithmCard(props: AlgorithmCardProps) {
               size={50}
               color="#E3EBF4"
             />
+          ) : props.iconFamily === "fontisto" ? (
+            <Fontisto name={props.iconName} size={38} color="#E3EBF4" />
           ) : (
             <Ionicons name={props.iconName} size={50} color="#E3EBF4" />
           )}
@@ -116,18 +122,20 @@ const styles = StyleSheet.create({
     gap: 9,
   },
   criticalRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 7,
-  },
-  criticalDot: {
-    width: 7,
-    height: 7,
+    paddingHorizontal: 8,
+    paddingVertical: 3,
     borderRadius: 4,
     backgroundColor: "#D40000",
+    alignSelf: "flex-start",
   },
+  // criticalDot: {
+  //   width: 7,
+  //   height: 7,
+  //   borderRadius: 4,
+  //   backgroundColor: "#D40000",
+  // },
   criticalText: {
-    color: "#D40000",
+    color: "#fafafa",
     fontSize: 12,
     fontWeight: "800",
   },

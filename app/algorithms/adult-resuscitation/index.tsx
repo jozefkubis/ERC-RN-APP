@@ -24,7 +24,8 @@ export default function ResuscitationAdult() {
           title="ALS"
           subtitle="Rozšírená resuscitácia"
           description="Defibrilácia, manažment dýchacích ciest a podávanie liekov pri zastavení obehu."
-          iconName="pulse-outline"
+          iconFamily="fontisto"
+          iconName="pulse"
         />
 
         <AlgorithmCard

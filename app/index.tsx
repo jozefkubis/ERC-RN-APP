@@ -63,7 +63,7 @@ export default function HomeScreen() {
         <BaseCard
           topText="Algoritmus"
           title="Špeciálne okolnosti"
-          description="Anafylaxia, Hypotermia, Toxické látky"
+          description="Anafylaxia, Hypotermia, Toxické látky..."
           iconName="warning-outline"
           iconColor="#CC6238"
           variant="light"
