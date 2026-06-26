@@ -42,7 +42,7 @@ export default function HomeScreen() {
         {/* Primárna karta: pediatrická resuscitácia */}
         <BaseCard
           topText="Algoritmus"
-          title="Pediatrická resuscitácia"
+          title="Resuscitácia detí"
           description="EPALS, PBLS"
           iconName="happy-outline"
           iconSize={50}
