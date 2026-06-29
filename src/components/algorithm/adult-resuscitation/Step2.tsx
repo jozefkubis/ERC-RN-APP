@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
   actionRow: {
     width: "100%",
     flexDirection: "row",
-    alignItems: "center",
+    alignItems: "flex-start",
     gap: 12,
   },
   actionIcon: {
