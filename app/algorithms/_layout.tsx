@@ -13,6 +13,7 @@ export default function AlgorithmsLayout() {
           headerTintColor: "#10243C",
           headerTitleStyle: { fontWeight: "bold" },
           headerTitleAlign: "center",
+          animation: "slide_from_right",
         }}
       />
       <Stack.Screen
@@ -23,6 +24,7 @@ export default function AlgorithmsLayout() {
           headerTintColor: "#10243C",
           headerTitleStyle: { fontWeight: "bold" },
           headerTitleAlign: "center",
+          animation: "slide_from_right",
         }}
       />
       <Stack.Screen
@@ -33,6 +35,7 @@ export default function AlgorithmsLayout() {
           headerTintColor: "#10243C",
           headerTitleStyle: { fontWeight: "bold" },
           headerTitleAlign: "center",
+          animation: "slide_from_right",
         }}
       />
       <Stack.Screen
@@ -43,6 +46,7 @@ export default function AlgorithmsLayout() {
           headerTintColor: "#10243C",
           headerTitleStyle: { fontWeight: "bold" },
           headerTitleAlign: "center",
+          animation: "slide_from_right",
         }}
       />
       <Stack.Screen
@@ -53,6 +57,7 @@ export default function AlgorithmsLayout() {
           headerTintColor: "#10243C",
           headerTitleStyle: { fontWeight: "bold" },
           headerTitleAlign: "center",
+          animation: "slide_from_right",
         }}
       />
     </Stack>
