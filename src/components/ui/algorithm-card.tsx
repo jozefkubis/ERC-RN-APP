@@ -90,7 +90,7 @@ export default function AlgorithmCard(props: AlgorithmCardProps) {
 const styles = StyleSheet.create({
   card: {
     width: "100%",
-    height: 172,
+    height: 184,
     justifyContent: "space-between",
     gap: 12,
     padding: 21,

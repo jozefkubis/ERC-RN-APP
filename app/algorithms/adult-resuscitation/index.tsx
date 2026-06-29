@@ -1,12 +1,14 @@
 import AlgorithmCard from "@/src/components/ui/algorithm-card";
-import InfoCard from "@/src/components/ui/info-card";
+import { useRouter } from "expo-router";
 import React from "react";
 import { ScrollView, StatusBar, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function ResuscitationAdult() {
+  const router = useRouter();
+
   return (
-    <SafeAreaView style={styles.safeArea} edges={["top", "bottom"]}>
+    <SafeAreaView style={styles.safeArea} edges={["bottom"]}>
       <StatusBar barStyle="dark-content" />
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
@@ -26,6 +28,9 @@ export default function ResuscitationAdult() {
           description="Defibrilácia, manažment dýchacích ciest a podávanie liekov pri zastavení obehu."
           iconFamily="fontisto"
           iconName="pulse"
+          onPress={() =>
+            router.push("/algorithms/adult-resuscitation/als/step1")
+          }
         />
 
         <AlgorithmCard
@@ -51,10 +56,10 @@ export default function ResuscitationAdult() {
           iconName="speedometer-slow"
         />
 
-        <InfoCard
+        {/* <InfoCard
           title="Skôr než začnete"
           description="Zaistite bezpečnosť miesta, potvrďte zastavenie obehu a privolajte pomoc pred pokračovaním v špecifických algoritmoch."
-        />
+        /> */}
       </ScrollView>
     </SafeAreaView>
   );

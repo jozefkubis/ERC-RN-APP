@@ -25,6 +25,36 @@ export default function AlgorithmsLayout() {
           headerTitleAlign: "center",
         }}
       />
+      <Stack.Screen
+        name="adult-resuscitation/als"
+        options={{
+          title: "Rozšírená resuscitácia",
+          headerStyle: { backgroundColor: "#F7F8FC" },
+          headerTintColor: "#10243C",
+          headerTitleStyle: { fontWeight: "bold" },
+          headerTitleAlign: "center",
+        }}
+      />
+      <Stack.Screen
+        name="adult-resuscitation/als/step1"
+        options={{
+          title: "Rozšírená resuscitácia",
+          headerStyle: { backgroundColor: "#F7F8FC" },
+          headerTintColor: "#10243C",
+          headerTitleStyle: { fontWeight: "bold" },
+          headerTitleAlign: "center",
+        }}
+      />
+      <Stack.Screen
+        name="adult-resuscitation/als/step2"
+        options={{
+          title: "Rozšírená resuscitácia",
+          headerStyle: { backgroundColor: "#F7F8FC" },
+          headerTintColor: "#10243C",
+          headerTitleStyle: { fontWeight: "bold" },
+          headerTitleAlign: "center",
+        }}
+      />
     </Stack>
   );
 }
