@@ -51,20 +51,22 @@ export default function TabsLayout() {
           headerShown: false,
         }}
       />
-      {/* <Tabs.Screen
+      <Tabs.Screen
         name="favorites"
         options={{
           title: "Obľúbené",
           tabBarLabel: "Favorites",
+          href: null, // Disable navigation to this tab
         }}
       />
       <Tabs.Screen
         name="settings"
         options={{
-          title: "Settings",
-          tabBarLabel: "Settings",
+          title: "Nastavenia",
+          tabBarLabel: "Nastavenia",
+          href: null, // Disable navigation to this tab
         }}
-      /> */}
+      />
     </Tabs>
   );
 }
