@@ -11,7 +11,7 @@ export default function Step1() {
   const router = useRouter();
 
   return (
-    <SafeAreaView style={styles.safeArea} edges={["bottom"]}>
+    <>
       <StatusBar barStyle="dark-content" />
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
@@ -46,15 +46,15 @@ export default function Step1() {
           description="Zaistite bezpečnosť seba, osoby so zastavením krvného obehu a všetkých okolostojacich."
         />
       </ScrollView>
-    </SafeAreaView>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-    backgroundColor: "#F7F8FC",
-  },
+  // safeArea: {
+  //   flex: 1,
+  //   backgroundColor: "#F7F8FC",
+  // },
   container: {
     paddingHorizontal: 30,
     paddingVertical: 16,

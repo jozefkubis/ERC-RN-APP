@@ -8,7 +8,7 @@ export default function ResuscitationAdult() {
   const router = useRouter();
 
   return (
-    <SafeAreaView style={styles.safeArea} edges={["bottom"]}>
+    <>
       <StatusBar barStyle="dark-content" />
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
@@ -61,15 +61,15 @@ export default function ResuscitationAdult() {
           description="Zaistite bezpečnosť miesta, potvrďte zastavenie obehu a privolajte pomoc pred pokračovaním v špecifických algoritmoch."
         /> */}
       </ScrollView>
-    </SafeAreaView>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-    backgroundColor: "#F7F8FC",
-  },
+  // safeArea: {
+  //   flex: 1,
+  //   backgroundColor: "#F7F8FC",
+  // },
   container: {
     paddingHorizontal: 30,
     paddingVertical: 16,

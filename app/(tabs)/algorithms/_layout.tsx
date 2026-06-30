@@ -1,8 +1,12 @@
 import { defaultHeaderOptions } from "@/src/navigation/screenOptions";
-import { Stack } from "expo-router";
+import Ionicons from "@expo/vector-icons/Ionicons";
+import { Stack, useRouter } from "expo-router";
 import React from "react";
+import { StyleSheet } from "react-native";
 
 export default function AlgorithmsLayout() {
+  const router = useRouter();
+
   return (
     <Stack
       screenOptions={{
@@ -12,7 +16,17 @@ export default function AlgorithmsLayout() {
     >
       <Stack.Screen
         name="adult-resuscitation/index"
-        options={{ title: "Resuscitácia dospelých" }}
+        options={{
+          title: "Resuscitácia dospelých",
+          headerLeft: () => (
+            <Ionicons
+              name="arrow-back"
+              size={24}
+              color="black"
+              onPress={() => router.back()}
+            />
+          ),
+        }}
       />
       <Stack.Screen name="epals/index" options={{ title: "EPALS" }} />
       <Stack.Screen
@@ -30,3 +44,11 @@ export default function AlgorithmsLayout() {
     </Stack>
   );
 }
+
+const styles = StyleSheet.create({
+  incon: {
+    backgroundColor: "#e0d6d6",
+    padding: 8,
+    borderRadius: 8,
+  },
+});

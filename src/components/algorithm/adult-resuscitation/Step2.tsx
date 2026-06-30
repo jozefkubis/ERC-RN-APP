@@ -19,7 +19,7 @@ const actions = [
 
 export default function Step2() {
   return (
-    <SafeAreaView style={styles.safeArea} edges={["bottom"]}>
+    <>
       <StatusBar barStyle="dark-content" />
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
@@ -71,15 +71,15 @@ export default function Step2() {
           description="Analýza rytmu má byť krátka. Po rozhodnutí sa okamžite vráťte ku kvalitnej KPR alebo podajte výboj podľa algoritmu."
         />
       </ScrollView>
-    </SafeAreaView>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-    backgroundColor: "#F7F8FC",
-  },
+  // safeArea: {
+  //   flex: 1,
+  //   backgroundColor: "#F7F8FC",
+  // },
   container: {
     paddingHorizontal: 30,
     paddingVertical: 16,

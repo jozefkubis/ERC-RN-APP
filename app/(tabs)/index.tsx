@@ -14,7 +14,7 @@ export default function HomeScreen() {
   }
 
   return (
-    <SafeAreaView style={styles.safeArea} edges={["bottom"]}>
+    <>
       <StatusBar barStyle="dark-content" />
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
@@ -122,16 +122,16 @@ export default function HomeScreen() {
           />
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
   // Bezpečná oblasť obrazovky
-  safeArea: {
-    flex: 1,
-    backgroundColor: "#F7F8FC",
-  },
+  // safeArea: {
+  //   flex: 1,
+  //   backgroundColor: "#F7F8FC",
+  // },
   container: {
     paddingHorizontal: 30,
     paddingVertical: 16,

@@ -20,6 +20,7 @@ export default function TabsLayout() {
     <Tabs
       screenOptions={({ route }) => ({
         ...defaultHeaderOptions,
+        animation: "shift",
         tabBarActiveTintColor: navigationColors.primary,
         tabBarInactiveTintColor: navigationColors.muted,
         tabBarStyle: {
@@ -39,7 +40,7 @@ export default function TabsLayout() {
         name="index"
         options={{
           title: "ERC 2025",
-          tabBarLabel: "Home",
+          tabBarLabel: "Domov",
         }}
       />
       <Tabs.Screen
@@ -50,7 +51,7 @@ export default function TabsLayout() {
           headerShown: false,
         }}
       />
-      <Tabs.Screen
+      {/* <Tabs.Screen
         name="favorites"
         options={{
           title: "Obľúbené",
@@ -63,7 +64,7 @@ export default function TabsLayout() {
           title: "Settings",
           tabBarLabel: "Settings",
         }}
-      />
+      /> */}
     </Tabs>
   );
 }
