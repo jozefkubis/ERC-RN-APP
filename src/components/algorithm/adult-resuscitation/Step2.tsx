@@ -1,4 +1,5 @@
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 import React from "react";
 import {
   Pressable,
@@ -8,7 +9,6 @@ import {
   Text,
   View,
 } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import InfoCard from "../../ui/info-card";
 
 const actions = [
@@ -18,6 +18,8 @@ const actions = [
 ];
 
 export default function Step2() {
+  const router = useRouter();
+
   return (
     <>
       <StatusBar barStyle="dark-content" />
@@ -47,7 +49,12 @@ export default function Step2() {
           ))}
         </View>
 
-        <Pressable style={({ pressed }) => [pressed && styles.pressed]}>
+        <Pressable
+          style={({ pressed }) => [pressed && styles.pressed]}
+          onPress={() =>
+            router.push("/algorithms/adult-resuscitation/als/step3")
+          }
+        >
           <View style={styles.rhythmCard}>
             <View style={styles.flowLine} />
             <View style={styles.rhythmIcon}>
