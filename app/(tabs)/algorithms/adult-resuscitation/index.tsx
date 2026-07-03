@@ -2,7 +2,6 @@ import AlgorithmCard from "@/src/components/ui/algorithm-card";
 import { useRouter } from "expo-router";
 import React from "react";
 import { ScrollView, StatusBar, StyleSheet, Text, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function ResuscitationAdult() {
   const router = useRouter();
@@ -38,6 +37,9 @@ export default function ResuscitationAdult() {
           subtitle="Základná resuscitácia"
           description="Prvotné rozpoznanie, kvalitné stláčanie hrudníka a včasná defibrilácia ak AED."
           iconName="heart-outline"
+          onPress={() =>
+            router.push("/algorithms/adult-resuscitation/bls/step1")
+          }
         />
 
         <AlgorithmCard

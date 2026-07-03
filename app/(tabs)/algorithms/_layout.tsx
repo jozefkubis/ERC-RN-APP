@@ -60,6 +60,22 @@ export default function AlgorithmsLayout() {
         name="adult-resuscitation/als/rosc"
         options={{ title: "ROSC" }}
       />
+      <Stack.Screen
+        name="adult-resuscitation/bls/step1"
+        options={{ title: "Základná resuscitácia" }}
+      />
+      <Stack.Screen
+        name="adult-resuscitation/bls/step2"
+        options={{ title: "Základná resuscitácia" }}
+      />
+      <Stack.Screen
+        name="adult-resuscitation/bls/step3"
+        options={{ title: "Základná resuscitácia" }}
+      />
+      <Stack.Screen
+        name="adult-resuscitation/bls/step4"
+        options={{ title: "Základná resuscitácia" }}
+      />
     </Stack>
   );
 }
