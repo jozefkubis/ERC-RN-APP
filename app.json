@@ -12,13 +12,26 @@
     },
     "android": {
       "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "package": "com.jozefkubis.ERCRNAPP"
     },
     "web": {
       "output": "static"
     },
     "plugins": [
       "expo-router"
-    ]
+    ],
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "9f745607-4511-4c71-ae10-b65e2d208d3d"
+      }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/9f745607-4511-4c71-ae10-b65e2d208d3d"
+    }
   }
 }
