@@ -4,6 +4,7 @@
     "slug": "ERC-RN-APP",
     "version": "1.0.0",
     "orientation": "portrait",
+    "platforms": ["android"],
     "scheme": "ercrnapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
@@ -18,9 +19,7 @@
     "web": {
       "output": "static"
     },
-    "plugins": [
-      "expo-router"
-    ],
+    "plugins": ["expo-router"],
     "extra": {
       "router": {},
       "eas": {

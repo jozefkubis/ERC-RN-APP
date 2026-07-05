@@ -2,7 +2,7 @@ import { Ionicons } from "@expo/vector-icons";
 import React from "react";
 import { ScrollView, StatusBar, StyleSheet, Text, View } from "react-native";
 import InfoCard from "../../ui/info-card";
-import TachyRegularityButtons from "./TachyRegularityButtons";
+import TachyRegularityButtons from "../../ui/TachyRegularityButtons";
 
 export default function Step3TachyNarrow() {
   return (
