@@ -199,7 +199,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: "900",
     lineHeight: 20,
-    textAlign: "center",
+    textAlign: "left",
   },
   section: {
     gap: 7,
@@ -210,7 +210,7 @@ const styles = StyleSheet.create({
     fontStyle: "italic",
     fontWeight: "900",
     lineHeight: 18,
-    textAlign: "center",
+    textAlign: "left",
   },
   itemRow: {
     flexDirection: "row",
