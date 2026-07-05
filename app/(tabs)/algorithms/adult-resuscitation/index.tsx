@@ -49,6 +49,9 @@ export default function ResuscitationAdult() {
           description="Vyhodnotenie a liečba tachyarytmií."
           iconFamily="ionicons"
           iconName="speedometer-outline"
+          onPress={() =>
+            router.push("/algorithms/adult-resuscitation/tachycardia/step1")
+          }
         />
 
         <AlgorithmCard

@@ -1,7 +1,11 @@
 import { Ionicons } from "@expo/vector-icons";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 
-export default function NoButton() {
+type NoButtonProps = {
+  onPress?: () => void;
+};
+
+export default function NoButton({ onPress }: NoButtonProps) {
   return (
     <Pressable
       style={({ pressed }) => [
@@ -9,6 +13,7 @@ export default function NoButton() {
         styles.answerCardLight,
         pressed && styles.pressed,
       ]}
+      onPress={onPress && onPress}
     >
       <View style={styles.answerIconLight}>
         <Ionicons name="close" size={24} color="#075296" />

@@ -76,6 +76,26 @@ export default function AlgorithmsLayout() {
         name="adult-resuscitation/bls/step4"
         options={{ title: "Základná resuscitácia" }}
       />
+      <Stack.Screen
+        name="adult-resuscitation/tachycardia/step1"
+        options={{ title: "Tachykardia" }}
+      />
+      <Stack.Screen
+        name="adult-resuscitation/tachycardia/step2unstable"
+        options={{ title: "Tachykardia" }}
+      />
+      <Stack.Screen
+        name="adult-resuscitation/tachycardia/step2stable"
+        options={{ title: "Tachykardia" }}
+      />
+      <Stack.Screen
+        name="adult-resuscitation/tachycardia/step3wide"
+        options={{ title: "Tachykardia" }}
+      />
+      <Stack.Screen
+        name="adult-resuscitation/tachycardia/step3narrow"
+        options={{ title: "Tachykardia" }}
+      />
     </Stack>
   );
 }

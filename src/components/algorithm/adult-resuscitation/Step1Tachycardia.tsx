@@ -1,0 +1,358 @@
+import { Ionicons } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
+import React from "react";
+import {
+  Pressable,
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
+import InfoCard from "../../ui/info-card";
+
+const abcdeSteps = [
+  "Monitorujte SpO2, EKG, TK",
+  "Podajte kyslík, ak je SpO2 < 94 % a zabezpečte intravenózny prístup",
+  "Zaznamenajte 12-zvodové EKG",
+  "Identifikujte a liečte reverzibilné príčiny",
+];
+
+const lifeThreateningSigns = [
+  "Šok",
+  "Synkopa s ťažkou alebo pretrvávajúcou hypotenziou",
+  "Ischémia myokardu",
+  "Závažné srdcové zlyhanie s pľúcnym edémom alebo šokom",
+  "Alebo ihneď po ROSC",
+];
+
+export default function Step1Tachycardia() {
+  const router = useRouter();
+
+  return (
+    <>
+      <StatusBar barStyle="dark-content" />
+      <ScrollView
+        contentInsetAdjustmentBehavior="automatic"
+        contentContainerStyle={styles.container}
+      >
+        <View style={styles.stepHeader}>
+          <View style={styles.stepBadge}>
+            <Text style={styles.stepBadgeText}>Krok 1</Text>
+          </View>
+          <Text style={styles.stepTitle}>Tachykardia</Text>
+          <Text style={styles.stepDescription}>
+            Zhodnoťte stav pacienta s využitím ABCDE prístupu a rýchlo
+            rozhodnite, či sú prítomné život ohrozujúce príznaky.
+          </Text>
+        </View>
+
+        <View style={styles.assessmentCard}>
+          <View style={styles.cardHeader}>
+            <View style={styles.cardIcon}>
+              <Ionicons name="pulse" size={25} color="#FFFFFF" />
+            </View>
+            <Text style={styles.cardTitle}>
+              Zhodnoťte stav pacienta s využitím ABCDE prístupu
+            </Text>
+          </View>
+          <View style={styles.list}>
+            {abcdeSteps.map((item) => (
+              <View key={item} style={styles.listItem}>
+                <View style={styles.bullet} />
+                <Text style={styles.listText}>{item}</Text>
+              </View>
+            ))}
+          </View>
+        </View>
+
+        <View style={styles.questionCard}>
+          <View style={styles.questionIcon}>
+            <Ionicons name="warning" size={27} color="#FFFFFF" />
+          </View>
+          <View style={styles.questionContent}>
+            <Text style={styles.questionText}>
+              Život ohrozujúce príznaky?
+            </Text>
+            <View style={styles.warningList}>
+              {lifeThreateningSigns.map((item) => (
+                <View key={item} style={styles.warningItem}>
+                  <View style={styles.warningDot} />
+                  <Text style={styles.warningText}>{item}</Text>
+                </View>
+              ))}
+            </View>
+          </View>
+        </View>
+
+        <View style={styles.answersContainer}>
+          <Pressable
+            onPress={() =>
+              router.push(
+                "/algorithms/adult-resuscitation/tachycardia/step2unstable",
+              )
+            }
+            style={({ pressed }) => [
+              styles.answerCard,
+              styles.answerCardPrimary,
+              pressed && styles.pressed,
+            ]}
+          >
+            <View style={styles.answerIconPrimary}>
+              <Ionicons name="checkmark" size={24} color="#FFFFFF" />
+            </View>
+            <View style={styles.answerTextContainer}>
+              <Text style={styles.answerTitlePrimary}>Áno</Text>
+              <Text style={styles.answerDescriptionPrimary}>
+                Pokračujte ako pri nestabilnej tachykardii.
+              </Text>
+            </View>
+            <Ionicons name="arrow-forward" size={22} color="#FFFFFF" />
+          </Pressable>
+
+          <Pressable
+            onPress={() =>
+              router.push(
+                "/algorithms/adult-resuscitation/tachycardia/step2stable",
+              )
+            }
+            style={({ pressed }) => [
+              styles.answerCard,
+              styles.answerCardLight,
+              pressed && styles.pressed,
+            ]}
+          >
+            <View style={styles.answerIconLight}>
+              <Ionicons name="close" size={24} color="#075296" />
+            </View>
+            <View style={styles.answerTextContainer}>
+              <Text style={styles.answerTitleLight}>Nie</Text>
+              <Text style={styles.answerDescriptionLight}>
+                Pokračujte ako pri stabilnej tachykardii.
+              </Text>
+            </View>
+            <Ionicons name="arrow-forward" size={22} color="#7A8492" />
+          </Pressable>
+        </View>
+
+        <InfoCard
+          title="Poznámka"
+          description="Pri akomkoľvek zhoršení stavu sa vráťte k hodnoteniu ABCDE a pripravte synchronizovanú kardioverziu."
+          iconName="information-circle-outline"
+        />
+      </ScrollView>
+    </>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    paddingHorizontal: 30,
+    paddingVertical: 16,
+    gap: 15,
+  },
+  stepHeader: {
+    width: "100%",
+    gap: 7,
+    paddingTop: 6,
+    paddingBottom: 4,
+  },
+  stepBadge: {
+    alignSelf: "flex-start",
+    paddingHorizontal: 13,
+    paddingVertical: 6,
+    borderRadius: 999,
+    backgroundColor: "#E4EFFD",
+  },
+  stepBadgeText: {
+    color: "#075296",
+    fontSize: 20,
+    fontWeight: "800",
+  },
+  stepTitle: {
+    color: "#10243C",
+    fontSize: 24,
+    fontWeight: "800",
+    lineHeight: 30,
+  },
+  stepDescription: {
+    color: "#5C6574",
+    fontSize: 14,
+    lineHeight: 21,
+  },
+  assessmentCard: {
+    width: "100%",
+    gap: 16,
+    padding: 18,
+    borderRadius: 12,
+    borderCurve: "continuous",
+    backgroundColor: "#D7EDFD",
+    boxShadow: "0 2px 4px rgba(15, 35, 60, 0.08)",
+  },
+  cardHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 14,
+  },
+  cardIcon: {
+    width: 42,
+    height: 42,
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 21,
+    backgroundColor: "#0877D1",
+  },
+  cardTitle: {
+    flex: 1,
+    color: "#075296",
+    fontSize: 18,
+    fontWeight: "800",
+    lineHeight: 24,
+  },
+  list: {
+    gap: 10,
+  },
+  listItem: {
+    flexDirection: "row",
+    alignItems: "flex-start",
+    gap: 10,
+  },
+  bullet: {
+    width: 7,
+    height: 7,
+    marginTop: 7,
+    borderRadius: 4,
+    backgroundColor: "#075296",
+  },
+  listText: {
+    flex: 1,
+    color: "#10243C",
+    fontSize: 14,
+    fontWeight: "700",
+    lineHeight: 20,
+  },
+  questionCard: {
+    width: "100%",
+    flexDirection: "row",
+    alignItems: "flex-start",
+    gap: 15,
+    padding: 18,
+    borderWidth: 2,
+    borderColor: "#0877D1",
+    borderRadius: 12,
+    borderCurve: "continuous",
+    backgroundColor: "#FFFFFF",
+    boxShadow: "0 2px 4px rgba(15, 35, 60, 0.08)",
+  },
+  questionIcon: {
+    width: 42,
+    height: 42,
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 21,
+    backgroundColor: "#ED1C24",
+  },
+  questionContent: {
+    flex: 1,
+    gap: 12,
+  },
+  questionText: {
+    color: "#075296",
+    fontSize: 20,
+    fontWeight: "800",
+    lineHeight: 27,
+  },
+  warningList: {
+    gap: 7,
+  },
+  warningItem: {
+    flexDirection: "row",
+    alignItems: "flex-start",
+    gap: 8,
+  },
+  warningDot: {
+    width: 6,
+    height: 6,
+    marginTop: 7,
+    borderRadius: 3,
+    backgroundColor: "#075296",
+  },
+  warningText: {
+    flex: 1,
+    color: "#10243C",
+    fontSize: 14,
+    fontWeight: "700",
+    lineHeight: 20,
+  },
+  answersContainer: {
+    width: "100%",
+    gap: 10,
+  },
+  answerCard: {
+    width: "100%",
+    minHeight: 96,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 14,
+    paddingHorizontal: 15,
+    paddingVertical: 14,
+    borderWidth: 1,
+    borderRadius: 10,
+    borderCurve: "continuous",
+    boxShadow: "0 2px 4px rgba(15, 35, 60, 0.08)",
+  },
+  answerCardPrimary: {
+    borderColor: "#075296",
+    backgroundColor: "#075296",
+  },
+  answerCardLight: {
+    borderColor: "#CBD3DF",
+    backgroundColor: "#FFFFFF",
+  },
+  answerIconPrimary: {
+    width: 40,
+    height: 40,
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 20,
+    backgroundColor: "#ED1C24",
+  },
+  answerIconLight: {
+    width: 40,
+    height: 40,
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 20,
+    backgroundColor: "#E4EFFD",
+  },
+  answerTextContainer: {
+    flex: 1,
+    gap: 4,
+  },
+  answerTitlePrimary: {
+    color: "#FFFFFF",
+    fontSize: 18,
+    fontWeight: "800",
+    lineHeight: 23,
+  },
+  answerTitleLight: {
+    color: "#10243C",
+    fontSize: 18,
+    fontWeight: "800",
+    lineHeight: 23,
+  },
+  answerDescriptionPrimary: {
+    color: "#D7E9F8",
+    fontSize: 13,
+    lineHeight: 19,
+  },
+  answerDescriptionLight: {
+    color: "#5C6574",
+    fontSize: 13,
+    lineHeight: 19,
+  },
+  pressed: {
+    opacity: 0.7,
+    transform: [{ scale: 0.99 }],
+  },
+});

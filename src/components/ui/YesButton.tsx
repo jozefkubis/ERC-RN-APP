@@ -2,10 +2,10 @@ import { Ionicons } from "@expo/vector-icons";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 
 type YesButtonProps = {
-  router: any;
+  onPress?: () => void;
 };
 
-export default function YesButton({ router }: YesButtonProps) {
+export default function YesButton({ onPress }: YesButtonProps) {
   return (
     <Pressable
       style={({ pressed }) => [
@@ -13,7 +13,7 @@ export default function YesButton({ router }: YesButtonProps) {
         styles.answerCardPrimary,
         pressed && styles.pressed,
       ]}
-      onPress={() => router.push("/algorithms/adult-resuscitation/als/step2")}
+      onPress={onPress}
     >
       <View style={styles.answerIconPrimary}>
         <Ionicons name="checkmark" size={24} color="#FFFFFF" />

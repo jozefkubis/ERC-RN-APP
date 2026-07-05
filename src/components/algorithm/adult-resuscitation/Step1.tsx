@@ -2,7 +2,6 @@ import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import React from "react";
 import { ScrollView, StatusBar, StyleSheet, Text, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import InfoCard from "../../ui/info-card";
 import NoButton from "../../ui/NoButton";
 import YesButton from "../../ui/YesButton";
@@ -38,7 +37,11 @@ export default function Step1() {
         </View>
 
         <View style={styles.answersContainer}>
-          <YesButton router={router} />
+          <YesButton
+            onPress={() =>
+              router.push("/algorithms/adult-resuscitation/als/step2")
+            }
+          />
           <NoButton />
         </View>
         <InfoCard
