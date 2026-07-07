@@ -1,10 +1,13 @@
 import { Ionicons } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 import React from "react";
 import { ScrollView, StatusBar, StyleSheet, Text, View } from "react-native";
 import InfoCard from "../../ui/info-card";
 import TachyRegularityButtons from "../../ui/TachyRegularityButtons";
 
 export default function Step3TachyWide() {
+  const router = useRouter();
+
   return (
     <>
       <StatusBar barStyle="dark-content" />
@@ -33,7 +36,18 @@ export default function Step3TachyWide() {
             <Text style={styles.rhythmText}>Zhodnoťte pravidelnosť rytmu</Text>
           </View>
 
-          <TachyRegularityButtons />
+          <TachyRegularityButtons
+            onIrregularPress={() =>
+              router.push(
+                "/algorithms/adult-resuscitation/tachycardia/step4wideirregular",
+              )
+            }
+            onRegularPress={() =>
+              router.push(
+                "/algorithms/adult-resuscitation/tachycardia/step4wideregular",
+              )
+            }
+          />
         </View>
 
         <InfoCard

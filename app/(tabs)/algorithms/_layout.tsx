@@ -96,6 +96,26 @@ export default function AlgorithmsLayout() {
         name="adult-resuscitation/tachycardia/step3narrow"
         options={{ title: "Tachykardia" }}
       />
+      <Stack.Screen
+        name="adult-resuscitation/tachycardia/step4wideregular"
+        options={{ title: "Tachykardia" }}
+      />
+      <Stack.Screen
+        name="adult-resuscitation/tachycardia/step4wideirregular"
+        options={{ title: "Tachykardia" }}
+      />
+      <Stack.Screen
+        name="adult-resuscitation/tachycardia/step4narrowregular"
+        options={{ title: "Tachykardia" }}
+      />
+      <Stack.Screen
+        name="adult-resuscitation/tachycardia/step4narrowirregular"
+        options={{ title: "Tachykardia" }}
+      />
+      <Stack.Screen
+        name="adult-resuscitation/tachycardia/synccardioversion"
+        options={{ title: "Tachykardia" }}
+      />
     </Stack>
   );
 }
