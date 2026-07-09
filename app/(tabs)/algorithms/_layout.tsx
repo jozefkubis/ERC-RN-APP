@@ -116,6 +116,10 @@ export default function AlgorithmsLayout() {
         name="adult-resuscitation/tachycardia/synccardioversion"
         options={{ title: "Tachykardia" }}
       />
+      <Stack.Screen
+        name="adult-resuscitation/bradycardia/step1"
+        options={{ title: "Bradykardia" }}
+      />
     </Stack>
   );
 }

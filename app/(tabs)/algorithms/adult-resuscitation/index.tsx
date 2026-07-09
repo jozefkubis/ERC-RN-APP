@@ -59,6 +59,9 @@ export default function ResuscitationAdult() {
           description="Manažment symptomatickej bradykardie."
           iconFamily="material-community"
           iconName="speedometer-slow"
+          onPress={() =>
+            router.push("/algorithms/adult-resuscitation/bradycardia/step1")
+          }
         />
 
         {/* <InfoCard
