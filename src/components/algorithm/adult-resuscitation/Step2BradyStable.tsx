@@ -1,18 +1,18 @@
 import InfoCard from "@/src/components/ui/info-card";
-import NoButton from "@/src/components/ui/NoButton";
 import YesButton from "@/src/components/ui/YesButton";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import React from "react";
 import { ScrollView, StatusBar, StyleSheet, Text, View } from "react-native";
 
-const atropineSteps = [
-  "Atropín 0,5 mg intravenózne",
-  "Opakujte každých 3 - 5 minút podľa odpovede",
-  "Maximálna dávka 3 mg",
+const asystoleRiskSigns = [
+  "Nedávna asystólia",
+  "AV blokáda Mobitz II",
+  "Kompletná srdcová blokáda so širokým QRS",
+  "Komorová pauza > 3 s",
 ];
 
-export default function Step2BradyUnstable() {
+export default function Step2BradyStable() {
   const router = useRouter();
 
   return (
@@ -26,74 +26,61 @@ export default function Step2BradyUnstable() {
           <View style={styles.stepBadge}>
             <Text style={styles.stepBadgeText}>Krok 2</Text>
           </View>
-          <Text style={styles.stepTitle}>Nestabilná bradykardia</Text>
+          <Text style={styles.stepTitle}>Stabilná bradykardia</Text>
           <Text style={styles.stepDescription}>
-            Pri prítomnosti život ohrozujúcich príznakov začnite atropínom a
-            priebežne prehodnocujte klinickú odpoveď.
+            Ak pacient nemá život ohrozujúce príznaky, zhodnoťte riziko
+            asystólie a pokračujte podľa odpovede.
           </Text>
         </View>
 
-        <View style={styles.urgentPanel}>
+        <View style={styles.stablePanel}>
           <View style={styles.panelTitleRow}>
             <View style={styles.panelIcon}>
-              <Ionicons name="warning" size={24} color="#FFFFFF" />
+              <Ionicons name="shield-checkmark" size={24} color="#075296" />
             </View>
-            <Text style={styles.panelTitle}>NESTABILNÁ</Text>
+            <Text style={styles.panelTitle}>STABILNÁ</Text>
           </View>
 
           <View style={styles.flowContainer}>
-            <View style={styles.actionCard}>
-              <View style={styles.cardHeader}>
-                <View style={styles.cardIcon}>
-                  <Ionicons name="medkit" size={22} color="#FFFFFF" />
-                </View>
-                <Text style={styles.cardTitle}>Atropín</Text>
-              </View>
-
-              <View style={styles.list}>
-                {atropineSteps.map((item) => (
-                  <View key={item} style={styles.listItem}>
-                    <View style={styles.dot} />
-                    <Text style={styles.listText}>{item}</Text>
-                  </View>
-                ))}
-              </View>
-            </View>
-
-            <View style={styles.transition}>
-              <Ionicons name="arrow-down" size={24} color="#075296" />
-            </View>
-
             <View style={styles.questionCard}>
               <View style={styles.questionIcon}>
                 <Ionicons name="help" size={26} color="#FFFFFF" />
               </View>
-              <Text style={styles.questionText}>Dostatočná reakcia?</Text>
+              <View style={styles.questionContent}>
+                <Text style={styles.questionText}>Riziko asystólie?</Text>
+                <View style={styles.list}>
+                  {asystoleRiskSigns.map((item) => (
+                    <View key={item} style={styles.listItem}>
+                      <View style={styles.dot} />
+                      <Text style={styles.listText}>{item}</Text>
+                    </View>
+                  ))}
+                </View>
+              </View>
             </View>
 
             <View style={styles.answersContainer}>
               <YesButton
                 onPress={() =>
                   router.push(
-                    "/algorithms/adult-resuscitation/bradycardia/step2stable",
-                  )
-                }
-              />
-              <NoButton
-                onPress={() =>
-                  router.push(
                     "/algorithms/adult-resuscitation/bradycardia/step3unstable",
                   )
                 }
               />
+              <View style={styles.observationCard}>
+                <View style={styles.observationIcon}>
+                  <Ionicons name="eye" size={24} color="#075296" />
+                </View>
+                <Text style={styles.observationText}>Ak Nie, pozorujte pacienta</Text>
+              </View>
             </View>
           </View>
         </View>
 
         <InfoCard
           title="Pripomienka"
-          description="Počas celého postupu monitorujte EKG, tlak krvi a SpO2. Liečte reverzibilné príčiny bradykardie."
-          iconName="information-circle-outline"
+          description="Pokračujte v monitorovaní EKG, tlaku krvi a SpO2. Pri zhoršení stavu sa vráťte k hodnoteniu život ohrozujúcich príznakov."
+          iconName="pulse-outline"
         />
       </ScrollView>
     </>
@@ -117,10 +104,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 13,
     paddingVertical: 6,
     borderRadius: 999,
-    backgroundColor: "#FDE7E8",
+    backgroundColor: "#E4EFFD",
   },
   stepBadgeText: {
-    color: "#C8141B",
+    color: "#075296",
     fontSize: 20,
     fontWeight: "800",
   },
@@ -135,13 +122,13 @@ const styles = StyleSheet.create({
     fontSize: 14,
     lineHeight: 21,
   },
-  urgentPanel: {
+  stablePanel: {
     width: "100%",
     gap: 18,
     padding: 18,
     borderRadius: 12,
     borderCurve: "continuous",
-    backgroundColor: "#FDE3E4",
+    backgroundColor: "#D7F2F5",
     boxShadow: "0 2px 4px rgba(15, 35, 60, 0.08)",
   },
   panelTitleRow: {
@@ -156,10 +143,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 18,
-    backgroundColor: "#ED1C24",
+    backgroundColor: "#FFFFFF",
   },
   panelTitle: {
-    color: "#ED1C24",
+    color: "#075296",
     fontSize: 20,
     fontWeight: "900",
     lineHeight: 26,
@@ -168,38 +155,38 @@ const styles = StyleSheet.create({
     width: "100%",
     gap: 12,
   },
-  actionCard: {
+  questionCard: {
     width: "100%",
+    flexDirection: "row",
+    alignItems: "flex-start",
     gap: 15,
-    padding: 16,
+    padding: 18,
     borderWidth: 2,
-    borderColor: "#075296",
-    borderRadius: 10,
+    borderColor: "#0877D1",
+    borderRadius: 12,
     borderCurve: "continuous",
     backgroundColor: "#FFFFFF",
   },
-  cardHeader: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 12,
-  },
-  cardIcon: {
-    width: 38,
-    height: 38,
+  questionIcon: {
+    width: 42,
+    height: 42,
     alignItems: "center",
     justifyContent: "center",
-    borderRadius: 19,
-    backgroundColor: "#075296",
+    borderRadius: 21,
+    backgroundColor: "#0877D1",
   },
-  cardTitle: {
+  questionContent: {
     flex: 1,
+    gap: 12,
+  },
+  questionText: {
     color: "#075296",
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: "800",
-    lineHeight: 24,
+    lineHeight: 27,
   },
   list: {
-    gap: 10,
+    gap: 9,
   },
   listItem: {
     flexDirection: "row",
@@ -220,65 +207,38 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     lineHeight: 20,
   },
-  transition: {
-    alignItems: "center",
-    justifyContent: "center",
-    paddingVertical: 2,
-  },
-  questionCard: {
-    width: "100%",
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 15,
-    padding: 18,
-    borderWidth: 2,
-    borderColor: "#0877D1",
-    borderRadius: 12,
-    borderCurve: "continuous",
-    backgroundColor: "#FFFFFF",
-  },
-  questionIcon: {
-    width: 42,
-    height: 42,
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 21,
-    backgroundColor: "#0877D1",
-  },
-  questionText: {
-    flex: 1,
-    color: "#075296",
-    fontSize: 20,
-    fontWeight: "800",
-    lineHeight: 27,
-  },
   answersContainer: {
     width: "100%",
     gap: 10,
   },
-  responseCard: {
+  observationCard: {
     width: "100%",
-    gap: 15,
-    padding: 16,
+    minHeight: 88,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 14,
+    paddingHorizontal: 15,
+    paddingVertical: 14,
     borderWidth: 2,
     borderColor: "#075296",
     borderRadius: 28,
     borderCurve: "continuous",
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "#D7EDFD",
+    boxShadow: "0 2px 4px rgba(15, 35, 60, 0.08)",
   },
-  responseIcon: {
-    width: 38,
-    height: 38,
+  observationIcon: {
+    width: 40,
+    height: 40,
     alignItems: "center",
     justifyContent: "center",
-    borderRadius: 19,
-    backgroundColor: "#E4EFFD",
+    borderRadius: 20,
+    backgroundColor: "#FFFFFF",
   },
-  responseTitle: {
+  observationText: {
     flex: 1,
     color: "#075296",
-    fontSize: 18,
+    fontSize: 14,
     fontWeight: "800",
-    lineHeight: 24,
+    lineHeight: 23,
   },
 });

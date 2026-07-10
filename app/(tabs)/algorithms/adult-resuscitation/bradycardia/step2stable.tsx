@@ -1,10 +1,6 @@
+import Step2BradyStable from "@/src/components/algorithm/adult-resuscitation/Step2BradyStable";
 import React from "react";
-import { Text, View } from "react-native";
 
-export default function Step2Stable() {
-  return (
-    <View>
-      <Text>Step2Stable</Text>
-    </View>
-  );
+export default function Step2StableScreen() {
+  return <Step2BradyStable />;
 }

@@ -1,18 +1,33 @@
 import InfoCard from "@/src/components/ui/info-card";
-import NoButton from "@/src/components/ui/NoButton";
-import YesButton from "@/src/components/ui/YesButton";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import React from "react";
-import { ScrollView, StatusBar, StyleSheet, Text, View } from "react-native";
+import {
+  Pressable,
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 
-const atropineSteps = [
-  "Atropín 0,5 mg intravenózne",
-  "Opakujte každých 3 - 5 minút podľa odpovede",
-  "Maximálna dávka 3 mg",
+const temporaryMeasures = [
+  "Atropín 0,5 mg IV, opakujte do maximálne 3 mg",
+  "Izoprenalín 5 mcg min^-1 IV",
+  "Adrenalín 2 - 10 mcg min^-1 IV",
+  "Alternatívne lieky*",
+  "a / alebo",
+  "Transkutánna kardiostimulácia",
 ];
 
-export default function Step2BradyUnstable() {
+const measureLinks: Record<string, string> = {
+  "Alternatívne lieky*":
+    "/algorithms/adult-resuscitation/bradycardia/alternative-medications",
+  "Transkutánna kardiostimulácia":
+    "/algorithms/adult-resuscitation/bradycardia/cardiostimulationscreen",
+};
+
+export default function Step3BradyUnstable() {
   const router = useRouter();
 
   return (
@@ -24,12 +39,12 @@ export default function Step2BradyUnstable() {
       >
         <View style={styles.stepHeader}>
           <View style={styles.stepBadge}>
-            <Text style={styles.stepBadgeText}>Krok 2</Text>
+            <Text style={styles.stepBadgeText}>Krok 3</Text>
           </View>
-          <Text style={styles.stepTitle}>Nestabilná bradykardia</Text>
+          <Text style={styles.stepTitle}>Nedostatočná reakcia</Text>
           <Text style={styles.stepDescription}>
-            Pri prítomnosti život ohrozujúcich príznakov začnite atropínom a
-            priebežne prehodnocujte klinickú odpoveď.
+            Ak odpoveď na atropín nie je dostatočná, začnite dočasné opatrenia a
+            pripravte kardiostimuláciu.
           </Text>
         </View>
 
@@ -47,16 +62,41 @@ export default function Step2BradyUnstable() {
                 <View style={styles.cardIcon}>
                   <Ionicons name="medkit" size={22} color="#FFFFFF" />
                 </View>
-                <Text style={styles.cardTitle}>Atropín</Text>
+                <Text style={styles.cardTitle}>
+                  Zvážte dočasné opatrenia
+                </Text>
               </View>
 
               <View style={styles.list}>
-                {atropineSteps.map((item) => (
-                  <View key={item} style={styles.listItem}>
-                    <View style={styles.dot} />
-                    <Text style={styles.listText}>{item}</Text>
-                  </View>
-                ))}
+                {temporaryMeasures.map((item) => {
+                  const link = measureLinks[item];
+
+                  return link ? (
+                    <Pressable
+                      key={item}
+                      onPress={() => router.push(link)}
+                      style={({ pressed }) => [
+                        styles.linkItem,
+                        pressed && styles.pressed,
+                      ]}
+                    >
+                      <View style={styles.dot} />
+                      <Text style={styles.linkText}>{item}</Text>
+                      <View style={styles.linkIcon}>
+                        <Ionicons
+                          name="arrow-forward"
+                          size={17}
+                          color="#FFFFFF"
+                        />
+                      </View>
+                    </Pressable>
+                  ) : (
+                    <View key={item} style={styles.listItem}>
+                      <View style={styles.dot} />
+                      <Text style={styles.listText}>{item}</Text>
+                    </View>
+                  );
+                })}
               </View>
             </View>
 
@@ -64,35 +104,23 @@ export default function Step2BradyUnstable() {
               <Ionicons name="arrow-down" size={24} color="#075296" />
             </View>
 
-            <View style={styles.questionCard}>
-              <View style={styles.questionIcon}>
-                <Ionicons name="help" size={26} color="#FFFFFF" />
+            <View style={styles.expertCard}>
+              <View style={styles.expertIcon}>
+                <Ionicons name="people" size={24} color="#075296" />
               </View>
-              <Text style={styles.questionText}>Dostatočná reakcia?</Text>
-            </View>
-
-            <View style={styles.answersContainer}>
-              <YesButton
-                onPress={() =>
-                  router.push(
-                    "/algorithms/adult-resuscitation/bradycardia/step2stable",
-                  )
-                }
-              />
-              <NoButton
-                onPress={() =>
-                  router.push(
-                    "/algorithms/adult-resuscitation/bradycardia/step3unstable",
-                  )
-                }
-              />
+              <View style={styles.expertTextContainer}>
+                <Text style={styles.expertTitle}>Vyhľadajte pomoc experta</Text>
+                <Text style={styles.expertDescription}>
+                  Zabezpečte transvenóznu kardiostimuláciu
+                </Text>
+              </View>
             </View>
           </View>
         </View>
 
         <InfoCard
-          title="Pripomienka"
-          description="Počas celého postupu monitorujte EKG, tlak krvi a SpO2. Liečte reverzibilné príčiny bradykardie."
+          title="Poznámka"
+          description="Alternatívne lieky voľte podľa dostupnosti, lokálneho protokolu a odporúčania experta."
           iconName="information-circle-outline"
         />
       </ScrollView>
@@ -220,65 +248,77 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     lineHeight: 20,
   },
+  linkItem: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+    paddingHorizontal: 10,
+    paddingVertical: 9,
+    borderWidth: 1,
+    borderColor: "#075296",
+    borderRadius: 10,
+    borderCurve: "continuous",
+    backgroundColor: "#E4EFFD",
+  },
+  linkText: {
+    flex: 1,
+    color: "#075296",
+    fontSize: 14,
+    fontWeight: "900",
+    lineHeight: 20,
+  },
+  linkIcon: {
+    width: 28,
+    height: 28,
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 14,
+    backgroundColor: "#075296",
+  },
+  pressed: {
+    opacity: 0.7,
+    transform: [{ scale: 0.99 }],
+  },
   transition: {
     alignItems: "center",
     justifyContent: "center",
     paddingVertical: 2,
   },
-  questionCard: {
+  expertCard: {
     width: "100%",
     flexDirection: "row",
     alignItems: "center",
-    gap: 15,
-    padding: 18,
+    gap: 14,
+    paddingHorizontal: 16,
+    paddingVertical: 15,
     borderWidth: 2,
-    borderColor: "#0877D1",
-    borderRadius: 12,
+    borderColor: "#075296",
+    borderRadius: 28,
     borderCurve: "continuous",
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "#D7EDFD",
   },
-  questionIcon: {
+  expertIcon: {
     width: 42,
     height: 42,
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 21,
-    backgroundColor: "#0877D1",
-  },
-  questionText: {
-    flex: 1,
-    color: "#075296",
-    fontSize: 20,
-    fontWeight: "800",
-    lineHeight: 27,
-  },
-  answersContainer: {
-    width: "100%",
-    gap: 10,
-  },
-  responseCard: {
-    width: "100%",
-    gap: 15,
-    padding: 16,
-    borderWidth: 2,
-    borderColor: "#075296",
-    borderRadius: 28,
-    borderCurve: "continuous",
     backgroundColor: "#FFFFFF",
   },
-  responseIcon: {
-    width: 38,
-    height: 38,
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 19,
-    backgroundColor: "#E4EFFD",
-  },
-  responseTitle: {
+  expertTextContainer: {
     flex: 1,
+    gap: 3,
+  },
+  expertTitle: {
     color: "#075296",
-    fontSize: 18,
-    fontWeight: "800",
-    lineHeight: 24,
+    fontSize: 17,
+    fontWeight: "900",
+    lineHeight: 22,
+  },
+  expertDescription: {
+    color: "#10243C",
+    fontSize: 14,
+    fontWeight: "700",
+    lineHeight: 20,
   },
 });

@@ -120,6 +120,26 @@ export default function AlgorithmsLayout() {
         name="adult-resuscitation/bradycardia/step1"
         options={{ title: "Bradykardia" }}
       />
+      <Stack.Screen
+        name="adult-resuscitation/bradycardia/step2unstable"
+        options={{ title: "Bradykardia" }}
+      />
+      <Stack.Screen
+        name="adult-resuscitation/bradycardia/step2stable"
+        options={{ title: "Bradykardia" }}
+      />
+      <Stack.Screen
+        name="adult-resuscitation/bradycardia/step3unstable"
+        options={{ title: "Bradykardia" }}
+      />
+      <Stack.Screen
+        name="adult-resuscitation/bradycardia/alternative-medications"
+        options={{ title: "Alternatívne lieky" }}
+      />
+      <Stack.Screen
+        name="adult-resuscitation/bradycardia/cardiostimulationscreen"
+        options={{ title: "Kardiostimulácia" }}
+      />
     </Stack>
   );
 }
