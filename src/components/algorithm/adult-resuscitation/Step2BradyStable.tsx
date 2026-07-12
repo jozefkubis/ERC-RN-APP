@@ -43,19 +43,19 @@ export default function Step2BradyStable() {
 
           <View style={styles.flowContainer}>
             <View style={styles.questionCard}>
-              <View style={styles.questionIcon}>
-                <Ionicons name="help" size={26} color="#FFFFFF" />
-              </View>
-              <View style={styles.questionContent}>
-                <Text style={styles.questionText}>Riziko asystólie?</Text>
-                <View style={styles.list}>
-                  {asystoleRiskSigns.map((item) => (
-                    <View key={item} style={styles.listItem}>
-                      <View style={styles.dot} />
-                      <Text style={styles.listText}>{item}</Text>
-                    </View>
-                  ))}
+              <View style={styles.questionHeader}>
+                <View style={styles.questionIcon}>
+                  <Ionicons name="help" size={26} color="#FFFFFF" />
                 </View>
+                <Text style={styles.questionText}>Riziko asystólie?</Text>
+              </View>
+              <View style={styles.list}>
+                {asystoleRiskSigns.map((item) => (
+                  <View key={item} style={styles.listItem}>
+                    <View style={styles.dot} />
+                    <Text style={styles.listText}>{item}</Text>
+                  </View>
+                ))}
               </View>
             </View>
 
@@ -157,9 +157,7 @@ const styles = StyleSheet.create({
   },
   questionCard: {
     width: "100%",
-    flexDirection: "row",
-    alignItems: "flex-start",
-    gap: 15,
+    gap: 12,
     padding: 18,
     borderWidth: 2,
     borderColor: "#0877D1",
@@ -175,11 +173,13 @@ const styles = StyleSheet.create({
     borderRadius: 21,
     backgroundColor: "#0877D1",
   },
-  questionContent: {
-    flex: 1,
-    gap: 12,
+  questionHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 15,
   },
   questionText: {
+    flex: 1,
     color: "#075296",
     fontSize: 20,
     fontWeight: "800",

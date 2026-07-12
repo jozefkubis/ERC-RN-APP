@@ -10,6 +10,7 @@ import {
   View,
 } from "react-native";
 import InfoCard from "../../ui/info-card";
+import ParalelThinkingALS from "./ParalelThinkingALS";
 
 const actionItems = [
   {
@@ -83,18 +84,7 @@ export default function Step4Nondefib() {
           ))}
         </View>
 
-        <View style={styles.noteCard}>
-          <View style={styles.noteIcon}>
-            <Ionicons name="git-branch-outline" size={24} color="#FFFFFF" />
-          </View>
-          <View style={styles.noteTextContainer}>
-            <Text style={styles.noteTitle}>Myslite paralelne</Text>
-            <Text style={styles.noteDescription}>
-              Počas KPR zabezpečte i.v./i.o. vstup, manažment dýchacích ciest,
-              rozdelenie úloh v tíme a liečbu príčiny.
-            </Text>
-          </View>
-        </View>
+        <ParalelThinkingALS />
 
         <Pressable
           style={({ pressed }) => [styles.causeCard, pressed && styles.pressed]}

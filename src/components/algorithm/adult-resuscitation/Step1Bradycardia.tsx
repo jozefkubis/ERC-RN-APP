@@ -61,19 +61,19 @@ export default function Step2Bradycardia() {
         </View>
 
         <View style={styles.questionCard}>
-          <View style={styles.questionIcon}>
-            <Ionicons name="warning" size={27} color="#FFFFFF" />
-          </View>
-          <View style={styles.questionContent}>
-            <Text style={styles.questionText}>Život ohrozujúce príznaky?</Text>
-            <View style={styles.warningList}>
-              {lifeThreateningSigns.map((item) => (
-                <View key={item} style={styles.warningItem}>
-                  <View style={styles.warningDot} />
-                  <Text style={styles.warningText}>{item}</Text>
-                </View>
-              ))}
+          <View style={styles.questionHeader}>
+            <View style={styles.questionIcon}>
+              <Ionicons name="warning" size={27} color="#FFFFFF" />
             </View>
+            <Text style={styles.questionText}>Život ohrozujúce príznaky?</Text>
+          </View>
+          <View style={styles.warningList}>
+            {lifeThreateningSigns.map((item) => (
+              <View key={item} style={styles.warningItem}>
+                <View style={styles.warningDot} />
+                <Text style={styles.warningText}>{item}</Text>
+              </View>
+            ))}
           </View>
         </View>
 
@@ -186,9 +186,7 @@ const styles = StyleSheet.create({
   },
   questionCard: {
     width: "100%",
-    flexDirection: "row",
-    alignItems: "flex-start",
-    gap: 15,
+    gap: 12,
     padding: 18,
     borderWidth: 2,
     borderColor: "#0877D1",
@@ -205,11 +203,13 @@ const styles = StyleSheet.create({
     borderRadius: 21,
     backgroundColor: "#ED1C24",
   },
-  questionContent: {
-    flex: 1,
-    gap: 12,
+  questionHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 15,
   },
   questionText: {
+    flex: 1,
     color: "#075296",
     fontSize: 20,
     fontWeight: "800",

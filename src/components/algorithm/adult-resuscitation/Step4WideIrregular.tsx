@@ -40,35 +40,38 @@ export default function Step4WideIrregular() {
             </View>
 
             <View style={styles.recommendationBlock}>
-              <View style={styles.recommendationIcon}>
-                <Ionicons name="flash" size={22} color="#075296" />
-              </View>
-              <View style={styles.textBlock}>
+              <View style={styles.recommendationHeader}>
+                <View style={styles.recommendationIcon}>
+                  <Ionicons name="flash" size={22} color="#075296" />
+                </View>
                 <Text style={styles.recommendationTitle}>
                   Fibrilácia predsiení s preexcitáciou
                 </Text>
-                <Text style={styles.recommendationText}>
+              </View>
+              <View style={styles.listItem}>
+                <View style={styles.dot} />
+                <Text style={styles.recommendationDescription}>
                   Zvážte prokaínamid alebo kardioverziu.
                 </Text>
               </View>
             </View>
 
             <View style={styles.recommendationBlock}>
-              <View style={styles.recommendationIcon}>
-                <Ionicons name="pulse" size={22} color="#075296" />
-              </View>
-              <View style={styles.textBlock}>
+              <View style={styles.recommendationHeader}>
+                <View style={styles.recommendationIcon}>
+                  <Ionicons name="pulse" size={22} color="#075296" />
+                </View>
                 <Text style={styles.recommendationTitle}>
                   Polymorfná KT s predĺženým QT intervalom
                 </Text>
-                <View style={styles.list}>
-                  {polymorphicSteps.map((item) => (
-                    <View key={item} style={styles.listItem}>
-                      <View style={styles.dot} />
-                      <Text style={styles.recommendationText}>{item}</Text>
-                    </View>
-                  ))}
-                </View>
+              </View>
+              <View style={styles.list}>
+                {polymorphicSteps.map((item) => (
+                  <View key={item} style={styles.listItem}>
+                    <View style={styles.dot} />
+                    <Text style={styles.recommendationText}>{item}</Text>
+                  </View>
+                ))}
               </View>
             </View>
           </View>
@@ -167,9 +170,7 @@ const styles = StyleSheet.create({
     lineHeight: 24,
   },
   recommendationBlock: {
-    flexDirection: "row",
-    alignItems: "flex-start",
-    gap: 12,
+    gap: 10,
     padding: 14,
     borderRadius: 10,
     borderCurve: "continuous",
@@ -183,11 +184,13 @@ const styles = StyleSheet.create({
     borderRadius: 18,
     backgroundColor: "#E4EFFD",
   },
-  textBlock: {
-    flex: 1,
-    gap: 7,
+  recommendationHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 12,
   },
   recommendationTitle: {
+    flex: 1,
     color: "#075296",
     fontSize: 15,
     fontWeight: "800",
@@ -195,6 +198,12 @@ const styles = StyleSheet.create({
   },
   recommendationText: {
     flex: 1,
+    color: "#10243C",
+    fontSize: 14,
+    fontWeight: "700",
+    lineHeight: 20,
+  },
+  recommendationDescription: {
     color: "#10243C",
     fontSize: 14,
     fontWeight: "700",
