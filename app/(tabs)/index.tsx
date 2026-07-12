@@ -8,10 +8,6 @@ import { ScrollView, StatusBar, StyleSheet, Text, View } from "react-native";
 export default function HomeScreen() {
   const router = useRouter();
 
-  function handleCardPress(route: string) {
-    router.push(route);
-  }
-
   return (
     <>
       <StatusBar barStyle="dark-content" />
@@ -22,50 +18,20 @@ export default function HomeScreen() {
         {/* Vyhľadávanie */}
         <Input placeholder="Vyhľadaj postup, algoritmus..." />
 
-        {/* Nadpis sekcie primárnych možností */}
+        {/* Odporúčania odborných spoločností */}
         <View style={styles.primaryOptionsContainer}>
-          <Ionicons name="shapes" size={24} color="#075296" />
-          <Text style={styles.primaryOption}>Primárne možnosti</Text>
+          <Ionicons name="heart-circle" size={24} color="#075296" />
+          <Text style={styles.primaryOption}>Odporúčania</Text>
         </View>
 
-        {/* Primárna karta: resuscitácia dospelých */}
+        {/* Vstup do aktuálne dostupných ERC odporúčaní */}
         <BaseCard
-          topText="Algoritmus"
-          title="Resuscitácia dospelých"
-          description="ALS, BLS, Post-resuscitačná starostlivosť"
+          topText="Aktuálne"
+          title="ERC 2025"
+          description="European Resuscitation Council"
           iconName="pulse"
           iconSize={44}
-          onPress={() => handleCardPress("/algorithms/adult-resuscitation")}
-        />
-
-        {/* Primárna karta: pediatrická resuscitácia */}
-        <BaseCard
-          topText="Algoritmus"
-          title="Resuscitácia detí"
-          description="EPALS, PBLS"
-          iconName="happy-outline"
-          iconSize={50}
-          variant="light"
-          onPress={() => handleCardPress("/algorithms/epals")}
-        />
-
-        {/* Primárna karta: resuscitácia novorodencov */}
-        <BaseCard
-          topText="Algoritmus"
-          title="Resuscitácia novorodencov"
-          description="NLS algoritmy"
-          iconName="medical-outline"
-          variant="light"
-        />
-
-        {/* Primárna karta: špeciálne okolnosti */}
-        <BaseCard
-          topText="Algoritmus"
-          title="Špeciálne okolnosti"
-          description="Anafylaxia, Hypotermia, Toxické látky..."
-          iconName="warning-outline"
-          iconColor="#CC6238"
-          variant="light"
+          onPress={() => router.push("/algorithms")}
         />
 
         {/* Sekcia nedávnych algoritmov */}
@@ -80,7 +46,7 @@ export default function HomeScreen() {
 
           <SmallCard
             title="ALS náhle zastavenie obehu"
-            subtitle="Resuscitácia dospelých"
+            subtitle="ERC 2025 · Resuscitácia dospelých"
             iconName="git-network"
             iconBackgroundColor="#0868C4"
             trailingIcon="chevron-forward"
@@ -88,7 +54,7 @@ export default function HomeScreen() {
           />
           <SmallCard
             title="Algoritmus anafylaxie"
-            subtitle="Špeciálne okolnosti"
+            subtitle="ERC 2025 · Špeciálne okolnosti"
             iconName="git-network"
             iconBackgroundColor="#0868C4"
             trailingIcon="chevron-forward"
