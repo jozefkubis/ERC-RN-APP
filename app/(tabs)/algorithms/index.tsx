@@ -2,7 +2,6 @@ import BaseCard from "@/src/components/ui/BaseCard";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { ScrollView, StatusBar, StyleSheet, Text, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function AlgorithmsScreen() {
   const router = useRouter();

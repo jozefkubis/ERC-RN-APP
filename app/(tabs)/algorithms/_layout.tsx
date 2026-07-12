@@ -1,11 +1,7 @@
 import { defaultHeaderOptions } from "@/src/navigation/screenOptions";
-import Ionicons from "@expo/vector-icons/Ionicons";
-import { Stack, useRouter } from "expo-router";
-import React from "react";
+import { Stack } from "expo-router";
 
 export default function AlgorithmsLayout() {
-  const router = useRouter();
-
   return (
     <Stack
       screenOptions={{
@@ -13,133 +9,12 @@ export default function AlgorithmsLayout() {
         animation: "slide_from_right",
       }}
     >
+      <Stack.Screen name="index" options={{ title: "Algoritmy" }} />
       <Stack.Screen
-        name="adult-resuscitation/index"
-        options={{
-          title: "Resuscitácia dospelých",
-          headerLeft: () => (
-            <Ionicons
-              name="arrow-back"
-              size={24}
-              color="black"
-              onPress={() => router.back()}
-            />
-          ),
-        }}
+        name="adult-resuscitation"
+        options={{ headerShown: false }}
       />
-      <Stack.Screen name="epals/index" options={{ title: "EPALS" }} />
-      <Stack.Screen
-        name="adult-resuscitation/als/index"
-        options={{ title: "Rozšírená resuscitácia" }}
-      />
-      <Stack.Screen
-        name="adult-resuscitation/als/step1"
-        options={{ title: "Rozšírená resuscitácia" }}
-      />
-      <Stack.Screen
-        name="adult-resuscitation/als/step2"
-        options={{ title: "Rozšírená resuscitácia" }}
-      />
-      <Stack.Screen
-        name="adult-resuscitation/als/step3"
-        options={{ title: "Rozšírená resuscitácia" }}
-      />
-      <Stack.Screen
-        name="adult-resuscitation/als/step4defib"
-        options={{ title: "Rozšírená resuscitácia" }}
-      />
-      <Stack.Screen
-        name="adult-resuscitation/als/step4nondefib"
-        options={{ title: "Rozšírená resuscitácia" }}
-      />
-      <Stack.Screen
-        name="adult-resuscitation/als/4h4t"
-        options={{ title: "4H / 4T" }}
-      />
-      <Stack.Screen
-        name="adult-resuscitation/als/rosc"
-        options={{ title: "ROSC" }}
-      />
-      <Stack.Screen
-        name="adult-resuscitation/bls/step1"
-        options={{ title: "Základná resuscitácia" }}
-      />
-      <Stack.Screen
-        name="adult-resuscitation/bls/step2"
-        options={{ title: "Základná resuscitácia" }}
-      />
-      <Stack.Screen
-        name="adult-resuscitation/bls/step3"
-        options={{ title: "Základná resuscitácia" }}
-      />
-      <Stack.Screen
-        name="adult-resuscitation/bls/step4"
-        options={{ title: "Základná resuscitácia" }}
-      />
-      <Stack.Screen
-        name="adult-resuscitation/tachycardia/step1"
-        options={{ title: "Tachykardia" }}
-      />
-      <Stack.Screen
-        name="adult-resuscitation/tachycardia/step2unstable"
-        options={{ title: "Tachykardia" }}
-      />
-      <Stack.Screen
-        name="adult-resuscitation/tachycardia/step2stable"
-        options={{ title: "Tachykardia" }}
-      />
-      <Stack.Screen
-        name="adult-resuscitation/tachycardia/step3wide"
-        options={{ title: "Tachykardia" }}
-      />
-      <Stack.Screen
-        name="adult-resuscitation/tachycardia/step3narrow"
-        options={{ title: "Tachykardia" }}
-      />
-      <Stack.Screen
-        name="adult-resuscitation/tachycardia/step4wideregular"
-        options={{ title: "Tachykardia" }}
-      />
-      <Stack.Screen
-        name="adult-resuscitation/tachycardia/step4wideirregular"
-        options={{ title: "Tachykardia" }}
-      />
-      <Stack.Screen
-        name="adult-resuscitation/tachycardia/step4narrowregular"
-        options={{ title: "Tachykardia" }}
-      />
-      <Stack.Screen
-        name="adult-resuscitation/tachycardia/step4narrowirregular"
-        options={{ title: "Tachykardia" }}
-      />
-      <Stack.Screen
-        name="adult-resuscitation/tachycardia/synccardioversion"
-        options={{ title: "Tachykardia" }}
-      />
-      <Stack.Screen
-        name="adult-resuscitation/bradycardia/step1"
-        options={{ title: "Bradykardia" }}
-      />
-      <Stack.Screen
-        name="adult-resuscitation/bradycardia/step2unstable"
-        options={{ title: "Bradykardia" }}
-      />
-      <Stack.Screen
-        name="adult-resuscitation/bradycardia/step2stable"
-        options={{ title: "Bradykardia" }}
-      />
-      <Stack.Screen
-        name="adult-resuscitation/bradycardia/step3unstable"
-        options={{ title: "Bradykardia" }}
-      />
-      <Stack.Screen
-        name="adult-resuscitation/bradycardia/alternative-medications"
-        options={{ title: "Alternatívne lieky" }}
-      />
-      <Stack.Screen
-        name="adult-resuscitation/bradycardia/cardiostimulationscreen"
-        options={{ title: "Kardiostimulácia" }}
-      />
+      <Stack.Screen name="epals" options={{ headerShown: false }} />
     </Stack>
   );
 }
