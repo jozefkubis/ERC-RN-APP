@@ -4,7 +4,6 @@ import SmallCard from "@/src/components/ui/SmallCard";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { ScrollView, StatusBar, StyleSheet, Text, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function HomeScreen() {
   const router = useRouter();
@@ -94,31 +93,6 @@ export default function HomeScreen() {
             iconBackgroundColor="#0868C4"
             trailingIcon="chevron-forward"
             trailingIconColor="#7A8492"
-          />
-        </View>
-
-        {/* Sekcia obľúbených položiek */}
-        <View style={styles.listSection}>
-          <View style={styles.sectionTitleRow}>
-            <Ionicons name="star" size={22} color="#FFB000" />
-            <Text style={styles.sectionTitle}>Obľúbené</Text>
-          </View>
-
-          <SmallCard
-            title="Dávkovanie adrenalínu"
-            subtitle="Databáza liekov"
-            iconName="medkit"
-            iconBackgroundColor="#8B6500"
-            trailingIcon="star"
-            trailingIconColor="#FFB000"
-          />
-          <SmallCard
-            title="KPR metronóm"
-            subtitle="Časovače"
-            iconName="timer"
-            iconBackgroundColor="#ED1C24"
-            trailingIcon="star"
-            trailingIconColor="#FFB000"
           />
         </View>
       </ScrollView>

@@ -11,7 +11,6 @@ type TabIconName = ComponentProps<typeof Ionicons>["name"];
 const icons: Record<string, TabIconName> = {
   index: "home",
   algorithms: "git-network",
-  favorites: "star",
   settings: "settings",
 };
 
@@ -51,20 +50,13 @@ export default function TabsLayout() {
           headerShown: false,
         }}
       />
-      <Tabs.Screen
-        name="favorites"
-        options={{
-          title: "Obľúbené",
-          tabBarLabel: "Favorites",
-          href: null, // Disable navigation to this tab
-        }}
-      />
+    
       <Tabs.Screen
         name="settings"
         options={{
           title: "Nastavenia",
           tabBarLabel: "Nastavenia",
-          href: null, // Disable navigation to this tab
+          // href: null, // Disable navigation to this tab
         }}
       />
     </Tabs>
