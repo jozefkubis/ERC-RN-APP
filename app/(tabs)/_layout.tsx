@@ -38,19 +38,19 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: "ERC 2025",
+          title: "Domov",
           tabBarLabel: "Domov",
         }}
       />
       <Tabs.Screen
         name="algorithms"
         options={{
-          title: "Algoritmy",
-          tabBarLabel: "Algoritmy",
+          title: "ERC 2025",
+          tabBarLabel: "ERC 2025",
           headerShown: false,
         }}
       />
-    
+
       <Tabs.Screen
         name="settings"
         options={{

@@ -1,7 +1,6 @@
 import BaseCard from "@/src/components/ui/BaseCard";
-import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import { ScrollView, StatusBar, StyleSheet, Text, View } from "react-native";
+import { ScrollView, StatusBar, StyleSheet } from "react-native";
 
 export default function AlgorithmsScreen() {
   const router = useRouter();
@@ -13,10 +12,10 @@ export default function AlgorithmsScreen() {
         contentInsetAdjustmentBehavior="automatic"
         contentContainerStyle={styles.container}
       >
-        <View style={styles.primaryOptionsContainer}>
+        {/* <View style={styles.primaryOptionsContainer}>
           <Ionicons name="git-network" size={24} color="#075296" />
           <Text style={styles.primaryOption}>Algoritmy</Text>
-        </View>
+        </View> */}
 
         <BaseCard
           topText="Algoritmus"

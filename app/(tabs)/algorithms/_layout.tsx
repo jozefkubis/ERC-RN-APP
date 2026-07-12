@@ -9,7 +9,7 @@ export default function AlgorithmsLayout() {
         animation: "slide_from_right",
       }}
     >
-      <Stack.Screen name="index" options={{ title: "Algoritmy" }} />
+      <Stack.Screen name="index" options={{ title: "ERC 2025" }} />
       <Stack.Screen
         name="adult-resuscitation"
         options={{ headerShown: false }}
