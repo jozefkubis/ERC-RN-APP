@@ -1,6 +1,14 @@
 import { Ionicons } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 import React from "react";
-import { ScrollView, StatusBar, StyleSheet, Text, View } from "react-native";
+import {
+  Pressable,
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import InfoCard from "../../ui/info-card";
 
 const cardioversionSteps = [
@@ -15,6 +23,8 @@ const medicationSteps = [
 ];
 
 export default function Step2TachyUnstable() {
+  const router = useRouter();
+
   return (
     <>
       <StatusBar barStyle="dark-content" />
@@ -41,13 +51,22 @@ export default function Step2TachyUnstable() {
             <Text style={styles.panelTitle}>NESTABILNÝ</Text>
           </View>
 
-          <View style={styles.flowContainer}>
+          <Pressable
+            style={styles.flowContainer}
+            onPress={() =>
+              router.push(
+                "/algorithms/adult-resuscitation/tachycardia/synccardioversion",
+              )
+            }
+          >
             <View style={styles.actionCard}>
               <View style={styles.cardHeader}>
                 <View style={styles.cardIcon}>
                   <Ionicons name="flash" size={22} color="#FFFFFF" />
                 </View>
-                <Text style={styles.cardTitle}>Synchronizovaná kardioverzia</Text>
+                <Text style={styles.cardTitle}>
+                  Synchronizovaná kardioverzia
+                </Text>
               </View>
 
               <View style={styles.list}>
@@ -57,6 +76,10 @@ export default function Step2TachyUnstable() {
                     <Text style={styles.listText}>{item}</Text>
                   </View>
                 ))}
+              </View>
+
+              <View style={styles.actionArrow}>
+                <Ionicons name="arrow-forward" size={24} color="#075296" />
               </View>
             </View>
 
@@ -82,7 +105,7 @@ export default function Step2TachyUnstable() {
                 ))}
               </View>
             </View>
-          </View>
+          </Pressable>
         </View>
 
         <InfoCard
@@ -167,11 +190,19 @@ const styles = StyleSheet.create({
     width: "100%",
     gap: 15,
     padding: 16,
+    paddingRight: 52,
     borderWidth: 2,
     borderColor: "#075296",
     borderRadius: 10,
     borderCurve: "continuous",
     backgroundColor: "#FFFFFF",
+  },
+  actionArrow: {
+    position: "absolute",
+    top: 0,
+    bottom: 0,
+    right: 16,
+    justifyContent: "center",
   },
   medicationCard: {
     width: "100%",
