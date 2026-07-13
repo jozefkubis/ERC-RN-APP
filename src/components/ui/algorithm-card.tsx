@@ -1,4 +1,5 @@
 import { Fontisto, Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
+import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import type { ComponentProps } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 
@@ -23,6 +24,10 @@ type AlgorithmCardProps =
   | (AlgorithmCardBaseProps & {
       iconFamily: "fontisto";
       iconName: ComponentProps<typeof Fontisto>["name"];
+    })
+  | (AlgorithmCardBaseProps & {
+      iconFamily?: "fontawesome6";
+      iconName: ComponentProps<typeof FontAwesome6>["name"];
     });
 
 export default function AlgorithmCard(props: AlgorithmCardProps) {
@@ -70,6 +75,8 @@ export default function AlgorithmCard(props: AlgorithmCardProps) {
             />
           ) : props.iconFamily === "fontisto" ? (
             <Fontisto name={props.iconName} size={38} color="#E3EBF4" />
+          ) : props.iconFamily === "fontawesome6" ? (
+            <FontAwesome6 name={props.iconName} size={38} color="#E3EBF4" />
           ) : (
             <Ionicons name={props.iconName} size={50} color="#E3EBF4" />
           )}

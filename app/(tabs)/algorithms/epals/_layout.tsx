@@ -10,7 +10,7 @@ export default function EpalsLayout() {
       <Stack.Screen
         name="index"
         options={{
-          title: "EPALS",
+          title: "Resuscitácia dietaťa",
           headerLeft: () => (
             <Ionicons
               name="arrow-back"
