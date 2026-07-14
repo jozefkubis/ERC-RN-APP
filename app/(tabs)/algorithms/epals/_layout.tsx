@@ -21,6 +21,14 @@ export default function EpalsLayout() {
           ),
         }}
       />
+      <Stack.Screen
+        name="pals/step1"
+        options={{ title: "Rozšírená resuscitácia" }}
+      />
+      <Stack.Screen
+        name="pals/step2"
+        options={{ title: "Rozšírená resuscitácia" }}
+      />
     </Stack>
   );
 }

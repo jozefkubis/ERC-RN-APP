@@ -1,8 +1,11 @@
 import AlgorithmCard from "@/src/components/ui/algorithm-card";
+import { useRouter } from "expo-router";
 import React from "react";
 import { ScrollView, StatusBar, StyleSheet, Text, View } from "react-native";
 
 export default function EPALS() {
+  const router = useRouter();
+
   return (
     <>
       <StatusBar barStyle="dark-content" />
@@ -24,6 +27,7 @@ export default function EPALS() {
           description="Zhodnotenie rytmu, defibrilácia, podávanie liekov pri zastavenia obehu."
           iconFamily="fontawesome6"
           iconName="children"
+          onPress={() => router.push("/algorithms/epals/pals/step1")}
         />
 
         <AlgorithmCard
