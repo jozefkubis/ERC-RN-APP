@@ -15,14 +15,14 @@ const rhythmOptions = [
     title: "Defibrilovateľný rytmus",
     subtitle: "KF / bKT",
     iconName: "flash-sharp" as const,
-    route: "/algorithms/epals/pals/defibrillable" as const,
+    route: "/algorithms/epals/pals/step3defib" as const,
     variant: "primary" as const,
   },
   {
     title: "Nedefibrilovateľný rytmus",
     subtitle: "Bradykardia, asystólia, BEA",
     iconName: "flash-off-sharp" as const,
-    route: "/algorithms/epals/pals/non-defibrillable" as const,
+    route: "/algorithms/epals/pals/step3nondefib" as const,
     variant: "light" as const,
   },
 ];
@@ -43,8 +43,8 @@ export default function Step2Pals() {
           </View>
           <Text style={styles.stepTitle}>Zhodnotenie rytmu</Text>
           <Text style={styles.stepDescription}>
-            Prerušte stláčanie iba na nevyhnutný čas a zvoľte ďalší postup
-            podľa rytmu alebo klinického výsledku.
+            Prerušte stláčanie iba na nevyhnutný čas a zvoľte ďalší postup podľa
+            rytmu alebo klinického výsledku.
           </Text>
         </View>
 
@@ -105,9 +105,7 @@ export default function Step2Pals() {
         <View style={styles.outcomeList}>
           <Pressable
             accessibilityRole="button"
-            onPress={() =>
-              router.push("/algorithms/epals/pals/termination")
-            }
+            onPress={() => router.push("/algorithms/epals/pals/termination")}
             style={({ pressed }) => [
               styles.outcomeCard,
               pressed && styles.pressed,
@@ -128,7 +126,10 @@ export default function Step2Pals() {
           <Pressable
             accessibilityRole="button"
             onPress={() => router.push("/algorithms/epals/pals/rosc")}
-            style={({ pressed }) => [styles.roscCard, pressed && styles.pressed]}
+            style={({ pressed }) => [
+              styles.roscCard,
+              pressed && styles.pressed,
+            ]}
           >
             <View style={styles.roscIcon}>
               <Ionicons name="checkmark" size={24} color="#FFFFFF" />
