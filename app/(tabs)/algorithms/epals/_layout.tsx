@@ -37,6 +37,34 @@ export default function EpalsLayout() {
         name="pals/step3nondefib"
         options={{ title: "Rozšírená resuscitácia" }}
       />
+      <Stack.Screen
+        name="pbls/step1"
+        options={{ title: "Základná resuscitácia" }}
+      />
+      <Stack.Screen
+        name="pbls/step2"
+        options={{ title: "Základná resuscitácia" }}
+      />
+      <Stack.Screen
+        name="pbls/step3"
+        options={{ title: "Základná resuscitácia" }}
+      />
+      <Stack.Screen
+        name="pbls/step4"
+        options={{ title: "Základná resuscitácia" }}
+      />
+      <Stack.Screen
+        name="pbls/step5"
+        options={{ title: "Základná resuscitácia" }}
+      />
+      <Stack.Screen
+        name="pals/roscpals"
+        options={{ title: "Poresuscitačná starostlivosť" }}
+      />
+      <Stack.Screen
+        name="pals/termination"
+        options={{ title: "Ukončenie resuscitácie" }}
+      />
     </Stack>
   );
 }

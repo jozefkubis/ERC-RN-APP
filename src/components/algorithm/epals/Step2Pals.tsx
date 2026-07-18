@@ -125,7 +125,7 @@ export default function Step2Pals() {
 
           <Pressable
             accessibilityRole="button"
-            onPress={() => router.push("/algorithms/epals/pals/rosc")}
+            onPress={() => router.push("/algorithms/epals/pals/roscpals")}
             style={({ pressed }) => [
               styles.roscCard,
               pressed && styles.pressed,

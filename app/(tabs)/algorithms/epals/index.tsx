@@ -36,6 +36,7 @@ export default function EPALS() {
           description="Rozpoznanie zastavenia obehu, 5 úvodných vdychov, kvalitná KPR a včasné použitie AED."
           iconFamily="ionicons"
           iconName="heart-outline"
+          onPress={() => router.push("/algorithms/epals/pbls/step1")}
         />
 
         <AlgorithmCard

@@ -16,6 +16,13 @@ const actions = [
   "Pripojte defibrilátor / monitor",
 ];
 
+const cprItems = [
+  "Vysokokvalitné kompresie hrudníka: frekvencia, hĺbka, uvoľnenie hrudníka",
+  "Ventilácia vakom a maskou so 100 % kyslíkom (technika s dvomi osobami)",
+  "Kontinuálne kompresie hrudníka po intubácii alebo, ak je zavedená supraglotická pomôcka",
+  "Ventilujte frekvenciou 25 (< 1 rok), 20 (1-8 rokov), 15 (8-12 rokov) alebo 10 (> 12 rokov) za minútu",
+];
+
 export default function Step1Pals() {
   const router = useRouter();
 
@@ -71,6 +78,24 @@ export default function Step1Pals() {
             <Ionicons name="arrow-forward" size={22} color="#075296" />
           </View>
         </Pressable>
+
+        <View style={styles.cprInfoCard}>
+          <View style={styles.cprInfoHeader}>
+            <View style={styles.cprInfoIcon}>
+              <Ionicons name="warning-outline" size={24} color="#ED1C24" />
+            </View>
+            <Text style={styles.cprInfoTitle}>Počas KPR</Text>
+          </View>
+
+          <View style={styles.cprInfoList}>
+            {cprItems.map((item) => (
+              <View key={item} style={styles.cprInfoRow}>
+                <View style={styles.cprBullet} />
+                <Text style={styles.cprInfoText}>{item}</Text>
+              </View>
+            ))}
+          </View>
+        </View>
       </ScrollView>
     </>
   );
@@ -183,6 +208,64 @@ const styles = StyleSheet.create({
     fontSize: 13,
     lineHeight: 19,
     textAlign: "center",
+  },
+  cprInfoCard: {
+    width: "100%",
+    gap: 13,
+    padding: 16,
+    borderWidth: 1,
+    borderColor: "#F0DEB4",
+    borderRadius: 10,
+    borderCurve: "continuous",
+    backgroundColor: "#FFF6DC",
+    boxShadow: "0 2px 4px rgba(15, 35, 60, 0.08)",
+  },
+  cprInfoHeader: {
+    width: "100%",
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+  },
+  cprInfoIcon: {
+    width: 34,
+    height: 34,
+    alignItems: "center",
+    justifyContent: "center",
+    borderWidth: 2,
+    borderColor: "#ED1C24",
+    borderRadius: 17,
+    backgroundColor: "#FFFFFF",
+  },
+  cprInfoTitle: {
+    flex: 1,
+    color: "#075296",
+    fontSize: 16,
+    fontWeight: "900",
+    lineHeight: 22,
+  },
+  cprInfoList: {
+    width: "100%",
+    gap: 9,
+  },
+  cprInfoRow: {
+    width: "100%",
+    flexDirection: "row",
+    alignItems: "flex-start",
+    gap: 10,
+  },
+  cprBullet: {
+    width: 5,
+    height: 5,
+    borderRadius: 3,
+    backgroundColor: "#075296",
+    marginTop: 8,
+  },
+  cprInfoText: {
+    flex: 1,
+    color: "#24425F",
+    fontSize: 13,
+    fontWeight: "700",
+    lineHeight: 19,
   },
   pressed: {
     opacity: 0.7,
