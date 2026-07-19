@@ -9,7 +9,9 @@ import {
   Text,
   View,
 } from "react-native";
+import H4T4Button from "../../ui/H4T4Button";
 import InfoCard from "../../ui/info-card";
+import ParalelThinkingALS from "../adult-resuscitation/ParalelThinkingALS";
 
 const nonDefibRhythmItems = [
   "Nedefibrilovateľné rytmy: bradykardia so slabou perfúziou, asystólia, BEA.",
@@ -35,8 +37,8 @@ export default function Step3PalsNondefib() {
           </View>
           <Text style={styles.stepTitle}>Nedefibrilovateľný rytmus</Text>
           <Text style={styles.stepDescription}>
-            Pri bradykardii so slabou perfúziou, asystólii alebo BEA
-            nepodávajte výboj. Okamžite pokračujte v KPR a podajte adrenalín.
+            Pri bradykardii so slabou perfúziou, asystólii alebo BEA nepodávajte
+            výboj. Okamžite pokračujte v KPR a podajte adrenalín.
           </Text>
         </View>
 
@@ -50,8 +52,8 @@ export default function Step3PalsNondefib() {
               IV / IO adrenalín čo najskôr
             </Text>
             <Text style={styles.adrenalineDescription}>
-              10 µg kg⁻¹, max. 1 mg. Po podaní prepláchnite vstup a
-              neprerušujte kompresie zbytočne.
+              10 µg kg⁻¹, max. 1 mg. Po podaní prepláchnite vstup a neprerušujte
+              kompresie zbytočne.
             </Text>
           </View>
         </View>
@@ -65,15 +67,15 @@ export default function Step3PalsNondefib() {
             />
           </View>
           <View style={styles.cprTextContainer}>
-            <Text style={styles.cprTitle}>
-              Ihneď pokračujte v KPR 2 minúty
-            </Text>
+            <Text style={styles.cprTitle}>Ihneď pokračujte v KPR 2 minúty</Text>
             <Text style={styles.cprDescription}>
               Pokračujte v kompresiách a ventilácii 15:2. Súbežne hľadajte a
               riešte reverzibilné príčiny.
             </Text>
           </View>
         </View>
+
+        <ParalelThinkingALS />
 
         <View style={styles.nonDefibInfoCard}>
           <View style={styles.nonDefibInfoHeader}>
@@ -94,6 +96,8 @@ export default function Step3PalsNondefib() {
             ))}
           </View>
         </View>
+
+        <H4T4Button />
 
         <Pressable
           accessibilityRole="button"

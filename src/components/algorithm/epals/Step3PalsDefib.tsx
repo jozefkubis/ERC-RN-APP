@@ -9,7 +9,9 @@ import {
   Text,
   View,
 } from "react-native";
+import H4T4Button from "../../ui/H4T4Button";
 import InfoCard from "../../ui/info-card";
+import ParalelThinkingALS from "../adult-resuscitation/ParalelThinkingALS";
 
 const defibRhythmItems = [
   "Pokračujte s výbojmi 4 J kg⁻¹ každé 2 minúty.",
@@ -47,8 +49,8 @@ export default function Step3PalsDefib() {
             <Text style={styles.shockLabel}>Okamžitý postup</Text>
             <Text style={styles.shockTitle}>1 výboj 4 J kg⁻¹</Text>
             <Text style={styles.shockDescription}>
-              Nabite defibrilátor počas KPR, všetkých upozornite a výboj
-              podajte s čo najkratšou pauzou.
+              Nabite defibrilátor počas KPR, všetkých upozornite a výboj podajte
+              s čo najkratšou pauzou.
             </Text>
           </View>
         </View>
@@ -62,9 +64,7 @@ export default function Step3PalsDefib() {
             />
           </View>
           <View style={styles.cprTextContainer}>
-            <Text style={styles.cprTitle}>
-              Ihneď pokračujte v KPR 2 minúty
-            </Text>
+            <Text style={styles.cprTitle}>Ihneď pokračujte v KPR 2 minúty</Text>
             <Text style={styles.cprDescription}>
               Po výboji nekontrolujte pulz ani rytmus. Okamžite obnovte
               kompresie a ventiláciu 15:2.
@@ -91,6 +91,9 @@ export default function Step3PalsDefib() {
             ))}
           </View>
         </View>
+
+        <ParalelThinkingALS />
+        <H4T4Button />
 
         <Pressable
           accessibilityRole="button"
