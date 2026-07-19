@@ -70,8 +70,9 @@ export default function Step4Pbls() {
           style={({ pressed }) => [styles.nextCard, pressed && styles.pressed]}
         >
           <View style={styles.nextTextContainer}>
-            {/* <Text style={styles.nextTitle}></Text> */}
-            <Text style={styles.nextDescription}>Ďalší krok - AED</Text>
+            <Text style={styles.nextTitle}>Ďalší krok </Text>
+            <Ionicons name="arrow-forward" size={22} color="#FFFFFF" />
+            <Text style={styles.nextDescription}>AED</Text>
           </View>
           <Ionicons name="arrow-forward" size={22} color="#FFFFFF" />
         </Pressable>
@@ -213,8 +214,9 @@ const styles = StyleSheet.create({
     boxShadow: "0 2px 4px rgba(15, 35, 60, 0.08)",
   },
   nextTextContainer: {
+    flexDirection: "row",
     alignItems: "center",
-    gap: 2,
+    gap: 14,
   },
   nextTitle: {
     color: "#D7E9F8",
