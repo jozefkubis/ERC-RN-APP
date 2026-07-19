@@ -105,26 +105,6 @@ export default function Step2Pals() {
         <View style={styles.outcomeList}>
           <Pressable
             accessibilityRole="button"
-            onPress={() => router.push("/algorithms/epals/pals/termination")}
-            style={({ pressed }) => [
-              styles.outcomeCard,
-              pressed && styles.pressed,
-            ]}
-          >
-            <View style={styles.terminationIcon}>
-              <Ionicons name="stop" size={22} color="#FFFFFF" />
-            </View>
-            <View style={styles.outcomeTextContainer}>
-              <Text style={styles.outcomeTitle}>Ukončenie resuscitácie</Text>
-              <Text style={styles.outcomeDescription}>
-                Prejdite na ukončenie resuscitácie.
-              </Text>
-            </View>
-            <Ionicons name="arrow-forward" size={22} color="#7A8492" />
-          </Pressable>
-
-          <Pressable
-            accessibilityRole="button"
             onPress={() => router.push("/algorithms/epals/pals/roscpals")}
             style={({ pressed }) => [
               styles.roscCard,
@@ -141,6 +121,26 @@ export default function Step2Pals() {
               </Text>
             </View>
             <Ionicons name="arrow-forward" size={22} color="#075296" />
+          </Pressable>
+
+          <Pressable
+            accessibilityRole="button"
+            onPress={() => router.push("/algorithms/epals/pals/termination")}
+            style={({ pressed }) => [
+              styles.outcomeCard,
+              pressed && styles.pressed,
+            ]}
+          >
+            <View style={styles.terminationIcon}>
+              <Ionicons name="stop" size={22} color="#FFFFFF" />
+            </View>
+            <View style={styles.outcomeTextContainer}>
+              <Text style={styles.outcomeTitle}>Ukončenie resuscitácie</Text>
+              <Text style={styles.outcomeDescription}>
+                Prejdite na ukončenie resuscitácie.
+              </Text>
+            </View>
+            <Ionicons name="arrow-forward" size={22} color="#7A8492" />
           </Pressable>
         </View>
       </ScrollView>
