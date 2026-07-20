@@ -53,6 +53,7 @@ export default function EPALS() {
           description="Postup podľa účinnosti kašľa a vedomia dieťaťa..."
           iconFamily="fontawesome6"
           iconName="lungs"
+          onPress={() => router.push("/algorithms/epals/fbao/step1")}
         />
       </ScrollView>
     </>
