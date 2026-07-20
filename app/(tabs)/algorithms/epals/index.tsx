@@ -39,13 +39,13 @@ export default function EPALS() {
           onPress={() => router.push("/algorithms/epals/pbls/step1")}
         />
 
-        <AlgorithmCard
+        {/* <AlgorithmCard
           title="Kriticky choré dieťa"
           subtitle="ABCDE prístup"
           description="Rýchle rozpoznanie a liečba porúch dýchacích ciest, dýchania, krvného obehu, vedomia..."
           iconFamily="ionicons"
           iconName="medkit-outline"
-        />
+        /> */}
 
         <AlgorithmCard
           title="FBAO"
