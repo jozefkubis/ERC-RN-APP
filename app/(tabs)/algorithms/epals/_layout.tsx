@@ -66,6 +66,7 @@ export default function EpalsLayout() {
         options={{ title: "Ukončenie resuscitácie" }}
       />
       <Stack.Screen name="fbao/step1" options={{ title: "FBAO" }} />
+      <Stack.Screen name="fbao/step2" options={{ title: "FBAO" }} />
     </Stack>
   );
 }

@@ -4,8 +4,9 @@ import React from "react";
 import { ScrollView, StatusBar, StyleSheet, Text, View } from "react-native";
 import InfoCard from "../../ui/info-card";
 import NoButton from "../../ui/NoButton";
+import YesButton from "../../ui/YesButton";
 
-export default function Step1() {
+export default function Step2() {
   const router = useRouter();
 
   return (
@@ -17,34 +18,33 @@ export default function Step1() {
       >
         <View style={styles.stepHeader}>
           <View style={styles.stepBadge}>
-            <Text style={styles.stepBadgeText}>Krok 1</Text>
+            <Text style={styles.stepBadgeText}>Krok 2</Text>
           </View>
-          <Text style={styles.stepTitle}>
-            Obštrukcia dýchacích ciest dieťaťa
-          </Text>
+          <Text style={styles.stepTitle}>Privolajte pomoc</Text>
           <Text style={styles.stepDescription}>
-            Pri príznakoch obštrukcie dýchacích ciest cudzím telesom rýchlo
-            zhodnoťte, či dieťa dokáže účinne kašľať.
+            Pri neúčinnom kašli bezodkladne aktivujte záchrannú zdravotnú službu
+            a zhodnoťte stav vedomia dieťaťa.
           </Text>
         </View>
 
-        <View style={styles.signsCard}>
-          <View style={styles.signsIcon}>
-            <Ionicons name="warning" size={24} color="#FFFFFF" />
+        <View style={styles.emergencyCard}>
+          <View style={styles.emergencyIcon}>
+            <Ionicons name="call" size={25} color="#FFFFFF" />
           </View>
-          <View style={styles.signsTextContainer}>
-            <Text style={styles.signsTitle}>
-              Príznaky obštrukcie dýchacích ciest cudzím telesom
+          <View style={styles.emergencyTextContainer}>
+            <Text style={styles.emergencyTitle}>
+              Privolajte záchrannú službu
             </Text>
-            <Text style={styles.signsDescription}>
-              Náhly vznik ťažkostí s dýchaním, kašeľ, dávivosť alebo stridor,
-              často počas jedenia alebo hry s drobným predmetom.
+            <Text style={styles.emergencyDescription}>
+              Druhý záchranca alebo hlasný odposluch
             </Text>
+          </View>
+          <View style={styles.emergencyNumber}>
+            <Text style={styles.emergencyNumberText}>112</Text>
           </View>
         </View>
 
         <View style={styles.flowConnector}>
-          {/* <View style={styles.connectorLine} /> */}
           <Ionicons name="arrow-down" size={24} color="#075296" />
         </View>
 
@@ -52,36 +52,24 @@ export default function Step1() {
           <View style={styles.questionIcon}>
             <Ionicons name="help" size={28} color="#FFFFFF" />
           </View>
-          <Text style={styles.questionText}>Je kašeľ účinný?</Text>
+          <Text style={styles.questionText}>Je dieťa pri vedomí?</Text>
         </View>
 
         <View style={styles.answersContainer}>
-          <View style={styles.guidanceCard}>
-            <Text style={styles.guidanceLabel}>Ak áno</Text>
-            <Text style={styles.guidanceText}>
-              Povzbudzujte dieťa ku kašľu, nezasahujte do dýchacích ciest a
-              priebežne sledujte zhoršenie stavu.
-            </Text>
-          </View>
+          <YesButton
+            onPress={() => router.push("/algorithms/epals/fbao/step3conscious")}
+          />
           <NoButton
-            onPress={() => router.push("/algorithms/epals/fbao/step2")}
+            onPress={() =>
+              router.push("/algorithms/epals/fbao/step3uncnscious")
+            }
           />
         </View>
 
-        {/* <View style={styles.guidanceGrid}>
-          <View style={styles.guidanceCard}>
-            <Text style={styles.guidanceLabel}>Ak nie</Text>
-            <Text style={styles.guidanceText}>
-              Kašeľ je neúčinný pri tichom kašli, neschopnosti hovoriť alebo
-              dýchať, cyanóze či slabnutí vedomia.
-            </Text>
-          </View>
-        </View> */}
-
         <InfoCard
           title="Dôležité"
-          description="Ak sa stav zhoršuje alebo kašeľ nie je účinný, privolajte pomoc a pokračujte ďalším krokom algoritmu FBAO."
-          iconName="call-outline"
+          description="Nevykonávajte opakované ani slepé vyberanie prstami. Predmet odstráňte iba vtedy, keď je v ústach jasne viditeľný."
+          iconName="warning-outline"
         />
       </ScrollView>
     </>
@@ -123,49 +111,62 @@ const styles = StyleSheet.create({
     fontSize: 14,
     lineHeight: 21,
   },
-  signsCard: {
+  emergencyCard: {
     width: "100%",
+    minHeight: 104,
     flexDirection: "row",
     alignItems: "center",
     gap: 14,
-    padding: 18,
+    padding: 17,
+    borderWidth: 2,
+    borderColor: "#075296",
     borderRadius: 10,
     borderCurve: "continuous",
-    backgroundColor: "#D7EDFD",
+    backgroundColor: "#FFFFFF",
     boxShadow: "0 2px 4px rgba(15, 35, 60, 0.08)",
   },
-  signsIcon: {
-    width: 42,
-    height: 42,
+  emergencyIcon: {
+    width: 46,
+    height: 46,
     alignItems: "center",
     justifyContent: "center",
-    borderRadius: 21,
-    backgroundColor: "#075296",
+    borderRadius: 23,
+    backgroundColor: "#ED1C24",
   },
-  signsTextContainer: {
+  emergencyTextContainer: {
     flex: 1,
-    gap: 5,
+    gap: 4,
   },
-  signsTitle: {
+  emergencyTitle: {
     color: "#075296",
     fontSize: 18,
     fontWeight: "900",
     lineHeight: 24,
   },
-  signsDescription: {
-    color: "#10243C",
-    fontSize: 13,
-    lineHeight: 19,
+  emergencyDescription: {
+    color: "#5C6574",
+    fontSize: 12,
+    lineHeight: 17,
+  },
+  emergencyNumber: {
+    alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: 8,
+    paddingVertical: 5,
+    borderWidth: 2,
+    borderColor: "#ED1C24",
+    borderRadius: 7,
+    borderCurve: "continuous",
+    backgroundColor: "#FFFFFF",
+  },
+  emergencyNumberText: {
+    color: "#ED1C24",
+    fontSize: 15,
+    fontWeight: "900",
   },
   flowConnector: {
     alignItems: "center",
     marginVertical: -4,
-  },
-  connectorLine: {
-    width: 4,
-    height: 18,
-    borderRadius: 2,
-    backgroundColor: "#075296",
   },
   questionCard: {
     width: "100%",
@@ -198,31 +199,5 @@ const styles = StyleSheet.create({
   answersContainer: {
     width: "100%",
     gap: 10,
-  },
-  guidanceGrid: {
-    width: "100%",
-    gap: 10,
-  },
-  guidanceCard: {
-    width: "100%",
-    gap: 5,
-    padding: 14,
-    borderWidth: 1,
-    borderColor: "#CBD3DF",
-    borderRadius: 10,
-    borderCurve: "continuous",
-    backgroundColor: "#FFFFFF",
-    boxShadow: "0 2px 4px rgba(15, 35, 60, 0.08)",
-  },
-  guidanceLabel: {
-    color: "#075296",
-    fontSize: 16,
-    fontWeight: "900",
-    lineHeight: 21,
-  },
-  guidanceText: {
-    color: "#5C6574",
-    fontSize: 13,
-    lineHeight: 19,
   },
 });
