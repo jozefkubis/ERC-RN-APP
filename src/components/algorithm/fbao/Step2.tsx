@@ -40,6 +40,8 @@ export default function Step2() {
             </Text>
           </View>
           <View style={styles.emergencyNumber}>
+            <Text style={styles.emergencyNumberText}>155</Text>
+            <View style={styles.emergencyNumberDivider} />
             <Text style={styles.emergencyNumberText}>112</Text>
           </View>
         </View>
@@ -164,6 +166,11 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: "900",
   },
+   emergencyNumberDivider: {
+    width: "100%",
+    height: 1.5,
+    backgroundColor: "#ED1C24",
+  },
   flowConnector: {
     alignItems: "center",
     marginVertical: -4,
@@ -200,4 +207,5 @@ const styles = StyleSheet.create({
     width: "100%",
     gap: 10,
   },
+ 
 });
