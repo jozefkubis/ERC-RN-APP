@@ -61,7 +61,7 @@ export default function Step2() {
           />
           <NoButton
             onPress={() =>
-              router.push("/algorithms/epals/fbao/step3uncnscious")
+              router.push("/algorithms/epals/fbao/step3unconscious")
             }
           />
         </View>

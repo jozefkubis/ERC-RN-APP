@@ -1,10 +1,6 @@
+import Step3Conscious from "@/src/components/algorithm/fbao/Step3Conscious";
 import React from "react";
-import { Text, View } from "react-native";
 
 export default function Step3ConsciousScreen() {
-  return (
-    <View>
-      <Text>Step 3 Conscious</Text>
-    </View>
-  );
+  return <Step3Conscious />;
 }

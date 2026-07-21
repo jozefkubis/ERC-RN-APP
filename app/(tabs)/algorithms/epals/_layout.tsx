@@ -67,6 +67,8 @@ export default function EpalsLayout() {
       />
       <Stack.Screen name="fbao/step1" options={{ title: "FBAO" }} />
       <Stack.Screen name="fbao/step2" options={{ title: "FBAO" }} />
+      <Stack.Screen name="fbao/step3conscious" options={{ title: "FBAO" }} />
+      <Stack.Screen name="fbao/step3unconscious" options={{ title: "FBAO" }} />
     </Stack>
   );
 }
