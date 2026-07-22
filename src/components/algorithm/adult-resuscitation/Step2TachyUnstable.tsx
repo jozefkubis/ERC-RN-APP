@@ -1,4 +1,5 @@
 import { Ionicons } from "@expo/vector-icons";
+import FlowConnector from "@/src/components/ui/FlowConnector";
 import { useRouter } from "expo-router";
 import React from "react";
 import {
@@ -85,7 +86,7 @@ export default function Step2TachyUnstable() {
 
             <View style={styles.transition}>
               <Text style={styles.transitionText}>Ak neúspešná</Text>
-              <Ionicons name="arrow-down" size={24} color="#075296" />
+              <FlowConnector />
             </View>
 
             <View style={styles.medicationCard}>

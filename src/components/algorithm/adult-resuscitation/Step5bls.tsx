@@ -1,4 +1,5 @@
 import { Ionicons } from "@expo/vector-icons";
+import FlowConnector from "@/src/components/ui/FlowConnector";
 import React from "react";
 import { ScrollView, StatusBar, StyleSheet, Text, View } from "react-native";
 
@@ -32,9 +33,7 @@ export default function Step5bls() {
           </View>
         </View>
 
-        <View style={styles.flowArrow}>
-          <Ionicons name="arrow-down" size={24} color="#075296" />
-        </View>
+        <FlowConnector />
 
         <View style={styles.finalCard}>
           <Text style={styles.finalText}>
@@ -119,11 +118,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "900",
     lineHeight: 21,
-  },
-  flowArrow: {
-    width: "100%",
-    alignItems: "center",
-    marginVertical: -5,
   },
   finalCard: {
     width: "100%",

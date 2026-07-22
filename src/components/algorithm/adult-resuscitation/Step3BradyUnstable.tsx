@@ -1,4 +1,5 @@
 import InfoCard from "@/src/components/ui/info-card";
+import FlowConnector from "@/src/components/ui/FlowConnector";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import React from "react";
@@ -100,9 +101,7 @@ export default function Step3BradyUnstable() {
               </View>
             </View>
 
-            <View style={styles.transition}>
-              <Ionicons name="arrow-down" size={24} color="#075296" />
-            </View>
+            <FlowConnector />
 
             <View style={styles.expertCard}>
               <View style={styles.expertIcon}>
@@ -278,11 +277,6 @@ const styles = StyleSheet.create({
   pressed: {
     opacity: 0.7,
     transform: [{ scale: 0.99 }],
-  },
-  transition: {
-    alignItems: "center",
-    justifyContent: "center",
-    paddingVertical: 2,
   },
   expertCard: {
     width: "100%",

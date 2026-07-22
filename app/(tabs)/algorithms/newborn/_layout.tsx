@@ -1,8 +1,8 @@
 import { defaultHeaderOptions } from "@/src/navigation/screenOptions";
-import { Ionicons } from "@expo/vector-icons";
+import Ionicons from "@expo/vector-icons/Ionicons";
 import { Stack, useRouter } from "expo-router";
 
-export default function AlgorithmsLayout() {
+export default function NewbornResuscitationLayout() {
   const router = useRouter();
 
   return (
@@ -15,7 +15,7 @@ export default function AlgorithmsLayout() {
       <Stack.Screen
         name="index"
         options={{
-          title: "ERC 2025",
+          title: "Resuscitácia novorodencov",
           headerLeft: () => (
             <Ionicons
               name="arrow-back"
@@ -27,11 +27,13 @@ export default function AlgorithmsLayout() {
         }}
       />
       <Stack.Screen
-        name="adult-resuscitation"
-        options={{ headerShown: false }}
+        name="step1"
+        options={{ title: "Resuscitácia novorodencov" }}
       />
-      <Stack.Screen name="epals" options={{ headerShown: false }} />
-      <Stack.Screen name="newborn" options={{ headerShown: false }} />
+      <Stack.Screen
+        name="step2"
+        options={{ title: "Resuscitácia novorodencov" }}
+      />
     </Stack>
   );
 }

@@ -42,6 +42,7 @@ export default function AlgorithmsScreen() {
           description="NLS algoritmy"
           iconName="medical-outline"
           variant="light"
+          onPress={() => router.push("/algorithms/newborn/step1")}
         />
 
         <BaseCard

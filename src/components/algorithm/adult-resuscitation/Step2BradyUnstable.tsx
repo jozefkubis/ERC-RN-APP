@@ -1,4 +1,5 @@
 import InfoCard from "@/src/components/ui/info-card";
+import FlowConnector from "@/src/components/ui/FlowConnector";
 import NoButton from "@/src/components/ui/NoButton";
 import YesButton from "@/src/components/ui/YesButton";
 import { Ionicons } from "@expo/vector-icons";
@@ -60,9 +61,7 @@ export default function Step2BradyUnstable() {
               </View>
             </View>
 
-            <View style={styles.transition}>
-              <Ionicons name="arrow-down" size={24} color="#075296" />
-            </View>
+            <FlowConnector />
 
             <View style={styles.questionCard}>
               <View style={styles.questionIcon}>
@@ -219,11 +218,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: "700",
     lineHeight: 20,
-  },
-  transition: {
-    alignItems: "center",
-    justifyContent: "center",
-    paddingVertical: 2,
   },
   questionCard: {
     width: "100%",

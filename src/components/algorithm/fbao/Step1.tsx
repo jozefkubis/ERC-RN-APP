@@ -2,6 +2,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import React from "react";
 import { ScrollView, StatusBar, StyleSheet, Text, View } from "react-native";
+import FlowConnector from "../../ui/FlowConnector";
 import InfoCard from "../../ui/info-card";
 import NoButton from "../../ui/NoButton";
 
@@ -43,10 +44,7 @@ export default function Step1() {
           </View>
         </View>
 
-        <View style={styles.flowConnector}>
-          {/* <View style={styles.connectorLine} /> */}
-          <Ionicons name="arrow-down" size={24} color="#075296" />
-        </View>
+        <FlowConnector />
 
         <View style={styles.questionCard}>
           <View style={styles.questionIcon}>
@@ -156,16 +154,6 @@ const styles = StyleSheet.create({
     color: "#10243C",
     fontSize: 13,
     lineHeight: 19,
-  },
-  flowConnector: {
-    alignItems: "center",
-    marginVertical: -4,
-  },
-  connectorLine: {
-    width: 4,
-    height: 18,
-    borderRadius: 2,
-    backgroundColor: "#075296",
   },
   questionCard: {
     width: "100%",

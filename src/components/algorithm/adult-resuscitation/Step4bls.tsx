@@ -1,4 +1,5 @@
 import { Ionicons } from "@expo/vector-icons";
+import FlowConnector from "@/src/components/ui/FlowConnector";
 import { useRouter } from "expo-router";
 import React from "react";
 import {
@@ -95,9 +96,7 @@ export default function Step4bls() {
           </View>
         </View>
 
-        <View style={styles.flowArrow}>
-          <Ionicons name="arrow-down" size={24} color="#075296" />
-        </View>
+        <FlowConnector />
 
         <Pressable
           onPress={() => router.push("/algorithms/adult-resuscitation/bls/step5")}
@@ -230,11 +229,6 @@ const styles = StyleSheet.create({
     color: "#10243C",
     fontSize: 13,
     lineHeight: 18,
-  },
-  flowArrow: {
-    width: "100%",
-    alignItems: "center",
-    marginVertical: -5,
   },
   nextCard: {
     width: "100%",

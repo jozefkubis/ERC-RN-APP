@@ -9,6 +9,7 @@ import {
   Text,
   View,
 } from "react-native";
+import FlowConnector from "../../ui/FlowConnector";
 import InfoCard from "../../ui/info-card";
 
 const actionSections = [
@@ -60,9 +61,7 @@ export default function Step3Conscious() {
           ))}
         </View>
 
-        <View style={styles.flowConnector}>
-          <Ionicons name="arrow-down" size={24} color="#075296" />
-        </View>
+        <FlowConnector />
 
         <View style={styles.questionCard}>
           <View style={styles.questionIcon}>
@@ -190,10 +189,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     lineHeight: 25,
     textAlign: "center",
-  },
-  flowConnector: {
-    alignItems: "center",
-    marginVertical: -4,
   },
   questionCard: {
     width: "100%",
