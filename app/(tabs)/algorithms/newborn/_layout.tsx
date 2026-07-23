@@ -34,6 +34,22 @@ export default function NewbornResuscitationLayout() {
         name="step2"
         options={{ title: "Resuscitácia novorodencov" }}
       />
+      <Stack.Screen
+        name="step3"
+        options={{ title: "Resuscitácia novorodencov" }}
+      />
+      <Stack.Screen
+        name="step4-with-movement"
+        options={{ title: "Resuscitácia novorodencov" }}
+      />
+      <Stack.Screen
+        name="step4-no-movement"
+        options={{ title: "Resuscitácia novorodencov" }}
+      />
+      <Stack.Screen
+        name="step5"
+        options={{ title: "Resuscitácia novorodencov" }}
+      />
     </Stack>
   );
 }
