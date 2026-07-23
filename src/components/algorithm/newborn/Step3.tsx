@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "900",
     lineHeight: 26,
-    textAlign: "center",
+    textAlign: "left",
   },
   questionCard: {
     width: "100%",

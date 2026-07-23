@@ -195,7 +195,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "900",
     lineHeight: 24,
-    textAlign: "center",
+    textAlign: "left",
   },
   escalationCard: {
     width: "100%",

@@ -156,17 +156,17 @@ const styles = StyleSheet.create({
   },
   ventilationTitle: {
     color: "#075296",
-    fontSize: 17,
+    fontSize: 18,
     fontWeight: "900",
     lineHeight: 24,
-    textAlign: "center",
+    textAlign: "left",
   },
   ventilationSubtitle: {
     color: "#075296",
     fontSize: 17,
     fontWeight: "900",
     lineHeight: 23,
-    textAlign: "center",
+    textAlign: "left",
   },
   compressionCard: {
     width: "100%",
