@@ -34,6 +34,26 @@ export default function AdultResuscitationLayout() {
         name="anafylaxia/step1"
         options={{ title: "Anafylaxia" }}
       />
+      <Stack.Screen
+        name="anafylaxia/step2"
+        options={{ title: "Anafylaxia" }}
+      />
+      <Stack.Screen
+        name="anafylaxia/step3"
+        options={{ title: "Anafylaxia" }}
+      />
+      <Stack.Screen
+        name="anafylaxia/refractory"
+        options={{ title: "Refraktérna anafylaxia" }}
+      />
+      <Stack.Screen
+        name="anafylaxia/cardiac-arrest"
+        options={{ title: "Anafylaxia – ZO" }}
+      />
+      <Stack.Screen
+        name="anafylaxia/aftercare"
+        options={{ title: "Anafylaxia" }}
+      />
     </Stack>
   );
 }
