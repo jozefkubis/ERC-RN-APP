@@ -172,8 +172,7 @@ const specialAlgorithms: SpecialAlgorithm[] = [
     badgeVariant: "warning" as const,
     title: "Toxicita lokálnych anestetík",
     subtitle: "LAST počas regionálnej anestézie",
-    description:
-      "Zastavte lokálne anestetikum, hyperventilujte, podajte lipidovú emulziu a použite nižšie dávky adrenalínu.",
+    description: "Zastavte lokálne anestetikum...",
     iconFamily: "material-community" as const,
     iconName: "needle" as const,
   },
@@ -192,8 +191,7 @@ const specialAlgorithms: SpecialAlgorithm[] = [
     badgeVariant: "warning" as const,
     title: "Pacient s LVAD",
     subtitle: "Neodpovedajúce zariadenie na podporu ľavej komory",
-    description:
-      "Aktivujte špecializovaný tím...",
+    description: "Aktivujte špecializovaný tím...",
     iconFamily: "material-community" as const,
     iconName: "pump" as const,
   },
