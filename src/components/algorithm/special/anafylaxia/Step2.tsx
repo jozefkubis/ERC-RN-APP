@@ -35,7 +35,7 @@ export default function Step2() {
         lead="Adrenalín 1 mg/ml (1 : 1 000), intramuskulárne do stehna:"
         items={[
           "6 – 12 rokov: 300 mikrogramov (0,3 ml)",
-          " 6 mes. – 6 rokov: 150 mikrogramov (0,15 ml)",
+          "6 mes. – 6 rokov: 150 mikrogramov (0,15 ml)",
           "Menej ako 6 mesiacov: 100 – 150 mikrogramov (0,1 – 0,15 ml)",
           "Hmotnostná dávka: 0,01 mg/kg, maximálne 0,5 mg",
           "Uvedené dávky platia iba pre i.m. podanie",
