@@ -52,6 +52,7 @@ export default function AlgorithmsScreen() {
           iconName="warning-outline"
           iconColor="#CC6238"
           variant="light"
+          onPress={() => router.push("/algorithms/special")}
         />
       </ScrollView>
     </>

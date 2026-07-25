@@ -86,7 +86,11 @@ export default function AlgorithmCard(props: AlgorithmCardProps) {
       <View style={styles.cardBody}>
         {subtitle ? <Text style={styles.cardSubtitle}>{subtitle}</Text> : null}
 
-        <Text style={styles.cardDescription} numberOfLines={3}>
+        <Text
+          style={styles.cardDescription}
+          numberOfLines={2}
+          ellipsizeMode="tail"
+        >
           {description}
         </Text>
       </View>
