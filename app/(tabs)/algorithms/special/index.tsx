@@ -25,7 +25,7 @@ const specialAlgorithms: SpecialAlgorithm[] = [
     title: "Poruchy draslíka",
     subtitle: "Hyperkaliémia a hypokaliémia",
     description:
-      "Liečte poruchu elektrolytov ako reverzibilnú príčinu vrátane kalcia, inzulínu s glukózou, salbutamolu alebo K+.",
+      "Liečte poruchu elektrolytov ako reverzibilnú príčinu vrátane kalcia, inzulínu s glukózou...",
     iconFamily: "material-community" as const,
     iconName: "atom-variant" as const,
   },
@@ -43,7 +43,7 @@ const specialAlgorithms: SpecialAlgorithm[] = [
     title: "Hypotermia",
     subtitle: "Náhodné podchladenie a ZO",
     description:
-      "Predĺžene hodnoťte životné funkcie, upravte defibriláciu a adrenalín podľa teploty, smerujte do ECMO centra.",
+      "Predĺžene hodnoťte životné funkcie, upravte defibriláciu a adrenalín podľa teploty...",
     iconFamily: "material-community" as const,
     iconName: "snowflake-thermometer" as const,
   },
@@ -52,7 +52,7 @@ const specialAlgorithms: SpecialAlgorithm[] = [
     title: "Záchrana z lavíny",
     subtitle: "Zasypanie, hypotermia, asfyxia",
     description:
-      "Rozhodujte podľa dýchacích ciest, teploty jadra a dĺžky zasypania; pri viacerých obetiach zvážte AvaLife.",
+      "Rozhodujte podľa dýchacích ciest, teploty jadra a dĺžky zasypania...",
     iconFamily: "material-community" as const,
     iconName: "landslide" as const,
   },
@@ -61,7 +61,7 @@ const specialAlgorithms: SpecialAlgorithm[] = [
     title: "Pľúcna embólia",
     subtitle: "Vysokoriziková PE a zastavenie obehu",
     description:
-      "Hľadajte zaťaženie pravej komory, nízke ETCO2 a zvážte fibrinolýzu, embolektómiu, trombektómiu alebo eKPR.",
+      "Hľadajte zaťaženie pravej komory, nízke ETCO2 a zvážte fibrinolýzu...",
     iconFamily: "material-community" as const,
     iconName: "lungs" as const,
   },
@@ -70,7 +70,7 @@ const specialAlgorithms: SpecialAlgorithm[] = [
     title: "Koronárna trombóza",
     subtitle: "AKS, STEMI, akútna koronárna oklúzia",
     description:
-      "Aktivujte STEMI sieť, smerujte pacienta do PCI centra a pri pretrvávajúcej KPR zvážte angiografiu alebo eKPR.",
+      "Aktivujte STEMI sieť, smerujte pacienta do PCI centra a pri pretrvávajúcej KPR...",
     iconFamily: "material-community" as const,
     iconName: "heart-pulse" as const,
   },
@@ -79,7 +79,7 @@ const specialAlgorithms: SpecialAlgorithm[] = [
     title: "Toxické látky",
     subtitle: "Intoxikácia ako reverzibilná príčina",
     description:
-      "Chráňte záchrancov, znížte absorpciu toxínu, podajte antidotá a konzultujte toxikologické centrum.",
+      "Chráňte záchrancov, znížte absorpciu toxínu, podajte antidotá...",
     iconFamily: "material-community" as const,
     iconName: "bottle-tonic-skull" as const,
   },
@@ -88,7 +88,7 @@ const specialAlgorithms: SpecialAlgorithm[] = [
     title: "Trauma",
     subtitle: "Traumatické zastavenie krvného obehu",
     description:
-      "Prioritou je okamžitá kontrola krvácania, zabezpečenie dýchacích ciest, dekompresia hrudníka a trauma centrum.",
+      "Prioritou je okamžitá kontrola krvácania, zabezpečenie dýchacích ciest...",
     iconFamily: "fontawesome6" as const,
     iconName: "kit-medical" as const,
   },
@@ -106,7 +106,7 @@ const specialAlgorithms: SpecialAlgorithm[] = [
     title: "Astma a CHOCHP",
     subtitle: "Obštrukčné ochorenie pľúc",
     description:
-      "Liečte život ohrozujúcu hypoxiu 100 % kyslíkom, hľadajte tenzný pneumotorax a dynamickú hyperinfláciu.",
+      "Liečte život ohrozujúcu hypoxiu 100 % kyslíkom, hľadajte tenzný pneumotorax...",
     iconFamily: "material-community" as const,
     iconName: "lungs" as const,
   },
@@ -115,7 +115,7 @@ const specialAlgorithms: SpecialAlgorithm[] = [
     title: "Hemodialýza",
     subtitle: "Zastavenie obehu počas dialýzy",
     description:
-      "Zastavte dialýzu, vráťte objem krvi, odpojte pacienta pri defibrilácii a nechajte dialyzačný vstup na lieky.",
+      "Zastavte dialýzu, vráťte objem krvi, odpojte pacienta pri defibrilácii...",
     iconFamily: "material-community" as const,
     iconName: "water-pump" as const,
   },
@@ -133,7 +133,7 @@ const specialAlgorithms: SpecialAlgorithm[] = [
     title: "Pectus excavatum",
     subtitle: "Deformita hrudníka...",
     description:
-      "Zvážte menšiu hĺbku kompresií, predo-zadné elektródy a skoré eKPR, ak sú kompresie neúčinné.",
+      "Zvážte menšiu hĺbku kompresií, predo-zadné elektródy a skoré eKPR...",
     iconFamily: "material-community" as const,
     iconName: "bone" as const,
   },
@@ -143,7 +143,7 @@ const specialAlgorithms: SpecialAlgorithm[] = [
     title: "Katetrizačné pracovisko",
     subtitle: "ZO počas koronárnej intervencie",
     description:
-      "Použite ALS s úpravami: tri rýchle výboje pri defibrilovateľnom rytme, stimulácia pri bradykardii a eKPR.",
+      "Použite ALS s úpravami: tri rýchle výboje pri defibrilovateľnom rytme...",
     iconFamily: "material-community" as const,
     iconName: "stethoscope" as const,
   },
@@ -153,7 +153,7 @@ const specialAlgorithms: SpecialAlgorithm[] = [
     title: "Topenie",
     subtitle: "Asfyxia, voda, hypotermia",
     description:
-      "Dbajte na bezpečnosť záchrancu, začnite piatimi vdychmi so 100 % kyslíkom a pokračujte štandardnou KPR.",
+      "Dbajte na bezpečnosť záchrancu, začnite piatimi vdychmi so 100 % kyslíkom...",
     iconFamily: "material-community" as const,
     iconName: "waves" as const,
   },
@@ -163,7 +163,7 @@ const specialAlgorithms: SpecialAlgorithm[] = [
     title: "Operačná sála",
     subtitle: "Perioperačné zastavenie obehu",
     description:
-      "Informujte chirurgický tím, overte dýchacie cesty a ETCO2, použite ultrazvuk a cielene liečte príčiny.",
+      "Informujte chirurgický tím, overte dýchacie cesty a ETCO2, použite ultrazvuk...",
     iconFamily: "material-community" as const,
     iconName: "hospital-box" as const,
   },
@@ -182,7 +182,7 @@ const specialAlgorithms: SpecialAlgorithm[] = [
     title: "Po kardiochirurgii",
     subtitle: "Zastavenie obehu po operácii srdca",
     description:
-      "Potvrďte zastavenie na arteriálnej krivke, podajte až tri výboje, zvážte resternotómiu do 5 minút.",
+      "Potvrďte zastavenie na arteriálnej krivke, podajte až tri výboje...",
     iconFamily: "material-community" as const,
     iconName: "heart-cog" as const,
   },
@@ -201,7 +201,7 @@ const specialAlgorithms: SpecialAlgorithm[] = [
     title: "Šport",
     subtitle: "Náhle zastavenie obehu pri športe",
     description:
-      "Športoviská majú mať hodnotenie rizika, rýchly prístup na plochu, AED a pripravený postup reakcie.",
+      "Športoviská majú mať hodnotenie rizika, rýchly prístup na plochu, AED...",
     iconFamily: "fontawesome6" as const,
     iconName: "person-running" as const,
   },
@@ -211,7 +211,7 @@ const specialAlgorithms: SpecialAlgorithm[] = [
     title: "ZZS a transport",
     subtitle: "Prednemocničná resuscitácia",
     description:
-      "Resuscitujte primárne na mieste; transport počas KPR má mať jasnú indikáciu a mechanické kompresie.",
+      "Resuscitujte primárne na mieste; transport počas KPR má mať jasnú indikáciu...",
     iconFamily: "fontawesome6" as const,
     iconName: "truck-medical" as const,
   },
@@ -221,7 +221,7 @@ const specialAlgorithms: SpecialAlgorithm[] = [
     title: "Počas letu",
     subtitle: "Zastavenie obehu v lietadle",
     description:
-      "Vyhľadajte zdravotníka na palube, prispôsobte kompresie priestoru a zvážte odklon letu podľa šance na ROSC.",
+      "Vyhľadajte zdravotníka na palube, prispôsobte kompresie priestoru a zvážte odklon...",
     iconFamily: "ionicons" as const,
     iconName: "airplane-outline" as const,
   },
@@ -230,8 +230,7 @@ const specialAlgorithms: SpecialAlgorithm[] = [
     badgeVariant: "warning" as const,
     title: "Mikrogravitácia",
     subtitle: "Resuscitácia mimo bežnej gravitácie",
-    description:
-      "Najprv zabezpečte pacienta, zvážte mechanické kompresie a využite telemedicínsku konzultáciu, ak je dostupná.",
+    description: "Najprv zabezpečte pacienta, zvážte mechanické kompresie...",
     iconFamily: "ionicons" as const,
     iconName: "planet-outline" as const,
   },
@@ -241,7 +240,7 @@ const specialAlgorithms: SpecialAlgorithm[] = [
     title: "Výletná loď",
     subtitle: "ALS na palube lode",
     description:
-      "Aktivujte palubné zdravotnícke zdroje, požiadajte o ďalší personál, zvážte telemedicínu a vrtuľníkovú ZZS.",
+      "Aktivujte palubné zdravotnícke zdroje, požiadajte o ďalší personál...",
     iconFamily: "ionicons" as const,
     iconName: "boat-outline" as const,
   },
