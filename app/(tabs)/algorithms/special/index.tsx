@@ -32,7 +32,7 @@ const specialAlgorithms: SpecialAlgorithm[] = [
   {
     badgeText: "Príčina",
     title: "Hypertermia",
-    subtitle: "Tepelný úpal, malígna hypertermia, toxíny",
+    subtitle: "Tepelný úpal, malígna hypertermia...",
     description:
       "Merajte teplotu jadra, začnite aktívne chladenie a pri malígnej hypertermii podajte dantrolén.",
     iconFamily: "material-community" as const,
@@ -41,9 +41,9 @@ const specialAlgorithms: SpecialAlgorithm[] = [
   {
     badgeText: "Príčina",
     title: "Hypotermia",
-    subtitle: "Náhodné podchladenie a zastavenie obehu",
+    subtitle: "Náhodné podchladenie a ZO",
     description:
-      "Predĺžene hodnotte životné funkcie, upravte defibriláciu a adrenalín podľa teploty, smerujte do ECMO centra.",
+      "Predĺžene hodnoťte životné funkcie, upravte defibriláciu a adrenalín podľa teploty, smerujte do ECMO centra.",
     iconFamily: "material-community" as const,
     iconName: "snowflake-thermometer" as const,
   },
@@ -95,7 +95,7 @@ const specialAlgorithms: SpecialAlgorithm[] = [
   {
     badgeText: "Pacient",
     title: "Tehotenstvo",
-    subtitle: "Zastavenie obehu v tehotnosti a peripartálne",
+    subtitle: "Zastavenie obehu v tehotnosti...",
     description:
       "Posun maternice doľava, privolať pôrodníka a neonatológa, pripraviť hysterotómiu.",
     iconFamily: "material-community" as const,
@@ -131,7 +131,7 @@ const specialAlgorithms: SpecialAlgorithm[] = [
   {
     badgeText: "Pacient",
     title: "Pectus excavatum",
-    subtitle: "Deformita hrudníka a účinnosť kompresií",
+    subtitle: "Deformita hrudníka...",
     description:
       "Zvážte menšiu hĺbku kompresií, predo-zadné elektródy a skoré eKPR, ak sú kompresie neúčinné.",
     iconFamily: "material-community" as const,
@@ -141,7 +141,7 @@ const specialAlgorithms: SpecialAlgorithm[] = [
     badgeText: "Prostredie",
     badgeVariant: "warning" as const,
     title: "Katetrizačné pracovisko",
-    subtitle: "Zastavenie obehu počas koronárnej intervencie",
+    subtitle: "ZO počas koronárnej intervencie",
     description:
       "Použite ALS s úpravami: tri rýchle výboje pri defibrilovateľnom rytme, stimulácia pri bradykardii a eKPR.",
     iconFamily: "material-community" as const,
@@ -193,7 +193,7 @@ const specialAlgorithms: SpecialAlgorithm[] = [
     title: "Pacient s LVAD",
     subtitle: "Neodpovedajúce zariadenie na podporu ľavej komory",
     description:
-      "Aktivujte špecializovaný tím, porucha zariadenia je priorita a KPR začnite podľa počtu záchrancov.",
+      "Aktivujte špecializovaný tím...",
     iconFamily: "material-community" as const,
     iconName: "pump" as const,
   },
