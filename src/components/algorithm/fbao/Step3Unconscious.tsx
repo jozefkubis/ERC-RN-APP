@@ -1,14 +1,9 @@
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import React from "react";
 import {
-  Pressable,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+  Pressable, StyleSheet, Text, View } from "react-native";
+import AlgorithmScreen from "../../ui/AlgorithmScreen";
+import StepHeader from "../../ui/StepHeader";
 import InfoCard from "../../ui/info-card";
 
 const routes = [
@@ -32,22 +27,12 @@ export default function Step3Unconscious() {
   const router = useRouter();
 
   return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        contentContainerStyle={styles.container}
-      >
-        <View style={styles.stepHeader}>
-          <View style={styles.stepBadge}>
-            <Text style={styles.stepBadgeText}>Krok 3</Text>
-          </View>
-          <Text style={styles.stepTitle}>Dieťa je v bezvedomí</Text>
-          <Text style={styles.stepDescription}>
-            Opatrne uložte dieťa na pevný povrch, privolajte pomoc a začnite
-            resuscitáciu bez zbytočného odkladu.
-          </Text>
-        </View>
+    <AlgorithmScreen>
+        <StepHeader
+        badge={"Krok 3"}
+        title={"Dieťa je v bezvedomí"}
+        description={"Opatrne uložte dieťa na pevný povrch, privolajte pomoc a začnite resuscitáciu bez zbytočného odkladu."}
+      />
 
         <View style={styles.cprCard}>
           <Text style={styles.cprTitle}>Začnite KPR</Text>
@@ -115,46 +100,11 @@ export default function Step3Unconscious() {
           description="Pri FBAO nevykonávajte slepé vyberanie prstami. Predmet odstráňte iba vtedy, keď je jasne viditeľný."
           iconName="warning-outline"
         />
-      </ScrollView>
-    </>
+    </AlgorithmScreen>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: 30,
-    paddingVertical: 16,
-    gap: 15,
-  },
-  stepHeader: {
-    width: "100%",
-    gap: 7,
-    paddingTop: 6,
-    paddingBottom: 4,
-  },
-  stepBadge: {
-    alignSelf: "flex-start",
-    paddingHorizontal: 13,
-    paddingVertical: 6,
-    borderRadius: 999,
-    backgroundColor: "#E4EFFD",
-  },
-  stepBadgeText: {
-    color: "#075296",
-    fontSize: 20,
-    fontWeight: "800",
-  },
-  stepTitle: {
-    color: "#10243C",
-    fontSize: 24,
-    fontWeight: "800",
-    lineHeight: 30,
-  },
-  stepDescription: {
-    color: "#5C6574",
-    fontSize: 14,
-    lineHeight: 21,
-  },
   cprCard: {
     width: "100%",
     minHeight: 102,

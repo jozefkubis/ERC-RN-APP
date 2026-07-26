@@ -1,97 +1,59 @@
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import React from "react";
-import { ScrollView, StatusBar, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
+import AlgorithmScreen from "../../ui/AlgorithmScreen";
 import InfoCard from "../../ui/info-card";
-import NoButton from "../../ui/NoButton";
+import StepHeader from "../../ui/StepHeader";
 import YesButton from "../../ui/YesButton";
 
 export default function Step1() {
   const router = useRouter();
 
   return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        contentContainerStyle={styles.container}
-      >
-        <View style={styles.stepHeader}>
-          <View style={styles.stepBadge}>
-            <Text style={styles.stepBadgeText}>Krok 1</Text>
-          </View>
-          <Text style={styles.stepTitle}>Prvotné rozpoznanie</Text>
-          <Text style={styles.stepDescription}>
-            Rýchlo vyhodnoťte reakciu a dýchanie. Pri pochybnostiach postupujte
-            ako pri zastavení obehu.
-          </Text>
-        </View>
+    <AlgorithmScreen>
+      <StepHeader
+        badge="Krok 1"
+        title="Prvotné rozpoznanie"
+        description="Rýchlo vyhodnoťte reakciu a dýchanie. Pri pochybnostiach postupujte ako pri zastavení obehu."
+      />
 
-        <View style={styles.questionCard}>
-          <View style={styles.questionIcon}>
-            <Ionicons name="help" size={28} color="#FFFFFF" />
-          </View>
-          <Text style={styles.questionText}>
-            Nereaguje a nedýcha alebo dýcha abnormálne?
-          </Text>
+      <View style={styles.questionCard}>
+        <View style={styles.questionIcon}>
+          <Ionicons name="help" size={28} color="#FFFFFF" />
         </View>
+        <Text style={styles.questionText}>
+          Nereaguje a nedýcha alebo dýcha abnormálne?
+        </Text>
+      </View>
 
-        <View style={styles.answersContainer}>
-          <YesButton
-            onPress={() =>
-              router.push("/algorithms/adult-resuscitation/als/step2")
-            }
-          />
-          <NoButton />
-        </View>
-        <InfoCard
-          title="Skôr než začnete"
-          description="Zaistite bezpečnosť seba, osoby so zastavením krvného obehu a všetkých okolostojacich."
+      <View style={styles.answersContainer}>
+        <YesButton
+          onPress={() =>
+            router.push("/algorithms/adult-resuscitation/als/step2")
+          }
         />
-      </ScrollView>
-    </>
+        <View style={[styles.answerCard, styles.answerCardLight]}>
+          <View style={styles.answerIconLight}>
+            <Ionicons name="checkmark" size={24} color="#075296" />
+          </View>
+          <View style={styles.answerTextContainer}>
+            <Text style={styles.answerTitleLight}>Nie</Text>
+            <Text style={styles.answerDescriptionLight}>
+              Ponechajte osobu v bezpečí, sledujte stav a pokračujte podľa
+              prístupu ABCDE.
+            </Text>
+          </View>
+        </View>
+      </View>
+      <InfoCard
+        title="Skôr než začnete"
+        description="Zaistite bezpečnosť seba, osoby so zastavením krvného obehu a všetkých okolostojacich."
+      />
+    </AlgorithmScreen>
   );
 }
 
 const styles = StyleSheet.create({
-  // safeArea: {
-  //   flex: 1,
-  //   backgroundColor: "#F7F8FC",
-  // },
-  container: {
-    paddingHorizontal: 30,
-    paddingVertical: 16,
-    gap: 15,
-  },
-  stepHeader: {
-    width: "100%",
-    gap: 7,
-    paddingTop: 6,
-    paddingBottom: 4,
-  },
-  stepBadge: {
-    alignSelf: "flex-start",
-    paddingHorizontal: 13,
-    paddingVertical: 6,
-    borderRadius: 999,
-    backgroundColor: "#E4EFFD",
-  },
-  stepBadgeText: {
-    color: "#075296",
-    fontSize: 20,
-    fontWeight: "800",
-  },
-  stepTitle: {
-    color: "#10243C",
-    fontSize: 24,
-    fontWeight: "800",
-    lineHeight: 30,
-  },
-  stepDescription: {
-    color: "#5C6574",
-    fontSize: 14,
-    lineHeight: 21,
-  },
   questionCard: {
     width: "100%",
     flexDirection: "row",
@@ -124,7 +86,7 @@ const styles = StyleSheet.create({
   },
   answerCard: {
     width: "100%",
-    minHeight: 88,
+    minHeight: 96,
     flexDirection: "row",
     alignItems: "center",
     gap: 14,
@@ -135,21 +97,9 @@ const styles = StyleSheet.create({
     borderCurve: "continuous",
     boxShadow: "0 2px 4px rgba(15, 35, 60, 0.08)",
   },
-  answerCardPrimary: {
-    borderColor: "#075296",
-    backgroundColor: "#075296",
-  },
   answerCardLight: {
     borderColor: "#CBD3DF",
     backgroundColor: "#FFFFFF",
-  },
-  answerIconPrimary: {
-    width: 40,
-    height: 40,
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 20,
-    backgroundColor: "#ED1C24",
   },
   answerIconLight: {
     width: 40,
@@ -161,20 +111,17 @@ const styles = StyleSheet.create({
   },
   answerTextContainer: {
     flex: 1,
-    gap: 3,
-  },
-  answerTitlePrimary: {
-    color: "#FFFFFF",
-    fontSize: 18,
-    fontWeight: "800",
+    gap: 4,
   },
   answerTitleLight: {
     color: "#10243C",
     fontSize: 18,
     fontWeight: "800",
+    lineHeight: 23,
   },
-  pressed: {
-    opacity: 0.7,
-    transform: [{ scale: 0.99 }],
+  answerDescriptionLight: {
+    color: "#5C6574",
+    fontSize: 13,
+    lineHeight: 19,
   },
 });

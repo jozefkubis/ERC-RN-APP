@@ -1,6 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
-import React from "react";
-import { ScrollView, StatusBar, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
+import AlgorithmScreen from "../../ui/AlgorithmScreen";
+import StepHeader from "../../ui/StepHeader";
 import InfoCard from "../../ui/info-card";
 
 const energyLevels = [
@@ -24,22 +25,12 @@ const energyLevels = [
 
 export default function SyncCardioversion() {
   return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        contentContainerStyle={styles.container}
-      >
-        <View style={styles.stepHeader}>
-          <View style={styles.stepBadge}>
-            <Text style={styles.stepBadgeText}>Kardioverzia</Text>
-          </View>
-          <Text style={styles.stepTitle}>Synchronizovaná kardioverzia</Text>
-          <Text style={styles.stepDescription}>
-            Použite synchronizovaný režim defibrilátora a priebežne kontrolujte
-            klinický stav pacienta.
-          </Text>
-        </View>
+    <AlgorithmScreen>
+        <StepHeader
+        badge={"Kardioverzia"}
+        title={"Synchronizovaná kardioverzia"}
+        description={"Použite synchronizovaný režim defibrilátora a priebežne kontrolujte klinický stav pacienta."}
+      />
 
         <View style={styles.cardioversionPanel}>
           <View style={styles.cardHeader}>
@@ -71,46 +62,11 @@ export default function SyncCardioversion() {
           description="Ak synchronizácia nie je možná pri polymorfnej alebo veľmi nepravidelnej tachykardii, postupujte podľa lokálneho protokolu pre defibriláciu."
           iconName="information-circle-outline"
         />
-      </ScrollView>
-    </>
+    </AlgorithmScreen>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: 30,
-    paddingVertical: 16,
-    gap: 15,
-  },
-  stepHeader: {
-    width: "100%",
-    gap: 7,
-    paddingTop: 6,
-    paddingBottom: 4,
-  },
-  stepBadge: {
-    alignSelf: "flex-start",
-    paddingHorizontal: 13,
-    paddingVertical: 6,
-    borderRadius: 999,
-    backgroundColor: "#E4EFFD",
-  },
-  stepBadgeText: {
-    color: "#075296",
-    fontSize: 20,
-    fontWeight: "800",
-  },
-  stepTitle: {
-    color: "#10243C",
-    fontSize: 24,
-    fontWeight: "800",
-    lineHeight: 30,
-  },
-  stepDescription: {
-    color: "#5C6574",
-    fontSize: 14,
-    lineHeight: 21,
-  },
+const styles = StyleSheet.create({
   cardioversionPanel: {
     width: "100%",
     gap: 16,

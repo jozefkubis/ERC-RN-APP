@@ -1,14 +1,9 @@
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import React from "react";
 import {
-  Pressable,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+  Pressable, StyleSheet, Text, View } from "react-native";
+import AlgorithmScreen from "../../ui/AlgorithmScreen";
+import StepHeader from "../../ui/StepHeader";
 import InfoCard from "../../ui/info-card";
 
 const helpOptions = [
@@ -35,22 +30,12 @@ export default function Step2bls() {
   const router = useRouter();
 
   return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        contentContainerStyle={styles.container}
-      >
-        <View style={styles.stepHeader}>
-          <View style={styles.stepBadge}>
-            <Text style={styles.stepBadgeText}>Krok 2</Text>
-          </View>
-          <Text style={styles.stepTitle}>Privolajte pomoc</Text>
-          <Text style={styles.stepDescription}>
-            Spustite poplach a čo najskôr zapojte ďalších ľudí alebo
-            resuscitačný tím.
-          </Text>
-        </View>
+    <AlgorithmScreen>
+        <StepHeader
+        badge={"Krok 2"}
+        title={"Privolajte pomoc"}
+        description={"Spustite poplach a čo najskôr zapojte ďalších ľudí alebo resuscitačný tím."}
+      />
 
         <Pressable
           onPress={() => router.push("/algorithms/adult-resuscitation/bls/step3")}
@@ -88,46 +73,11 @@ export default function Step2bls() {
           description="Počas čakania na spojenie alebo príchod pomoci zhodnoťte dýchanie. Pri pochybnostiach pokračujte ako pri zastavení obehu."
           iconName="call-outline"
         />
-      </ScrollView>
-    </>
+    </AlgorithmScreen>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: 30,
-    paddingVertical: 16,
-    gap: 15,
-  },
-  stepHeader: {
-    width: "100%",
-    gap: 7,
-    paddingTop: 6,
-    paddingBottom: 4,
-  },
-  stepBadge: {
-    alignSelf: "flex-start",
-    paddingHorizontal: 13,
-    paddingVertical: 6,
-    borderRadius: 999,
-    backgroundColor: "#E4EFFD",
-  },
-  stepBadgeText: {
-    color: "#075296",
-    fontSize: 20,
-    fontWeight: "800",
-  },
-  stepTitle: {
-    color: "#10243C",
-    fontSize: 24,
-    fontWeight: "800",
-    lineHeight: 30,
-  },
-  stepDescription: {
-    color: "#5C6574",
-    fontSize: 14,
-    lineHeight: 21,
-  },
+const styles = StyleSheet.create({
   callCard: {
     width: "100%",
     minHeight: 96,

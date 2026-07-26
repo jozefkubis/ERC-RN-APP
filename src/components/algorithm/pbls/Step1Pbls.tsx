@@ -1,125 +1,73 @@
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import React from "react";
-import {
-  Pressable,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
+import AlgorithmScreen from "../../ui/AlgorithmScreen";
 import InfoCard from "../../ui/info-card";
+import StepHeader from "../../ui/StepHeader";
 
 export default function Step1Pbls() {
   const router = useRouter();
 
   return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        contentContainerStyle={styles.container}
-      >
-        <View style={styles.stepHeader}>
-          <View style={styles.stepBadge}>
-            <Text style={styles.stepBadgeText}>Krok 1</Text>
+    <AlgorithmScreen>
+      <StepHeader
+        badge="Krok 1"
+        title="Bezpečnosť a reakcia"
+        description="Zaistite bezpečnosť seba aj dieťaťa a zhodnoťte reakciu slovným a jemným dotykovým podnetom."
+      />
+
+      <View style={styles.questionCard}>
+        <View style={styles.questionIcon}>
+          <Ionicons name="help" size={28} color="#FFFFFF" />
+        </View>
+        <Text style={styles.questionText}>Reaguje dieťa?</Text>
+      </View>
+
+      <View style={styles.answersContainer}>
+        <View style={[styles.answerCard, styles.answerCardLight]}>
+          <View style={styles.answerIconLight}>
+            <Ionicons name="checkmark" size={24} color="#075296" />
           </View>
-          <Text style={styles.stepTitle}>Bezpečnosť a reakcia</Text>
-          <Text style={styles.stepDescription}>
-            Zaistite bezpečnosť seba aj dieťaťa a zhodnoťte reakciu slovným a
-            jemným dotykovým podnetom.
-          </Text>
+          <View style={styles.answerTextContainer}>
+            <Text style={styles.answerTitleLight}>Áno</Text>
+            <Text style={styles.answerDescriptionLight}>
+              Nechajte dieťa v bezpečí, sledujte stav a postupujte podľa ABCDE.
+            </Text>
+          </View>
         </View>
 
-        <View style={styles.questionCard}>
-          <View style={styles.questionIcon}>
-            <Ionicons name="help" size={28} color="#FFFFFF" />
+        <Pressable
+          accessibilityRole="button"
+          onPress={() => router.push("/algorithms/epals/pbls/step2")}
+          style={({ pressed }) => [
+            styles.answerCard,
+            styles.answerCardPrimary,
+            pressed && styles.pressed,
+          ]}
+        >
+          <View style={styles.answerIconPrimary}>
+            <Ionicons name="close" size={24} color="#FFFFFF" />
           </View>
-          <Text style={styles.questionText}>Reaguje dieťa?</Text>
-        </View>
-
-        <View style={styles.answersContainer}>
-          <View style={[styles.answerCard, styles.answerCardLight]}>
-            <View style={styles.answerIconLight}>
-              <Ionicons name="checkmark" size={24} color="#075296" />
-            </View>
-            <View style={styles.answerTextContainer}>
-              <Text style={styles.answerTitleLight}>Áno</Text>
-              <Text style={styles.answerDescriptionLight}>
-                Nechajte dieťa v bezpečí, sledujte stav a postupujte podľa
-                ABCDE.
-              </Text>
-            </View>
+          <View style={styles.answerTextContainer}>
+            <Text style={styles.answerTitlePrimary}>Nie</Text>
+            <Text style={styles.answerDescriptionPrimary}>
+              Privolajte pomoc a zhodnoťte dýchanie.
+            </Text>
           </View>
+          <Ionicons name="arrow-forward" size={22} color="#FFFFFF" />
+        </Pressable>
+      </View>
 
-          <Pressable
-            accessibilityRole="button"
-            onPress={() => router.push("/algorithms/epals/pbls/step2")}
-            style={({ pressed }) => [
-              styles.answerCard,
-              styles.answerCardPrimary,
-              pressed && styles.pressed,
-            ]}
-          >
-            <View style={styles.answerIconPrimary}>
-              <Ionicons name="close" size={24} color="#FFFFFF" />
-            </View>
-            <View style={styles.answerTextContainer}>
-              <Text style={styles.answerTitlePrimary}>Nie</Text>
-              <Text style={styles.answerDescriptionPrimary}>
-                Privolajte pomoc a zhodnoťte dýchanie.
-              </Text>
-            </View>
-            <Ionicons name="arrow-forward" size={22} color="#FFFFFF" />
-          </Pressable>
-        </View>
-
-        <InfoCard
-          title="Dôležité"
-          description="Nepoužívajte bolestivé podnety. Ak je možné, volajte tiesňovú linku cez hlasný odposluch a riaďte sa pokynmi operátora."
-          iconName="call-outline"
-        />
-      </ScrollView>
-    </>
+      <InfoCard
+        title="Dôležité"
+        description="Nepoužívajte bolestivé podnety. Ak je možné, volajte tiesňovú linku cez hlasný odposluch a riaďte sa pokynmi operátora."
+        iconName="call-outline"
+      />
+    </AlgorithmScreen>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: 30,
-    paddingVertical: 16,
-    gap: 15,
-  },
-  stepHeader: {
-    width: "100%",
-    gap: 7,
-    paddingTop: 6,
-    paddingBottom: 4,
-  },
-  stepBadge: {
-    alignSelf: "flex-start",
-    paddingHorizontal: 13,
-    paddingVertical: 6,
-    borderRadius: 999,
-    backgroundColor: "#E4EFFD",
-  },
-  stepBadgeText: {
-    color: "#075296",
-    fontSize: 20,
-    fontWeight: "800",
-  },
-  stepTitle: {
-    color: "#10243C",
-    fontSize: 24,
-    fontWeight: "800",
-    lineHeight: 30,
-  },
-  stepDescription: {
-    color: "#5C6574",
-    fontSize: 14,
-    lineHeight: 21,
-  },
   questionCard: {
     width: "100%",
     flexDirection: "row",

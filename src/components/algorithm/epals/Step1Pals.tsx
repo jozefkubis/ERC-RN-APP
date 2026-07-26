@@ -1,14 +1,8 @@
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import React from "react";
-import {
-  Pressable,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
+import AlgorithmScreen from "../../ui/AlgorithmScreen";
+import StepHeader from "../../ui/StepHeader";
 
 const actions = [
   "Privolajte ZZS / resuscitačný tím",
@@ -27,115 +21,68 @@ export default function Step1Pals() {
   const router = useRouter();
 
   return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        contentContainerStyle={styles.container}
-      >
-        <View style={styles.stepHeader}>
-          <View style={styles.stepBadge}>
-            <Text style={styles.stepBadgeText}>Krok 1</Text>
+    <AlgorithmScreen>
+      <StepHeader
+        badge="Krok 1"
+        title="Rozpoznanie zastavenia krvného obehu"
+        description="Žiadne známky života a/alebo bradykardia < 60 min⁻¹ so slabou perfúziou"
+      />
+
+      <View style={styles.actionCard}>
+        {actions.map((action) => (
+          <View key={action} style={styles.actionRow}>
+            <View style={styles.actionIcon}>
+              <Ionicons name="checkmark" size={18} color="#FFFFFF" />
+            </View>
+            <Text style={styles.actionText}>{action}</Text>
           </View>
-          <Text style={styles.stepTitle}>
-            Rozpoznanie zastavenia krvného obehu
+        ))}
+      </View>
+
+      <Pressable
+        style={({ pressed }) => [pressed && styles.pressed]}
+        onPress={() => router.push("/algorithms/epals/pals/step2")}
+      >
+        <View style={styles.rhythmCard}>
+          <View style={styles.flowLine} />
+          <View style={styles.rhythmIcon}>
+            <MaterialCommunityIcons
+              name="heart-pulse"
+              size={30}
+              color="#FFFFFF"
+            />
+          </View>
+          <Text style={styles.rhythmTitle}>ZHODNOŤTE RYTMUS</Text>
+          <Text style={styles.rhythmDescription}>
+            Zastavte stláčanie len na nevyhnutný čas a rozhodnite, či je rytmus
+            defibrilovateľný.
           </Text>
-          <Text style={styles.stepDescription}>
-            Žiadne známky života a/alebo bradykardia &lt; 60 min⁻¹ so slabou
-            perfúziou
-          </Text>
+          <Ionicons name="arrow-forward" size={22} color="#075296" />
+        </View>
+      </Pressable>
+
+      <View style={styles.cprInfoCard}>
+        <View style={styles.cprInfoHeader}>
+          <View style={styles.cprInfoIcon}>
+            <Ionicons name="warning-outline" size={24} color="#ED1C24" />
+          </View>
+          <Text style={styles.cprInfoTitle}>Počas KPR</Text>
         </View>
 
-        <View style={styles.actionCard}>
-          {actions.map((action) => (
-            <View key={action} style={styles.actionRow}>
-              <View style={styles.actionIcon}>
-                <Ionicons name="checkmark" size={18} color="#FFFFFF" />
-              </View>
-              <Text style={styles.actionText}>{action}</Text>
+        <View style={styles.cprInfoList}>
+          {cprItems.map((item) => (
+            <View key={item} style={styles.cprInfoRow}>
+              <View style={styles.cprBullet} />
+              <Text style={styles.cprInfoText}>{item}</Text>
             </View>
           ))}
         </View>
-
-        <Pressable
-          style={({ pressed }) => [pressed && styles.pressed]}
-          onPress={() => router.push("/algorithms/epals/pals/step2")}
-        >
-          <View style={styles.rhythmCard}>
-            <View style={styles.flowLine} />
-            <View style={styles.rhythmIcon}>
-              <MaterialCommunityIcons
-                name="heart-pulse"
-                size={30}
-                color="#FFFFFF"
-              />
-            </View>
-            <Text style={styles.rhythmTitle}>ZHODNOŤTE RYTMUS</Text>
-            <Text style={styles.rhythmDescription}>
-              Zastavte stláčanie len na nevyhnutný čas a rozhodnite, či je
-              rytmus defibrilovateľný.
-            </Text>
-            <Ionicons name="arrow-forward" size={22} color="#075296" />
-          </View>
-        </Pressable>
-
-        <View style={styles.cprInfoCard}>
-          <View style={styles.cprInfoHeader}>
-            <View style={styles.cprInfoIcon}>
-              <Ionicons name="warning-outline" size={24} color="#ED1C24" />
-            </View>
-            <Text style={styles.cprInfoTitle}>Počas KPR</Text>
-          </View>
-
-          <View style={styles.cprInfoList}>
-            {cprItems.map((item) => (
-              <View key={item} style={styles.cprInfoRow}>
-                <View style={styles.cprBullet} />
-                <Text style={styles.cprInfoText}>{item}</Text>
-              </View>
-            ))}
-          </View>
-        </View>
-      </ScrollView>
-    </>
+      </View>
+    </AlgorithmScreen>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: 30,
-    paddingVertical: 16,
-    gap: 15,
-  },
-  stepHeader: {
-    width: "100%",
-    gap: 7,
-    paddingTop: 6,
-    paddingBottom: 4,
-  },
-  stepBadge: {
-    alignSelf: "flex-start",
-    paddingHorizontal: 13,
-    paddingVertical: 6,
-    borderRadius: 999,
-    backgroundColor: "#E4EFFD",
-  },
-  stepBadgeText: {
-    color: "#075296",
-    fontSize: 20,
-    fontWeight: "800",
-  },
-  stepTitle: {
-    color: "#10243C",
-    fontSize: 24,
-    fontWeight: "800",
-    lineHeight: 30,
-  },
-  stepDescription: {
-    color: "#5C6574",
-    fontSize: 14,
-    lineHeight: 21,
-  },
   actionCard: {
     width: "100%",
     gap: 12,

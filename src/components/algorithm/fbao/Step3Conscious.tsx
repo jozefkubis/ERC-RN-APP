@@ -1,14 +1,9 @@
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import React from "react";
 import {
-  Pressable,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+  Pressable, StyleSheet, Text, View } from "react-native";
+import AlgorithmScreen from "../../ui/AlgorithmScreen";
+import StepHeader from "../../ui/StepHeader";
 import FlowConnector from "../../ui/FlowConnector";
 import InfoCard from "../../ui/info-card";
 
@@ -27,22 +22,12 @@ export default function Step3Conscious() {
   const router = useRouter();
 
   return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        contentContainerStyle={styles.container}
-      >
-        <View style={styles.stepHeader}>
-          <View style={styles.stepBadge}>
-            <Text style={styles.stepBadgeText}>Krok 3</Text>
-          </View>
-          <Text style={styles.stepTitle}>Dieťa je pri vedomí</Text>
-          <Text style={styles.stepDescription}>
-            Pri neúčinnej kašli postupujte podľa veku dieťaťa a po každom
-            cykle zhodnoťte, či sa obštrukcia uvoľnila.
-          </Text>
-        </View>
+    <AlgorithmScreen>
+        <StepHeader
+        badge={"Krok 3"}
+        title={"Dieťa je pri vedomí"}
+        description={"Pri neúčinnej kašli postupujte podľa veku dieťaťa a po každom cykle zhodnoťte, či sa obštrukcia uvoľnila."}
+      />
 
         <View style={styles.answerLabel}>
           <Text style={styles.answerLabelText}>ÁNO</Text>
@@ -110,46 +95,11 @@ export default function Step3Conscious() {
           description="Ak dieťa kedykoľvek stratí vedomie, začnite KPR a prejdite na vetvu bezvedomia."
           iconName="warning-outline"
         />
-      </ScrollView>
-    </>
+    </AlgorithmScreen>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: 30,
-    paddingVertical: 16,
-    gap: 15,
-  },
-  stepHeader: {
-    width: "100%",
-    gap: 7,
-    paddingTop: 6,
-    paddingBottom: 4,
-  },
-  stepBadge: {
-    alignSelf: "flex-start",
-    paddingHorizontal: 13,
-    paddingVertical: 6,
-    borderRadius: 999,
-    backgroundColor: "#E4EFFD",
-  },
-  stepBadgeText: {
-    color: "#075296",
-    fontSize: 20,
-    fontWeight: "800",
-  },
-  stepTitle: {
-    color: "#10243C",
-    fontSize: 24,
-    fontWeight: "800",
-    lineHeight: 30,
-  },
-  stepDescription: {
-    color: "#5C6574",
-    fontSize: 14,
-    lineHeight: 21,
-  },
+const styles = StyleSheet.create({
   answerLabel: {
     width: "100%",
     alignItems: "center",

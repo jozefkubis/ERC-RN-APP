@@ -1,7 +1,8 @@
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import React from "react";
-import { ScrollView, StatusBar, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
+import AlgorithmScreen from "../../ui/AlgorithmScreen";
+import StepHeader from "../../ui/StepHeader";
 import FlowConnector from "../../ui/FlowConnector";
 import NoButton from "../../ui/NoButton";
 import YesButton from "../../ui/YesButton";
@@ -18,26 +19,12 @@ export default function Step4NoMovement() {
   const router = useRouter();
 
   return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        contentContainerStyle={styles.container}
-      >
-        <View style={styles.stepHeader}>
-          <View style={styles.stepBadge}>
-            <Text selectable style={styles.stepBadgeText}>
-              Krok 4
-            </Text>
-          </View>
-          <Text selectable style={styles.stepTitle}>
-            Hrudník sa nehýbe
-          </Text>
-          <Text selectable style={styles.stepDescription}>
-            Najprv opravte ventiláciu. Bez pohybu hrudníka nemajú inflačné
-            vdychy očakávaný efekt.
-          </Text>
-        </View>
+    <AlgorithmScreen>
+        <StepHeader
+        badge={"Krok 4"}
+        title={"Hrudník sa nehýbe"}
+        description={"Najprv opravte ventiláciu. Bez pohybu hrudníka nemajú inflačné vdychy očakávaný efekt."}
+      />
 
         <View style={styles.fixCard}>
           <View style={styles.fixHeader}>
@@ -105,46 +92,11 @@ export default function Step4NoMovement() {
             }
           />
         </View>
-      </ScrollView>
-    </>
+    </AlgorithmScreen>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: 30,
-    paddingVertical: 16,
-    gap: 15,
-  },
-  stepHeader: {
-    width: "100%",
-    gap: 7,
-    paddingTop: 6,
-    paddingBottom: 4,
-  },
-  stepBadge: {
-    alignSelf: "flex-start",
-    paddingHorizontal: 13,
-    paddingVertical: 6,
-    borderRadius: 999,
-    backgroundColor: "#E4EFFD",
-  },
-  stepBadgeText: {
-    color: "#075296",
-    fontSize: 20,
-    fontWeight: "800",
-  },
-  stepTitle: {
-    color: "#10243C",
-    fontSize: 24,
-    fontWeight: "800",
-    lineHeight: 30,
-  },
-  stepDescription: {
-    color: "#5C6574",
-    fontSize: 14,
-    lineHeight: 21,
-  },
   fixCard: {
     width: "100%",
     gap: 14,

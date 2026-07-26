@@ -1,14 +1,9 @@
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import React from "react";
 import {
-  Pressable,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+  Pressable, StyleSheet, Text, View } from "react-native";
+import AlgorithmScreen from "../../ui/AlgorithmScreen";
+import StepHeader from "../../ui/StepHeader";
 import H4T4Button from "../../ui/H4T4Button";
 import InfoCard from "../../ui/info-card";
 import ParalelThinkingALS from "../adult-resuscitation/ParalelThinkingALS";
@@ -25,22 +20,12 @@ export default function Step3PalsNondefib() {
   const router = useRouter();
 
   return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        contentContainerStyle={styles.container}
-      >
-        <View style={styles.stepHeader}>
-          <View style={styles.stepBadge}>
-            <Text style={styles.stepBadgeText}>Krok 3</Text>
-          </View>
-          <Text style={styles.stepTitle}>Nedefibrilovateľný rytmus</Text>
-          <Text style={styles.stepDescription}>
-            Pri bradykardii so slabou perfúziou, asystólii alebo BEA nepodávajte
-            výboj. Okamžite pokračujte v KPR a podajte adrenalín.
-          </Text>
-        </View>
+    <AlgorithmScreen>
+        <StepHeader
+        badge={"Krok 3"}
+        title={"Nedefibrilovateľný rytmus"}
+        description={"Pri bradykardii so slabou perfúziou, asystólii alebo BEA nepodávajte výboj. Okamžite pokračujte v KPR a podajte adrenalín."}
+      />
 
         <View style={styles.adrenalineCard}>
           <View style={styles.adrenalineIcon}>
@@ -119,46 +104,11 @@ export default function Step3PalsNondefib() {
           description="Pri nedefibrilovateľnom rytme nepodávajte výboj. Prioritou je kvalitná KPR, čo najskorší adrenalín, ventilácia kyslíkom a liečba reverzibilných príčin."
           iconName="alert-circle-outline"
         />
-      </ScrollView>
-    </>
+    </AlgorithmScreen>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: 30,
-    paddingVertical: 16,
-    gap: 15,
-  },
-  stepHeader: {
-    width: "100%",
-    gap: 7,
-    paddingTop: 6,
-    paddingBottom: 4,
-  },
-  stepBadge: {
-    alignSelf: "flex-start",
-    paddingHorizontal: 13,
-    paddingVertical: 6,
-    borderRadius: 999,
-    backgroundColor: "#E4EFFD",
-  },
-  stepBadgeText: {
-    color: "#075296",
-    fontSize: 20,
-    fontWeight: "800",
-  },
-  stepTitle: {
-    color: "#10243C",
-    fontSize: 24,
-    fontWeight: "800",
-    lineHeight: 30,
-  },
-  stepDescription: {
-    color: "#5C6574",
-    fontSize: 14,
-    lineHeight: 21,
-  },
+const styles = StyleSheet.create({
   adrenalineCard: {
     width: "100%",
     flexDirection: "row",

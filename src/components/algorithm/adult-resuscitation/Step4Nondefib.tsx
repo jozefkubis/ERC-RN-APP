@@ -1,14 +1,9 @@
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import React from "react";
 import {
-  Pressable,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+  Pressable, StyleSheet, Text, View } from "react-native";
+import AlgorithmScreen from "../../ui/AlgorithmScreen";
+import StepHeader from "../../ui/StepHeader";
 import InfoCard from "../../ui/info-card";
 import ParalelThinkingALS from "./ParalelThinkingALS";
 
@@ -31,22 +26,12 @@ export default function Step4Nondefib() {
   const router = useRouter();
 
   return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        contentContainerStyle={styles.container}
-      >
-        <View style={styles.stepHeader}>
-          <View style={styles.stepBadge}>
-            <Text style={styles.stepBadgeText}>Krok 4</Text>
-          </View>
-          <Text style={styles.stepTitle}>Nedefibrilovateľný rytmus</Text>
-          <Text style={styles.stepDescription}>
-            Pri BEA alebo asystólii nepodávajte výboj. Okamžite pokračujte v
-            kvalitnej KPR a riešte príčinu zastavenia obehu.
-          </Text>
-        </View>
+    <AlgorithmScreen>
+        <StepHeader
+        badge={"Krok 4"}
+        title={"Nedefibrilovateľný rytmus"}
+        description={"Pri BEA alebo asystólii nepodávajte výboj. Okamžite pokračujte v kvalitnej KPR a riešte príčinu zastavenia obehu."}
+      />
 
         <View style={styles.noShockCard}>
           <View style={styles.noShockIcon}>
@@ -125,46 +110,11 @@ export default function Step4Nondefib() {
           description="Pri asystólii nie je potrebné prerušiť kompresie iba kvôli kontrole rytmu. Pokračujte v KPR a kontrolujte rytmus v pravidelných cykloch."
           iconName="alert-circle-outline"
         />
-      </ScrollView>
-    </>
+    </AlgorithmScreen>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: 30,
-    paddingVertical: 16,
-    gap: 15,
-  },
-  stepHeader: {
-    width: "100%",
-    gap: 7,
-    paddingTop: 6,
-    paddingBottom: 4,
-  },
-  stepBadge: {
-    alignSelf: "flex-start",
-    paddingHorizontal: 13,
-    paddingVertical: 6,
-    borderRadius: 999,
-    backgroundColor: "#E4EFFD",
-  },
-  stepBadgeText: {
-    color: "#075296",
-    fontSize: 20,
-    fontWeight: "800",
-  },
-  stepTitle: {
-    color: "#10243C",
-    fontSize: 24,
-    fontWeight: "800",
-    lineHeight: 30,
-  },
-  stepDescription: {
-    color: "#5C6574",
-    fontSize: 14,
-    lineHeight: 21,
-  },
+const styles = StyleSheet.create({
   noShockCard: {
     width: "100%",
     flexDirection: "row",

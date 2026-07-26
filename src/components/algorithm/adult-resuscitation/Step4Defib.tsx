@@ -1,14 +1,9 @@
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import React from "react";
 import {
-  Pressable,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+  Pressable, StyleSheet, Text, View } from "react-native";
+import AlgorithmScreen from "../../ui/AlgorithmScreen";
+import StepHeader from "../../ui/StepHeader";
 import H4T4Button from "../../ui/H4T4Button";
 import InfoCard from "../../ui/info-card";
 import ParalelThinkingALS from "./ParalelThinkingALS";
@@ -30,22 +25,12 @@ export default function Step4Defib() {
   const router = useRouter();
 
   return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        contentContainerStyle={styles.container}
-      >
-        <View style={styles.stepHeader}>
-          <View style={styles.stepBadge}>
-            <Text style={styles.stepBadgeText}>Krok 4</Text>
-          </View>
-          <Text style={styles.stepTitle}>Defibrilovateľný rytmus</Text>
-          <Text style={styles.stepDescription}>
-            Pri KF alebo bezpulzovej KT podajte výboj s čo najkratším prerušením
-            kompresií.
-          </Text>
-        </View>
+    <AlgorithmScreen>
+        <StepHeader
+        badge={"Krok 4"}
+        title={"Defibrilovateľný rytmus"}
+        description={"Pri KF alebo bezpulzovej KT podajte výboj s čo najkratším prerušením kompresií."}
+      />
 
         <View style={styles.shockCard}>
           <View style={styles.shockIcon}>
@@ -118,46 +103,11 @@ export default function Step4Defib() {
           description="Defibrilačné výboje podávajte po jednom. Po každom výboji okamžite obnovte kompresie hrudníka."
           iconName="alert-circle-outline"
         />
-      </ScrollView>
-    </>
+    </AlgorithmScreen>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: 30,
-    paddingVertical: 16,
-    gap: 15,
-  },
-  stepHeader: {
-    width: "100%",
-    gap: 7,
-    paddingTop: 6,
-    paddingBottom: 4,
-  },
-  stepBadge: {
-    alignSelf: "flex-start",
-    paddingHorizontal: 13,
-    paddingVertical: 6,
-    borderRadius: 999,
-    backgroundColor: "#E4EFFD",
-  },
-  stepBadgeText: {
-    color: "#075296",
-    fontSize: 20,
-    fontWeight: "800",
-  },
-  stepTitle: {
-    color: "#10243C",
-    fontSize: 24,
-    fontWeight: "800",
-    lineHeight: 30,
-  },
-  stepDescription: {
-    color: "#5C6574",
-    fontSize: 14,
-    lineHeight: 21,
-  },
+const styles = StyleSheet.create({
   shockCard: {
     width: "100%",
     flexDirection: "row",

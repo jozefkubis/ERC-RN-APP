@@ -1,14 +1,9 @@
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import React from "react";
 import {
-  Pressable,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+  Pressable, StyleSheet, Text, View } from "react-native";
+import AlgorithmScreen from "../../ui/AlgorithmScreen";
+import StepHeader from "../../ui/StepHeader";
 import InfoCard from "../../ui/info-card";
 
 const hItems = [
@@ -53,23 +48,12 @@ export default function FourHFourT() {
   const router = useRouter();
 
   return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        contentContainerStyle={styles.container}
-      >
-        <View style={styles.stepHeader}>
-          <View style={styles.stepBadge}>
-            <Text style={styles.stepBadgeText}>4H / 4T</Text>
-          </View>
-          <Text style={styles.stepTitle}>Reverzibilné príčiny</Text>
-          <Text style={styles.stepDescription}>
-            Počas každej vetvy ALS aktívne hľadajte a liečte príčinu zastavenia
-            obehu. Tento checklist patrí k defibrilovateľným aj
-            nedefibrilovateľným rytmom.
-          </Text>
-        </View>
+    <AlgorithmScreen>
+        <StepHeader
+        badge={"4H / 4T"}
+        title={"Reverzibilné príčiny"}
+        description={"Počas každej vetvy ALS aktívne hľadajte a liečte príčinu zastavenia obehu. Tento checklist patrí k defibrilovateľným aj nedefibrilovateľným rytmom."}
+      />
 
         <CauseSection title="4H" items={hItems} iconName="water-outline" />
         <CauseSection title="4T" items={tItems} iconName="git-branch-outline" />
@@ -95,8 +79,7 @@ export default function FourHFourT() {
             <Text style={styles.backDescription}>Vrátiť sa na predchádzajúci krok</Text>
           </View>
         </Pressable>
-      </ScrollView>
-    </>
+    </AlgorithmScreen>
   );
 }
 
@@ -133,41 +116,7 @@ function CauseSection({ title, items, iconName }: CauseSectionProps) {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: 30,
-    paddingVertical: 16,
-    gap: 15,
-  },
-  stepHeader: {
-    width: "100%",
-    gap: 7,
-    paddingTop: 6,
-    paddingBottom: 4,
-  },
-  stepBadge: {
-    alignSelf: "flex-start",
-    paddingHorizontal: 13,
-    paddingVertical: 6,
-    borderRadius: 999,
-    backgroundColor: "#E4EFFD",
-  },
-  stepBadgeText: {
-    color: "#075296",
-    fontSize: 20,
-    fontWeight: "800",
-  },
-  stepTitle: {
-    color: "#10243C",
-    fontSize: 24,
-    fontWeight: "800",
-    lineHeight: 30,
-  },
-  stepDescription: {
-    color: "#5C6574",
-    fontSize: 14,
-    lineHeight: 21,
-  },
+const styles = StyleSheet.create({
   sectionCard: {
     width: "100%",
     gap: 14,

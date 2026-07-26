@@ -2,15 +2,10 @@ import InfoCard from "@/src/components/ui/info-card";
 import FlowConnector from "@/src/components/ui/FlowConnector";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import React from "react";
 import {
-  Pressable,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+  Pressable, StyleSheet, Text, View } from "react-native";
+import AlgorithmScreen from "../../ui/AlgorithmScreen";
+import StepHeader from "../../ui/StepHeader";
 
 const temporaryMeasures = [
   "Atropín 0,5 mg IV, opakujte do maximálne 3 mg",
@@ -32,22 +27,12 @@ export default function Step3BradyUnstable() {
   const router = useRouter();
 
   return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        contentContainerStyle={styles.container}
-      >
-        <View style={styles.stepHeader}>
-          <View style={styles.stepBadge}>
-            <Text style={styles.stepBadgeText}>Krok 3</Text>
-          </View>
-          <Text style={styles.stepTitle}>Nedostatočná reakcia</Text>
-          <Text style={styles.stepDescription}>
-            Ak odpoveď na atropín nie je dostatočná, začnite dočasné opatrenia a
-            pripravte kardiostimuláciu.
-          </Text>
-        </View>
+    <AlgorithmScreen>
+        <StepHeader
+        badge={"Krok 3"}
+        title={"Nedostatočná reakcia"}
+        description={"Ak odpoveď na atropín nie je dostatočná, začnite dočasné opatrenia a pripravte kardiostimuláciu."}
+      />
 
         <View style={styles.urgentPanel}>
           <View style={styles.panelTitleRow}>
@@ -122,46 +107,11 @@ export default function Step3BradyUnstable() {
           description="Alternatívne lieky voľte podľa dostupnosti, lokálneho protokolu a odporúčania experta."
           iconName="information-circle-outline"
         />
-      </ScrollView>
-    </>
+    </AlgorithmScreen>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: 30,
-    paddingVertical: 16,
-    gap: 15,
-  },
-  stepHeader: {
-    width: "100%",
-    gap: 7,
-    paddingTop: 6,
-    paddingBottom: 4,
-  },
-  stepBadge: {
-    alignSelf: "flex-start",
-    paddingHorizontal: 13,
-    paddingVertical: 6,
-    borderRadius: 999,
-    backgroundColor: "#FDE7E8",
-  },
-  stepBadgeText: {
-    color: "#C8141B",
-    fontSize: 20,
-    fontWeight: "800",
-  },
-  stepTitle: {
-    color: "#10243C",
-    fontSize: 24,
-    fontWeight: "800",
-    lineHeight: 30,
-  },
-  stepDescription: {
-    color: "#5C6574",
-    fontSize: 14,
-    lineHeight: 21,
-  },
+const styles = StyleSheet.create({
   urgentPanel: {
     width: "100%",
     gap: 18,

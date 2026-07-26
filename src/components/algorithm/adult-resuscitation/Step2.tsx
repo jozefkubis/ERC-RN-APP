@@ -1,15 +1,9 @@
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import React from "react";
-import {
-  Pressable,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
+import AlgorithmScreen from "../../ui/AlgorithmScreen";
 import InfoCard from "../../ui/info-card";
+import StepHeader from "../../ui/StepHeader";
 
 const actions = [
   "Začnite KPR 30:2",
@@ -21,106 +15,55 @@ export default function Step2() {
   const router = useRouter();
 
   return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        contentContainerStyle={styles.container}
+    <AlgorithmScreen>
+      <StepHeader
+        badge="Krok 2"
+        title="Okamžitá resuscitácia"
+        description="Minimalizujte prerušenia stláčania hrudníka a čo najskôr pripojte monitor alebo defibrilátor."
+      />
+
+      <View style={styles.actionCard}>
+        {actions.map((action) => (
+          <View key={action} style={styles.actionRow}>
+            <View style={styles.actionIcon}>
+              <Ionicons name="checkmark" size={18} color="#FFFFFF" />
+            </View>
+            <Text style={styles.actionText}>{action}</Text>
+          </View>
+        ))}
+      </View>
+
+      <Pressable
+        style={({ pressed }) => [pressed && styles.pressed]}
+        onPress={() => router.push("/algorithms/adult-resuscitation/als/step3")}
       >
-        <View style={styles.stepHeader}>
-          <View style={styles.stepBadge}>
-            <Text style={styles.stepBadgeText}>Krok 2</Text>
+        <View style={styles.rhythmCard}>
+          <View style={styles.flowLine} />
+          <View style={styles.rhythmIcon}>
+            <MaterialCommunityIcons
+              name="heart-pulse"
+              size={30}
+              color="#FFFFFF"
+            />
           </View>
-          <Text style={styles.stepTitle}>Okamžitá resuscitácia</Text>
-          <Text style={styles.stepDescription}>
-            Minimalizujte prerušenia stláčania hrudníka a čo najskôr pripojte
-            monitor alebo defibrilátor.
+          <Text style={styles.rhythmTitle}>ZHODNOŤTE RYTMUS</Text>
+          <Text style={styles.rhythmDescription}>
+            Zastavte stláčanie len na nevyhnutný čas a rozhodnite, či je rytmus
+            defibrilovateľný.
           </Text>
+          <Ionicons name="arrow-forward" size={22} color="#075296" />
         </View>
+      </Pressable>
 
-        <View style={styles.actionCard}>
-          {actions.map((action) => (
-            <View key={action} style={styles.actionRow}>
-              <View style={styles.actionIcon}>
-                <Ionicons name="checkmark" size={18} color="#FFFFFF" />
-              </View>
-              <Text style={styles.actionText}>{action}</Text>
-            </View>
-          ))}
-        </View>
-
-        <Pressable
-          style={({ pressed }) => [pressed && styles.pressed]}
-          onPress={() =>
-            router.push("/algorithms/adult-resuscitation/als/step3")
-          }
-        >
-          <View style={styles.rhythmCard}>
-            <View style={styles.flowLine} />
-            <View style={styles.rhythmIcon}>
-              <MaterialCommunityIcons
-                name="heart-pulse"
-                size={30}
-                color="#FFFFFF"
-              />
-            </View>
-            <Text style={styles.rhythmTitle}>ZHODNOŤTE RYTMUS</Text>
-            <Text style={styles.rhythmDescription}>
-              Zastavte stláčanie len na nevyhnutný čas a rozhodnite, či je
-              rytmus defibrilovateľný.
-            </Text>
-            <Ionicons name="arrow-forward" size={22} color="#075296" />
-          </View>
-        </Pressable>
-
-        <InfoCard
-          title="Princíp"
-          description="Analýza rytmu má byť krátka. Po rozhodnutí sa okamžite vráťte ku kvalitnej KPR alebo podajte výboj podľa algoritmu."
-        />
-      </ScrollView>
-    </>
+      <InfoCard
+        title="Princíp"
+        description="Analýza rytmu má byť krátka. Po rozhodnutí sa okamžite vráťte ku kvalitnej KPR alebo podajte výboj podľa algoritmu."
+      />
+    </AlgorithmScreen>
   );
 }
 
 const styles = StyleSheet.create({
-  // safeArea: {
-  //   flex: 1,
-  //   backgroundColor: "#F7F8FC",
-  // },
-  container: {
-    paddingHorizontal: 30,
-    paddingVertical: 16,
-    gap: 15,
-  },
-  stepHeader: {
-    width: "100%",
-    gap: 7,
-    paddingTop: 6,
-    paddingBottom: 4,
-  },
-  stepBadge: {
-    alignSelf: "flex-start",
-    paddingHorizontal: 13,
-    paddingVertical: 6,
-    borderRadius: 999,
-    backgroundColor: "#E4EFFD",
-  },
-  stepBadgeText: {
-    color: "#075296",
-    fontSize: 20,
-    fontWeight: "800",
-  },
-  stepTitle: {
-    color: "#10243C",
-    fontSize: 24,
-    fontWeight: "800",
-    lineHeight: 30,
-  },
-  stepDescription: {
-    color: "#5C6574",
-    fontSize: 14,
-    lineHeight: 21,
-  },
   actionCard: {
     width: "100%",
     gap: 12,

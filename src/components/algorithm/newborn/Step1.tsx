@@ -1,9 +1,10 @@
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import React from "react";
-import { ScrollView, StatusBar, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
+import AlgorithmScreen from "../../ui/AlgorithmScreen";
 import FlowConnector from "../../ui/FlowConnector";
 import NextStepButton from "../../ui/NextStepButton";
+import StepHeader from "../../ui/StepHeader";
 
 const firstCareActions = [
   "Oneskorené podviazanie pupočníka",
@@ -20,143 +21,92 @@ export default function Step1() {
   const router = useRouter();
 
   return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        contentContainerStyle={styles.container}
-      >
-        <View style={styles.stepHeader}>
-          <View style={styles.stepBadge}>
-            <Text selectable style={styles.stepBadgeText}>
-              Krok 1
-            </Text>
-          </View>
-          <Text selectable style={styles.stepTitle}>
-            Príprava a prvé opatrenia
+    <AlgorithmScreen>
+      <StepHeader
+        badge="Krok 1"
+        title="Príprava a prvé opatrenia"
+        description="Pripravte tím a vybavenie ešte pred narodením. Po narodení spustite stopky a udržujte novorodenca v teple."
+      />
+
+      <View style={styles.preparationCard}>
+        <View style={styles.preparationIcon}>
+          <Ionicons name="people" size={25} color="#FFFFFF" />
+        </View>
+        <View style={styles.cardText}>
+          <Text selectable style={styles.preparationTitle}>
+            Prenatálne poradenstvo
           </Text>
-          <Text selectable style={styles.stepDescription}>
-            Pripravte tím a vybavenie ešte pred narodením. Po narodení spustite
-            stopky a udržujte novorodenca v teple.
+          <Text selectable style={styles.preparationDescription}>
+            Brífing tímu a kontrola vybavenia
+          </Text>
+        </View>
+      </View>
+
+      <FlowConnector />
+
+      <View style={styles.birthCard}>
+        <View style={styles.birthIcon}>
+          <Ionicons name="timer-outline" size={25} color="#075296" />
+        </View>
+        <View style={styles.cardText}>
+          <Text selectable style={styles.birthTitle}>
+            Narodenie
+          </Text>
+          <Text selectable style={styles.birthDescription}>
+            Spustite stopky
+          </Text>
+        </View>
+      </View>
+
+      <FlowConnector />
+
+      <View style={styles.careCard}>
+        {firstCareActions.map((action) => (
+          <View key={action} style={styles.actionRow}>
+            <View style={styles.actionIcon}>
+              <Ionicons name="checkmark" size={18} color="#FFFFFF" />
+            </View>
+            <Text selectable style={styles.actionText}>
+              {action}
+            </Text>
+          </View>
+        ))}
+        <View style={styles.warmthRow}>
+          <Ionicons name="thermometer-outline" size={22} color="#075296" />
+          <Text selectable style={styles.warmthText}>
+            Udržiavajte v teple
+          </Text>
+        </View>
+      </View>
+
+      <View style={styles.prematureCard}>
+        <View style={styles.prematureHeader}>
+          <View style={styles.prematureIcon}>
+            <Ionicons name="warning-outline" size={22} color="#CC6238" />
+          </View>
+          <Text selectable style={styles.prematureTitle}>
+            Predčasný pôrod &lt; 32 týždňov
           </Text>
         </View>
 
-        <View style={styles.preparationCard}>
-          <View style={styles.preparationIcon}>
-            <Ionicons name="people" size={25} color="#FFFFFF" />
-          </View>
-          <View style={styles.cardText}>
-            <Text selectable style={styles.preparationTitle}>
-              Prenatálne poradenstvo
-            </Text>
-            <Text selectable style={styles.preparationDescription}>
-              Brífing tímu a kontrola vybavenia
-            </Text>
-          </View>
-        </View>
-
-        <FlowConnector />
-
-        <View style={styles.birthCard}>
-          <View style={styles.birthIcon}>
-            <Ionicons name="timer-outline" size={25} color="#075296" />
-          </View>
-          <View style={styles.cardText}>
-            <Text selectable style={styles.birthTitle}>
-              Narodenie
-            </Text>
-            <Text selectable style={styles.birthDescription}>
-              Spustite stopky
-            </Text>
-          </View>
-        </View>
-
-        <FlowConnector />
-
-        <View style={styles.careCard}>
-          {firstCareActions.map((action) => (
-            <View key={action} style={styles.actionRow}>
-              <View style={styles.actionIcon}>
-                <Ionicons name="checkmark" size={18} color="#FFFFFF" />
-              </View>
-              <Text selectable style={styles.actionText}>
+        <View style={styles.prematureList}>
+          {prematureBirthActions.map((action) => (
+            <View key={action} style={styles.prematureRow}>
+              <View style={styles.prematureBullet} />
+              <Text selectable style={styles.prematureText}>
                 {action}
               </Text>
             </View>
           ))}
-          <View style={styles.warmthRow}>
-            <Ionicons name="thermometer-outline" size={22} color="#075296" />
-            <Text selectable style={styles.warmthText}>
-              Udržiavajte v teple
-            </Text>
-          </View>
         </View>
+      </View>
 
-        <View style={styles.prematureCard}>
-          <View style={styles.prematureHeader}>
-            <View style={styles.prematureIcon}>
-              <Ionicons name="warning-outline" size={22} color="#CC6238" />
-            </View>
-            <Text selectable style={styles.prematureTitle}>
-              Predčasný pôrod &lt; 32 týždňov
-            </Text>
-          </View>
-
-          <View style={styles.prematureList}>
-            {prematureBirthActions.map((action) => (
-              <View key={action} style={styles.prematureRow}>
-                <View style={styles.prematureBullet} />
-                <Text selectable style={styles.prematureText}>
-                  {action}
-                </Text>
-              </View>
-            ))}
-          </View>
-        </View>
-
-        <NextStepButton
-          onPress={() => router.push("/algorithms/newborn/step2")}
-        />
-      </ScrollView>
-    </>
+      <NextStepButton onPress={() => router.push("/algorithms/newborn/step2")} />
+    </AlgorithmScreen>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: 30,
-    paddingVertical: 16,
-    gap: 15,
-  },
-  stepHeader: {
-    width: "100%",
-    gap: 7,
-    paddingTop: 6,
-    paddingBottom: 4,
-  },
-  stepBadge: {
-    alignSelf: "flex-start",
-    paddingHorizontal: 13,
-    paddingVertical: 6,
-    borderRadius: 999,
-    backgroundColor: "#E4EFFD",
-  },
-  stepBadgeText: {
-    color: "#075296",
-    fontSize: 20,
-    fontWeight: "800",
-  },
-  stepTitle: {
-    color: "#10243C",
-    fontSize: 24,
-    fontWeight: "800",
-    lineHeight: 30,
-  },
-  stepDescription: {
-    color: "#5C6574",
-    fontSize: 14,
-    lineHeight: 21,
-  },
   preparationCard: {
     width: "100%",
     minHeight: 104,
@@ -274,7 +224,6 @@ const styles = StyleSheet.create({
     fontWeight: "800",
     lineHeight: 20,
   },
-
   prematureCard: {
     width: "100%",
     gap: 13,
@@ -333,46 +282,5 @@ const styles = StyleSheet.create({
     fontSize: 13,
     fontWeight: "700",
     lineHeight: 19,
-  },
-  nextStepButton: {
-    width: "100%",
-    minHeight: 82,
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 14,
-    paddingHorizontal: 18,
-    paddingVertical: 15,
-    borderRadius: 10,
-    borderCurve: "continuous",
-    backgroundColor: "#075296",
-    boxShadow: "0 2px 4px rgba(15, 35, 60, 0.08)",
-  },
-  nextStepText: {
-    flex: 1,
-    gap: 3,
-  },
-  nextStepIcon: {
-    width: 40,
-    height: 40,
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 20,
-    backgroundColor: "#ED1C24",
-  },
-  nextStepEyebrow: {
-    color: "#B9DDFF",
-    fontSize: 12,
-    fontWeight: "700",
-    lineHeight: 17,
-  },
-  nextStepTitle: {
-    color: "#FFFFFF",
-    fontSize: 18,
-    fontWeight: "800",
-    lineHeight: 24,
-  },
-  pressed: {
-    opacity: 0.7,
-    transform: [{ scale: 0.99 }],
   },
 });

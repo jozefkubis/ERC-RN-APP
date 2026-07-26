@@ -1,14 +1,9 @@
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import React from "react";
 import {
-  Pressable,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+  Pressable, StyleSheet, Text, View } from "react-native";
+import AlgorithmScreen from "../../ui/AlgorithmScreen";
+import StepHeader from "../../ui/StepHeader";
 import InfoCard from "../../ui/info-card";
 
 const abcdeSteps = [
@@ -30,22 +25,12 @@ export default function Step1Tachycardia() {
   const router = useRouter();
 
   return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        contentContainerStyle={styles.container}
-      >
-        <View style={styles.stepHeader}>
-          <View style={styles.stepBadge}>
-            <Text style={styles.stepBadgeText}>Krok 1</Text>
-          </View>
-          <Text style={styles.stepTitle}>Tachykardia</Text>
-          <Text style={styles.stepDescription}>
-            Zhodnoťte stav pacienta s využitím ABCDE prístupu a rýchlo
-            rozhodnite, či sú prítomné život ohrozujúce príznaky.
-          </Text>
-        </View>
+    <AlgorithmScreen>
+        <StepHeader
+        badge={"Krok 1"}
+        title={"Tachykardia"}
+        description={"Zhodnoťte stav pacienta s využitím ABCDE prístupu a rýchlo rozhodnite, či sú prítomné život ohrozujúce príznaky."}
+      />
 
         <View style={styles.assessmentCard}>
           <View style={styles.cardHeader}>
@@ -140,46 +125,11 @@ export default function Step1Tachycardia() {
           description="Pri akomkoľvek zhoršení stavu sa vráťte k hodnoteniu ABCDE a pripravte synchronizovanú kardioverziu."
           iconName="information-circle-outline"
         />
-      </ScrollView>
-    </>
+    </AlgorithmScreen>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: 30,
-    paddingVertical: 16,
-    gap: 15,
-  },
-  stepHeader: {
-    width: "100%",
-    gap: 7,
-    paddingTop: 6,
-    paddingBottom: 4,
-  },
-  stepBadge: {
-    alignSelf: "flex-start",
-    paddingHorizontal: 13,
-    paddingVertical: 6,
-    borderRadius: 999,
-    backgroundColor: "#E4EFFD",
-  },
-  stepBadgeText: {
-    color: "#075296",
-    fontSize: 20,
-    fontWeight: "800",
-  },
-  stepTitle: {
-    color: "#10243C",
-    fontSize: 24,
-    fontWeight: "800",
-    lineHeight: 30,
-  },
-  stepDescription: {
-    color: "#5C6574",
-    fontSize: 14,
-    lineHeight: 21,
-  },
+const styles = StyleSheet.create({
   assessmentCard: {
     width: "100%",
     gap: 16,

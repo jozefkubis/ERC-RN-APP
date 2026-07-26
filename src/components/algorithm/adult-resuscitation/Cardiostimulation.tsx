@@ -1,6 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
-import React from "react";
-import { ScrollView, StatusBar, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
+import AlgorithmScreen from "../../ui/AlgorithmScreen";
+import StepHeader from "../../ui/StepHeader";
 
 const indications = [
   "Nestabilná symptomatická bradykardia rezistentná na farmakologickú liečbu",
@@ -47,22 +48,12 @@ const safetyNotes = [
 
 export default function Cardiostimulation() {
   return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        contentContainerStyle={styles.container}
-      >
-        <View style={styles.stepHeader}>
-          <View style={styles.stepBadge}>
-            <Text style={styles.stepBadgeText}>Doplnok</Text>
-          </View>
-          <Text style={styles.stepTitle}>Transkutánna kardiostimulácia</Text>
-          <Text style={styles.stepDescription}>
-            Univerzálny postup pre externý defibrilátor/monitor s funkciou
-            neinvazívnej stimulácie pri nestabilnej symptomatickej bradykardii.
-          </Text>
-        </View>
+    <AlgorithmScreen>
+        <StepHeader
+        badge={"Doplnok"}
+        title={"Transkutánna kardiostimulácia"}
+        description={"Univerzálny postup pre externý defibrilátor/monitor s funkciou neinvazívnej stimulácie pri nestabilnej symptomatickej bradykardii."}
+      />
 
         <View style={styles.pacingPanel}>
           <View style={styles.panelTitleRow}>
@@ -167,46 +158,11 @@ export default function Cardiostimulation() {
           description="Medicínsky rámec: ERCSRR Odporúčania 2025, strana 39. Praktické kroky sú formulované univerzálne pre externý defibrilátor/monitor s funkciou stimulácie."
           iconName="document-text-outline"
         /> */}
-      </ScrollView>
-    </>
+    </AlgorithmScreen>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: 28,
-    paddingVertical: 14,
-    gap: 13,
-  },
-  stepHeader: {
-    width: "100%",
-    gap: 5,
-    paddingTop: 6,
-    paddingBottom: 4,
-  },
-  stepBadge: {
-    alignSelf: "flex-start",
-    paddingHorizontal: 11,
-    paddingVertical: 4,
-    borderRadius: 999,
-    backgroundColor: "#E4EFFD",
-  },
-  stepBadgeText: {
-    color: "#075296",
-    fontSize: 18,
-    fontWeight: "800",
-  },
-  stepTitle: {
-    color: "#10243C",
-    fontSize: 22,
-    fontWeight: "800",
-    lineHeight: 28,
-  },
-  stepDescription: {
-    color: "#5C6574",
-    fontSize: 12,
-    lineHeight: 19,
-  },
+const styles = StyleSheet.create({
   pacingPanel: {
     width: "100%",
     gap: 12,

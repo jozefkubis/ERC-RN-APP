@@ -1,14 +1,9 @@
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import React from "react";
 import {
-  Pressable,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+  Pressable, StyleSheet, Text, View } from "react-native";
+import AlgorithmScreen from "../../ui/AlgorithmScreen";
+import StepHeader from "../../ui/StepHeader";
 import InfoCard from "../../ui/info-card";
 
 const breathingSteps = [
@@ -22,21 +17,12 @@ export default function Step2Pbls() {
   const router = useRouter();
 
   return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        contentContainerStyle={styles.container}
-      >
-        <View style={styles.stepHeader}>
-          <View style={styles.stepBadge}>
-            <Text style={styles.stepBadgeText}>Krok 2</Text>
-          </View>
-          <Text style={styles.stepTitle}>Dýchacie cesty a dýchanie</Text>
-          <Text style={styles.stepDescription}>
-            Skontrolujte dýchanie rýchlo, bez zbytočného odkladu začiatku KPR.
-          </Text>
-        </View>
+    <AlgorithmScreen>
+        <StepHeader
+        badge={"Krok 2"}
+        title={"Dýchacie cesty a dýchanie"}
+        description={"Skontrolujte dýchanie rýchlo, bez zbytočného odkladu začiatku KPR."}
+      />
 
         <View style={styles.infoCard}>
           <View style={styles.infoHeader}>
@@ -78,46 +64,11 @@ export default function Step2Pbls() {
           description="Udržujte priechodné dýchacie cesty, sledujte dýchanie nepretržite alebo aspoň každú minútu a privolajte pomoc."
           iconName="information-circle-outline"
         />
-      </ScrollView>
-    </>
+    </AlgorithmScreen>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: 30,
-    paddingVertical: 16,
-    gap: 15,
-  },
-  stepHeader: {
-    width: "100%",
-    gap: 7,
-    paddingTop: 6,
-    paddingBottom: 4,
-  },
-  stepBadge: {
-    alignSelf: "flex-start",
-    paddingHorizontal: 13,
-    paddingVertical: 6,
-    borderRadius: 999,
-    backgroundColor: "#E4EFFD",
-  },
-  stepBadgeText: {
-    color: "#075296",
-    fontSize: 20,
-    fontWeight: "800",
-  },
-  stepTitle: {
-    color: "#10243C",
-    fontSize: 24,
-    fontWeight: "800",
-    lineHeight: 30,
-  },
-  stepDescription: {
-    color: "#5C6574",
-    fontSize: 14,
-    lineHeight: 21,
-  },
   infoCard: {
     width: "100%",
     gap: 13,

@@ -1,7 +1,8 @@
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import React from "react";
-import { ScrollView, StatusBar, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
+import AlgorithmScreen from "../../ui/AlgorithmScreen";
+import StepHeader from "../../ui/StepHeader";
 import FlowConnector from "../../ui/FlowConnector";
 import NextStepButton from "../../ui/NextStepButton";
 
@@ -14,26 +15,12 @@ export default function Step2() {
   const router = useRouter();
 
   return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        contentContainerStyle={styles.container}
-      >
-        <View style={styles.stepHeader}>
-          <View style={styles.stepBadge}>
-            <Text selectable style={styles.stepBadgeText}>
-              Krok 2
-            </Text>
-          </View>
-          <Text selectable style={styles.stepTitle}>
-            Dýchanie a srdcová frekvencia
-          </Text>
-          <Text selectable style={styles.stepDescription}>
-            Rýchlo zhodnoťte dýchanie a srdcovú frekvenciu. Pri nedostatočnom
-            dýchaní ihneď spriechodnite dýchacie cesty.
-          </Text>
-        </View>
+    <AlgorithmScreen>
+        <StepHeader
+        badge={"Krok 2"}
+        title={"Dýchanie a srdcová frekvencia"}
+        description={"Rýchlo zhodnoťte dýchanie a srdcovú frekvenciu. Pri nedostatočnom dýchaní ihneď spriechodnite dýchacie cesty."}
+      />
 
         <View style={styles.assessmentCard}>
           <View style={styles.assessmentIcon}>
@@ -121,46 +108,11 @@ export default function Step2() {
         <NextStepButton
           onPress={() => router.push("/algorithms/newborn/step3")}
         />
-      </ScrollView>
-    </>
+    </AlgorithmScreen>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: 30,
-    paddingVertical: 16,
-    gap: 15,
-  },
-  stepHeader: {
-    width: "100%",
-    gap: 7,
-    paddingTop: 6,
-    paddingBottom: 4,
-  },
-  stepBadge: {
-    alignSelf: "flex-start",
-    paddingHorizontal: 13,
-    paddingVertical: 6,
-    borderRadius: 999,
-    backgroundColor: "#E4EFFD",
-  },
-  stepBadgeText: {
-    color: "#075296",
-    fontSize: 20,
-    fontWeight: "800",
-  },
-  stepTitle: {
-    color: "#10243C",
-    fontSize: 24,
-    fontWeight: "800",
-    lineHeight: 30,
-  },
-  stepDescription: {
-    color: "#5C6574",
-    fontSize: 14,
-    lineHeight: 21,
-  },
+const styles = StyleSheet.create({
   assessmentCard: {
     width: "100%",
     minHeight: 96,

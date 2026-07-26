@@ -1,6 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
-import React from "react";
-import { ScrollView, StatusBar, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
+import AlgorithmScreen from "../../ui/AlgorithmScreen";
+import StepHeader from "../../ui/StepHeader";
 
 const alternatives = [
   "Aminofylín",
@@ -11,22 +12,12 @@ const alternatives = [
 
 export default function BradyAlternativeMedications() {
   return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        contentContainerStyle={styles.container}
-      >
-        <View style={styles.stepHeader}>
-          <View style={styles.stepBadge}>
-            <Text style={styles.stepBadgeText}>Doplnok</Text>
-          </View>
-          <Text style={styles.stepTitle}>Alternatívne lieky</Text>
-          <Text style={styles.stepDescription}>
-            Prehľad možností, ktoré možno zvážiť pri nedostatočnej reakcii na
-            atropín.
-          </Text>
-        </View>
+    <AlgorithmScreen>
+        <StepHeader
+        badge={"Doplnok"}
+        title={"Alternatívne lieky"}
+        description={"Prehľad možností, ktoré možno zvážiť pri nedostatočnej reakcii na atropín."}
+      />
 
         <View style={styles.noteCard}>
           <View style={styles.cardHeader}>
@@ -45,46 +36,11 @@ export default function BradyAlternativeMedications() {
             ))}
           </View>
         </View>
-      </ScrollView>
-    </>
+    </AlgorithmScreen>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: 30,
-    paddingVertical: 16,
-    gap: 15,
-  },
-  stepHeader: {
-    width: "100%",
-    gap: 7,
-    paddingTop: 6,
-    paddingBottom: 4,
-  },
-  stepBadge: {
-    alignSelf: "flex-start",
-    paddingHorizontal: 13,
-    paddingVertical: 6,
-    borderRadius: 999,
-    backgroundColor: "#FFF3D2",
-  },
-  stepBadgeText: {
-    color: "#075296",
-    fontSize: 20,
-    fontWeight: "800",
-  },
-  stepTitle: {
-    color: "#10243C",
-    fontSize: 24,
-    fontWeight: "800",
-    lineHeight: 30,
-  },
-  stepDescription: {
-    color: "#5C6574",
-    fontSize: 14,
-    lineHeight: 21,
-  },
+const styles = StyleSheet.create({
   noteCard: {
     width: "100%",
     gap: 14,

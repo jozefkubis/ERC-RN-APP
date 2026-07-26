@@ -1,7 +1,8 @@
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import React from "react";
-import { ScrollView, StatusBar, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
+import AlgorithmScreen from "../../ui/AlgorithmScreen";
+import StepHeader from "../../ui/StepHeader";
 import FlowConnector from "../../ui/FlowConnector";
 import InfoCard from "../../ui/info-card";
 import NoButton from "../../ui/NoButton";
@@ -11,22 +12,12 @@ export default function Step2() {
   const router = useRouter();
 
   return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        contentContainerStyle={styles.container}
-      >
-        <View style={styles.stepHeader}>
-          <View style={styles.stepBadge}>
-            <Text style={styles.stepBadgeText}>Krok 2</Text>
-          </View>
-          <Text style={styles.stepTitle}>Privolajte pomoc</Text>
-          <Text style={styles.stepDescription}>
-            Pri neúčinnom kašli bezodkladne aktivujte záchrannú zdravotnú službu
-            a zhodnoťte stav vedomia dieťaťa.
-          </Text>
-        </View>
+    <AlgorithmScreen>
+        <StepHeader
+        badge={"Krok 2"}
+        title={"Privolajte pomoc"}
+        description={"Pri neúčinnom kašli bezodkladne aktivujte záchrannú zdravotnú službu a zhodnoťte stav vedomia dieťaťa."}
+      />
 
         <View style={styles.emergencyCard}>
           <View style={styles.emergencyIcon}>
@@ -72,46 +63,11 @@ export default function Step2() {
           description="Nevykonávajte opakované ani slepé vyberanie prstami. Predmet odstráňte iba vtedy, keď je v ústach jasne viditeľný."
           iconName="warning-outline"
         />
-      </ScrollView>
-    </>
+    </AlgorithmScreen>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: 30,
-    paddingVertical: 16,
-    gap: 15,
-  },
-  stepHeader: {
-    width: "100%",
-    gap: 7,
-    paddingTop: 6,
-    paddingBottom: 4,
-  },
-  stepBadge: {
-    alignSelf: "flex-start",
-    paddingHorizontal: 13,
-    paddingVertical: 6,
-    borderRadius: 999,
-    backgroundColor: "#E4EFFD",
-  },
-  stepBadgeText: {
-    color: "#075296",
-    fontSize: 20,
-    fontWeight: "800",
-  },
-  stepTitle: {
-    color: "#10243C",
-    fontSize: 24,
-    fontWeight: "800",
-    lineHeight: 30,
-  },
-  stepDescription: {
-    color: "#5C6574",
-    fontSize: 14,
-    lineHeight: 21,
-  },
+const styles = StyleSheet.create({
   emergencyCard: {
     width: "100%",
     minHeight: 104,
