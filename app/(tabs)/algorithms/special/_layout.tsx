@@ -30,18 +30,9 @@ export default function AdultResuscitationLayout() {
         name="special/index"
         options={{ title: "Špeciálne okolnosti" }}
       />
-      <Stack.Screen
-        name="anafylaxia/step1"
-        options={{ title: "Anafylaxia" }}
-      />
-      <Stack.Screen
-        name="anafylaxia/step2"
-        options={{ title: "Anafylaxia" }}
-      />
-      <Stack.Screen
-        name="anafylaxia/step3"
-        options={{ title: "Anafylaxia" }}
-      />
+      <Stack.Screen name="anafylaxia/step1" options={{ title: "Anafylaxia" }} />
+      <Stack.Screen name="anafylaxia/step2" options={{ title: "Anafylaxia" }} />
+      <Stack.Screen name="anafylaxia/step3" options={{ title: "Anafylaxia" }} />
       <Stack.Screen
         name="anafylaxia/refractory"
         options={{ title: "Refraktérna anafylaxia" }}
@@ -53,6 +44,26 @@ export default function AdultResuscitationLayout() {
       <Stack.Screen
         name="anafylaxia/aftercare"
         options={{ title: "Anafylaxia" }}
+      />
+      <Stack.Screen
+        name="kalium/intro"
+        options={{ title: "Poruchy draslíka" }}
+      />
+      <Stack.Screen
+        name="kalium/hyper/step1"
+        options={{ title: "Hyperkaliémia" }}
+      />
+      <Stack.Screen
+        name="kalium/hyper/step2"
+        options={{ title: "Hyperkaliémia" }}
+      />
+      <Stack.Screen
+        name="kalium/hyper/cardiac-arrest"
+        options={{ title: "Hyperkaliémia – ZO" }}
+      />
+      <Stack.Screen
+        name="kalium/hypo/step1"
+        options={{ title: "Hypokaliémia" }}
       />
     </Stack>
   );

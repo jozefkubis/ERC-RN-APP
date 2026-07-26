@@ -1,13 +1,11 @@
 import NoButton from "@/src/components/ui/NoButton";
 import YesButton from "@/src/components/ui/YesButton";
 import { useRouter } from "expo-router";
-import {
-  AlgorithmScreen,
-  ContentCard,
-  DecisionCard,
-  HeroCard,
-  StepHeader,
-} from "./anaphylaxis-ui";
+import AlgorithmScreen from "@/src/components/ui/AlgorithmScreen";
+import ContentCard from "@/src/components/ui/ContentCard";
+import DecisionCard from "@/src/components/ui/DecisionCard";
+import HeroCard from "@/src/components/ui/HeroCard";
+import StepHeader from "@/src/components/ui/StepHeader";
 
 export default function Step2() {
   const router = useRouter();

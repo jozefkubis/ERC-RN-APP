@@ -1,11 +1,9 @@
 import { useRouter } from "expo-router";
 import FlowConnector from "../../../ui/FlowConnector";
-import {
-  AlgorithmScreen,
-  ContentCard,
-  FlowActionButton,
-  StepHeader,
-} from "./anaphylaxis-ui";
+import AlgorithmScreen from "@/src/components/ui/AlgorithmScreen";
+import ContentCard from "@/src/components/ui/ContentCard";
+import FlowActionButton from "@/src/components/ui/FlowActionButton";
+import StepHeader from "@/src/components/ui/StepHeader";
 
 export default function Step1() {
   const router = useRouter();

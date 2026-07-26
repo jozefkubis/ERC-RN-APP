@@ -1,12 +1,10 @@
 import { useRouter } from "expo-router";
 import InfoCard from "../../../ui/info-card";
-import {
-  AlgorithmScreen,
-  ContentCard,
-  FlowActionButton,
-  HeroCard,
-  StepHeader,
-} from "./anaphylaxis-ui";
+import AlgorithmScreen from "@/src/components/ui/AlgorithmScreen";
+import ContentCard from "@/src/components/ui/ContentCard";
+import FlowActionButton from "@/src/components/ui/FlowActionButton";
+import HeroCard from "@/src/components/ui/HeroCard";
+import StepHeader from "@/src/components/ui/StepHeader";
 
 export default function Aftercare() {
   const router = useRouter();

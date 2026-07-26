@@ -5,7 +5,9 @@ import React from "react";
 import { ScrollView, StatusBar, StyleSheet, Text, View } from "react-native";
 
 type SpecialAlgorithm = ComponentProps<typeof AlgorithmCard> & {
-  route?: "/algorithms/special/anafylaxia/step1";
+  route?:
+    | "/algorithms/special/anafylaxia/step1"
+    | "/algorithms/special/kalium/intro";
 };
 
 const specialAlgorithms: SpecialAlgorithm[] = [
@@ -28,6 +30,7 @@ const specialAlgorithms: SpecialAlgorithm[] = [
       "Liečte poruchu elektrolytov ako reverzibilnú príčinu vrátane kalcia, inzulínu s glukózou...",
     iconFamily: "material-community" as const,
     iconName: "atom-variant" as const,
+    route: "/algorithms/special/kalium/intro" as const,
   },
   {
     badgeText: "Príčina",
