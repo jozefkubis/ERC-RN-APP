@@ -7,7 +7,8 @@ import { ScrollView, StatusBar, StyleSheet, Text, View } from "react-native";
 type SpecialAlgorithm = ComponentProps<typeof AlgorithmCard> & {
   route?:
     | "/algorithms/special/anafylaxia/step1"
-    | "/algorithms/special/kalium/intro";
+    | "/algorithms/special/kalium/intro"
+    | "/algorithms/special/hypertermia/intro";
 };
 
 const specialAlgorithms: SpecialAlgorithm[] = [
@@ -40,6 +41,7 @@ const specialAlgorithms: SpecialAlgorithm[] = [
       "Merajte teplotu jadra, začnite aktívne chladenie a pri malígnej hypertermii podajte dantrolén.",
     iconFamily: "material-community" as const,
     iconName: "thermometer-high" as const,
+    route: "/algorithms/special/hypertermia/intro" as const,
   },
   {
     badgeText: "Príčina",

@@ -65,6 +65,22 @@ export default function AdultResuscitationLayout() {
         name="kalium/hypo/step1"
         options={{ title: "Hypokaliémia" }}
       />
+      <Stack.Screen
+        name="hypertermia/intro"
+        options={{ title: "Hypertermia" }}
+      />
+      <Stack.Screen
+        name="hypertermia/regular/step1"
+        options={{ title: "Hypertermia" }}
+      />
+      <Stack.Screen
+        name="hypertermia/maligna/step1"
+        options={{ title: "Maligná hypertermia" }}
+      />
+      <Stack.Screen
+        name="hypertermia/toxic/step1"
+        options={{ title: "Hypertermia spôsobená toxínmi" }}
+      />
     </Stack>
   );
 }
