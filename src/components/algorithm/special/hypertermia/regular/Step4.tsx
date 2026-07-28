@@ -6,30 +6,29 @@ import StepHeader from "@/src/components/ui/StepHeader";
 import YesButton from "@/src/components/ui/YesButton";
 import { useRouter } from "expo-router";
 
-export default function Step1() {
+export default function Step4() {
   const router = useRouter();
 
   return (
     <AlgorithmScreen>
       <StepHeader
-        badge="Krok 1"
-        title="Posúďte potrebu KPR"
-        description="Rýchlo skontrolujte vedomie a normálne dýchanie. Pri zastavení krvného obehu postupujte podľa univerzálneho algoritmu ALS."
-        urgent
+        badge="Krok 4"
+        title="Posúďte neurologický stav"
+        description="Pri teplote jadra najviac 40,5 °C skontrolujte prítomnosť zmätenosti alebo dezorientácie."
       />
 
       <FlowConnector />
 
-      <DecisionCard question="Potrebuje KPR?" />
+      <DecisionCard question="Teplota jadra ≤ 40,5 °C a zmätenosť / dezorientácia?" />
 
       <YesButton
         onPress={() =>
-          router.push("/algorithms/adult-resuscitation/als/step1")
+          router.push("/algorithms/special/hypertermia/regular/step3")
         }
       />
       <NoButton
         onPress={() =>
-          router.push("/algorithms/special/hypertermia/regular/step2")
+          router.push("/algorithms/special/hypertermia/regular/step5")
         }
       />
     </AlgorithmScreen>

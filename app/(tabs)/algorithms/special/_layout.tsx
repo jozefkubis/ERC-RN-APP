@@ -74,6 +74,22 @@ export default function AdultResuscitationLayout() {
         options={{ title: "Hypertermia" }}
       />
       <Stack.Screen
+        name="hypertermia/regular/step2"
+        options={{ title: "Hypertermia" }}
+      />
+      <Stack.Screen
+        name="hypertermia/regular/step3"
+        options={{ title: "Hypertermia" }}
+      />
+      <Stack.Screen
+        name="hypertermia/regular/step4"
+        options={{ title: "Hypertermia" }}
+      />
+      <Stack.Screen
+        name="hypertermia/regular/step5"
+        options={{ title: "Hypertermia" }}
+      />
+      <Stack.Screen
         name="hypertermia/maligna/step1"
         options={{ title: "Maligná hypertermia" }}
       />
