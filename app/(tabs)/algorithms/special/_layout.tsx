@@ -90,12 +90,73 @@ export default function AdultResuscitationLayout() {
         options={{ title: "Hypertermia" }}
       />
       <Stack.Screen
+        name="hypertermia/regular/step6"
+        options={{ title: "Hyponatriémia" }}
+      />
+      <Stack.Screen
+        name="hypertermia/regular/step7"
+        options={{ title: "Hypertermia" }}
+      />
+      <Stack.Screen
+        name="hypertermia/regular/step8"
+        options={{ title: "Rehydratácia" }}
+      />
+      <Stack.Screen
+        name="hypertermia/regular/step9"
+        options={{ title: "Hypertermia" }}
+      />
+      <Stack.Screen
         name="hypertermia/maligna/step1"
         options={{ title: "Maligná hypertermia" }}
       />
       <Stack.Screen
         name="hypertermia/toxic/step1"
         options={{ title: "Hypertermia spôsobená toxínmi" }}
+      />
+      <Stack.Screen name="hypotermia/intro" options={{ title: "Hypotermia" }} />
+      <Stack.Screen
+        name="hypotermia/regular/step1"
+        options={{ title: "Hypotermia" }}
+      />
+      <Stack.Screen
+        name="hypotermia/regular/step2-vitals"
+        options={{ title: "Náhodná hypotermia" }}
+      />
+      <Stack.Screen
+        name="hypotermia/regular/step3-vitals"
+        options={{ title: "Náhodná hypotermia" }}
+      />
+      <Stack.Screen
+        name="hypotermia/regular/cpr"
+        options={{ title: "Náhodná hypotermia" }}
+      />
+      <Stack.Screen
+        name="hypotermia/regular/step2-novitals"
+        options={{ title: "Náhodná hypotermia" }}
+      />
+      <Stack.Screen
+        name="hypotermia/regular/step3-novitals"
+        options={{ title: "Náhodná hypotermia" }}
+      />
+      <Stack.Screen
+        name="hypotermia/regular/step4-novitals"
+        options={{ title: "Náhodná hypotermia" }}
+      />
+      <Stack.Screen
+        name="hypotermia/regular/step5-novitals"
+        options={{ title: "Náhodná hypotermia" }}
+      />
+      <Stack.Screen
+        name="hypotermia/hope-score"
+        options={{ title: "HOPE skóre" }}
+      />
+      <Stack.Screen
+        name="hypotermia/lavina/step1"
+        options={{ title: "Záchrana z lavíny" }}
+      />
+      <Stack.Screen
+        name="hypotermia/lavina/avalife"
+        options={{ title: "AvaLife" }}
       />
     </Stack>
   );

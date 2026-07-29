@@ -6,29 +6,29 @@ import StepHeader from "@/src/components/ui/StepHeader";
 import YesButton from "@/src/components/ui/YesButton";
 import { useRouter } from "expo-router";
 
-export default function Step5() {
+export default function Step7() {
   const router = useRouter();
 
   return (
     <AlgorithmScreen>
       <StepHeader
-        badge="Krok 5"
-        title="Skontrolujte sodík v krvi"
-        description="Vyhodnoťte koncentráciu sodíka a podľa výsledku zvoľte ďalší postup."
+        badge="Krok 7"
+        title="Posúďte hydratáciu"
+        description="Skontrolujte, či sú prítomné známky závažnej dehydratácie."
       />
 
       <FlowConnector />
 
-      <DecisionCard question="Sodík v krvi < 130 mEq·l⁻¹?" />
+      <DecisionCard question="Silne dehydrovaný?" />
 
       <YesButton
         onPress={() =>
-          router.push("/algorithms/special/hypertermia/regular/step6")
+          router.push("/algorithms/special/hypertermia/regular/step8")
         }
       />
       <NoButton
         onPress={() =>
-          router.push("/algorithms/special/hypertermia/regular/step7")
+          router.push("/algorithms/special/hypertermia/regular/step9")
         }
       />
     </AlgorithmScreen>

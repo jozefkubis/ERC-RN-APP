@@ -8,7 +8,7 @@ type FlowActionButtonProps = {
   title: string;
   description: string;
   iconName: IconName;
-  onPress: () => void;
+  onPress?: () => void;
   variant?: "primary" | "danger" | "light";
 };
 

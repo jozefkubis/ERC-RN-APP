@@ -19,7 +19,10 @@ export default function Step2() {
 
       <FlowConnector />
 
-      <DecisionCard question="Teplota jadra* > 40,5 °C?" />
+      <DecisionCard
+        question="Teplota jadra* > 40,5 °C?"
+        description="Použite teplotnú sondu."
+      />
 
       <YesButton
         onPress={() =>

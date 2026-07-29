@@ -19,7 +19,10 @@ export default function Step4() {
 
       <FlowConnector />
 
-      <DecisionCard question="Teplota jadra ≤ 40,5 °C a zmätenosť / dezorientácia?" />
+      <DecisionCard
+        question="Teplota jadra ≤ 40,5 °C a zmätenosť / dezorientácia?"
+        description="Použite teplotnú sondu."
+      />
 
       <YesButton
         onPress={() =>

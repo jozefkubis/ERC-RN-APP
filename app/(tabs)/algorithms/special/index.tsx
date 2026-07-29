@@ -8,7 +8,8 @@ type SpecialAlgorithm = ComponentProps<typeof AlgorithmCard> & {
   route?:
     | "/algorithms/special/anafylaxia/step1"
     | "/algorithms/special/kalium/intro"
-    | "/algorithms/special/hypertermia/intro";
+    | "/algorithms/special/hypertermia/intro"
+    | "/algorithms/special/hypotermia/intro";
 };
 
 const specialAlgorithms: SpecialAlgorithm[] = [
@@ -48,18 +49,10 @@ const specialAlgorithms: SpecialAlgorithm[] = [
     title: "Hypotermia",
     subtitle: "Náhodné podchladenie a ZO",
     description:
-      "Predĺžene hodnoťte životné funkcie, upravte defibriláciu a adrenalín podľa teploty...",
+      "Predĺžene hodnoťte životné funkcie, zmerajte teplotu jadra a rizikových pacientov smerujte do centra eKPR.",
     iconFamily: "material-community" as const,
     iconName: "snowflake-thermometer" as const,
-  },
-  {
-    badgeText: "Príčina",
-    title: "Záchrana z lavíny",
-    subtitle: "Zasypanie, hypotermia, asfyxia",
-    description:
-      "Rozhodujte podľa dýchacích ciest, teploty jadra a dĺžky zasypania...",
-    iconFamily: "material-community" as const,
-    iconName: "landslide" as const,
+    route: "/algorithms/special/hypotermia/intro" as const,
   },
   {
     badgeText: "Príčina",

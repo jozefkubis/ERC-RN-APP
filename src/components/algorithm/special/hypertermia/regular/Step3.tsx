@@ -17,28 +17,32 @@ export default function Step3() {
       <HeroCard
         eyebrow="Najrýchlejšie aktívne chladenie"
         title="Ponorenie do studenej vody"
-        description="Ponorte pacienta do studenej vody a priebežne sledujte teplotu telesného jadra."
+        description="Ponorte pacienta do vane naplnenej do ½ až ¾ vodou a ľadom s teplotou 1 – 17 °C; voda má byť miešaná alebo cirkulujúca. Priebežne sledujte teplotu telesného jadra."
         iconName="snow-outline"
       />
 
       <FlowConnector />
 
       <ContentCard
-        title="Zastavte chladenie pri teplote jadra < 39 °C"
-        iconName="thermometer-outline"
+        title="Najprv chlaďte, potom transportujte"
+        iconName="warning-outline"
         tone="warning"
-        items={["Počas chladenia nepretržite monitorujte stav pacienta."]}
+        items={[
+          "Začnite okamžite chladiť ešte pred prevozom do nemocnice.",
+          "Rýchlo ochlaďte pacienta na teplotu jadra < 39 °C.",
+          "Podľa potreby pokračujte v chladení aj počas transportu.",
+        ]}
       />
 
       <FlowConnector />
 
       <ContentCard
-        title="Pokračujte v monitorovaní aspoň 15 minút po ochladení"
+        title="Ak teplotu jadra nemožno zistiť"
         iconName="pulse-outline"
         tone="info"
         items={[
+          "Pokračujte v chladení 15 minút alebo kým neurologické príznaky neustúpia, podľa toho, čo nastane skôr.",
           "Rehydratujte podľa potreby.",
-          "Skontrolujte zlepšenie mentálneho stavu.",
           "Zabráňte náhodnému podchladeniu (< 35 °C).",
         ]}
       />
