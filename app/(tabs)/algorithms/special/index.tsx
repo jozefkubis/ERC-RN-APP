@@ -9,7 +9,10 @@ type SpecialAlgorithm = ComponentProps<typeof AlgorithmCard> & {
     | "/algorithms/special/anafylaxia/step1"
     | "/algorithms/special/kalium/intro"
     | "/algorithms/special/hypertermia/intro"
-    | "/algorithms/special/hypotermia/intro";
+    | "/algorithms/special/hypotermia/intro"
+    | "/algorithms/special/embolia/intro"
+    | "/algorithms/special/koronarnatromboza/step1"
+    | "/algorithms/special/toxic/step1";
 };
 
 const specialAlgorithms: SpecialAlgorithm[] = [
@@ -62,6 +65,7 @@ const specialAlgorithms: SpecialAlgorithm[] = [
       "Hľadajte zaťaženie pravej komory, nízke ETCO2 a zvážte fibrinolýzu...",
     iconFamily: "material-community" as const,
     iconName: "lungs" as const,
+    route: "/algorithms/special/embolia/intro" as const,
   },
   {
     badgeText: "Príčina",
@@ -71,6 +75,7 @@ const specialAlgorithms: SpecialAlgorithm[] = [
       "Aktivujte STEMI sieť, smerujte pacienta do PCI centra a pri pretrvávajúcej KPR...",
     iconFamily: "material-community" as const,
     iconName: "heart-pulse" as const,
+    route: "/algorithms/special/koronarnatromboza/step1" as const,
   },
   {
     badgeText: "Príčina",
@@ -80,6 +85,7 @@ const specialAlgorithms: SpecialAlgorithm[] = [
       "Chráňte záchrancov, znížte absorpciu toxínu, podajte antidotá...",
     iconFamily: "material-community" as const,
     iconName: "bottle-tonic-skull" as const,
+    route: "/algorithms/special/toxic/step1" as const,
   },
   {
     badgeText: "Príčina",

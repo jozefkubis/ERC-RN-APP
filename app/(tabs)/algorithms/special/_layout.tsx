@@ -158,6 +158,43 @@ export default function AdultResuscitationLayout() {
         name="hypotermia/lavina/avalife"
         options={{ title: "AvaLife" }}
       />
+      <Stack.Screen
+        name="embolia/intro"
+        options={{ title: "Pľúcna embólia" }}
+      />
+      <Stack.Screen
+        name="embolia/PE/step1"
+        options={{ title: "Pľúcna embólia" }}
+      />
+      <Stack.Screen
+        name="embolia/PE/step2"
+        options={{ title: "Pľúcna embólia" }}
+      />
+      <Stack.Screen
+        name="embolia/PEresuscitacia/step1"
+        options={{ title: "Pľúcna embólia – ZO" }}
+      />
+      <Stack.Screen
+        name="koronarnatromboza/step1"
+        options={{ title: "Koronárna trombóza" }}
+      />
+      <Stack.Screen
+        name="koronarnatromboza/step2"
+        options={{ title: "Koronárna trombóza" }}
+      />
+      <Stack.Screen
+        name="koronarnatromboza/st-elevation"
+        options={{ title: "Koronárna trombóza – STEMI" }}
+      />
+      <Stack.Screen
+        name="koronarnatromboza/no-st-elevation"
+        options={{ title: "Koronárna trombóza" }}
+      />
+      <Stack.Screen
+        name="koronarnatromboza/ongoing-cpr"
+        options={{ title: "Koronárna trombóza – KPR" }}
+      />
+      <Stack.Screen name="toxic/step1" options={{ title: "Toxické látky" }} />
     </Stack>
   );
 }
