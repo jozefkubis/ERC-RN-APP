@@ -12,7 +12,8 @@ type SpecialAlgorithm = ComponentProps<typeof AlgorithmCard> & {
     | "/algorithms/special/hypotermia/intro"
     | "/algorithms/special/embolia/intro"
     | "/algorithms/special/koronarnatromboza/step1"
-    | "/algorithms/special/toxic/step1";
+    | "/algorithms/special/toxic/step1"
+    | "/algorithms/special/trauma/step1";
 };
 
 const specialAlgorithms: SpecialAlgorithm[] = [
@@ -95,6 +96,7 @@ const specialAlgorithms: SpecialAlgorithm[] = [
       "Prioritou je okamžitá kontrola krvácania, zabezpečenie dýchacích ciest...",
     iconFamily: "fontawesome6" as const,
     iconName: "kit-medical" as const,
+    route: "/algorithms/special/trauma/step1" as const,
   },
   {
     badgeText: "Pacient",

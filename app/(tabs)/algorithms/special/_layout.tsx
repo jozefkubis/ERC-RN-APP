@@ -195,6 +195,9 @@ export default function AdultResuscitationLayout() {
         options={{ title: "Koronárna trombóza – KPR" }}
       />
       <Stack.Screen name="toxic/step1" options={{ title: "Toxické látky" }} />
+      <Stack.Screen name="trauma/step1" options={{ title: "Trauma" }} />
+      <Stack.Screen name="trauma/step2" options={{ title: "Trauma" }} />
+      <Stack.Screen name="trauma/step3" options={{ title: "Trauma" }} />
     </Stack>
   );
 }
