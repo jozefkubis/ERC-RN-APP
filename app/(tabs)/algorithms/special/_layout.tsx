@@ -211,6 +211,9 @@ export default function AdultResuscitationLayout() {
         name="pectus-excavatum/step1"
         options={{ title: "Pectus excavatum" }}
       />
+      <Stack.Screen name="pregnet/step1" options={{ title: "Tehotenstvo" }} />
+      <Stack.Screen name="pregnet/step2" options={{ title: "Tehotenstvo" }} />
+      <Stack.Screen name="pregnet/step3" options={{ title: "Tehotenstvo" }} />
     </Stack>
   );
 }

@@ -17,7 +17,8 @@ type SpecialAlgorithm = ComponentProps<typeof AlgorithmCard> & {
     | "/algorithms/special/astma-chochp/step1"
     | "/algorithms/special/hemodialyza/step1"
     | "/algorithms/special/obezita/step1"
-    | "/algorithms/special/pectus-excavatum/step1";
+    | "/algorithms/special/pectus-excavatum/step1"
+    | "/algorithms/special/pregnet/step1";
 };
 
 const specialAlgorithms: SpecialAlgorithm[] = [
@@ -110,6 +111,7 @@ const specialAlgorithms: SpecialAlgorithm[] = [
       "Posun maternice doľava, privolať pôrodníka a neonatológa, pripraviť hysterotómiu.",
     iconFamily: "material-community" as const,
     iconName: "human-pregnant" as const,
+    route: "/algorithms/special/pregnet/step1" as const,
   },
   {
     badgeText: "Pacient",
