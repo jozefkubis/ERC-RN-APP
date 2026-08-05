@@ -13,7 +13,11 @@ type SpecialAlgorithm = ComponentProps<typeof AlgorithmCard> & {
     | "/algorithms/special/embolia/intro"
     | "/algorithms/special/koronarnatromboza/step1"
     | "/algorithms/special/toxic/step1"
-    | "/algorithms/special/trauma/step1";
+    | "/algorithms/special/trauma/step1"
+    | "/algorithms/special/astma-chochp/step1"
+    | "/algorithms/special/hemodialyza/step1"
+    | "/algorithms/special/obezita/step1"
+    | "/algorithms/special/pectus-excavatum/step1";
 };
 
 const specialAlgorithms: SpecialAlgorithm[] = [
@@ -115,6 +119,7 @@ const specialAlgorithms: SpecialAlgorithm[] = [
       "Liečte život ohrozujúcu hypoxiu 100 % kyslíkom, hľadajte tenzný pneumotorax...",
     iconFamily: "material-community" as const,
     iconName: "lungs" as const,
+    route: "/algorithms/special/astma-chochp/step1" as const,
   },
   {
     badgeText: "Pacient",
@@ -124,6 +129,7 @@ const specialAlgorithms: SpecialAlgorithm[] = [
       "Zastavte dialýzu, vráťte objem krvi, odpojte pacienta pri defibrilácii...",
     iconFamily: "material-community" as const,
     iconName: "water-pump" as const,
+    route: "/algorithms/special/hemodialyza/step1" as const,
   },
   {
     badgeText: "Pacient",
@@ -133,6 +139,7 @@ const specialAlgorithms: SpecialAlgorithm[] = [
       "Podľa odporúčaní nie je potrebná odchýlka od štandardného BLS a ALS postupu.",
     iconFamily: "material-community" as const,
     iconName: "human-male-height-variant" as const,
+    route: "/algorithms/special/obezita/step1" as const,
   },
   {
     badgeText: "Pacient",
@@ -142,6 +149,7 @@ const specialAlgorithms: SpecialAlgorithm[] = [
       "Zvážte menšiu hĺbku kompresií, predo-zadné elektródy a skoré eKPR...",
     iconFamily: "material-community" as const,
     iconName: "bone" as const,
+    route: "/algorithms/special/pectus-excavatum/step1" as const,
   },
   {
     badgeText: "Prostredie",

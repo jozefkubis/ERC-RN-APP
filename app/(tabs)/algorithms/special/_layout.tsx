@@ -198,6 +198,19 @@ export default function AdultResuscitationLayout() {
       <Stack.Screen name="trauma/step1" options={{ title: "Trauma" }} />
       <Stack.Screen name="trauma/step2" options={{ title: "Trauma" }} />
       <Stack.Screen name="trauma/step3" options={{ title: "Trauma" }} />
+      <Stack.Screen
+        name="astma-chochp/step1"
+        options={{ title: "Astma a CHOCHP" }}
+      />
+      <Stack.Screen
+        name="hemodialyza/step1"
+        options={{ title: "Hemodialýza" }}
+      />
+      <Stack.Screen name="obezita/step1" options={{ title: "Obezita" }} />
+      <Stack.Screen
+        name="pectus-excavatum/step1"
+        options={{ title: "Pectus excavatum" }}
+      />
     </Stack>
   );
 }
