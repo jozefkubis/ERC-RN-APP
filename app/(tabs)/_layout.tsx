@@ -10,7 +10,7 @@ type TabIconName = ComponentProps<typeof Ionicons>["name"];
 
 const icons: Record<string, TabIconName> = {
   index: "home",
-  algorithms: "git-network",
+  algorithms: "git-network-sharp",
   settings: "settings",
 };
 

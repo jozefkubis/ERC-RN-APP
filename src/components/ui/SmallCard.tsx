@@ -9,6 +9,7 @@ type SmallCardProps = {
   iconBackgroundColor: string;
   trailingIcon: ComponentProps<typeof Ionicons>["name"];
   trailingIconColor: string;
+  onPress?: () => void;
 };
 
 export default function SmallCard({
@@ -18,9 +19,13 @@ export default function SmallCard({
   iconBackgroundColor,
   trailingIcon,
   trailingIconColor,
+  onPress,
 }: SmallCardProps) {
   return (
-    <Pressable style={({ pressed }) => pressed && styles.pressed}>
+    <Pressable
+      onPress={onPress}
+      style={({ pressed }) => pressed && styles.pressed}
+    >
       <View style={styles.card}>
         <View style={[styles.icon, { backgroundColor: iconBackgroundColor }]}>
           <Ionicons name={iconName} size={23} color="#FFFFFF" />

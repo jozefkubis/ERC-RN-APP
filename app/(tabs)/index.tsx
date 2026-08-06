@@ -1,12 +1,50 @@
 import BaseCard from "@/src/components/ui/BaseCard";
 import Input from "@/src/components/ui/Input";
 import SmallCard from "@/src/components/ui/SmallCard";
+import { algorithmSearchItems } from "@/src/data/algorithm-search";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
+import { useState } from "react";
 import { ScrollView, StatusBar, StyleSheet, Text, View } from "react-native";
+
+// Upraví text do jednoduchej podoby, aby vyhľadávanie fungovalo
+// bez ohľadu na veľké písmená a diakritiku.
+function normalizeText(text: string) {
+  return text
+    // Rozdelí napríklad „ľ“ alebo „á“ na písmeno a diakritickú značku.
+    .normalize("NFD")
+    // Odstráni oddelené diakritické značky.
+    .replace(/[\u0300-\u036f]/g, "")
+    // Prevedie celý text na malé písmená.
+    .toLowerCase();
+}
 
 export default function HomeScreen() {
   const router = useRouter();
+
+  const [filterValue, setFilterValue] = useState("");
+
+  // Odstránime medzery na okrajoch a pripravíme text na porovnávanie.
+  const searchText = normalizeText(filterValue.trim());
+
+  // Vyhľadávanie sa spustí až po zadaní aspoň dvoch znakov.
+  const isSearching = searchText.length >= 2;
+
+  // Z katalógu ponecháme iba algoritmy, ktoré obsahujú hľadaný text.
+  const filteredAlgorithms = isSearching
+    ? algorithmSearchItems.filter((algorithm) => {
+        // Názov, kategóriu a kľúčové slová spojíme do jedného textu.
+        const algorithmText = [
+          algorithm.title,
+          algorithm.category,
+          ...algorithm.keywords,
+        ].join(" ");
+
+        // includes() overí, či sa hľadaný text nachádza v algoritme.
+        return normalizeText(algorithmText).includes(searchText);
+      })
+    // Ak používateľ ešte nehľadá, výsledky ostanú prázdne.
+    : [];
 
   return (
     <>
@@ -14,71 +52,113 @@ export default function HomeScreen() {
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         contentContainerStyle={styles.container}
+        keyboardShouldPersistTaps="handled"
       >
-        {/* Vyhľadávanie */}
-        <Input placeholder="Vyhľadaj postup, algoritmus..." />
-
-        {/* Odporúčania odborných spoločností */}
-        <View style={styles.primaryOptionsContainer}>
-          <Ionicons name="heart-circle" size={24} color="#075296" />
-          <Text style={styles.primaryOption}>Odporúčania</Text>
-        </View>
-
-        {/* Vstup do aktuálne dostupných ERC odporúčaní */}
-        <BaseCard
-          topText="Aktuálne"
-          title="ERC 2025"
-          description="European Resuscitation Council"
-          iconName="pulse"
-          iconSize={44}
-          onPress={() => router.push("/algorithms")}
+        <Input
+          clearable
+          placeholder="Vyhľadaj postup, algoritmus..."
+          onChangeText={setFilterValue}
+          value={filterValue}
         />
 
-        {/* Sekcia nedávnych algoritmov */}
-        <View style={styles.listSection}>
-          <View style={styles.sectionHeader}>
-            <View style={styles.sectionTitleRow}>
-              <Ionicons name="time-outline" size={22} color="#6B7483" />
-              <Text style={styles.sectionTitle}>História</Text>
-            </View>
-            <Text style={styles.sectionAction}>Zobraziť všetko</Text>
-          </View>
+        {/* Pri vyhľadávaní zobrazíme výsledky, inak obsah domovskej stránky. */}
+        {isSearching ? (
+          <View style={styles.searchResults}>
+            <Text style={styles.resultsTitle}>
+              Výsledky ({filteredAlgorithms.length})
+            </Text>
 
-          <SmallCard
-            title="ALS náhle zastavenie obehu"
-            subtitle="ERC 2025 · Resuscitácia dospelých"
-            iconName="git-network"
-            iconBackgroundColor="#0868C4"
-            trailingIcon="chevron-forward"
-            trailingIconColor="#7A8492"
-          />
-          <SmallCard
-            title="Algoritmus anafylaxie"
-            subtitle="ERC 2025 · Špeciálne okolnosti"
-            iconName="git-network"
-            iconBackgroundColor="#0868C4"
-            trailingIcon="chevron-forward"
-            trailingIconColor="#7A8492"
-          />
-        </View>
+            {filteredAlgorithms.length > 0 ? (
+              // Pre každý nájdený algoritmus vytvoríme jednu kartu.
+              filteredAlgorithms.map((algorithm) => (
+                <SmallCard
+                  key={`${algorithm.title}-${algorithm.category}`}
+                  title={algorithm.title}
+                  subtitle={algorithm.category}
+                  iconName="git-network-sharp"
+                  iconBackgroundColor="#0868C4"
+                  trailingIcon="chevron-forward"
+                  trailingIconColor="#7A8492"
+                  onPress={() => router.push(algorithm.route)}
+                />
+              ))
+            ) : (
+              <Text style={styles.emptyText}>
+                Nenašli sa žiadne algoritmy. Skúste iný výraz.
+              </Text>
+            )}
+          </View>
+        ) : (
+          <>
+            <View style={styles.primaryOptionsContainer}>
+              <Ionicons name="heart-circle" size={24} color="#075296" />
+              <Text style={styles.primaryOption}>Odporúčania</Text>
+            </View>
+
+            <BaseCard
+              topText="Aktuálne"
+              title="ERC 2025"
+              description="European Resuscitation Council"
+              iconName="pulse"
+              iconSize={44}
+              onPress={() => router.push("/algorithms")}
+            />
+
+            <View style={styles.listSection}>
+              <View style={styles.sectionHeader}>
+                <View style={styles.sectionTitleRow}>
+                  <Ionicons name="time-outline" size={22} color="#6B7483" />
+                  <Text style={styles.sectionTitle}>História</Text>
+                </View>
+                <Text style={styles.sectionAction}>Zobraziť všetko</Text>
+              </View>
+
+              <SmallCard
+                title="ALS náhle zastavenie obehu"
+                subtitle="ERC 2025 · Resuscitácia dospelých"
+                iconName="git-network-sharp"
+                iconBackgroundColor="#0868C4"
+                trailingIcon="chevron-forward"
+                trailingIconColor="#7A8492"
+              />
+              <SmallCard
+                title="Algoritmus anafylaxie"
+                subtitle="ERC 2025 · Špeciálne okolnosti"
+                iconName="git-network-sharp"
+                iconBackgroundColor="#0868C4"
+                trailingIcon="chevron-forward"
+                trailingIconColor="#7A8492"
+              />
+            </View>
+          </>
+        )}
       </ScrollView>
     </>
   );
 }
 
 const styles = StyleSheet.create({
-  // Bezpečná oblasť obrazovky
-  // safeArea: {
-  //   flex: 1,
-  //   backgroundColor: "#F7F8FC",
-  // },
   container: {
     paddingHorizontal: 30,
     paddingVertical: 16,
     gap: 15,
   },
-
-  // Nadpis primárnych možností
+  searchResults: {
+    gap: 8,
+  },
+  resultsTitle: {
+    paddingVertical: 6,
+    color: "#10243C",
+    fontSize: 18,
+    fontWeight: "800",
+  },
+  emptyText: {
+    paddingVertical: 30,
+    color: "#6B7483",
+    fontSize: 14,
+    lineHeight: 20,
+    textAlign: "center",
+  },
   primaryOptionsContainer: {
     flexDirection: "row",
     alignItems: "center",
@@ -90,8 +170,6 @@ const styles = StyleSheet.create({
     color: "#10243C",
     fontWeight: "bold",
   },
-
-  // Sekcie nedávnych a obľúbených položiek
   listSection: {
     width: "100%",
     gap: 8,
