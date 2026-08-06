@@ -18,7 +18,18 @@ type SpecialAlgorithm = ComponentProps<typeof AlgorithmCard> & {
     | "/algorithms/special/hemodialyza/step1"
     | "/algorithms/special/obezita/step1"
     | "/algorithms/special/pectus-excavatum/step1"
-    | "/algorithms/special/pregnet/step1";
+    | "/algorithms/special/pregnet/step1"
+    | "/algorithms/special/katetrizacne-pracovisko/step1"
+    | "/algorithms/special/topenie/step1"
+    | "/algorithms/special/operacna-sala/step1"
+    | "/algorithms/special/lokalne-anestetika/step1"
+    | "/algorithms/special/kardiochirurgia/step1"
+    | "/algorithms/special/lvad/step1"
+    | "/algorithms/special/sport/step1"
+    | "/algorithms/special/zzs-transport/step1"
+    | "/algorithms/special/pocas-letu/step1"
+    | "/algorithms/special/mikrogravitacia/step1"
+    | "/algorithms/special/vyletna-lod/step1";
 };
 
 const specialAlgorithms: SpecialAlgorithm[] = [
@@ -162,6 +173,7 @@ const specialAlgorithms: SpecialAlgorithm[] = [
       "Použite ALS s úpravami: tri rýchle výboje pri defibrilovateľnom rytme...",
     iconFamily: "material-community" as const,
     iconName: "stethoscope" as const,
+    route: "/algorithms/special/katetrizacne-pracovisko/step1" as const,
   },
   {
     badgeText: "Prostredie",
@@ -172,6 +184,7 @@ const specialAlgorithms: SpecialAlgorithm[] = [
       "Dbajte na bezpečnosť záchrancu, začnite piatimi vdychmi so 100 % kyslíkom...",
     iconFamily: "material-community" as const,
     iconName: "waves" as const,
+    route: "/algorithms/special/topenie/step1" as const,
   },
   {
     badgeText: "Prostredie",
@@ -182,6 +195,7 @@ const specialAlgorithms: SpecialAlgorithm[] = [
       "Informujte chirurgický tím, overte dýchacie cesty a ETCO2, použite ultrazvuk...",
     iconFamily: "material-community" as const,
     iconName: "hospital-box" as const,
+    route: "/algorithms/special/operacna-sala/step1" as const,
   },
   {
     badgeText: "Prostredie",
@@ -191,6 +205,7 @@ const specialAlgorithms: SpecialAlgorithm[] = [
     description: "Zastavte lokálne anestetikum...",
     iconFamily: "material-community" as const,
     iconName: "needle" as const,
+    route: "/algorithms/special/lokalne-anestetika/step1" as const,
   },
   {
     badgeText: "Prostredie",
@@ -201,6 +216,7 @@ const specialAlgorithms: SpecialAlgorithm[] = [
       "Potvrďte zastavenie na arteriálnej krivke, podajte až tri výboje...",
     iconFamily: "material-community" as const,
     iconName: "heart-cog" as const,
+    route: "/algorithms/special/kardiochirurgia/step1" as const,
   },
   {
     badgeText: "Prostredie",
@@ -210,6 +226,7 @@ const specialAlgorithms: SpecialAlgorithm[] = [
     description: "Aktivujte špecializovaný tím...",
     iconFamily: "material-community" as const,
     iconName: "pump" as const,
+    route: "/algorithms/special/lvad/step1" as const,
   },
   {
     badgeText: "Prostredie",
@@ -220,6 +237,7 @@ const specialAlgorithms: SpecialAlgorithm[] = [
       "Športoviská majú mať hodnotenie rizika, rýchly prístup na plochu, AED...",
     iconFamily: "fontawesome6" as const,
     iconName: "person-running" as const,
+    route: "/algorithms/special/sport/step1" as const,
   },
   {
     badgeText: "Prostredie",
@@ -230,6 +248,7 @@ const specialAlgorithms: SpecialAlgorithm[] = [
       "Resuscitujte primárne na mieste; transport počas KPR má mať jasnú indikáciu...",
     iconFamily: "fontawesome6" as const,
     iconName: "truck-medical" as const,
+    route: "/algorithms/special/zzs-transport/step1" as const,
   },
   {
     badgeText: "Prostredie",
@@ -240,6 +259,7 @@ const specialAlgorithms: SpecialAlgorithm[] = [
       "Vyhľadajte zdravotníka na palube, prispôsobte kompresie priestoru a zvážte odklon...",
     iconFamily: "ionicons" as const,
     iconName: "airplane-outline" as const,
+    route: "/algorithms/special/pocas-letu/step1" as const,
   },
   {
     badgeText: "Prostredie",
@@ -249,6 +269,7 @@ const specialAlgorithms: SpecialAlgorithm[] = [
     description: "Najprv zabezpečte pacienta, zvážte mechanické kompresie...",
     iconFamily: "ionicons" as const,
     iconName: "planet-outline" as const,
+    route: "/algorithms/special/mikrogravitacia/step1" as const,
   },
   {
     badgeText: "Prostredie",
@@ -259,6 +280,7 @@ const specialAlgorithms: SpecialAlgorithm[] = [
       "Aktivujte palubné zdravotnícke zdroje, požiadajte o ďalší personál...",
     iconFamily: "ionicons" as const,
     iconName: "boat-outline" as const,
+    route: "/algorithms/special/vyletna-lod/step1" as const,
   },
 ];
 

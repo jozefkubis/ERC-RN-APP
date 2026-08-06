@@ -214,6 +214,41 @@ export default function AdultResuscitationLayout() {
       <Stack.Screen name="pregnet/step1" options={{ title: "Tehotenstvo" }} />
       <Stack.Screen name="pregnet/step2" options={{ title: "Tehotenstvo" }} />
       <Stack.Screen name="pregnet/step3" options={{ title: "Tehotenstvo" }} />
+      <Stack.Screen
+        name="katetrizacne-pracovisko/step1"
+        options={{ title: "Katetrizačné pracovisko" }}
+      />
+      <Stack.Screen name="topenie/step1" options={{ title: "Topenie" }} />
+      <Stack.Screen
+        name="operacna-sala/step1"
+        options={{ title: "Operačná sála" }}
+      />
+      <Stack.Screen
+        name="lokalne-anestetika/step1"
+        options={{ title: "Toxicita lokálnych anestetík" }}
+      />
+      <Stack.Screen
+        name="kardiochirurgia/step1"
+        options={{ title: "Po kardiochirurgii" }}
+      />
+      <Stack.Screen name="lvad/step1" options={{ title: "Pacient s LVAD" }} />
+      <Stack.Screen name="sport/step1" options={{ title: "Šport" }} />
+      <Stack.Screen
+        name="zzs-transport/step1"
+        options={{ title: "ZZS a transport" }}
+      />
+      <Stack.Screen
+        name="pocas-letu/step1"
+        options={{ title: "Počas letu" }}
+      />
+      <Stack.Screen
+        name="mikrogravitacia/step1"
+        options={{ title: "Mikrogravitácia" }}
+      />
+      <Stack.Screen
+        name="vyletna-lod/step1"
+        options={{ title: "Výletná loď" }}
+      />
     </Stack>
   );
 }
