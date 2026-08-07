@@ -26,13 +26,6 @@ export default function AlgorithmsLayout() {
           ),
         }}
       />
-      <Stack.Screen
-        name="adult-resuscitation"
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen name="epals" options={{ headerShown: false }} />
-      <Stack.Screen name="newborn" options={{ headerShown: false }} />
-      <Stack.Screen name="special" options={{ headerShown: false }} />
     </Stack>
   );
 }
