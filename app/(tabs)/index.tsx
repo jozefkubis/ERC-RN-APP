@@ -1,28 +1,43 @@
 import BaseCard from "@/src/components/ui/BaseCard";
 import Input from "@/src/components/ui/Input";
 import SmallCard from "@/src/components/ui/SmallCard";
+import {
+  loadViewingHistory,
+  type HistoryItem,
+} from "@/src/components/utils/History";
 import { algorithmSearchItems } from "@/src/data/algorithm-search";
 import { Ionicons } from "@expo/vector-icons";
-import { useRouter } from "expo-router";
-import { useState } from "react";
-import { ScrollView, StatusBar, StyleSheet, Text, View } from "react-native";
+import { useFocusEffect, useRouter, type Href } from "expo-router";
+import { useCallback, useState } from "react";
+import {
+  Pressable,
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 
 // Upraví text do jednoduchej podoby, aby vyhľadávanie fungovalo
 // bez ohľadu na veľké písmená a diakritiku.
 function normalizeText(text: string) {
-  return text
-    // Rozdelí napríklad „ľ“ alebo „á“ na písmeno a diakritickú značku.
-    .normalize("NFD")
-    // Odstráni oddelené diakritické značky.
-    .replace(/[\u0300-\u036f]/g, "")
-    // Prevedie celý text na malé písmená.
-    .toLowerCase();
+  return (
+    text
+      // Rozdelí napríklad "ľ" alebo "á" na písmeno a diakritickú značku.
+      .normalize("NFD")
+      // Odstráni oddelené diakritické značky.
+      .replace(/[\u0300-\u036f]/g, "")
+      // Prevedie celý text na malé písmená.
+      .toLowerCase()
+  );
 }
 
 export default function HomeScreen() {
   const router = useRouter();
 
   const [filterValue, setFilterValue] = useState("");
+  const [viewingHistory, setViewingHistory] = useState<HistoryItem[]>([]);
+  const [showAllHistory, setShowAllHistory] = useState(false);
 
   // Odstránime medzery na okrajoch a pripravíme text na porovnávanie.
   const searchText = normalizeText(filterValue.trim());
@@ -43,8 +58,32 @@ export default function HomeScreen() {
         // includes() overí, či sa hľadaný text nachádza v algoritme.
         return normalizeText(algorithmText).includes(searchText);
       })
-    // Ak používateľ ešte nehľadá, výsledky ostanú prázdne.
-    : [];
+    : // Ak používateľ ešte nehľadá, výsledky ostanú prázdne.
+      [];
+
+  const visibleHistory = showAllHistory
+    ? viewingHistory
+    : viewingHistory.slice(0, 2);
+
+  useFocusEffect(
+    useCallback(() => {
+      let isActive = true;
+
+      async function refreshHistory() {
+        const latestHistory = await loadViewingHistory();
+
+        if (isActive) {
+          setViewingHistory(latestHistory);
+        }
+      }
+
+      refreshHistory();
+
+      return () => {
+        isActive = false;
+      };
+    }, []),
+  );
 
   return (
     <>
@@ -110,25 +149,37 @@ export default function HomeScreen() {
                   <Ionicons name="time-outline" size={22} color="#6B7483" />
                   <Text style={styles.sectionTitle}>História</Text>
                 </View>
-                <Text style={styles.sectionAction}>Zobraziť všetko</Text>
+
+                {viewingHistory.length > 2 ? (
+                  <Pressable
+                    onPress={() => setShowAllHistory((current) => !current)}
+                    style={({ pressed }) =>
+                      pressed && styles.sectionActionPressed
+                    }
+                  >
+                    <Text style={styles.sectionAction}>
+                      {showAllHistory ? "Zobraziť menej" : "Zobraziť všetko"}
+                    </Text>
+                  </Pressable>
+                ) : null}
               </View>
 
-              <SmallCard
-                title="ALS náhle zastavenie obehu"
-                subtitle="ERC 2025 · Resuscitácia dospelých"
-                iconName="git-network-sharp"
-                iconBackgroundColor="#0868C4"
-                trailingIcon="chevron-forward"
-                trailingIconColor="#7A8492"
-              />
-              <SmallCard
-                title="Algoritmus anafylaxie"
-                subtitle="ERC 2025 · Špeciálne okolnosti"
-                iconName="git-network-sharp"
-                iconBackgroundColor="#0868C4"
-                trailingIcon="chevron-forward"
-                trailingIconColor="#7A8492"
-              />
+              {visibleHistory.length > 0 ? (
+                visibleHistory.map((historyItem) => (
+                  <SmallCard
+                    key={historyItem.route}
+                    title={historyItem.title}
+                    subtitle={`ERC 2025 · ${historyItem.category}`}
+                    iconName="git-network-sharp"
+                    iconBackgroundColor="#0868C4"
+                    trailingIcon="chevron-forward"
+                    trailingIconColor="#7A8492"
+                    onPress={() => router.push(historyItem.route as Href)}
+                  />
+                ))
+              ) : (
+                <Text style={styles.emptyText}>História je zatiaľ prázdna.</Text>
+              )}
             </View>
           </>
         )}
@@ -196,5 +247,8 @@ const styles = StyleSheet.create({
     color: "#075296",
     fontSize: 13,
     fontWeight: "700",
+  },
+  sectionActionPressed: {
+    opacity: 0.7,
   },
 });

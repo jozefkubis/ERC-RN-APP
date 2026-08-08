@@ -1,0 +1,18 @@
+ Najdôležitejšie si zapamätaj takto:
+
+  - History v _layout.tsx = tichý sledovač, ktorý zapisuje navštívené algoritmy.
+  - loadViewingHistory() = funkcia, ktorá vie históriu načítať z mobilu.
+  - index.tsx = domovská stránka, ktorá si tú históriu načíta a zobrazí ako karty.
+  - usePathname() = povie, na akej route práve si.
+  - useFocusEffect() = spustí sa, keď sa vrátiš späť na home screen.
+
+  Čiže tok je:
+
+  klikneš algoritmus
+  → zmení sa route
+  → History ju uloží
+  → vrátiš sa na home
+  → index načíta históriu
+  → zobrazí karty
+
+  Toto je už dobrý kus React Native/Expo logiky naraz, takže dáva zmysel si to rozobrať pomaly.
