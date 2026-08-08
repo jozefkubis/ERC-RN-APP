@@ -2,7 +2,7 @@ import BaseCard from "@/src/components/ui/BaseCard";
 import Input from "@/src/components/ui/Input";
 import SmallCard from "@/src/components/ui/SmallCard";
 import {
-  loadViewingHistory,
+  loadHistory,
   type HistoryItem,
 } from "@/src/components/utils/History";
 import { algorithmSearchItems } from "@/src/data/algorithm-search";
@@ -70,7 +70,7 @@ export default function HomeScreen() {
       let isActive = true;
 
       async function refreshHistory() {
-        const latestHistory = await loadViewingHistory();
+        const latestHistory = await loadHistory();
 
         if (isActive) {
           setViewingHistory(latestHistory);
