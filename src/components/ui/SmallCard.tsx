@@ -1,3 +1,4 @@
+import type { AppThemeMode } from "@/src/context/settings-context";
 import { Ionicons } from "@expo/vector-icons";
 import type { ComponentProps } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
@@ -8,8 +9,26 @@ type SmallCardProps = {
   iconName: ComponentProps<typeof Ionicons>["name"];
   iconBackgroundColor: string;
   trailingIcon: ComponentProps<typeof Ionicons>["name"];
-  trailingIconColor: string;
+  trailingIconColor?: string;
   onPress?: () => void;
+  themeMode?: AppThemeMode;
+};
+
+const smallCardColors = {
+  light: {
+    background: "#FFFFFF",
+    border: "#CBD3DF",
+    title: "#172A43",
+    subtitle: "#626B79",
+    trailingIcon: "#7A8492",
+  },
+  dark: {
+    background: "#101B2B",
+    border: "#31435A",
+    title: "#F5F8FC",
+    subtitle: "#AAB6C7",
+    trailingIcon: "#AAB6C7",
+  },
 };
 
 export default function SmallCard({
@@ -20,21 +39,38 @@ export default function SmallCard({
   trailingIcon,
   trailingIconColor,
   onPress,
+  themeMode = "light",
 }: SmallCardProps) {
+  const colors = smallCardColors[themeMode];
+
   return (
     <Pressable
       onPress={onPress}
       style={({ pressed }) => pressed && styles.pressed}
     >
-      <View style={styles.card}>
+      <View
+        style={[
+          styles.card,
+          {
+            borderColor: colors.border,
+            backgroundColor: colors.background,
+          },
+        ]}
+      >
         <View style={[styles.icon, { backgroundColor: iconBackgroundColor }]}>
           <Ionicons name={iconName} size={23} color="#FFFFFF" />
         </View>
         <View style={styles.textContainer}>
-          <Text style={styles.title}>{title}</Text>
-          <Text style={styles.subtitle}>{subtitle}</Text>
+          <Text style={[styles.title, { color: colors.title }]}>{title}</Text>
+          <Text style={[styles.subtitle, { color: colors.subtitle }]}>
+            {subtitle}
+          </Text>
         </View>
-        <Ionicons name={trailingIcon} size={21} color={trailingIconColor} />
+        <Ionicons
+          name={trailingIcon}
+          size={21}
+          color={trailingIconColor ?? colors.trailingIcon}
+        />
       </View>
     </Pressable>
   );
@@ -50,10 +86,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 14,
     paddingVertical: 12,
     borderWidth: 1,
-    borderColor: "#CBD3DF",
     borderRadius: 10,
     borderCurve: "continuous",
-    backgroundColor: "#FFFFFF",
     boxShadow: "0 2px 4px rgba(15, 35, 60, 0.08)",
   },
   icon: {
@@ -68,13 +102,11 @@ const styles = StyleSheet.create({
     gap: 2,
   },
   title: {
-    color: "#172A43",
     fontSize: 14,
     fontWeight: "700",
     lineHeight: 21,
   },
   subtitle: {
-    color: "#626B79",
     fontSize: 14,
   },
   pressed: {

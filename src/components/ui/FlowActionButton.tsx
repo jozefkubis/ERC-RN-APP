@@ -1,3 +1,4 @@
+import type { AppThemeMode } from "@/src/context/settings-context";
 import { Ionicons } from "@expo/vector-icons";
 import type { ComponentProps } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
@@ -10,6 +11,26 @@ type FlowActionButtonProps = {
   iconName: IconName;
   onPress?: () => void;
   variant?: "primary" | "danger" | "light";
+  themeMode?: AppThemeMode;
+};
+
+const actionColors = {
+  light: {
+    lightBorder: "#CBD3DF",
+    lightBackground: "#FFFFFF",
+    lightIconBackground: "#E4EFFD",
+    lightTitle: "#10243C",
+    lightDescription: "#5C6574",
+    lightPrimary: "#075296",
+  },
+  dark: {
+    lightBorder: "#31435A",
+    lightBackground: "#101B2B",
+    lightIconBackground: "#20334C",
+    lightTitle: "#F5F8FC",
+    lightDescription: "#AAB6C7",
+    lightPrimary: "#77B7F2",
+  },
 };
 
 export default function FlowActionButton({
@@ -18,9 +39,11 @@ export default function FlowActionButton({
   iconName,
   onPress,
   variant = "primary",
+  themeMode = "light",
 }: FlowActionButtonProps) {
   const isLight = variant === "light";
   const isDanger = variant === "danger";
+  const colors = actionColors[themeMode];
 
   return (
     <Pressable
@@ -28,7 +51,10 @@ export default function FlowActionButton({
       onPress={onPress}
       style={({ pressed }) => [
         styles.actionButton,
-        isLight && styles.lightActionButton,
+        isLight && {
+          borderColor: colors.lightBorder,
+          backgroundColor: colors.lightBackground,
+        },
         isDanger && styles.dangerActionButton,
         pressed && styles.pressed,
       ]}
@@ -36,25 +62,31 @@ export default function FlowActionButton({
       <View
         style={[
           styles.actionIcon,
-          isLight && styles.lightActionIcon,
+          isLight && { backgroundColor: colors.lightIconBackground },
           isDanger && styles.dangerActionIcon,
         ]}
       >
         <Ionicons
           name={iconName}
           size={23}
-          color={isLight ? "#075296" : "#FFFFFF"}
+          color={isLight ? colors.lightPrimary : "#FFFFFF"}
         />
       </View>
       <View style={styles.actionTextContainer}>
-        <Text selectable style={[styles.actionTitle, isLight && styles.lightActionTitle]}>
+        <Text
+          selectable
+          style={[
+            styles.actionTitle,
+            isLight && { color: colors.lightTitle },
+          ]}
+        >
           {title}
         </Text>
         <Text
           selectable
           style={[
             styles.actionDescription,
-            isLight && styles.lightActionDescription,
+            isLight && { color: colors.lightDescription },
           ]}
         >
           {description}
@@ -63,7 +95,7 @@ export default function FlowActionButton({
       <Ionicons
         name="arrow-forward"
         size={22}
-        color={isLight ? "#075296" : "#FFFFFF"}
+        color={isLight ? colors.lightPrimary : "#FFFFFF"}
       />
     </Pressable>
   );
@@ -89,10 +121,6 @@ const styles = StyleSheet.create({
     borderColor: "#C8141B",
     backgroundColor: "#C8141B",
   },
-  lightActionButton: {
-    borderColor: "#CBD3DF",
-    backgroundColor: "#FFFFFF",
-  },
   actionIcon: {
     width: 40,
     height: 40,
@@ -104,9 +132,6 @@ const styles = StyleSheet.create({
   dangerActionIcon: {
     backgroundColor: "#8D0E13",
   },
-  lightActionIcon: {
-    backgroundColor: "#E4EFFD",
-  },
   actionTextContainer: {
     flex: 1,
     gap: 3,
@@ -117,16 +142,10 @@ const styles = StyleSheet.create({
     fontWeight: "900",
     lineHeight: 22,
   },
-  lightActionTitle: {
-    color: "#10243C",
-  },
   actionDescription: {
     color: "#D7E9F8",
     fontSize: 12,
     lineHeight: 17,
-  },
-  lightActionDescription: {
-    color: "#5C6574",
   },
   pressed: {
     opacity: 0.7,

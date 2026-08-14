@@ -1,3 +1,4 @@
+import type { AppThemeMode } from "@/src/context/settings-context";
 import { Ionicons } from "@expo/vector-icons";
 import type { ComponentProps } from "react";
 import {
@@ -19,6 +20,42 @@ type BaseCardProps = {
   variant?: "primary" | "light";
   style?: StyleProp<ViewStyle>;
   onPress?: () => void;
+  themeMode?: AppThemeMode;
+};
+
+const baseCardColors = {
+  light: {
+    primaryBackground: "#075296",
+    primaryIcon: "#4D86BC",
+    primaryBadgeBackground: "#0877D1",
+    primaryBadgeText: "#B9DDFF",
+    primaryTitle: "#FFFFFF",
+    primaryDescription: "#D7E9F8",
+    primaryArrow: "#FFFFFF",
+    lightBackground: "#FFFFFF",
+    lightBorder: "#CBD3DF",
+    lightBadgeBackground: "#E4EFFD",
+    lightBadgeText: "#637083",
+    lightTitle: "#10243C",
+    lightDescription: "#5C6574",
+    lightArrow: "#075296",
+  },
+  dark: {
+    primaryBackground: "#0B3159",
+    primaryIcon: "#77B7F2",
+    primaryBadgeBackground: "#164C80",
+    primaryBadgeText: "#D7ECFF",
+    primaryTitle: "#FFFFFF",
+    primaryDescription: "#D7E9F8",
+    primaryArrow: "#FFFFFF",
+    lightBackground: "#101B2B",
+    lightBorder: "#31435A",
+    lightBadgeBackground: "#20334C",
+    lightBadgeText: "#AAB6C7",
+    lightTitle: "#F5F8FC",
+    lightDescription: "#AAB6C7",
+    lightArrow: "#77B7F2",
+  },
 };
 
 export default function BaseCard({
@@ -31,18 +68,50 @@ export default function BaseCard({
   variant = "primary",
   style,
   onPress,
+  themeMode = "light",
 }: BaseCardProps) {
   const isLight = variant === "light";
+  const colors = baseCardColors[themeMode];
 
   return (
     <Pressable
       style={({ pressed }) => pressed && styles.pressed}
       onPress={onPress}
     >
-      <View style={[styles.card, isLight && styles.lightCard, style]}>
+      <View
+        style={[
+          styles.card,
+          isLight
+            ? {
+                borderWidth: 1,
+                borderColor: colors.lightBorder,
+                backgroundColor: colors.lightBackground,
+              }
+            : { backgroundColor: colors.primaryBackground },
+          style,
+        ]}
+      >
         <View style={styles.cardTopRow}>
-          <View style={[styles.badge, isLight && styles.lightBadge]}>
-            <Text style={[styles.badgeText, isLight && styles.lightBadgeText]}>
+          <View
+            style={[
+              styles.badge,
+              {
+                backgroundColor: isLight
+                  ? colors.lightBadgeBackground
+                  : colors.primaryBadgeBackground,
+              },
+            ]}
+          >
+            <Text
+              style={[
+                styles.badgeText,
+                {
+                  color: isLight
+                    ? colors.lightBadgeText
+                    : colors.primaryBadgeText,
+                },
+              ]}
+            >
               {topText}
             </Text>
           </View>
@@ -51,12 +120,20 @@ export default function BaseCard({
             <Ionicons
               name={iconName}
               size={iconSize}
-              color={iconColor ?? (isLight ? "#E3EBF4" : "#4D86BC")}
+              color={
+                iconColor ?? (isLight ? colors.lightArrow : colors.primaryIcon)
+              }
             />
           </View>
         </View>
 
-        <Text style={[styles.cardTitle, isLight && styles.lightCardTitle]}>
+        <Text
+          style={[
+            styles.cardTitle,
+            isLight && styles.lightCardTitle,
+            { color: isLight ? colors.lightTitle : colors.primaryTitle },
+          ]}
+        >
           {title}
         </Text>
 
@@ -64,7 +141,11 @@ export default function BaseCard({
           <Text
             style={[
               styles.cardDescription,
-              isLight && styles.lightCardDescription,
+              {
+                color: isLight
+                  ? colors.lightDescription
+                  : colors.primaryDescription,
+              },
             ]}
           >
             {description}
@@ -72,7 +153,7 @@ export default function BaseCard({
           <Ionicons
             name="arrow-forward"
             size={25}
-            color={isLight ? "#075296" : "#FFFFFF"}
+            color={isLight ? colors.lightArrow : colors.primaryArrow}
           />
         </View>
       </View>
@@ -90,7 +171,6 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     borderCurve: "continuous",
     overflow: "hidden",
-    backgroundColor: "#075296",
     boxShadow: "0 2px 4px rgba(15, 35, 60, 0.08)",
   },
   cardTopRow: {
@@ -119,45 +199,26 @@ const styles = StyleSheet.create({
     paddingHorizontal: 13,
     paddingVertical: 6,
     borderRadius: 999,
-    backgroundColor: "#0877D1",
   },
   badgeText: {
-    color: "#B9DDFF",
     fontSize: 13,
     fontWeight: "700",
   },
   cardTitle: {
     flexShrink: 1,
-    color: "#FFFFFF",
     fontSize: 23,
     fontWeight: "800",
     lineHeight: 29,
   },
-  cardDescription: {
-    flex: 1,
-    color: "#D7E9F8",
-    fontSize: 12,
-    fontWeight: "700",
-    lineHeight: 18,
-  },
-  lightCard: {
-    borderWidth: 1,
-    borderColor: "#CBD3DF",
-    backgroundColor: "#FFFFFF",
-  },
-  lightBadge: {
-    backgroundColor: "#E4EFFD",
-  },
-  lightBadgeText: {
-    color: "#637083",
-  },
   lightCardTitle: {
-    color: "#10243C",
     fontSize: 21,
     lineHeight: 27,
   },
-  lightCardDescription: {
-    color: "#5C6574",
+  cardDescription: {
+    flex: 1,
+    fontSize: 12,
+    fontWeight: "700",
+    lineHeight: 18,
   },
   pressed: {
     opacity: 0.7,

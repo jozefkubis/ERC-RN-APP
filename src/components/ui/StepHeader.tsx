@@ -1,3 +1,4 @@
+import type { AppThemeMode } from "@/src/context/settings-context";
 import { StyleSheet, Text, View } from "react-native";
 
 type StepHeaderProps = {
@@ -5,6 +6,26 @@ type StepHeaderProps = {
   title: string;
   description: string;
   urgent?: boolean;
+  themeMode?: AppThemeMode;
+};
+
+const headerColors = {
+  light: {
+    title: "#10243C",
+    description: "#5C6574",
+    badgeBackground: "#E4EFFD",
+    badgeText: "#075296",
+    urgentBadgeBackground: "#FDE7E8",
+    urgentBadgeText: "#C8141B",
+  },
+  dark: {
+    title: "#F5F8FC",
+    description: "#AAB6C7",
+    badgeBackground: "#17375B",
+    badgeText: "#8BC4FA",
+    urgentBadgeBackground: "#4A1B22",
+    urgentBadgeText: "#FF9AA1",
+  },
 };
 
 export default function StepHeader({
@@ -12,24 +33,39 @@ export default function StepHeader({
   title,
   description,
   urgent = false,
+  themeMode = "light",
 }: StepHeaderProps) {
+  const colors = headerColors[themeMode];
+
   return (
     <View style={styles.stepHeader}>
-      <View style={[styles.stepBadge, urgent && styles.urgentStepBadge]}>
+      <View
+        style={[
+          styles.stepBadge,
+          {
+            backgroundColor: urgent
+              ? colors.urgentBadgeBackground
+              : colors.badgeBackground,
+          },
+        ]}
+      >
         <Text
           selectable
           style={[
             styles.stepBadgeText,
-            urgent && styles.urgentStepBadgeText,
+            { color: urgent ? colors.urgentBadgeText : colors.badgeText },
           ]}
         >
           {badge}
         </Text>
       </View>
-      <Text selectable style={styles.stepTitle}>
+      <Text selectable style={[styles.stepTitle, { color: colors.title }]}>
         {title}
       </Text>
-      <Text selectable style={styles.stepDescription}>
+      <Text
+        selectable
+        style={[styles.stepDescription, { color: colors.description }]}
+      >
         {description}
       </Text>
     </View>
@@ -48,27 +84,17 @@ const styles = StyleSheet.create({
     paddingHorizontal: 13,
     paddingVertical: 6,
     borderRadius: 999,
-    backgroundColor: "#E4EFFD",
-  },
-  urgentStepBadge: {
-    backgroundColor: "#FDE7E8",
   },
   stepBadgeText: {
-    color: "#075296",
     fontSize: 20,
     fontWeight: "800",
   },
-  urgentStepBadgeText: {
-    color: "#C8141B",
-  },
   stepTitle: {
-    color: "#10243C",
     fontSize: 24,
     fontWeight: "800",
     lineHeight: 30,
   },
   stepDescription: {
-    color: "#5C6574",
     fontSize: 14,
     lineHeight: 21,
   },

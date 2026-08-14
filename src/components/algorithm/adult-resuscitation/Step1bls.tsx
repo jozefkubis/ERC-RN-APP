@@ -1,84 +1,209 @@
+import { useSettings } from "@/src/context/settings-context";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import {
-  Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import AlgorithmScreen from "../../ui/AlgorithmScreen";
 import StepHeader from "../../ui/StepHeader";
 import InfoCard from "../../ui/info-card";
 
+const pageText = {
+  sk: {
+    badge: "Krok 1",
+    title: "Základná resuscitácia dospelého",
+    description:
+      "Najprv overte bezpečnosť a skontrolujte, či osoba reaguje.",
+    question: "Reaguje osoba?",
+    yesTitle: "Áno",
+    yesDescription:
+      "Ponechajte ju v bezpečí, sledujte stav a pokračujte podľa prístupu ABCDE.",
+    noTitle: "Nie",
+    noDescription:
+      "Privolajte záchrannú zdravotnú službu a zhodnoťte dýchanie.",
+    infoTitle: "Skôr než začnete",
+    infoDescription:
+      "Zaistite bezpečnosť seba, osoby so zastavením krvného obehu a všetkých okolostojacich.",
+  },
+  en: {
+    badge: "Step 1",
+    title: "Adult basic life support",
+    description:
+      "First check for safety and assess whether the person responds.",
+    question: "Is the person responsive?",
+    yesTitle: "Yes",
+    yesDescription:
+      "Leave them in a safe position, monitor their condition, and continue using the ABCDE approach.",
+    noTitle: "No",
+    noDescription: "Call emergency medical services and assess breathing.",
+    infoTitle: "Before you start",
+    infoDescription:
+      "Ensure safety for yourself, the person in cardiac arrest, and all bystanders.",
+  },
+};
+
+const cardColors = {
+  light: {
+    questionBackground: "#D7EDFD",
+    questionBorder: "#8EC3F0",
+    questionIcon: "#0877D1",
+    questionText: "#0877D1",
+    primaryBackground: "#075296",
+    primaryBorder: "#075296",
+    primaryText: "#FFFFFF",
+    primaryDescription: "#D7E9F8",
+    dangerIcon: "#ED1C24",
+    lightBackground: "#FFFFFF",
+    lightBorder: "#CBD3DF",
+    lightIconBackground: "#E4EFFD",
+    lightIcon: "#075296",
+    lightTitle: "#10243C",
+    lightDescription: "#5C6574",
+  },
+  dark: {
+    questionBackground: "#102A3F",
+    questionBorder: "#2F7FBE",
+    questionIcon: "#164C80",
+    questionText: "#B9DDFF",
+    primaryBackground: "#0E4A80",
+    primaryBorder: "#2F7FBE",
+    primaryText: "#FFFFFF",
+    primaryDescription: "#D7E9F8",
+    dangerIcon: "#B7151B",
+    lightBackground: "#101B2B",
+    lightBorder: "#31435A",
+    lightIconBackground: "#164C80",
+    lightIcon: "#B9DDFF",
+    lightTitle: "#F5F8FC",
+    lightDescription: "#AAB6C7",
+  },
+};
+
 export default function Step1bls() {
   const router = useRouter();
+  const { language, themeMode } = useSettings();
+  const text = pageText[language];
+  const colors = cardColors[themeMode];
 
   return (
-    <AlgorithmScreen>
-        <StepHeader
-        badge={"Krok 1"}
-        title={"Základná resuscitácia dospelého"}
-        description={"Najprv overte bezpečnosť a skontrolujte, či osoba reaguje."}
+    <AlgorithmScreen themeMode={themeMode}>
+      <StepHeader
+        badge={text.badge}
+        title={text.title}
+        description={text.description}
+        themeMode={themeMode}
       />
 
-        <View style={styles.questionCard}>
-          <View style={styles.questionIcon}>
-            <Ionicons name="help" size={28} color="#FFFFFF" />
-          </View>
-          <Text style={styles.questionText}>Reaguje osoba?</Text>
+      <View
+        style={[
+          styles.questionCard,
+          {
+            borderColor: colors.questionBorder,
+            backgroundColor: colors.questionBackground,
+          },
+        ]}
+      >
+        <View
+          style={[
+            styles.questionIcon,
+            { backgroundColor: colors.questionIcon },
+          ]}
+        >
+          <Ionicons name="help" size={28} color="#FFFFFF" />
         </View>
+        <Text style={[styles.questionText, { color: colors.questionText }]}>
+          {text.question}
+        </Text>
+      </View>
 
-        <View style={styles.answersContainer}>
-          <View style={[styles.answerCard, styles.answerCardLight]}>
-            <View style={styles.answerIconLight}>
-              <Ionicons name="checkmark" size={24} color="#075296" />
-            </View>
-            <View style={styles.answerTextContainer}>
-              <Text style={styles.answerTitleLight}>Áno</Text>
-              <Text style={styles.answerDescriptionLight}>
-                Ponechajte ju v bezpečí, sledujte stav a pokračujte podľa
-                prístupu ABCDE.
-              </Text>
-            </View>
-          </View>
-
-          <Pressable
-            onPress={() =>
-              router.push("/algorithms/adult-resuscitation/bls/step2")
-            }
-            style={({ pressed }) => [
-              styles.answerCard,
-              styles.answerCardPrimary,
-              pressed && styles.pressed,
+      <View style={styles.answersContainer}>
+        <View
+          style={[
+            styles.answerCard,
+            {
+              borderColor: colors.lightBorder,
+              backgroundColor: colors.lightBackground,
+            },
+          ]}
+        >
+          <View
+            style={[
+              styles.answerIconLight,
+              { backgroundColor: colors.lightIconBackground },
             ]}
           >
-            <View style={styles.answerIconPrimary}>
-              <Ionicons name="close" size={24} color="#FFFFFF" />
-            </View>
-            <View style={styles.answerTextContainer}>
-              <Text style={styles.answerTitlePrimary}>Nie</Text>
-              <Text style={styles.answerDescriptionPrimary}>
-                Privolajte záchrannú zdravotnú službu a zhodnoťte dýchanie.
-              </Text>
-            </View>
-            <Ionicons name="arrow-forward" size={22} color="#FFFFFF" />
-          </Pressable>
+            <Ionicons name="checkmark" size={24} color={colors.lightIcon} />
+          </View>
+          <View style={styles.answerTextContainer}>
+            <Text style={[styles.answerTitle, { color: colors.lightTitle }]}>
+              {text.yesTitle}
+            </Text>
+            <Text
+              style={[
+                styles.answerDescription,
+                { color: colors.lightDescription },
+              ]}
+            >
+              {text.yesDescription}
+            </Text>
+          </View>
         </View>
 
-        <InfoCard
-          title="Skôr než začnete"
-          description="Zaistite bezpečnosť seba, osoby so zastavením krvného obehu a všetkých okolostojacich."
-        />
+        <Pressable
+          onPress={() =>
+            router.push("/algorithms/adult-resuscitation/bls/step2")
+          }
+          style={({ pressed }) => [
+            styles.answerCard,
+            {
+              borderColor: colors.primaryBorder,
+              backgroundColor: colors.primaryBackground,
+            },
+            pressed && styles.pressed,
+          ]}
+        >
+          <View
+            style={[
+              styles.answerIconPrimary,
+              { backgroundColor: colors.dangerIcon },
+            ]}
+          >
+            <Ionicons name="close" size={24} color="#FFFFFF" />
+          </View>
+          <View style={styles.answerTextContainer}>
+            <Text style={[styles.answerTitle, { color: colors.primaryText }]}>
+              {text.noTitle}
+            </Text>
+            <Text
+              style={[
+                styles.answerDescription,
+                { color: colors.primaryDescription },
+              ]}
+            >
+              {text.noDescription}
+            </Text>
+          </View>
+          <Ionicons name="arrow-forward" size={22} color="#FFFFFF" />
+        </Pressable>
+      </View>
+
+      <InfoCard
+        title={text.infoTitle}
+        description={text.infoDescription}
+        themeMode={themeMode}
+      />
     </AlgorithmScreen>
   );
 }
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create({
   questionCard: {
     width: "100%",
     flexDirection: "row",
     alignItems: "center",
     gap: 15,
     padding: 18,
+    borderWidth: 1,
     borderRadius: 12,
     borderCurve: "continuous",
-    backgroundColor: "#D7EDFD",
     boxShadow: "0 2px 4px rgba(15, 35, 60, 0.08)",
   },
   questionIcon: {
@@ -87,11 +212,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 21,
-    backgroundColor: "#0877D1",
   },
   questionText: {
     flex: 1,
-    color: "#0877D1",
     fontSize: 20,
     fontWeight: "800",
     lineHeight: 27,
@@ -113,21 +236,12 @@ const styles = StyleSheet.create({
     borderCurve: "continuous",
     boxShadow: "0 2px 4px rgba(15, 35, 60, 0.08)",
   },
-  answerCardPrimary: {
-    borderColor: "#075296",
-    backgroundColor: "#075296",
-  },
-  answerCardLight: {
-    borderColor: "#CBD3DF",
-    backgroundColor: "#FFFFFF",
-  },
   answerIconPrimary: {
     width: 40,
     height: 40,
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 20,
-    backgroundColor: "#ED1C24",
   },
   answerIconLight: {
     width: 40,
@@ -135,31 +249,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 20,
-    backgroundColor: "#E4EFFD",
   },
   answerTextContainer: {
     flex: 1,
     gap: 4,
   },
-  answerTitlePrimary: {
-    color: "#FFFFFF",
+  answerTitle: {
     fontSize: 18,
     fontWeight: "800",
     lineHeight: 23,
   },
-  answerTitleLight: {
-    color: "#10243C",
-    fontSize: 18,
-    fontWeight: "800",
-    lineHeight: 23,
-  },
-  answerDescriptionPrimary: {
-    color: "#D7E9F8",
-    fontSize: 13,
-    lineHeight: 19,
-  },
-  answerDescriptionLight: {
-    color: "#5C6574",
+  answerDescription: {
     fontSize: 13,
     lineHeight: 19,
   },

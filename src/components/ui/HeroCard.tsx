@@ -1,3 +1,4 @@
+import type { AppThemeMode } from "@/src/context/settings-context";
 import { Ionicons } from "@expo/vector-icons";
 import type { ComponentProps } from "react";
 import { StyleSheet, Text, View } from "react-native";
@@ -10,6 +11,22 @@ type HeroCardProps = {
   description: string;
   iconName: IconName;
   danger?: boolean;
+  themeMode?: AppThemeMode;
+};
+
+const heroColors = {
+  light: {
+    normalBackground: "#075296",
+    dangerBackground: "#C8141B",
+    eyebrow: "#B9DDFF",
+    description: "#EAF4FC",
+  },
+  dark: {
+    normalBackground: "#0B3159",
+    dangerBackground: "#7F151B",
+    eyebrow: "#B9DDFF",
+    description: "#EAF4FC",
+  },
 };
 
 export default function HeroCard({
@@ -18,20 +35,35 @@ export default function HeroCard({
   description,
   iconName,
   danger = false,
+  themeMode = "light",
 }: HeroCardProps) {
+  const colors = heroColors[themeMode];
+
   return (
-    <View style={[styles.heroCard, danger && styles.dangerHeroCard]}>
+    <View
+      style={[
+        styles.heroCard,
+        {
+          backgroundColor: danger
+            ? colors.dangerBackground
+            : colors.normalBackground,
+        },
+      ]}
+    >
       <View style={[styles.heroIcon, danger && styles.dangerHeroIcon]}>
         <Ionicons name={iconName} size={29} color="#FFFFFF" />
       </View>
       <View style={styles.heroTextContainer}>
-        <Text selectable style={styles.heroEyebrow}>
+        <Text selectable style={[styles.heroEyebrow, { color: colors.eyebrow }]}>
           {eyebrow}
         </Text>
         <Text selectable style={styles.heroTitle}>
           {title}
         </Text>
-        <Text selectable style={styles.heroDescription}>
+        <Text
+          selectable
+          style={[styles.heroDescription, { color: colors.description }]}
+        >
           {description}
         </Text>
       </View>
@@ -48,11 +80,7 @@ const styles = StyleSheet.create({
     padding: 18,
     borderRadius: 12,
     borderCurve: "continuous",
-    backgroundColor: "#075296",
     boxShadow: "0 2px 4px rgba(15, 35, 60, 0.08)",
-  },
-  dangerHeroCard: {
-    backgroundColor: "#C8141B",
   },
   heroIcon: {
     width: 54,
@@ -70,7 +98,6 @@ const styles = StyleSheet.create({
     gap: 4,
   },
   heroEyebrow: {
-    color: "#B9DDFF",
     fontSize: 12,
     fontWeight: "800",
     lineHeight: 17,
@@ -82,7 +109,6 @@ const styles = StyleSheet.create({
     lineHeight: 29,
   },
   heroDescription: {
-    color: "#EAF4FC",
     fontSize: 13,
     lineHeight: 19,
   },

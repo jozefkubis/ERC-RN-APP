@@ -1,114 +1,285 @@
+import { useSettings } from "@/src/context/settings-context";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import {
-  Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import AlgorithmScreen from "../../ui/AlgorithmScreen";
-import StepHeader from "../../ui/StepHeader";
 import H4T4Button from "../../ui/H4T4Button";
+import StepHeader from "../../ui/StepHeader";
 import InfoCard from "../../ui/info-card";
 import ParalelThinkingALS from "../adult-resuscitation/ParalelThinkingALS";
 
-const nonDefibRhythmItems = [
-  "Nedefibrilovateľné rytmy: bradykardia so slabou perfúziou, asystólia, BEA.",
-  "Zabezpečte IV/IO vstup; ak je IV vstup ťažký, prejdite včas na IO.",
-  "Adrenalín 10 µg kg⁻¹ IV/IO, max. 1 mg, podajte čo najskôr.",
-  "Adrenalín opakujte každé 4 minúty, teda každý druhý 2-minútový cyklus.",
-  "Rytmus zhodnoťte každé 2 minúty, prerušenie má trvať menej ako 5 sekúnd.",
-];
+const pageText = {
+  sk: {
+    badge: "Krok 3",
+    title: "Nedefibrilovateľný rytmus",
+    description:
+      "Pri bradykardii so slabou perfúziou, asystólii alebo BEA nepodávajte výboj. Okamžite pokračujte v KPR a podajte adrenalín.",
+    adrenalineLabel: "Okamžitý postup",
+    adrenalineTitle: "IV / IO adrenalín čo najskôr",
+    adrenalineDescription:
+      "10 mcg/kg, max. 1 mg. Po podaní prepláchnite vstup a neprerušujte kompresie zbytočne.",
+    cprTitle: "Ihneď pokračujte v KPR 2 minúty",
+    cprDescription:
+      "Pokračujte v kompresiách a ventilácii 15:2. Súbežne hľadajte a riešte reverzibilné príčiny.",
+    nonDefibInfoTitle: "Pre nedefibrilovateľné rytmy",
+    nonDefibRhythmItems: [
+      "Nedefibrilovateľné rytmy: bradykardia so slabou perfúziou, asystólia, BEA.",
+      "Zabezpečte IV/IO vstup; ak je IV vstup ťažký, prejdite včas na IO.",
+      "Adrenalín 10 mcg/kg IV/IO, max. 1 mg, podajte čo najskôr.",
+      "Adrenalín opakujte každé 4 minúty, teda každý druhý 2-minútový cyklus.",
+      "Rytmus zhodnoťte každé 2 minúty, prerušenie má trvať menej ako 5 sekúnd.",
+    ],
+    nextTitle: "Po 2 minútach",
+    nextDescription: "Znovu zhodnoťte rytmus",
+    infoTitle: "Dôležité",
+    infoDescription:
+      "Pri nedefibrilovateľnom rytme nepodávajte výboj. Prioritou je kvalitná KPR, čo najskorší adrenalín, ventilácia kyslíkom a liečba reverzibilných príčin.",
+  },
+  en: {
+    badge: "Step 3",
+    title: "Non-shockable rhythm",
+    description:
+      "For bradycardia with poor perfusion, asystole, or PEA, do not shock. Immediately continue CPR and give adrenaline.",
+    adrenalineLabel: "Immediate action",
+    adrenalineTitle: "IV / IO adrenaline as soon as possible",
+    adrenalineDescription:
+      "10 mcg/kg, max. 1 mg. Flush the line after administration and avoid unnecessary interruption to compressions.",
+    cprTitle: "Immediately resume CPR for 2 minutes",
+    cprDescription:
+      "Continue compressions and ventilation 15:2. Search for and treat reversible causes in parallel.",
+    nonDefibInfoTitle: "For non-shockable rhythms",
+    nonDefibRhythmItems: [
+      "Non-shockable rhythms: bradycardia with poor perfusion, asystole, PEA.",
+      "Establish IV/IO access; if IV access is difficult, move early to IO.",
+      "Give adrenaline 10 mcg/kg IV/IO, max. 1 mg, as soon as possible.",
+      "Repeat adrenaline every 4 minutes, meaning every second 2-minute cycle.",
+      "Reassess rhythm every 2 minutes; interruption should be less than 5 seconds.",
+    ],
+    nextTitle: "After 2 minutes",
+    nextDescription: "Reassess the rhythm",
+    infoTitle: "Important",
+    infoDescription:
+      "Do not deliver a shock for a non-shockable rhythm. Prioritise high-quality CPR, early adrenaline, oxygen ventilation, and treatment of reversible causes.",
+  },
+};
+
+const cardColors = {
+  light: {
+    actionBackground: "#FFFFFF",
+    actionBorder: "#075296",
+    actionIconBackground: "#E4EFFD",
+    actionIcon: "#075296",
+    actionLabel: "#075296",
+    actionTitle: "#10243C",
+    actionDescription: "#5C6574",
+    cardBackground: "#FFFFFF",
+    cardBorder: "#CBD3DF",
+    cardTitle: "#10243C",
+    cardDescription: "#5C6574",
+    cprIcon: "#ED1C24",
+    infoBackground: "#FFF6DC",
+    infoBorder: "#F0DEB4",
+    infoIconBackground: "#FFFFFF",
+    infoTitle: "#075296",
+    infoText: "#24425F",
+    bullet: "#075296",
+    primaryBackground: "#075296",
+    primaryBorder: "#075296",
+    primaryTitle: "#FFFFFF",
+    primaryDescription: "#D7E9F8",
+    nextIcon: "#0877D1",
+  },
+  dark: {
+    actionBackground: "#101B2B",
+    actionBorder: "#2F7FBE",
+    actionIconBackground: "#164C80",
+    actionIcon: "#B9DDFF",
+    actionLabel: "#B9DDFF",
+    actionTitle: "#F5F8FC",
+    actionDescription: "#AAB6C7",
+    cardBackground: "#101B2B",
+    cardBorder: "#31435A",
+    cardTitle: "#F5F8FC",
+    cardDescription: "#AAB6C7",
+    cprIcon: "#B7151B",
+    infoBackground: "#2B2414",
+    infoBorder: "#6A5727",
+    infoIconBackground: "#101B2B",
+    infoTitle: "#F6D38A",
+    infoText: "#E7D7A8",
+    bullet: "#F6D38A",
+    primaryBackground: "#0E4A80",
+    primaryBorder: "#2F7FBE",
+    primaryTitle: "#FFFFFF",
+    primaryDescription: "#D7E9F8",
+    nextIcon: "#164C80",
+  },
+};
 
 export default function Step3PalsNondefib() {
   const router = useRouter();
+  const { language, themeMode } = useSettings();
+  const text = pageText[language];
+  const colors = cardColors[themeMode];
 
   return (
-    <AlgorithmScreen>
-        <StepHeader
-        badge={"Krok 3"}
-        title={"Nedefibrilovateľný rytmus"}
-        description={"Pri bradykardii so slabou perfúziou, asystólii alebo BEA nepodávajte výboj. Okamžite pokračujte v KPR a podajte adrenalín."}
+    <AlgorithmScreen themeMode={themeMode}>
+      <StepHeader
+        badge={text.badge}
+        title={text.title}
+        description={text.description}
+        themeMode={themeMode}
       />
 
-        <View style={styles.adrenalineCard}>
-          <View style={styles.adrenalineIcon}>
-            <Ionicons name="flash-off-sharp" size={28} color="#075296" />
-          </View>
-          <View style={styles.adrenalineTextContainer}>
-            <Text style={styles.adrenalineLabel}>Okamžitý postup</Text>
-            <Text style={styles.adrenalineTitle}>
-              IV / IO adrenalín čo najskôr
-            </Text>
-            <Text style={styles.adrenalineDescription}>
-              10 µg kg⁻¹, max. 1 mg. Po podaní prepláchnite vstup a neprerušujte
-              kompresie zbytočne.
-            </Text>
-          </View>
-        </View>
-
-        <View style={styles.cprCard}>
-          <View style={styles.cprIcon}>
-            <MaterialCommunityIcons
-              name="heart-pulse"
-              size={28}
-              color="#FFFFFF"
-            />
-          </View>
-          <View style={styles.cprTextContainer}>
-            <Text style={styles.cprTitle}>Ihneď pokračujte v KPR 2 minúty</Text>
-            <Text style={styles.cprDescription}>
-              Pokračujte v kompresiách a ventilácii 15:2. Súbežne hľadajte a
-              riešte reverzibilné príčiny.
-            </Text>
-          </View>
-        </View>
-
-        <ParalelThinkingALS />
-
-        <View style={styles.nonDefibInfoCard}>
-          <View style={styles.nonDefibInfoHeader}>
-            <View style={styles.nonDefibInfoIcon}>
-              <Ionicons name="flash-off-sharp" size={18} color="#075296" />
-            </View>
-            <Text style={styles.nonDefibInfoTitle}>
-              Pre nedefibrilovateľné rytmy
-            </Text>
-          </View>
-
-          <View style={styles.nonDefibInfoList}>
-            {nonDefibRhythmItems.map((item) => (
-              <View key={item} style={styles.nonDefibInfoRow}>
-                <View style={styles.bullet} />
-                <Text style={styles.nonDefibInfoText}>{item}</Text>
-              </View>
-            ))}
-          </View>
-        </View>
-
-        <H4T4Button />
-
-        <Pressable
-          accessibilityRole="button"
-          onPress={() => router.push("/algorithms/epals/pals/step2")}
-          style={({ pressed }) => [styles.nextCard, pressed && styles.pressed]}
+      <View
+        style={[
+          styles.adrenalineCard,
+          {
+            borderColor: colors.actionBorder,
+            backgroundColor: colors.actionBackground,
+          },
+        ]}
+      >
+        <View
+          style={[
+            styles.adrenalineIcon,
+            {
+              borderColor: colors.actionBorder,
+              backgroundColor: colors.actionIconBackground,
+            },
+          ]}
         >
-          <View style={styles.nextIcon}>
-            <Ionicons name="timer-outline" size={24} color="#FFFFFF" />
-          </View>
-          <View style={styles.nextTextContainer}>
-            <Text style={styles.nextTitle}>Po 2 minútach</Text>
-            <Text style={styles.nextDescription}>Znovu zhodnoťte rytmus</Text>
-          </View>
-          <Ionicons name="arrow-forward" size={22} color="#FFFFFF" />
-        </Pressable>
+          <Ionicons
+            name="flash-off-sharp"
+            size={28}
+            color={colors.actionIcon}
+          />
+        </View>
+        <View style={styles.adrenalineTextContainer}>
+          <Text style={[styles.adrenalineLabel, { color: colors.actionLabel }]}>
+            {text.adrenalineLabel}
+          </Text>
+          <Text style={[styles.adrenalineTitle, { color: colors.actionTitle }]}>
+            {text.adrenalineTitle}
+          </Text>
+          <Text
+            style={[
+              styles.adrenalineDescription,
+              { color: colors.actionDescription },
+            ]}
+          >
+            {text.adrenalineDescription}
+          </Text>
+        </View>
+      </View>
 
-        <InfoCard
-          title="Dôležité"
-          description="Pri nedefibrilovateľnom rytme nepodávajte výboj. Prioritou je kvalitná KPR, čo najskorší adrenalín, ventilácia kyslíkom a liečba reverzibilných príčin."
-          iconName="alert-circle-outline"
-        />
+      <View
+        style={[
+          styles.cprCard,
+          {
+            borderColor: colors.cardBorder,
+            backgroundColor: colors.cardBackground,
+          },
+        ]}
+      >
+        <View style={[styles.cprIcon, { backgroundColor: colors.cprIcon }]}>
+          <MaterialCommunityIcons name="heart-pulse" size={28} color="#FFFFFF" />
+        </View>
+        <View style={styles.cprTextContainer}>
+          <Text style={[styles.cprTitle, { color: colors.cardTitle }]}>
+            {text.cprTitle}
+          </Text>
+          <Text
+            style={[styles.cprDescription, { color: colors.cardDescription }]}
+          >
+            {text.cprDescription}
+          </Text>
+        </View>
+      </View>
+
+      <ParalelThinkingALS />
+
+      <View
+        style={[
+          styles.nonDefibInfoCard,
+          {
+            borderColor: colors.infoBorder,
+            backgroundColor: colors.infoBackground,
+          },
+        ]}
+      >
+        <View style={styles.nonDefibInfoHeader}>
+          <View
+            style={[
+              styles.nonDefibInfoIcon,
+              { backgroundColor: colors.infoIconBackground },
+            ]}
+          >
+            <Ionicons name="flash-off-sharp" size={18} color="#075296" />
+          </View>
+          <Text
+            style={[styles.nonDefibInfoTitle, { color: colors.infoTitle }]}
+          >
+            {text.nonDefibInfoTitle}
+          </Text>
+        </View>
+
+        <View style={styles.nonDefibInfoList}>
+          {text.nonDefibRhythmItems.map((item) => (
+            <View key={item} style={styles.nonDefibInfoRow}>
+              <View style={[styles.bullet, { backgroundColor: colors.bullet }]} />
+              <Text style={[styles.nonDefibInfoText, { color: colors.infoText }]}>
+                {item}
+              </Text>
+            </View>
+          ))}
+        </View>
+      </View>
+
+      <H4T4Button />
+
+      <Pressable
+        accessibilityRole="button"
+        onPress={() => router.push("/algorithms/epals/pals/step2")}
+        style={({ pressed }) => [
+          styles.nextCard,
+          {
+            borderColor: colors.primaryBorder,
+            backgroundColor: colors.primaryBackground,
+          },
+          pressed && styles.pressed,
+        ]}
+      >
+        <View style={[styles.nextIcon, { backgroundColor: colors.nextIcon }]}>
+          <Ionicons name="timer-outline" size={24} color="#FFFFFF" />
+        </View>
+        <View style={styles.nextTextContainer}>
+          <Text style={[styles.nextTitle, { color: colors.primaryTitle }]}>
+            {text.nextTitle}
+          </Text>
+          <Text
+            style={[
+              styles.nextDescription,
+              { color: colors.primaryDescription },
+            ]}
+          >
+            {text.nextDescription}
+          </Text>
+        </View>
+        <Ionicons name="arrow-forward" size={22} color="#FFFFFF" />
+      </Pressable>
+
+      <InfoCard
+        title={text.infoTitle}
+        description={text.infoDescription}
+        iconName="alert-circle-outline"
+        themeMode={themeMode}
+      />
     </AlgorithmScreen>
   );
 }
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create({
   adrenalineCard: {
     width: "100%",
     flexDirection: "row",
@@ -116,10 +287,8 @@ const styles = StyleSheet.create({
     gap: 15,
     padding: 18,
     borderWidth: 1,
-    borderColor: "#075296",
     borderRadius: 12,
     borderCurve: "continuous",
-    backgroundColor: "#FFFFFF",
     boxShadow: "0 2px 4px rgba(15, 35, 60, 0.08)",
   },
   adrenalineIcon: {
@@ -128,28 +297,23 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderWidth: 2,
-    borderColor: "#075296",
     borderRadius: 27,
-    backgroundColor: "#E4EFFD",
   },
   adrenalineTextContainer: {
     flex: 1,
     gap: 4,
   },
   adrenalineLabel: {
-    color: "#075296",
     fontSize: 12,
     fontWeight: "800",
     lineHeight: 17,
   },
   adrenalineTitle: {
-    color: "#10243C",
     fontSize: 22,
     fontWeight: "900",
     lineHeight: 28,
   },
   adrenalineDescription: {
-    color: "#5C6574",
     fontSize: 13,
     lineHeight: 19,
   },
@@ -160,10 +324,8 @@ const styles = StyleSheet.create({
     gap: 14,
     padding: 16,
     borderWidth: 1,
-    borderColor: "#CBD3DF",
     borderRadius: 10,
     borderCurve: "continuous",
-    backgroundColor: "#FFFFFF",
     boxShadow: "0 2px 4px rgba(15, 35, 60, 0.08)",
   },
   cprIcon: {
@@ -172,20 +334,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 21,
-    backgroundColor: "#ED1C24",
   },
   cprTextContainer: {
     flex: 1,
     gap: 4,
   },
   cprTitle: {
-    color: "#10243C",
     fontSize: 17,
     fontWeight: "900",
     lineHeight: 22,
   },
   cprDescription: {
-    color: "#5C6574",
     fontSize: 13,
     lineHeight: 19,
   },
@@ -194,10 +353,8 @@ const styles = StyleSheet.create({
     gap: 13,
     padding: 16,
     borderWidth: 1,
-    borderColor: "#F0DEB4",
     borderRadius: 10,
     borderCurve: "continuous",
-    backgroundColor: "#FFF6DC",
     boxShadow: "0 2px 4px rgba(15, 35, 60, 0.08)",
   },
   nonDefibInfoHeader: {
@@ -214,11 +371,9 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: "#075296",
     borderRadius: 17,
-    backgroundColor: "#FFFFFF",
   },
   nonDefibInfoTitle: {
     flex: 1,
-    color: "#075296",
     fontSize: 16,
     fontWeight: "900",
     lineHeight: 22,
@@ -237,12 +392,10 @@ const styles = StyleSheet.create({
     width: 5,
     height: 5,
     borderRadius: 3,
-    backgroundColor: "#075296",
     marginTop: 8,
   },
   nonDefibInfoText: {
     flex: 1,
-    color: "#24425F",
     fontSize: 13,
     lineHeight: 19,
     fontWeight: "700",
@@ -256,10 +409,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     paddingVertical: 14,
     borderWidth: 1,
-    borderColor: "#075296",
     borderRadius: 10,
     borderCurve: "continuous",
-    backgroundColor: "#075296",
     boxShadow: "0 2px 4px rgba(15, 35, 60, 0.08)",
   },
   nextIcon: {
@@ -268,20 +419,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 20,
-    backgroundColor: "#0877D1",
   },
   nextTextContainer: {
     flex: 1,
     gap: 3,
   },
   nextTitle: {
-    color: "#FFFFFF",
     fontSize: 18,
     fontWeight: "800",
     lineHeight: 23,
   },
   nextDescription: {
-    color: "#D7E9F8",
     fontSize: 13,
     lineHeight: 19,
   },

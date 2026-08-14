@@ -1,142 +1,279 @@
+import { useSettings } from "@/src/context/settings-context";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import {
-  Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import AlgorithmScreen from "../../ui/AlgorithmScreen";
 import StepHeader from "../../ui/StepHeader";
 import InfoCard from "../../ui/info-card";
 
-const abcdeSteps = [
-  "Monitorujte SpO2, EKG, TK",
-  "Podajte kyslík, ak je SpO2 < 94 % a zabezpečte intravenózny prístup",
-  "Zaznamenajte 12-zvodové EKG",
-  "Identifikujte a liečte reverzibilné príčiny",
-];
+const pageText = {
+  sk: {
+    badge: "Krok 1",
+    title: "Tachykardia",
+    description:
+      "Zhodnoťte stav pacienta s využitím ABCDE prístupu a rýchlo rozhodnite, či sú prítomné život ohrozujúce príznaky.",
+    assessmentTitle: "Zhodnoťte stav pacienta s využitím ABCDE prístupu",
+    abcdeSteps: [
+      "Monitorujte SpO2, EKG, TK",
+      "Podajte kyslík, ak je SpO2 < 94 % a zabezpečte intravenózny prístup",
+      "Zaznamenajte 12-zvodové EKG",
+      "Identifikujte a liečte reverzibilné príčiny",
+    ],
+    question: "Život ohrozujúce príznaky?",
+    lifeThreateningSigns: [
+      "Šok",
+      "Synkopa s ťažkou alebo pretrvávajúcou hypotenziou",
+      "Ischémia myokardu",
+      "Závažné srdcové zlyhanie s pľúcnym edémom alebo šokom",
+      "Alebo ihneď po ROSC",
+    ],
+    yesTitle: "Áno",
+    yesDescription: "Pokračujte ako pri nestabilnej tachykardii.",
+    noTitle: "Nie",
+    noDescription: "Pokračujte ako pri stabilnej tachykardii.",
+    infoTitle: "Poznámka",
+    infoDescription:
+      "Pri akomkoľvek zhoršení stavu sa vráťte k hodnoteniu ABCDE a pripravte synchronizovanú kardioverziu.",
+  },
+  en: {
+    badge: "Step 1",
+    title: "Tachycardia",
+    description:
+      "Assess the patient using the ABCDE approach and quickly decide whether life-threatening features are present.",
+    assessmentTitle: "Assess the patient using the ABCDE approach",
+    abcdeSteps: [
+      "Monitor SpO2, ECG, and blood pressure",
+      "Give oxygen if SpO2 < 94 % and secure intravenous access",
+      "Record a 12-lead ECG",
+      "Identify and treat reversible causes",
+    ],
+    question: "Life-threatening features?",
+    lifeThreateningSigns: [
+      "Shock",
+      "Syncope with severe or persistent hypotension",
+      "Myocardial ischaemia",
+      "Severe heart failure with pulmonary oedema or shock",
+      "Or immediately after ROSC",
+    ],
+    yesTitle: "Yes",
+    yesDescription: "Continue as unstable tachycardia.",
+    noTitle: "No",
+    noDescription: "Continue as stable tachycardia.",
+    infoTitle: "Note",
+    infoDescription:
+      "If the patient's condition deteriorates at any time, return to ABCDE assessment and prepare synchronised cardioversion.",
+  },
+};
 
-const lifeThreateningSigns = [
-  "Šok",
-  "Synkopa s ťažkou alebo pretrvávajúcou hypotenziou",
-  "Ischémia myokardu",
-  "Závažné srdcové zlyhanie s pľúcnym edémom alebo šokom",
-  "Alebo ihneď po ROSC",
-];
+const cardColors = {
+  light: {
+    softBackground: "#D7EDFD",
+    softBorder: "#8EC3F0",
+    cardBackground: "#FFFFFF",
+    cardBorder: "#CBD3DF",
+    questionBorder: "#0877D1",
+    primary: "#075296",
+    primaryIcon: "#0877D1",
+    dangerIcon: "#ED1C24",
+    text: "#10243C",
+    mutedText: "#5C6574",
+    primaryBackground: "#075296",
+    primaryBorder: "#075296",
+    primaryText: "#FFFFFF",
+    primaryMutedText: "#D7E9F8",
+    lightIconBackground: "#E4EFFD",
+    arrowLight: "#7A8492",
+  },
+  dark: {
+    softBackground: "#102A3F",
+    softBorder: "#2F7FBE",
+    cardBackground: "#101B2B",
+    cardBorder: "#31435A",
+    questionBorder: "#2F7FBE",
+    primary: "#B9DDFF",
+    primaryIcon: "#164C80",
+    dangerIcon: "#B7151B",
+    text: "#F5F8FC",
+    mutedText: "#AAB6C7",
+    primaryBackground: "#0E4A80",
+    primaryBorder: "#2F7FBE",
+    primaryText: "#FFFFFF",
+    primaryMutedText: "#D7E9F8",
+    lightIconBackground: "#164C80",
+    arrowLight: "#AAB6C7",
+  },
+};
 
 export default function Step1Tachycardia() {
   const router = useRouter();
+  const { language, themeMode } = useSettings();
+  const text = pageText[language];
+  const colors = cardColors[themeMode];
 
   return (
-    <AlgorithmScreen>
-        <StepHeader
-        badge={"Krok 1"}
-        title={"Tachykardia"}
-        description={"Zhodnoťte stav pacienta s využitím ABCDE prístupu a rýchlo rozhodnite, či sú prítomné život ohrozujúce príznaky."}
+    <AlgorithmScreen themeMode={themeMode}>
+      <StepHeader
+        badge={text.badge}
+        title={text.title}
+        description={text.description}
+        themeMode={themeMode}
       />
 
-        <View style={styles.assessmentCard}>
-          <View style={styles.cardHeader}>
-            <View style={styles.cardIcon}>
-              <Ionicons name="pulse" size={25} color="#FFFFFF" />
-            </View>
-            <Text style={styles.cardTitle}>
-              Zhodnoťte stav pacienta s využitím ABCDE prístupu
-            </Text>
+      <View
+        style={[
+          styles.assessmentCard,
+          {
+            borderColor: colors.softBorder,
+            backgroundColor: colors.softBackground,
+          },
+        ]}
+      >
+        <View style={styles.cardHeader}>
+          <View style={[styles.cardIcon, { backgroundColor: colors.primaryIcon }]}>
+            <Ionicons name="pulse" size={25} color="#FFFFFF" />
           </View>
-          <View style={styles.list}>
-            {abcdeSteps.map((item) => (
-              <View key={item} style={styles.listItem}>
-                <View style={styles.bullet} />
-                <Text style={styles.listText}>{item}</Text>
-              </View>
-            ))}
-          </View>
+          <Text style={[styles.cardTitle, { color: colors.primary }]}>
+            {text.assessmentTitle}
+          </Text>
         </View>
-
-        <View style={styles.questionCard}>
-          <View style={styles.questionHeader}>
-            <View style={styles.questionIcon}>
-              <Ionicons name="warning" size={27} color="#FFFFFF" />
-            </View>
-            <Text style={styles.questionText}>
-              Život ohrozujúce príznaky?
-            </Text>
-          </View>
-          <View style={styles.warningList}>
-            {lifeThreateningSigns.map((item) => (
-              <View key={item} style={styles.warningItem}>
-                <View style={styles.warningDot} />
-                <Text style={styles.warningText}>{item}</Text>
-              </View>
-            ))}
-          </View>
-        </View>
-
-        <View style={styles.answersContainer}>
-          <Pressable
-            onPress={() =>
-              router.push(
-                "/algorithms/adult-resuscitation/tachycardia/step2unstable",
-              )
-            }
-            style={({ pressed }) => [
-              styles.answerCard,
-              styles.answerCardPrimary,
-              pressed && styles.pressed,
-            ]}
-          >
-            <View style={styles.answerIconPrimary}>
-              <Ionicons name="checkmark" size={24} color="#FFFFFF" />
-            </View>
-            <View style={styles.answerTextContainer}>
-              <Text style={styles.answerTitlePrimary}>Áno</Text>
-              <Text style={styles.answerDescriptionPrimary}>
-                Pokračujte ako pri nestabilnej tachykardii.
+        <View style={styles.list}>
+          {text.abcdeSteps.map((item) => (
+            <View key={item} style={styles.listItem}>
+              <View style={[styles.bullet, { backgroundColor: colors.primary }]} />
+              <Text style={[styles.listText, { color: colors.text }]}>
+                {item}
               </Text>
             </View>
-            <Ionicons name="arrow-forward" size={22} color="#FFFFFF" />
-          </Pressable>
+          ))}
+        </View>
+      </View>
 
-          <Pressable
-            onPress={() =>
-              router.push(
-                "/algorithms/adult-resuscitation/tachycardia/step2stable",
-              )
-            }
-            style={({ pressed }) => [
-              styles.answerCard,
-              styles.answerCardLight,
-              pressed && styles.pressed,
-            ]}
+      <View
+        style={[
+          styles.questionCard,
+          {
+            borderColor: colors.questionBorder,
+            backgroundColor: colors.cardBackground,
+          },
+        ]}
+      >
+        <View style={styles.questionHeader}>
+          <View
+            style={[styles.questionIcon, { backgroundColor: colors.dangerIcon }]}
           >
-            <View style={styles.answerIconLight}>
-              <Ionicons name="close" size={24} color="#075296" />
-            </View>
-            <View style={styles.answerTextContainer}>
-              <Text style={styles.answerTitleLight}>Nie</Text>
-              <Text style={styles.answerDescriptionLight}>
-                Pokračujte ako pri stabilnej tachykardii.
+            <Ionicons name="warning" size={27} color="#FFFFFF" />
+          </View>
+          <Text style={[styles.questionText, { color: colors.primary }]}>
+            {text.question}
+          </Text>
+        </View>
+        <View style={styles.warningList}>
+          {text.lifeThreateningSigns.map((item) => (
+            <View key={item} style={styles.warningItem}>
+              <View
+                style={[styles.warningDot, { backgroundColor: colors.primary }]}
+              />
+              <Text style={[styles.warningText, { color: colors.text }]}>
+                {item}
               </Text>
             </View>
-            <Ionicons name="arrow-forward" size={22} color="#7A8492" />
-          </Pressable>
+          ))}
         </View>
+      </View>
 
-        <InfoCard
-          title="Poznámka"
-          description="Pri akomkoľvek zhoršení stavu sa vráťte k hodnoteniu ABCDE a pripravte synchronizovanú kardioverziu."
-          iconName="information-circle-outline"
-        />
+      <View style={styles.answersContainer}>
+        <Pressable
+          onPress={() =>
+            router.push(
+              "/algorithms/adult-resuscitation/tachycardia/step2unstable",
+            )
+          }
+          style={({ pressed }) => [
+            styles.answerCard,
+            {
+              borderColor: colors.primaryBorder,
+              backgroundColor: colors.primaryBackground,
+            },
+            pressed && styles.pressed,
+          ]}
+        >
+          <View
+            style={[
+              styles.answerIconPrimary,
+              { backgroundColor: colors.dangerIcon },
+            ]}
+          >
+            <Ionicons name="checkmark" size={24} color="#FFFFFF" />
+          </View>
+          <View style={styles.answerTextContainer}>
+            <Text style={[styles.answerTitle, { color: colors.primaryText }]}>
+              {text.yesTitle}
+            </Text>
+            <Text
+              style={[
+                styles.answerDescription,
+                { color: colors.primaryMutedText },
+              ]}
+            >
+              {text.yesDescription}
+            </Text>
+          </View>
+          <Ionicons name="arrow-forward" size={22} color="#FFFFFF" />
+        </Pressable>
+
+        <Pressable
+          onPress={() =>
+            router.push(
+              "/algorithms/adult-resuscitation/tachycardia/step2stable",
+            )
+          }
+          style={({ pressed }) => [
+            styles.answerCard,
+            {
+              borderColor: colors.cardBorder,
+              backgroundColor: colors.cardBackground,
+            },
+            pressed && styles.pressed,
+          ]}
+        >
+          <View
+            style={[
+              styles.answerIconLight,
+              { backgroundColor: colors.lightIconBackground },
+            ]}
+          >
+            <Ionicons name="close" size={24} color={colors.primary} />
+          </View>
+          <View style={styles.answerTextContainer}>
+            <Text style={[styles.answerTitle, { color: colors.text }]}>
+              {text.noTitle}
+            </Text>
+            <Text style={[styles.answerDescription, { color: colors.mutedText }]}>
+              {text.noDescription}
+            </Text>
+          </View>
+          <Ionicons name="arrow-forward" size={22} color={colors.arrowLight} />
+        </Pressable>
+      </View>
+
+      <InfoCard
+        title={text.infoTitle}
+        description={text.infoDescription}
+        iconName="information-circle-outline"
+        themeMode={themeMode}
+      />
     </AlgorithmScreen>
   );
 }
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create({
   assessmentCard: {
     width: "100%",
     gap: 16,
     padding: 18,
+    borderWidth: 1,
     borderRadius: 12,
     borderCurve: "continuous",
-    backgroundColor: "#D7EDFD",
     boxShadow: "0 2px 4px rgba(15, 35, 60, 0.08)",
   },
   cardHeader: {
@@ -150,11 +287,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 21,
-    backgroundColor: "#0877D1",
   },
   cardTitle: {
     flex: 1,
-    color: "#075296",
     fontSize: 18,
     fontWeight: "800",
     lineHeight: 24,
@@ -172,11 +307,9 @@ const styles = StyleSheet.create({
     height: 7,
     marginTop: 7,
     borderRadius: 4,
-    backgroundColor: "#075296",
   },
   listText: {
     flex: 1,
-    color: "#10243C",
     fontSize: 14,
     fontWeight: "700",
     lineHeight: 20,
@@ -186,10 +319,8 @@ const styles = StyleSheet.create({
     gap: 12,
     padding: 18,
     borderWidth: 2,
-    borderColor: "#0877D1",
     borderRadius: 12,
     borderCurve: "continuous",
-    backgroundColor: "#FFFFFF",
     boxShadow: "0 2px 4px rgba(15, 35, 60, 0.08)",
   },
   questionIcon: {
@@ -198,7 +329,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 21,
-    backgroundColor: "#ED1C24",
   },
   questionHeader: {
     flexDirection: "row",
@@ -207,7 +337,6 @@ const styles = StyleSheet.create({
   },
   questionText: {
     flex: 1,
-    color: "#075296",
     fontSize: 20,
     fontWeight: "800",
     lineHeight: 27,
@@ -225,11 +354,9 @@ const styles = StyleSheet.create({
     height: 6,
     marginTop: 7,
     borderRadius: 3,
-    backgroundColor: "#075296",
   },
   warningText: {
     flex: 1,
-    color: "#10243C",
     fontSize: 14,
     fontWeight: "700",
     lineHeight: 20,
@@ -251,21 +378,12 @@ const styles = StyleSheet.create({
     borderCurve: "continuous",
     boxShadow: "0 2px 4px rgba(15, 35, 60, 0.08)",
   },
-  answerCardPrimary: {
-    borderColor: "#075296",
-    backgroundColor: "#075296",
-  },
-  answerCardLight: {
-    borderColor: "#CBD3DF",
-    backgroundColor: "#FFFFFF",
-  },
   answerIconPrimary: {
     width: 40,
     height: 40,
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 20,
-    backgroundColor: "#ED1C24",
   },
   answerIconLight: {
     width: 40,
@@ -273,31 +391,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 20,
-    backgroundColor: "#E4EFFD",
   },
   answerTextContainer: {
     flex: 1,
     gap: 4,
   },
-  answerTitlePrimary: {
-    color: "#FFFFFF",
+  answerTitle: {
     fontSize: 18,
     fontWeight: "800",
     lineHeight: 23,
   },
-  answerTitleLight: {
-    color: "#10243C",
-    fontSize: 18,
-    fontWeight: "800",
-    lineHeight: 23,
-  },
-  answerDescriptionPrimary: {
-    color: "#D7E9F8",
-    fontSize: 13,
-    lineHeight: 19,
-  },
-  answerDescriptionLight: {
-    color: "#5C6574",
+  answerDescription: {
     fontSize: 13,
     lineHeight: 19,
   },

@@ -1,69 +1,162 @@
+import { useSettings } from "@/src/context/settings-context";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import {
-  Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import AlgorithmScreen from "../../ui/AlgorithmScreen";
 import StepHeader from "../../ui/StepHeader";
 import InfoCard from "../../ui/info-card";
 
-const breathingSteps = [
-  "Spriechodnite dýchacie cesty záklonom hlavy a zdvihnutím brady.",
-  "Pozrite, počujte a cíťte dýchanie.",
-  "Hľadajte známky života najviac 10 sekúnd.",
-  "Ak máte pochybnosti, konajte ako pri abnormálnom dýchaní.",
-];
+const pageText = {
+  sk: {
+    badge: "Krok 2",
+    title: "Dýchacie cesty a dýchanie",
+    description:
+      "Skontrolujte dýchanie rýchlo, bez zbytočného odkladu začiatku KPR.",
+    infoTitle: "Zhodnotenie do 10 sekúnd",
+    breathingSteps: [
+      "Spriechodnite dýchacie cesty záklonom hlavy a zdvihnutím brady.",
+      "Pozrite, počujte a cíťte dýchanie.",
+      "Hľadajte známky života najviac 10 sekúnd.",
+      "Ak máte pochybnosti, konajte ako pri abnormálnom dýchaní.",
+    ],
+    nextTitle: "Nedýcha normálne",
+    nextDescription: "Dajte 5 úvodných záchranných vdychov.",
+    breathingTitle: "Ak dieťa dýcha",
+    breathingDescription:
+      "Udržujte priechodné dýchacie cesty, sledujte dýchanie nepretržite alebo aspoň každú minútu a privolajte pomoc.",
+  },
+  en: {
+    badge: "Step 2",
+    title: "Airway and breathing",
+    description:
+      "Check breathing quickly without unnecessarily delaying the start of CPR.",
+    infoTitle: "Assess within 10 seconds",
+    breathingSteps: [
+      "Open the airway using head tilt and chin lift.",
+      "Look, listen, and feel for breathing.",
+      "Look for signs of life for no more than 10 seconds.",
+      "If in doubt, act as if breathing is abnormal.",
+    ],
+    nextTitle: "Not breathing normally",
+    nextDescription: "Give 5 initial rescue breaths.",
+    breathingTitle: "If the child is breathing",
+    breathingDescription:
+      "Keep the airway open, monitor breathing continuously or at least every minute, and call for help.",
+  },
+};
+
+const cardColors = {
+  light: {
+    cardBackground: "#FFFFFF",
+    cardBorder: "#CBD3DF",
+    iconBackground: "#075296",
+    title: "#10243C",
+    text: "#10243C",
+    bullet: "#075296",
+    nextBackground: "#FFFFFF",
+    nextBorder: "#075296",
+    nextIcon: "#ED1C24",
+    nextTitle: "#075296",
+    nextDescription: "#5C6574",
+    arrow: "#075296",
+  },
+  dark: {
+    cardBackground: "#101B2B",
+    cardBorder: "#31435A",
+    iconBackground: "#164C80",
+    title: "#F5F8FC",
+    text: "#D7E2F0",
+    bullet: "#77B7F2",
+    nextBackground: "#101B2B",
+    nextBorder: "#2F7FBE",
+    nextIcon: "#B7151B",
+    nextTitle: "#B9DDFF",
+    nextDescription: "#AAB6C7",
+    arrow: "#77B7F2",
+  },
+};
 
 export default function Step2Pbls() {
   const router = useRouter();
+  const { language, themeMode } = useSettings();
+  const text = pageText[language];
+  const colors = cardColors[themeMode];
 
   return (
-    <AlgorithmScreen>
-        <StepHeader
-        badge={"Krok 2"}
-        title={"Dýchacie cesty a dýchanie"}
-        description={"Skontrolujte dýchanie rýchlo, bez zbytočného odkladu začiatku KPR."}
+    <AlgorithmScreen themeMode={themeMode}>
+      <StepHeader
+        badge={text.badge}
+        title={text.title}
+        description={text.description}
+        themeMode={themeMode}
       />
 
-        <View style={styles.infoCard}>
-          <View style={styles.infoHeader}>
-            <View style={styles.infoIcon}>
-              <Ionicons name="body" size={24} color="#FFFFFF" />
-            </View>
-            <Text style={styles.infoTitle}>Zhodnotenie do 10 sekúnd</Text>
+      <View
+        style={[
+          styles.infoCard,
+          {
+            borderColor: colors.cardBorder,
+            backgroundColor: colors.cardBackground,
+          },
+        ]}
+      >
+        <View style={styles.infoHeader}>
+          <View
+            style={[styles.infoIcon, { backgroundColor: colors.iconBackground }]}
+          >
+            <Ionicons name="body" size={24} color="#FFFFFF" />
           </View>
-
-          <View style={styles.infoList}>
-            {breathingSteps.map((step) => (
-              <View key={step} style={styles.infoRow}>
-                <View style={styles.bullet} />
-                <Text style={styles.infoText}>{step}</Text>
-              </View>
-            ))}
-          </View>
+          <Text style={[styles.infoTitle, { color: colors.title }]}>
+            {text.infoTitle}
+          </Text>
         </View>
 
-        <Pressable
-          accessibilityRole="button"
-          onPress={() => router.push("/algorithms/epals/pbls/step3")}
-          style={({ pressed }) => [styles.nextCard, pressed && styles.pressed]}
-        >
-          <View style={styles.nextIcon}>
-            <Ionicons name="fitness" size={24} color="#FFFFFF" />
-          </View>
-          <View style={styles.nextTextContainer}>
-            <Text style={styles.nextTitle}>Nedýcha normálne</Text>
-            <Text style={styles.nextDescription}>
-              Dajte 5 úvodných záchranných vdychov.
-            </Text>
-          </View>
-          <Ionicons name="arrow-forward" size={22} color="#075296" />
-        </Pressable>
+        <View style={styles.infoList}>
+          {text.breathingSteps.map((step) => (
+            <View key={step} style={styles.infoRow}>
+              <View style={[styles.bullet, { backgroundColor: colors.bullet }]} />
+              <Text style={[styles.infoText, { color: colors.text }]}>
+                {step}
+              </Text>
+            </View>
+          ))}
+        </View>
+      </View>
 
-        <InfoCard
-          title="Ak dieťa dýcha"
-          description="Udržujte priechodné dýchacie cesty, sledujte dýchanie nepretržite alebo aspoň každú minútu a privolajte pomoc."
-          iconName="information-circle-outline"
-        />
+      <Pressable
+        accessibilityRole="button"
+        onPress={() => router.push("/algorithms/epals/pbls/step3")}
+        style={({ pressed }) => [
+          styles.nextCard,
+          {
+            borderColor: colors.nextBorder,
+            backgroundColor: colors.nextBackground,
+          },
+          pressed && styles.pressed,
+        ]}
+      >
+        <View style={[styles.nextIcon, { backgroundColor: colors.nextIcon }]}>
+          <Ionicons name="fitness" size={24} color="#FFFFFF" />
+        </View>
+        <View style={styles.nextTextContainer}>
+          <Text style={[styles.nextTitle, { color: colors.nextTitle }]}>
+            {text.nextTitle}
+          </Text>
+          <Text
+            style={[styles.nextDescription, { color: colors.nextDescription }]}
+          >
+            {text.nextDescription}
+          </Text>
+        </View>
+        <Ionicons name="arrow-forward" size={22} color={colors.arrow} />
+      </Pressable>
+
+      <InfoCard
+        title={text.breathingTitle}
+        description={text.breathingDescription}
+        iconName="information-circle-outline"
+        themeMode={themeMode}
+      />
     </AlgorithmScreen>
   );
 }
@@ -74,10 +167,8 @@ const styles = StyleSheet.create({
     gap: 13,
     padding: 16,
     borderWidth: 1,
-    borderColor: "#CBD3DF",
     borderRadius: 10,
     borderCurve: "continuous",
-    backgroundColor: "#FFFFFF",
     boxShadow: "0 2px 4px rgba(15, 35, 60, 0.08)",
   },
   infoHeader: {
@@ -91,11 +182,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 21,
-    backgroundColor: "#075296",
   },
   infoTitle: {
     flex: 1,
-    color: "#10243C",
     fontSize: 17,
     fontWeight: "900",
     lineHeight: 22,
@@ -112,12 +201,10 @@ const styles = StyleSheet.create({
     width: 6,
     height: 6,
     borderRadius: 3,
-    backgroundColor: "#075296",
     marginTop: 7,
   },
   infoText: {
     flex: 1,
-    color: "#10243C",
     fontSize: 14,
     lineHeight: 20,
   },
@@ -130,10 +217,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     paddingVertical: 14,
     borderWidth: 1,
-    borderColor: "#075296",
     borderRadius: 10,
     borderCurve: "continuous",
-    backgroundColor: "#FFFFFF",
     boxShadow: "0 2px 4px rgba(15, 35, 60, 0.08)",
   },
   nextIcon: {
@@ -142,20 +227,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 22,
-    backgroundColor: "#ED1C24",
   },
   nextTextContainer: {
     flex: 1,
     gap: 4,
   },
   nextTitle: {
-    color: "#075296",
     fontSize: 18,
     fontWeight: "900",
     lineHeight: 23,
   },
   nextDescription: {
-    color: "#5C6574",
     fontSize: 13,
     lineHeight: 19,
   },

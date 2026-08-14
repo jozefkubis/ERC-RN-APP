@@ -1,119 +1,265 @@
+import { useSettings } from "@/src/context/settings-context";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import {
-  Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import AlgorithmScreen from "../../ui/AlgorithmScreen";
-import StepHeader from "../../ui/StepHeader";
 import H4T4Button from "../../ui/H4T4Button";
+import StepHeader from "../../ui/StepHeader";
 import InfoCard from "../../ui/info-card";
 import ParalelThinkingALS from "../adult-resuscitation/ParalelThinkingALS";
 
-const defibRhythmItems = [
-  "Pokračujte s výbojmi 4 J kg⁻¹ každé 2 minúty.",
-  "Pri refraktérnej KF/bKT od 5. výboja zvážte zvýšenie až na 8 J kg⁻¹, max. 360 J.",
-  "Adrenalín 10 µg kg⁻¹ IV/IO, max. 1 mg, po 4 minútach a potom každé 4 minúty.",
-  "Amiodarón 5 mg kg⁻¹ IV/IO, max. 300 mg, po 3. výboji; 5 mg kg⁻¹, max. 150 mg, po 5. výboji.",
-];
+const pageText = {
+  sk: {
+    badge: "Krok 3",
+    title: "Defibrilovateľný rytmus",
+    description:
+      "Pri KF alebo bezpulzovej KT podajte výboj s minimálnym prerušením kompresií.",
+    shockLabel: "Okamžitý postup",
+    shockTitle: "1 výboj 4 J/kg",
+    shockDescription:
+      "Nabite defibrilátor počas KPR, všetkých upozornite a výboj podajte s čo najkratšou pauzou.",
+    cprTitle: "Ihneď pokračujte v KPR 2 minúty",
+    cprDescription:
+      "Po výboji nekontrolujte pulz ani rytmus. Okamžite obnovte kompresie a ventiláciu 15:2.",
+    defibInfoTitle: "Pre defibrilovateľné rytmy",
+    defibRhythmItems: [
+      "Pokračujte s výbojmi 4 J/kg každé 2 minúty.",
+      "Pri refraktérnej KF/bezpulzovej KT od 5. výboja zvážte zvýšenie až na 8 J/kg, max. 360 J.",
+      "Adrenalín 10 mcg/kg IV/IO, max. 1 mg, po 4 minútach a potom každé 4 minúty.",
+      "Amiodarón 5 mg/kg IV/IO, max. 300 mg, po 3. výboji; 5 mg/kg, max. 150 mg, po 5. výboji.",
+    ],
+    nextTitle: "Po 2 minútach",
+    nextDescription: "Znovu zhodnoťte rytmus",
+    infoTitle: "Dôležité",
+    infoDescription:
+      "Výboje podávajte jednotlivo. Po každom výboji okamžite pokračujte v KPR a reverzibilné príčiny riešte bez zbytočného prerušenia kompresií.",
+  },
+  en: {
+    badge: "Step 3",
+    title: "Shockable rhythm",
+    description:
+      "For VF or pulseless VT, deliver a shock with minimal interruption to compressions.",
+    shockLabel: "Immediate action",
+    shockTitle: "1 shock 4 J/kg",
+    shockDescription:
+      "Charge the defibrillator during CPR, warn everyone, and deliver the shock with the shortest possible pause.",
+    cprTitle: "Immediately resume CPR for 2 minutes",
+    cprDescription:
+      "After the shock, do not check pulse or rhythm. Immediately resume compressions and ventilation 15:2.",
+    defibInfoTitle: "For shockable rhythms",
+    defibRhythmItems: [
+      "Continue shocks at 4 J/kg every 2 minutes.",
+      "For refractory VF/pulseless VT from the 5th shock, consider increasing up to 8 J/kg, max. 360 J.",
+      "Adrenaline 10 mcg/kg IV/IO, max. 1 mg, after 4 minutes and then every 4 minutes.",
+      "Amiodarone 5 mg/kg IV/IO, max. 300 mg, after the 3rd shock; 5 mg/kg, max. 150 mg, after the 5th shock.",
+    ],
+    nextTitle: "After 2 minutes",
+    nextDescription: "Reassess the rhythm",
+    infoTitle: "Important",
+    infoDescription:
+      "Deliver shocks one at a time. After each shock, immediately resume CPR and treat reversible causes without unnecessary interruption to compressions.",
+  },
+};
+
+const cardColors = {
+  light: {
+    primaryBackground: "#075296",
+    primaryBorder: "#075296",
+    primaryLabel: "#B9DDFF",
+    primaryTitle: "#FFFFFF",
+    primaryDescription: "#D7E9F8",
+    shockIcon: "#ED1C24",
+    cardBackground: "#FFFFFF",
+    cardBorder: "#CBD3DF",
+    cardTitle: "#10243C",
+    cardDescription: "#5C6574",
+    infoBackground: "#FFF6DC",
+    infoBorder: "#F0DEB4",
+    infoIconBackground: "#FFFFFF",
+    infoTitle: "#075296",
+    infoText: "#24425F",
+    bullet: "#075296",
+    nextIcon: "#0877D1",
+  },
+  dark: {
+    primaryBackground: "#0E4A80",
+    primaryBorder: "#2F7FBE",
+    primaryLabel: "#B9DDFF",
+    primaryTitle: "#FFFFFF",
+    primaryDescription: "#D7E9F8",
+    shockIcon: "#B7151B",
+    cardBackground: "#101B2B",
+    cardBorder: "#31435A",
+    cardTitle: "#F5F8FC",
+    cardDescription: "#AAB6C7",
+    infoBackground: "#2B2414",
+    infoBorder: "#6A5727",
+    infoIconBackground: "#101B2B",
+    infoTitle: "#F6D38A",
+    infoText: "#E7D7A8",
+    bullet: "#F6D38A",
+    nextIcon: "#164C80",
+  },
+};
 
 export default function Step3PalsDefib() {
   const router = useRouter();
+  const { language, themeMode } = useSettings();
+  const text = pageText[language];
+  const colors = cardColors[themeMode];
 
   return (
-    <AlgorithmScreen>
-        <StepHeader
-        badge={"Krok 3"}
-        title={"Defibrilovateľný rytmus"}
-        description={"Pri KF alebo bezpulzovej KT podajte výboj s minimálnym prerušením kompresií."}
+    <AlgorithmScreen themeMode={themeMode}>
+      <StepHeader
+        badge={text.badge}
+        title={text.title}
+        description={text.description}
+        themeMode={themeMode}
       />
 
-        <View style={styles.shockCard}>
-          <View style={styles.shockIcon}>
-            <Ionicons name="flash-sharp" size={30} color="#FFFFFF" />
+      <View
+        style={[
+          styles.shockCard,
+          {
+            borderColor: colors.primaryBorder,
+            backgroundColor: colors.primaryBackground,
+          },
+        ]}
+      >
+        <View style={[styles.shockIcon, { backgroundColor: colors.shockIcon }]}>
+          <Ionicons name="flash-sharp" size={30} color="#FFFFFF" />
+        </View>
+        <View style={styles.shockTextContainer}>
+          <Text style={[styles.shockLabel, { color: colors.primaryLabel }]}>
+            {text.shockLabel}
+          </Text>
+          <Text style={[styles.shockTitle, { color: colors.primaryTitle }]}>
+            {text.shockTitle}
+          </Text>
+          <Text
+            style={[
+              styles.shockDescription,
+              { color: colors.primaryDescription },
+            ]}
+          >
+            {text.shockDescription}
+          </Text>
+        </View>
+      </View>
+
+      <View
+        style={[
+          styles.cprCard,
+          {
+            borderColor: colors.cardBorder,
+            backgroundColor: colors.cardBackground,
+          },
+        ]}
+      >
+        <View style={[styles.cprIcon, { backgroundColor: colors.shockIcon }]}>
+          <MaterialCommunityIcons name="heart-pulse" size={28} color="#FFFFFF" />
+        </View>
+        <View style={styles.cprTextContainer}>
+          <Text style={[styles.cprTitle, { color: colors.cardTitle }]}>
+            {text.cprTitle}
+          </Text>
+          <Text
+            style={[styles.cprDescription, { color: colors.cardDescription }]}
+          >
+            {text.cprDescription}
+          </Text>
+        </View>
+      </View>
+
+      <View
+        style={[
+          styles.defibInfoCard,
+          {
+            borderColor: colors.infoBorder,
+            backgroundColor: colors.infoBackground,
+          },
+        ]}
+      >
+        <View style={styles.defibInfoHeader}>
+          <View
+            style={[
+              styles.defibInfoIcon,
+              { backgroundColor: colors.infoIconBackground },
+            ]}
+          >
+            <Ionicons name="flash-sharp" size={19} color="#075296" />
           </View>
-          <View style={styles.shockTextContainer}>
-            <Text style={styles.shockLabel}>Okamžitý postup</Text>
-            <Text style={styles.shockTitle}>1 výboj 4 J kg⁻¹</Text>
-            <Text style={styles.shockDescription}>
-              Nabite defibrilátor počas KPR, všetkých upozornite a výboj podajte
-              s čo najkratšou pauzou.
-            </Text>
-          </View>
+          <Text style={[styles.defibInfoTitle, { color: colors.infoTitle }]}>
+            {text.defibInfoTitle}
+          </Text>
         </View>
 
-        <View style={styles.cprCard}>
-          <View style={styles.cprIcon}>
-            <MaterialCommunityIcons
-              name="heart-pulse"
-              size={28}
-              color="#FFFFFF"
-            />
-          </View>
-          <View style={styles.cprTextContainer}>
-            <Text style={styles.cprTitle}>Ihneď pokračujte v KPR 2 minúty</Text>
-            <Text style={styles.cprDescription}>
-              Po výboji nekontrolujte pulz ani rytmus. Okamžite obnovte
-              kompresie a ventiláciu 15:2.
-            </Text>
-          </View>
-        </View>
-
-        <View style={styles.defibInfoCard}>
-          <View style={styles.defibInfoHeader}>
-            <View style={styles.defibInfoIcon}>
-              <Ionicons name="flash-sharp" size={19} color="#075296" />
+        <View style={styles.defibInfoList}>
+          {text.defibRhythmItems.map((item) => (
+            <View key={item} style={styles.defibInfoRow}>
+              <View style={[styles.bullet, { backgroundColor: colors.bullet }]} />
+              <Text style={[styles.defibInfoText, { color: colors.infoText }]}>
+                {item}
+              </Text>
             </View>
-            <Text style={styles.defibInfoTitle}>
-              Pre defibrilovateľné rytmy
-            </Text>
-          </View>
-
-          <View style={styles.defibInfoList}>
-            {defibRhythmItems.map((item) => (
-              <View key={item} style={styles.defibInfoRow}>
-                <View style={styles.bullet} />
-                <Text style={styles.defibInfoText}>{item}</Text>
-              </View>
-            ))}
-          </View>
+          ))}
         </View>
+      </View>
 
-        <ParalelThinkingALS />
-        <H4T4Button />
+      <ParalelThinkingALS />
+      <H4T4Button />
 
-        <Pressable
-          accessibilityRole="button"
-          onPress={() => router.push("/algorithms/epals/pals/step2")}
-          style={({ pressed }) => [styles.nextCard, pressed && styles.pressed]}
-        >
-          <View style={styles.nextIcon}>
-            <Ionicons name="timer-outline" size={24} color="#FFFFFF" />
-          </View>
-          <View style={styles.nextTextContainer}>
-            <Text style={styles.nextTitle}>Po 2 minútach</Text>
-            <Text style={styles.nextDescription}>Znovu zhodnoťte rytmus</Text>
-          </View>
-          <Ionicons name="arrow-forward" size={22} color="#FFFFFF" />
-        </Pressable>
+      <Pressable
+        accessibilityRole="button"
+        onPress={() => router.push("/algorithms/epals/pals/step2")}
+        style={({ pressed }) => [
+          styles.nextCard,
+          {
+            borderColor: colors.primaryBorder,
+            backgroundColor: colors.primaryBackground,
+          },
+          pressed && styles.pressed,
+        ]}
+      >
+        <View style={[styles.nextIcon, { backgroundColor: colors.nextIcon }]}>
+          <Ionicons name="timer-outline" size={24} color="#FFFFFF" />
+        </View>
+        <View style={styles.nextTextContainer}>
+          <Text style={[styles.nextTitle, { color: colors.primaryTitle }]}>
+            {text.nextTitle}
+          </Text>
+          <Text
+            style={[
+              styles.nextDescription,
+              { color: colors.primaryDescription },
+            ]}
+          >
+            {text.nextDescription}
+          </Text>
+        </View>
+        <Ionicons name="arrow-forward" size={22} color="#FFFFFF" />
+      </Pressable>
 
-        <InfoCard
-          title="Dôležité"
-          description="Výboje podávajte jednotlivo. Po každom výboji okamžite pokračujte v KPR a reverzibilné príčiny riešte bez zbytočného prerušenia kompresií."
-          iconName="alert-circle-outline"
-        />
+      <InfoCard
+        title={text.infoTitle}
+        description={text.infoDescription}
+        iconName="alert-circle-outline"
+        themeMode={themeMode}
+      />
     </AlgorithmScreen>
   );
 }
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create({
   shockCard: {
     width: "100%",
     flexDirection: "row",
     alignItems: "center",
     gap: 15,
     padding: 18,
+    borderWidth: 1,
     borderRadius: 12,
     borderCurve: "continuous",
-    backgroundColor: "#075296",
     boxShadow: "0 2px 4px rgba(15, 35, 60, 0.08)",
   },
   shockIcon: {
@@ -122,26 +268,22 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 27,
-    backgroundColor: "#ED1C24",
   },
   shockTextContainer: {
     flex: 1,
     gap: 4,
   },
   shockLabel: {
-    color: "#B9DDFF",
     fontSize: 12,
     fontWeight: "800",
     lineHeight: 17,
   },
   shockTitle: {
-    color: "#FFFFFF",
     fontSize: 28,
     fontWeight: "900",
     lineHeight: 34,
   },
   shockDescription: {
-    color: "#D7E9F8",
     fontSize: 13,
     lineHeight: 19,
   },
@@ -152,10 +294,8 @@ const styles = StyleSheet.create({
     gap: 14,
     padding: 16,
     borderWidth: 1,
-    borderColor: "#CBD3DF",
     borderRadius: 10,
     borderCurve: "continuous",
-    backgroundColor: "#FFFFFF",
     boxShadow: "0 2px 4px rgba(15, 35, 60, 0.08)",
   },
   cprIcon: {
@@ -164,20 +304,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 21,
-    backgroundColor: "#ED1C24",
   },
   cprTextContainer: {
     flex: 1,
     gap: 4,
   },
   cprTitle: {
-    color: "#10243C",
     fontSize: 17,
     fontWeight: "900",
     lineHeight: 22,
   },
   cprDescription: {
-    color: "#5C6574",
     fontSize: 13,
     lineHeight: 19,
   },
@@ -186,10 +323,8 @@ const styles = StyleSheet.create({
     gap: 13,
     padding: 16,
     borderWidth: 1,
-    borderColor: "#F0DEB4",
     borderRadius: 10,
     borderCurve: "continuous",
-    backgroundColor: "#FFF6DC",
     boxShadow: "0 2px 4px rgba(15, 35, 60, 0.08)",
   },
   defibInfoHeader: {
@@ -206,11 +341,9 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: "#075296",
     borderRadius: 17,
-    backgroundColor: "#FFFFFF",
   },
   defibInfoTitle: {
     flex: 1,
-    color: "#075296",
     fontSize: 16,
     fontWeight: "900",
     lineHeight: 22,
@@ -229,12 +362,10 @@ const styles = StyleSheet.create({
     width: 5,
     height: 5,
     borderRadius: 3,
-    backgroundColor: "#075296",
     marginTop: 8,
   },
   defibInfoText: {
     flex: 1,
-    color: "#24425F",
     fontSize: 13,
     lineHeight: 19,
     fontWeight: "700",
@@ -248,10 +379,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     paddingVertical: 14,
     borderWidth: 1,
-    borderColor: "#075296",
     borderRadius: 10,
     borderCurve: "continuous",
-    backgroundColor: "#075296",
     boxShadow: "0 2px 4px rgba(15, 35, 60, 0.08)",
   },
   nextIcon: {
@@ -260,20 +389,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 20,
-    backgroundColor: "#0877D1",
   },
   nextTextContainer: {
     flex: 1,
     gap: 3,
   },
   nextTitle: {
-    color: "#FFFFFF",
     fontSize: 18,
     fontWeight: "800",
     lineHeight: 23,
   },
   nextDescription: {
-    color: "#D7E9F8",
     fontSize: 13,
     lineHeight: 19,
   },

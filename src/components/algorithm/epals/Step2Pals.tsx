@@ -1,138 +1,274 @@
+import { useSettings } from "@/src/context/settings-context";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import {
-  Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import AlgorithmScreen from "../../ui/AlgorithmScreen";
 import StepHeader from "../../ui/StepHeader";
 
-const rhythmOptions = [
-  {
-    title: "Defibrilovateľný rytmus",
-    subtitle: "KF / bKT",
-    iconName: "flash-sharp" as const,
-    route: "/algorithms/epals/pals/step3defib" as const,
-    variant: "primary" as const,
+const pageText = {
+  sk: {
+    badge: "Krok 2",
+    title: "Zhodnotenie rytmu",
+    description:
+      "Prerušte stláčanie iba na nevyhnutný čas a zvoľte ďalší postup podľa rytmu alebo klinického výsledku.",
+    rhythmOptions: [
+      {
+        title: "Defibrilovateľný rytmus",
+        subtitle: "KF / bezpulzová KT",
+        iconName: "flash-sharp" as const,
+        route: "/algorithms/epals/pals/step3defib" as const,
+        variant: "primary" as const,
+      },
+      {
+        title: "Nedefibrilovateľný rytmus",
+        subtitle: "Bradykardia, asystólia, BEA",
+        iconName: "flash-off-sharp" as const,
+        route: "/algorithms/epals/pals/step3nondefib" as const,
+        variant: "light" as const,
+      },
+    ],
+    roscTitle: "ROSC",
+    roscDescription: "Obnovenie spontánneho krvného obehu.",
+    terminationTitle: "Ukončenie resuscitácie",
+    terminationDescription: "Prejdite na ukončenie resuscitácie.",
   },
-  {
-    title: "Nedefibrilovateľný rytmus",
-    subtitle: "Bradykardia, asystólia, BEA",
-    iconName: "flash-off-sharp" as const,
-    route: "/algorithms/epals/pals/step3nondefib" as const,
-    variant: "light" as const,
+  en: {
+    badge: "Step 2",
+    title: "Rhythm assessment",
+    description:
+      "Interrupt compressions only for the minimum time needed and choose the next action based on rhythm or clinical outcome.",
+    rhythmOptions: [
+      {
+        title: "Shockable rhythm",
+        subtitle: "VF / pulseless VT",
+        iconName: "flash-sharp" as const,
+        route: "/algorithms/epals/pals/step3defib" as const,
+        variant: "primary" as const,
+      },
+      {
+        title: "Non-shockable rhythm",
+        subtitle: "Bradycardia, asystole, PEA",
+        iconName: "flash-off-sharp" as const,
+        route: "/algorithms/epals/pals/step3nondefib" as const,
+        variant: "light" as const,
+      },
+    ],
+    roscTitle: "ROSC",
+    roscDescription: "Return of spontaneous circulation.",
+    terminationTitle: "Termination of resuscitation",
+    terminationDescription: "Continue to termination of resuscitation.",
   },
-];
+};
+
+const cardColors = {
+  light: {
+    primaryCardBackground: "#075296",
+    primaryCardBorder: "#075296",
+    primaryText: "#FFFFFF",
+    primaryMutedText: "#D7E9F8",
+    lightCardBackground: "#FFFFFF",
+    lightCardBorder: "#CBD3DF",
+    lightTitle: "#10243C",
+    lightSubtitle: "#075296",
+    lightIconBackground: "#E4EFFD",
+    roscBackground: "#D7EDFD",
+    roscBorder: "#8EC3F0",
+    roscTitle: "#075296",
+    roscDescription: "#28506F",
+    outcomeBackground: "#FFFFFF",
+    outcomeBorder: "#CBD3DF",
+    outcomeIcon: "#7A8492",
+    outcomeTitle: "#10243C",
+    outcomeDescription: "#5C6574",
+    arrowLight: "#7A8492",
+    arrowRosc: "#075296",
+  },
+  dark: {
+    primaryCardBackground: "#0E4A80",
+    primaryCardBorder: "#2F7FBE",
+    primaryText: "#FFFFFF",
+    primaryMutedText: "#D7E9F8",
+    lightCardBackground: "#101B2B",
+    lightCardBorder: "#31435A",
+    lightTitle: "#F5F8FC",
+    lightSubtitle: "#B9DDFF",
+    lightIconBackground: "#164C80",
+    roscBackground: "#102A3F",
+    roscBorder: "#2F7FBE",
+    roscTitle: "#B9DDFF",
+    roscDescription: "#AAB6C7",
+    outcomeBackground: "#101B2B",
+    outcomeBorder: "#31435A",
+    outcomeIcon: "#586678",
+    outcomeTitle: "#F5F8FC",
+    outcomeDescription: "#AAB6C7",
+    arrowLight: "#AAB6C7",
+    arrowRosc: "#77B7F2",
+  },
+};
 
 export default function Step2Pals() {
   const router = useRouter();
+  const { language, themeMode } = useSettings();
+  const text = pageText[language];
+  const colors = cardColors[themeMode];
 
   return (
-    <AlgorithmScreen>
-        <StepHeader
-        badge={"Krok 2"}
-        title={"Zhodnotenie rytmu"}
-        description={"Prerušte stláčanie iba na nevyhnutný čas a zvoľte ďalší postup podľa rytmu alebo klinického výsledku."}
+    <AlgorithmScreen themeMode={themeMode}>
+      <StepHeader
+        badge={text.badge}
+        title={text.title}
+        description={text.description}
+        themeMode={themeMode}
       />
 
-        <View style={styles.rhythmList}>
-          {rhythmOptions.map((option) => {
-            const isLight = option.variant === "light";
+      <View style={styles.rhythmList}>
+        {text.rhythmOptions.map((option) => {
+          const isLight = option.variant === "light";
 
-            return (
-              <Pressable
-                key={option.title}
-                accessibilityRole="button"
-                onPress={() => router.push(option.route)}
-                style={({ pressed }) => [
-                  styles.rhythmCard,
-                  isLight ? styles.rhythmCardLight : styles.rhythmCardPrimary,
-                  pressed && styles.pressed,
+          return (
+            <Pressable
+              key={option.title}
+              accessibilityRole="button"
+              onPress={() => router.push(option.route)}
+              style={({ pressed }) => [
+                styles.rhythmCard,
+                {
+                  borderColor: isLight
+                    ? colors.lightCardBorder
+                    : colors.primaryCardBorder,
+                  backgroundColor: isLight
+                    ? colors.lightCardBackground
+                    : colors.primaryCardBackground,
+                },
+                pressed && styles.pressed,
+              ]}
+            >
+              <View
+                style={[
+                  styles.rhythmIcon,
+                  {
+                    backgroundColor: isLight
+                      ? colors.lightIconBackground
+                      : "#ED1C24",
+                  },
                 ]}
               >
-                <View
-                  style={[styles.rhythmIcon, isLight && styles.rhythmIconLight]}
-                >
-                  <Ionicons
-                    name={option.iconName}
-                    size={24}
-                    color={isLight ? "#075296" : "#FFFFFF"}
-                  />
-                </View>
-
-                <View style={styles.rhythmTextContainer}>
-                  <Text
-                    style={[
-                      styles.rhythmTitle,
-                      isLight && styles.rhythmTitleLight,
-                    ]}
-                  >
-                    {option.title}
-                  </Text>
-                  <Text
-                    style={[
-                      styles.rhythmSubtitle,
-                      isLight && styles.rhythmSubtitleLight,
-                    ]}
-                  >
-                    {option.subtitle}
-                  </Text>
-                </View>
-
                 <Ionicons
-                  name="arrow-forward"
-                  size={22}
-                  color={isLight ? "#7A8492" : "#FFFFFF"}
+                  name={option.iconName}
+                  size={24}
+                  color={isLight ? colors.lightSubtitle : "#FFFFFF"}
                 />
-              </Pressable>
-            );
-          })}
-        </View>
+              </View>
 
-        <View style={styles.outcomeList}>
-          <Pressable
-            accessibilityRole="button"
-            onPress={() => router.push("/algorithms/epals/pals/roscpals")}
-            style={({ pressed }) => [
-              styles.roscCard,
-              pressed && styles.pressed,
+              <View style={styles.rhythmTextContainer}>
+                <Text
+                  style={[
+                    styles.rhythmTitle,
+                    {
+                      color: isLight ? colors.lightTitle : colors.primaryText,
+                    },
+                  ]}
+                >
+                  {option.title}
+                </Text>
+                <Text
+                  style={[
+                    styles.rhythmSubtitle,
+                    {
+                      color: isLight
+                        ? colors.lightSubtitle
+                        : colors.primaryMutedText,
+                    },
+                  ]}
+                >
+                  {option.subtitle}
+                </Text>
+              </View>
+
+              <Ionicons
+                name="arrow-forward"
+                size={22}
+                color={isLight ? colors.arrowLight : "#FFFFFF"}
+              />
+            </Pressable>
+          );
+        })}
+      </View>
+
+      <View style={styles.outcomeList}>
+        <Pressable
+          accessibilityRole="button"
+          onPress={() => router.push("/algorithms/epals/pals/roscpals")}
+          style={({ pressed }) => [
+            styles.roscCard,
+            {
+              borderColor: colors.roscBorder,
+              backgroundColor: colors.roscBackground,
+            },
+            pressed && styles.pressed,
+          ]}
+        >
+          <View style={styles.roscIcon}>
+            <Ionicons name="checkmark" size={24} color="#FFFFFF" />
+          </View>
+          <View style={styles.outcomeTextContainer}>
+            <Text style={[styles.roscTitle, { color: colors.roscTitle }]}>
+              {text.roscTitle}
+            </Text>
+            <Text
+              style={[
+                styles.roscDescription,
+                { color: colors.roscDescription },
+              ]}
+            >
+              {text.roscDescription}
+            </Text>
+          </View>
+          <Ionicons name="arrow-forward" size={22} color={colors.arrowRosc} />
+        </Pressable>
+
+        <Pressable
+          accessibilityRole="button"
+          onPress={() => router.push("/algorithms/epals/pals/termination")}
+          style={({ pressed }) => [
+            styles.outcomeCard,
+            {
+              borderColor: colors.outcomeBorder,
+              backgroundColor: colors.outcomeBackground,
+            },
+            pressed && styles.pressed,
+          ]}
+        >
+          <View
+            style={[
+              styles.terminationIcon,
+              { backgroundColor: colors.outcomeIcon },
             ]}
           >
-            <View style={styles.roscIcon}>
-              <Ionicons name="checkmark" size={24} color="#FFFFFF" />
-            </View>
-            <View style={styles.outcomeTextContainer}>
-              <Text style={styles.roscTitle}>ROSC</Text>
-              <Text style={styles.roscDescription}>
-                Obnovenie spontánneho krvného obehu.
-              </Text>
-            </View>
-            <Ionicons name="arrow-forward" size={22} color="#075296" />
-          </Pressable>
-
-          <Pressable
-            accessibilityRole="button"
-            onPress={() => router.push("/algorithms/epals/pals/termination")}
-            style={({ pressed }) => [
-              styles.outcomeCard,
-              pressed && styles.pressed,
-            ]}
-          >
-            <View style={styles.terminationIcon}>
-              <Ionicons name="stop" size={22} color="#FFFFFF" />
-            </View>
-            <View style={styles.outcomeTextContainer}>
-              <Text style={styles.outcomeTitle}>Ukončenie resuscitácie</Text>
-              <Text style={styles.outcomeDescription}>
-                Prejdite na ukončenie resuscitácie.
-              </Text>
-            </View>
-            <Ionicons name="arrow-forward" size={22} color="#7A8492" />
-          </Pressable>
-        </View>
+            <Ionicons name="stop" size={22} color="#FFFFFF" />
+          </View>
+          <View style={styles.outcomeTextContainer}>
+            <Text style={[styles.outcomeTitle, { color: colors.outcomeTitle }]}>
+              {text.terminationTitle}
+            </Text>
+            <Text
+              style={[
+                styles.outcomeDescription,
+                { color: colors.outcomeDescription },
+              ]}
+            >
+              {text.terminationDescription}
+            </Text>
+          </View>
+          <Ionicons name="arrow-forward" size={22} color={colors.arrowLight} />
+        </Pressable>
+      </View>
     </AlgorithmScreen>
   );
 }
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create({
   rhythmList: {
     width: "100%",
     gap: 10,
@@ -150,46 +286,26 @@ const styles = StyleSheet.create({
     borderCurve: "continuous",
     boxShadow: "0 2px 4px rgba(15, 35, 60, 0.08)",
   },
-  rhythmCardPrimary: {
-    borderColor: "#075296",
-    backgroundColor: "#075296",
-  },
-  rhythmCardLight: {
-    borderColor: "#CBD3DF",
-    backgroundColor: "#FFFFFF",
-  },
   rhythmIcon: {
     width: 44,
     height: 44,
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 22,
-    backgroundColor: "#ED1C24",
-  },
-  rhythmIconLight: {
-    backgroundColor: "#E4EFFD",
   },
   rhythmTextContainer: {
     flex: 1,
     gap: 4,
   },
   rhythmTitle: {
-    color: "#FFFFFF",
     fontSize: 18,
     fontWeight: "800",
     lineHeight: 23,
   },
-  rhythmTitleLight: {
-    color: "#10243C",
-  },
   rhythmSubtitle: {
-    color: "#D7E9F8",
     fontSize: 14,
     fontWeight: "800",
     lineHeight: 19,
-  },
-  rhythmSubtitleLight: {
-    color: "#075296",
   },
   outcomeList: {
     width: "100%",
@@ -204,10 +320,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     paddingVertical: 14,
     borderWidth: 1,
-    borderColor: "#CBD3DF",
     borderRadius: 10,
     borderCurve: "continuous",
-    backgroundColor: "#FFFFFF",
     boxShadow: "0 2px 4px rgba(15, 35, 60, 0.08)",
   },
   terminationIcon: {
@@ -216,20 +330,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 22,
-    backgroundColor: "#7A8492",
   },
   outcomeTextContainer: {
     flex: 1,
     gap: 4,
   },
   outcomeTitle: {
-    color: "#10243C",
     fontSize: 17,
     fontWeight: "900",
     lineHeight: 22,
   },
   outcomeDescription: {
-    color: "#5C6574",
     fontSize: 13,
     lineHeight: 19,
   },
@@ -242,10 +353,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     paddingVertical: 14,
     borderWidth: 1,
-    borderColor: "#8EC3F0",
     borderRadius: 10,
     borderCurve: "continuous",
-    backgroundColor: "#D7EDFD",
     boxShadow: "0 2px 4px rgba(15, 35, 60, 0.08)",
   },
   roscIcon: {
@@ -257,13 +366,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#19A85B",
   },
   roscTitle: {
-    color: "#075296",
     fontSize: 18,
     fontWeight: "900",
     lineHeight: 23,
   },
   roscDescription: {
-    color: "#28506F",
     fontSize: 13,
     lineHeight: 19,
   },

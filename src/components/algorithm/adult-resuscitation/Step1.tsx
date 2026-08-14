@@ -1,3 +1,4 @@
+import { useSettings } from "@/src/context/settings-context";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { StyleSheet, Text, View } from "react-native";
@@ -6,48 +7,145 @@ import InfoCard from "../../ui/info-card";
 import StepHeader from "../../ui/StepHeader";
 import YesButton from "../../ui/YesButton";
 
+const pageText = {
+  sk: {
+    badge: "Krok 1",
+    title: "Prvotné rozpoznanie",
+    description:
+      "Rýchlo vyhodnoťte reakciu a dýchanie. Pri pochybnostiach postupujte ako pri zastavení obehu.",
+    question: "Nereaguje a nedýcha alebo dýcha abnormálne?",
+    yes: "Áno",
+    no: "Nie",
+    noDescription:
+      "Ponechajte osobu v bezpečí, sledujte stav a pokračujte podľa prístupu ABCDE.",
+    infoTitle: "Skôr než začnete",
+    infoDescription:
+      "Zaistite bezpečnosť seba, osoby so zastavením krvného obehu a všetkých okolostojacich.",
+  },
+  en: {
+    badge: "Step 1",
+    title: "Initial recognition",
+    description:
+      "Quickly assess responsiveness and breathing. If in doubt, treat the situation as cardiac arrest.",
+    question: "Unresponsive and not breathing or breathing abnormally?",
+    yes: "Yes",
+    no: "No",
+    noDescription:
+      "Keep the person safe, monitor their condition, and continue with the ABCDE approach.",
+    infoTitle: "Before you start",
+    infoDescription:
+      "Ensure the safety of yourself, the person in cardiac arrest, and all bystanders.",
+  },
+};
+
+const cardColors = {
+  light: {
+    questionBackground: "#D7EDFD",
+    questionIcon: "#0877D1",
+    questionText: "#0877D1",
+    answerBackground: "#FFFFFF",
+    answerBorder: "#CBD3DF",
+    answerIconBackground: "#E4EFFD",
+    answerIcon: "#075296",
+    answerTitle: "#10243C",
+    answerDescription: "#5C6574",
+  },
+  dark: {
+    questionBackground: "#102C45",
+    questionIcon: "#164C80",
+    questionText: "#B9DDFF",
+    answerBackground: "#101B2B",
+    answerBorder: "#31435A",
+    answerIconBackground: "#20334C",
+    answerIcon: "#77B7F2",
+    answerTitle: "#F5F8FC",
+    answerDescription: "#AAB6C7",
+  },
+};
+
 export default function Step1() {
   const router = useRouter();
+  const { language, themeMode } = useSettings();
+  const text = pageText[language];
+  const colors = cardColors[themeMode];
 
   return (
-    <AlgorithmScreen>
+    <AlgorithmScreen themeMode={themeMode}>
       <StepHeader
-        badge="Krok 1"
-        title="Prvotné rozpoznanie"
-        description="Rýchlo vyhodnoťte reakciu a dýchanie. Pri pochybnostiach postupujte ako pri zastavení obehu."
+        badge={text.badge}
+        title={text.title}
+        description={text.description}
+        themeMode={themeMode}
       />
 
-      <View style={styles.questionCard}>
-        <View style={styles.questionIcon}>
+      <View
+        style={[
+          styles.questionCard,
+          { backgroundColor: colors.questionBackground },
+        ]}
+      >
+        <View
+          style={[
+            styles.questionIcon,
+            { backgroundColor: colors.questionIcon },
+          ]}
+        >
           <Ionicons name="help" size={28} color="#FFFFFF" />
         </View>
-        <Text style={styles.questionText}>
-          Nereaguje a nedýcha alebo dýcha abnormálne?
+        <Text style={[styles.questionText, { color: colors.questionText }]}>
+          {text.question}
         </Text>
       </View>
 
       <View style={styles.answersContainer}>
         <YesButton
+          title={text.yes}
+          themeMode={themeMode}
           onPress={() =>
             router.push("/algorithms/adult-resuscitation/als/step2")
           }
         />
-        <View style={[styles.answerCard, styles.answerCardLight]}>
-          <View style={styles.answerIconLight}>
-            <Ionicons name="checkmark" size={24} color="#075296" />
+        <View
+          style={[
+            styles.answerCard,
+            {
+              borderColor: colors.answerBorder,
+              backgroundColor: colors.answerBackground,
+            },
+          ]}
+        >
+          <View
+            style={[
+              styles.answerIconLight,
+              { backgroundColor: colors.answerIconBackground },
+            ]}
+          >
+            <Ionicons
+              name="checkmark"
+              size={24}
+              color={colors.answerIcon}
+            />
           </View>
           <View style={styles.answerTextContainer}>
-            <Text style={styles.answerTitleLight}>Nie</Text>
-            <Text style={styles.answerDescriptionLight}>
-              Ponechajte osobu v bezpečí, sledujte stav a pokračujte podľa
-              prístupu ABCDE.
+            <Text style={[styles.answerTitleLight, { color: colors.answerTitle }]}>
+              {text.no}
+            </Text>
+            <Text
+              style={[
+                styles.answerDescriptionLight,
+                { color: colors.answerDescription },
+              ]}
+            >
+              {text.noDescription}
             </Text>
           </View>
         </View>
       </View>
+
       <InfoCard
-        title="Skôr než začnete"
-        description="Zaistite bezpečnosť seba, osoby so zastavením krvného obehu a všetkých okolostojacich."
+        title={text.infoTitle}
+        description={text.infoDescription}
+        themeMode={themeMode}
       />
     </AlgorithmScreen>
   );
@@ -62,7 +160,6 @@ const styles = StyleSheet.create({
     padding: 18,
     borderRadius: 12,
     borderCurve: "continuous",
-    backgroundColor: "#D7EDFD",
     boxShadow: "0 2px 4px rgba(15, 35, 60, 0.08)",
   },
   questionIcon: {
@@ -71,11 +168,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 21,
-    backgroundColor: "#0877D1",
   },
   questionText: {
     flex: 1,
-    color: "#0877D1",
     fontSize: 20,
     fontWeight: "800",
     lineHeight: 27,
@@ -97,30 +192,23 @@ const styles = StyleSheet.create({
     borderCurve: "continuous",
     boxShadow: "0 2px 4px rgba(15, 35, 60, 0.08)",
   },
-  answerCardLight: {
-    borderColor: "#CBD3DF",
-    backgroundColor: "#FFFFFF",
-  },
   answerIconLight: {
     width: 40,
     height: 40,
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 20,
-    backgroundColor: "#E4EFFD",
   },
   answerTextContainer: {
     flex: 1,
     gap: 4,
   },
   answerTitleLight: {
-    color: "#10243C",
     fontSize: 18,
     fontWeight: "800",
     lineHeight: 23,
   },
   answerDescriptionLight: {
-    color: "#5C6574",
     fontSize: 13,
     lineHeight: 19,
   },

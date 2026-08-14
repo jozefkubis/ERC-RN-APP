@@ -1,3 +1,4 @@
+import type { AppThemeMode } from "@/src/context/settings-context";
 import { Fontisto, Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import type { ComponentProps } from "react";
@@ -10,6 +11,7 @@ type AlgorithmCardBaseProps = {
   badgeText?: string;
   badgeVariant?: "critical" | "warning";
   onPress?: () => void;
+  themeMode?: AppThemeMode;
 };
 
 type AlgorithmCardProps =
@@ -30,6 +32,25 @@ type AlgorithmCardProps =
       iconName: ComponentProps<typeof FontAwesome6>["name"];
     });
 
+const cardColors = {
+  light: {
+    background: "#F9FAFE",
+    border: "#D2D9E6",
+    title: "#10243C",
+    subtitle: "#172A43",
+    description: "#4F5867",
+    icon: "#E3EBF4",
+  },
+  dark: {
+    background: "#101B2B",
+    border: "#31435A",
+    title: "#F5F8FC",
+    subtitle: "#E7EEF8",
+    description: "#AAB6C7",
+    icon: "#34506F",
+  },
+};
+
 export default function AlgorithmCard(props: AlgorithmCardProps) {
   const {
     title,
@@ -38,67 +59,95 @@ export default function AlgorithmCard(props: AlgorithmCardProps) {
     badgeText,
     badgeVariant = "critical",
     onPress,
+    themeMode = "light",
   } = props;
+  const colors = cardColors[themeMode];
   const isWarningBadge = badgeVariant === "warning";
 
   return (
     <Pressable
-      style={({ pressed }) => [styles.card, pressed && styles.pressed]}
+      style={({ pressed }) => [styles.cardPressable, pressed && styles.pressed]}
       onPress={onPress}
     >
-      <View style={styles.cardTopRow}>
-        <View style={styles.cardHeaderText}>
-          {badgeText ? (
-            <View
-              style={isWarningBadge ? styles.warningBadge : styles.criticalRow}
-            >
-              {/* {!isWarningBadge ? <View style={styles.criticalDot} /> : null} */}
-              <Text
+      <View
+        style={[
+          styles.card,
+          {
+            borderColor: colors.border,
+            backgroundColor: colors.background,
+          },
+        ]}
+      >
+        <View style={styles.cardTopRow}>
+          <View style={styles.cardHeaderText}>
+            {badgeText ? (
+              <View
                 style={
-                  isWarningBadge ? styles.warningBadgeText : styles.criticalText
+                  isWarningBadge ? styles.warningBadge : styles.criticalRow
                 }
               >
-                {badgeText}
-              </Text>
-            </View>
+                <Text
+                  style={
+                    isWarningBadge
+                      ? styles.warningBadgeText
+                      : styles.criticalText
+                  }
+                >
+                  {badgeText}
+                </Text>
+              </View>
+            ) : null}
+
+            <Text style={[styles.cardTitle, { color: colors.title }]}>
+              {title}
+            </Text>
+          </View>
+
+          <View style={styles.iconContainer}>
+            {props.iconFamily === "material-community" ? (
+              <MaterialCommunityIcons
+                name={props.iconName}
+                size={50}
+                color={colors.icon}
+              />
+            ) : props.iconFamily === "fontisto" ? (
+              <Fontisto name={props.iconName} size={38} color={colors.icon} />
+            ) : props.iconFamily === "fontawesome6" ? (
+              <FontAwesome6
+                name={props.iconName}
+                size={38}
+                color={colors.icon}
+              />
+            ) : (
+              <Ionicons name={props.iconName} size={50} color={colors.icon} />
+            )}
+          </View>
+        </View>
+
+        <View style={styles.cardBody}>
+          {subtitle ? (
+            <Text style={[styles.cardSubtitle, { color: colors.subtitle }]}>
+              {subtitle}
+            </Text>
           ) : null}
 
-          <Text style={styles.cardTitle}>{title}</Text>
+          <Text
+            style={[styles.cardDescription, { color: colors.description }]}
+            numberOfLines={2}
+            ellipsizeMode="tail"
+          >
+            {description}
+          </Text>
         </View>
-
-        <View style={styles.iconContainer}>
-          {props.iconFamily === "material-community" ? (
-            <MaterialCommunityIcons
-              name={props.iconName}
-              size={50}
-              color="#E3EBF4"
-            />
-          ) : props.iconFamily === "fontisto" ? (
-            <Fontisto name={props.iconName} size={38} color="#E3EBF4" />
-          ) : props.iconFamily === "fontawesome6" ? (
-            <FontAwesome6 name={props.iconName} size={38} color="#E3EBF4" />
-          ) : (
-            <Ionicons name={props.iconName} size={50} color="#E3EBF4" />
-          )}
-        </View>
-      </View>
-
-      <View style={styles.cardBody}>
-        {subtitle ? <Text style={styles.cardSubtitle}>{subtitle}</Text> : null}
-
-        <Text
-          style={styles.cardDescription}
-          numberOfLines={2}
-          ellipsizeMode="tail"
-        >
-          {description}
-        </Text>
       </View>
     </Pressable>
   );
 }
 
 const styles = StyleSheet.create({
+  cardPressable: {
+    width: "100%",
+  },
   card: {
     width: "100%",
     height: 184,
@@ -106,10 +155,8 @@ const styles = StyleSheet.create({
     gap: 12,
     padding: 21,
     borderWidth: 1,
-    borderColor: "#D2D9E6",
     borderRadius: 10,
     borderCurve: "continuous",
-    backgroundColor: "#F9FAFE",
   },
   cardTopRow: {
     width: "100%",
@@ -133,29 +180,23 @@ const styles = StyleSheet.create({
     gap: 9,
   },
   criticalRow: {
+    alignSelf: "flex-start",
     paddingHorizontal: 8,
     paddingVertical: 3,
     borderRadius: 4,
     backgroundColor: "#D40000",
-    alignSelf: "flex-start",
   },
-  // criticalDot: {
-  //   width: 7,
-  //   height: 7,
-  //   borderRadius: 4,
-  //   backgroundColor: "#D40000",
-  // },
   criticalText: {
-    color: "#fafafa",
+    color: "#FAFAFA",
     fontSize: 12,
     fontWeight: "800",
   },
   warningBadge: {
+    alignSelf: "flex-start",
     paddingHorizontal: 8,
     paddingVertical: 3,
     borderRadius: 4,
     backgroundColor: "#F6D38A",
-    alignSelf: "flex-start",
   },
   warningBadgeText: {
     color: "#8B6500",
@@ -163,17 +204,14 @@ const styles = StyleSheet.create({
     fontWeight: "800",
   },
   cardTitle: {
-    color: "#10243C",
     fontSize: 18,
     fontWeight: "800",
   },
   cardSubtitle: {
-    color: "#172A43",
     fontSize: 14,
     fontWeight: "800",
   },
   cardDescription: {
-    color: "#4F5867",
     fontSize: 12,
     lineHeight: 22,
   },

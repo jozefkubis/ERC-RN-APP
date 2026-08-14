@@ -1,100 +1,155 @@
 import AlgorithmCard from "@/src/components/ui/algorithm-card";
+import { useSettings } from "@/src/context/settings-context";
 import { useRouter } from "expo-router";
-import React from "react";
 import { ScrollView, StatusBar, StyleSheet, Text, View } from "react-native";
+
+const adultText = {
+  sk: {
+    title: "Vyberte algoritmus",
+    description:
+      "Postupujte podľa štandardných ERC pokynov pre dospelých.",
+    alsBadge: "ZZS",
+    alsTitle: "ALS",
+    alsSubtitle: "Rozšírená resuscitácia",
+    alsDescription:
+      "Defibrilácia, manažment dýchacích ciest a podávanie liekov pri zastavení obehu.",
+    blsTitle: "BLS",
+    blsSubtitle: "Základná resuscitácia",
+    blsDescription:
+      "Prvotné rozpoznanie, kvalitné stláčanie hrudníka a včasná defibrilácia pomocou AED.",
+    pulseBadge: "S PULZOM",
+    tachyTitle: "Tachykardia",
+    tachyDescription: "Vyhodnotenie a liečba tachyarytmií.",
+    bradyTitle: "Bradykardia",
+    bradyDescription: "Manažment symptomatickej bradykardie.",
+  },
+  en: {
+    title: "Choose algorithm",
+    description: "Follow standard ERC guidance for adult resuscitation.",
+    alsBadge: "EMS",
+    alsTitle: "ALS",
+    alsSubtitle: "Advanced life support",
+    alsDescription:
+      "Defibrillation, airway management, and drug administration during cardiac arrest.",
+    blsTitle: "BLS",
+    blsSubtitle: "Basic life support",
+    blsDescription:
+      "Initial recognition, high-quality chest compressions, and early defibrillation with an AED.",
+    pulseBadge: "WITH PULSE",
+    tachyTitle: "Tachycardia",
+    tachyDescription: "Assessment and treatment of tachyarrhythmias.",
+    bradyTitle: "Bradycardia",
+    bradyDescription: "Management of symptomatic bradycardia.",
+  },
+};
+
+const screenColors = {
+  light: {
+    background: "#F7F8FC",
+    statusBar: "dark-content" as const,
+    title: "#10243C",
+    description: "#5C6574",
+  },
+  dark: {
+    background: "#07111F",
+    statusBar: "light-content" as const,
+    title: "#F5F8FC",
+    description: "#AAB6C7",
+  },
+};
 
 export default function ResuscitationAdult() {
   const router = useRouter();
+  const { language, themeMode } = useSettings();
+  const text = adultText[language];
+  const colors = screenColors[themeMode];
 
   return (
     <>
-      <StatusBar barStyle="dark-content" />
+      <StatusBar barStyle={colors.statusBar} />
       <ScrollView
+        style={{ backgroundColor: colors.background }}
         contentInsetAdjustmentBehavior="automatic"
         contentContainerStyle={styles.container}
       >
         <View style={styles.titleTextContainer}>
-          <Text style={styles.titleText}>Vyberte Algoritmus</Text>
-          <Text style={styles.descriptionText}>
-            Postupujte podľa štandardných ERC pokynov pre dospelých.
+          <Text style={[styles.titleText, { color: colors.title }]}>
+            {text.title}
+          </Text>
+          <Text
+            style={[styles.descriptionText, { color: colors.description }]}
+          >
+            {text.description}
           </Text>
         </View>
 
         <AlgorithmCard
-          badgeText="ZZS"
-          title="ALS"
-          subtitle="Rozšírená resuscitácia"
-          description="Defibrilácia, manažment dýchacích ciest a podávanie liekov pri zastavení obehu."
+          badgeText={text.alsBadge}
+          title={text.alsTitle}
+          subtitle={text.alsSubtitle}
+          description={text.alsDescription}
           iconFamily="fontisto"
           iconName="pulse"
+          themeMode={themeMode}
           onPress={() =>
             router.push("/algorithms/adult-resuscitation/als/step1")
           }
         />
 
         <AlgorithmCard
-          title="BLS"
-          subtitle="Základná resuscitácia"
-          description="Prvotné rozpoznanie, kvalitné stláčanie hrudníka a včasná defibrilácia ak AED."
+          title={text.blsTitle}
+          subtitle={text.blsSubtitle}
+          description={text.blsDescription}
           iconName="heart-outline"
+          themeMode={themeMode}
           onPress={() =>
             router.push("/algorithms/adult-resuscitation/bls/step1")
           }
         />
 
         <AlgorithmCard
-          badgeText="S PULZOM"
+          badgeText={text.pulseBadge}
           badgeVariant="warning"
-          title="Tachykardia"
-          description="Vyhodnotenie a liečba tachyarytmií."
+          title={text.tachyTitle}
+          description={text.tachyDescription}
           iconFamily="ionicons"
           iconName="speedometer-outline"
+          themeMode={themeMode}
           onPress={() =>
             router.push("/algorithms/adult-resuscitation/tachycardia/step1")
           }
         />
 
         <AlgorithmCard
-          title="Bradykardia"
-          description="Manažment symptomatickej bradykardie."
+          title={text.bradyTitle}
+          description={text.bradyDescription}
           iconFamily="material-community"
           iconName="speedometer-slow"
+          themeMode={themeMode}
           onPress={() =>
             router.push("/algorithms/adult-resuscitation/bradycardia/step1")
           }
         />
-
-        {/* <InfoCard
-          title="Skôr než začnete"
-          description="Zaistite bezpečnosť miesta, potvrďte zastavenie obehu a privolajte pomoc pred pokračovaním v špecifických algoritmoch."
-        /> */}
       </ScrollView>
     </>
   );
 }
 
 const styles = StyleSheet.create({
-  // safeArea: {
-  //   flex: 1,
-  //   backgroundColor: "#F7F8FC",
-  // },
   container: {
     paddingHorizontal: 30,
     paddingVertical: 16,
     gap: 15,
   },
   titleTextContainer: {
-    flexDirection: "column",
     gap: 5,
     marginBottom: 10,
   },
   titleText: {
     fontSize: 24,
     fontWeight: "bold",
-    color: "#10243C",
   },
   descriptionText: {
     fontSize: 14,
-    color: "#10243C",
   },
 });

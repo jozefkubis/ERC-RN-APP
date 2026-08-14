@@ -5,6 +5,7 @@ import {
   loadHistory,
   type HistoryItem,
 } from "@/src/components/utils/History";
+import { useSettings } from "@/src/context/settings-context";
 import { algorithmSearchItems } from "@/src/data/algorithm-search";
 import { Ionicons } from "@expo/vector-icons";
 import { useFocusEffect, useRouter, type Href } from "expo-router";
@@ -18,48 +19,89 @@ import {
   View,
 } from "react-native";
 
-// Upraví text do jednoduchej podoby, aby vyhľadávanie fungovalo
-// bez ohľadu na veľké písmená a diakritiku.
+const homeText = {
+  sk: {
+    searchPlaceholder: "Vyhľadaj postup, algoritmus...",
+    clearSearch: "Vymazať text",
+    resultsTitle: "Výsledky",
+    noResults: "Nenašli sa žiadne algoritmy. Skúste iný výraz.",
+    recommendations: "Odporúčania",
+    currentBadge: "Aktuálne",
+    ercDescription: "European Resuscitation Council",
+    historyTitle: "História",
+    showAll: "Zobraziť všetko",
+    showLess: "Zobraziť menej",
+    emptyHistory: "História je zatiaľ prázdna.",
+  },
+  en: {
+    searchPlaceholder: "Search procedure, algorithm...",
+    clearSearch: "Clear text",
+    resultsTitle: "Results",
+    noResults: "No algorithms found. Try another search term.",
+    recommendations: "Recommendations",
+    currentBadge: "Current",
+    ercDescription: "European Resuscitation Council",
+    historyTitle: "History",
+    showAll: "Show all",
+    showLess: "Show less",
+    emptyHistory: "History is empty for now.",
+  },
+};
+
+const homeColors = {
+  light: {
+    background: "#F7F8FC",
+    statusBar: "dark-content" as const,
+    title: "#10243C",
+    muted: "#6B7483",
+    primary: "#075296",
+    historyIcon: "#6B7483",
+    trailingIcon: "#7A8492",
+    cardIcon: "#0868C4",
+  },
+  dark: {
+    background: "#07111F",
+    statusBar: "light-content" as const,
+    title: "#F5F8FC",
+    muted: "#AAB6C7",
+    primary: "#77B7F2",
+    historyIcon: "#AAB6C7",
+    trailingIcon: "#AAB6C7",
+    cardIcon: "#0B5EA8",
+  },
+};
+
 function normalizeText(text: string) {
-  return (
-    text
-      // Rozdelí napríklad "ľ" alebo "á" na písmeno a diakritickú značku.
-      .normalize("NFD")
-      // Odstráni oddelené diakritické značky.
-      .replace(/[\u0300-\u036f]/g, "")
-      // Prevedie celý text na malé písmená.
-      .toLowerCase()
-  );
+  return text
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase();
 }
 
 export default function HomeScreen() {
   const router = useRouter();
+  const { language, themeMode } = useSettings();
+  const text = homeText[language];
+  const colors = homeColors[themeMode];
 
   const [filterValue, setFilterValue] = useState("");
   const [viewingHistory, setViewingHistory] = useState<HistoryItem[]>([]);
   const [showAllHistory, setShowAllHistory] = useState(false);
 
-  // Odstránime medzery na okrajoch a pripravíme text na porovnávanie.
   const searchText = normalizeText(filterValue.trim());
-
-  // Vyhľadávanie sa spustí až po zadaní aspoň dvoch znakov.
   const isSearching = searchText.length >= 2;
 
-  // Z katalógu ponecháme iba algoritmy, ktoré obsahujú hľadaný text.
   const filteredAlgorithms = isSearching
     ? algorithmSearchItems.filter((algorithm) => {
-        // Názov, kategóriu a kľúčové slová spojíme do jedného textu.
         const algorithmText = [
           algorithm.title,
           algorithm.category,
           ...algorithm.keywords,
         ].join(" ");
 
-        // includes() overí, či sa hľadaný text nachádza v algoritme.
         return normalizeText(algorithmText).includes(searchText);
       })
-    : // Ak používateľ ešte nehľadá, výsledky ostanú prázdne.
-      [];
+    : [];
 
   const visibleHistory = showAllHistory
     ? viewingHistory
@@ -87,67 +129,78 @@ export default function HomeScreen() {
 
   return (
     <>
-      <StatusBar barStyle="dark-content" />
+      <StatusBar barStyle={colors.statusBar} />
       <ScrollView
+        style={{ backgroundColor: colors.background }}
         contentInsetAdjustmentBehavior="automatic"
         contentContainerStyle={styles.container}
         keyboardShouldPersistTaps="handled"
       >
         <Input
           clearable
-          placeholder="Vyhľadaj postup, algoritmus..."
+          clearAccessibilityLabel={text.clearSearch}
+          placeholder={text.searchPlaceholder}
           onChangeText={setFilterValue}
           value={filterValue}
+          themeMode={themeMode}
         />
 
-        {/* Pri vyhľadávaní zobrazíme výsledky, inak obsah domovskej stránky. */}
         {isSearching ? (
           <View style={styles.searchResults}>
-            <Text style={styles.resultsTitle}>
-              Výsledky ({filteredAlgorithms.length})
+            <Text style={[styles.resultsTitle, { color: colors.title }]}>
+              {text.resultsTitle} ({filteredAlgorithms.length})
             </Text>
 
             {filteredAlgorithms.length > 0 ? (
-              // Pre každý nájdený algoritmus vytvoríme jednu kartu.
               filteredAlgorithms.map((algorithm) => (
                 <SmallCard
                   key={`${algorithm.title}-${algorithm.category}`}
                   title={algorithm.title}
                   subtitle={algorithm.category}
                   iconName="git-network-sharp"
-                  iconBackgroundColor="#0868C4"
+                  iconBackgroundColor={colors.cardIcon}
                   trailingIcon="chevron-forward"
-                  trailingIconColor="#7A8492"
+                  trailingIconColor={colors.trailingIcon}
+                  themeMode={themeMode}
                   onPress={() => router.push(algorithm.route)}
                 />
               ))
             ) : (
-              <Text style={styles.emptyText}>
-                Nenašli sa žiadne algoritmy. Skúste iný výraz.
+              <Text style={[styles.emptyText, { color: colors.muted }]}>
+                {text.noResults}
               </Text>
             )}
           </View>
         ) : (
           <>
             <View style={styles.primaryOptionsContainer}>
-              <Ionicons name="heart-circle" size={24} color="#075296" />
-              <Text style={styles.primaryOption}>Odporúčania</Text>
+              <Ionicons name="heart-circle" size={24} color={colors.primary} />
+              <Text style={[styles.primaryOption, { color: colors.title }]}>
+                {text.recommendations}
+              </Text>
             </View>
 
             <BaseCard
-              topText="Aktuálne"
+              topText={text.currentBadge}
               title="ERC 2025"
-              description="European Resuscitation Council"
+              description={text.ercDescription}
               iconName="pulse"
               iconSize={44}
+              themeMode={themeMode}
               onPress={() => router.push("/algorithms")}
             />
 
             <View style={styles.listSection}>
               <View style={styles.sectionHeader}>
                 <View style={styles.sectionTitleRow}>
-                  <Ionicons name="time-outline" size={22} color="#6B7483" />
-                  <Text style={styles.sectionTitle}>História</Text>
+                  <Ionicons
+                    name="time-outline"
+                    size={22}
+                    color={colors.historyIcon}
+                  />
+                  <Text style={[styles.sectionTitle, { color: colors.title }]}>
+                    {text.historyTitle}
+                  </Text>
                 </View>
 
                 {viewingHistory.length > 2 ? (
@@ -157,8 +210,8 @@ export default function HomeScreen() {
                       pressed && styles.sectionActionPressed
                     }
                   >
-                    <Text style={styles.sectionAction}>
-                      {showAllHistory ? "Zobraziť menej" : "Zobraziť všetko"}
+                    <Text style={[styles.sectionAction, { color: colors.primary }]}>
+                      {showAllHistory ? text.showLess : text.showAll}
                     </Text>
                   </Pressable>
                 ) : null}
@@ -169,16 +222,19 @@ export default function HomeScreen() {
                   <SmallCard
                     key={historyItem.route}
                     title={historyItem.title}
-                    subtitle={`ERC 2025 · ${historyItem.category}`}
+                    subtitle={`ERC 2025 - ${historyItem.category}`}
                     iconName="git-network-sharp"
-                    iconBackgroundColor="#0868C4"
+                    iconBackgroundColor={colors.cardIcon}
                     trailingIcon="chevron-forward"
-                    trailingIconColor="#7A8492"
+                    trailingIconColor={colors.trailingIcon}
+                    themeMode={themeMode}
                     onPress={() => router.push(historyItem.route as Href)}
                   />
                 ))
               ) : (
-                <Text style={styles.emptyText}>História je zatiaľ prázdna.</Text>
+                <Text style={[styles.emptyText, { color: colors.muted }]}>
+                  {text.emptyHistory}
+                </Text>
               )}
             </View>
           </>
@@ -199,26 +255,23 @@ const styles = StyleSheet.create({
   },
   resultsTitle: {
     paddingVertical: 6,
-    color: "#10243C",
     fontSize: 18,
     fontWeight: "800",
   },
   emptyText: {
     paddingVertical: 30,
-    color: "#6B7483",
     fontSize: 14,
     lineHeight: 20,
     textAlign: "center",
   },
   primaryOptionsContainer: {
+    width: "100%",
     flexDirection: "row",
     alignItems: "center",
-    width: "100%",
   },
   primaryOption: {
     padding: 15,
     fontSize: 20,
-    color: "#10243C",
     fontWeight: "bold",
   },
   listSection: {
@@ -239,12 +292,10 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   sectionTitle: {
-    color: "#10243C",
     fontSize: 20,
     fontWeight: "800",
   },
   sectionAction: {
-    color: "#075296",
     fontSize: 13,
     fontWeight: "700",
   },

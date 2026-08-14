@@ -1,110 +1,221 @@
+import { useSettings } from "@/src/context/settings-context";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import {
-  Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import AlgorithmScreen from "../../ui/AlgorithmScreen";
+import H4T4Button from "../../ui/H4T4Button";
 import StepHeader from "../../ui/StepHeader";
 import InfoCard from "../../ui/info-card";
 
-const careItems = [
-  "Použite ABCDE prístup",
-  "Cieľová SpO₂ 94-98 % a normálna PaCO₂",
-  "Cieľový systolický TK > 100 mmHg",
-  "12-zvodové EKG",
-  "Identifikujte a liečte príčinu",
-  "Kontrolujte telesnú teplotu",
-];
+const pageText = {
+  sk: {
+    badge: "ROSC",
+    title: "Starostlivosť po obnovení obehu",
+    description:
+      "Po návrate spontánneho obehu stabilizujte pacienta, hľadajte príčinu zastavenia obehu a pripravte ďalší manažment.",
+    heroLabel: "Ihneď po obnovení obehu",
+    heroTitle: "ROSC",
+    heroDescription:
+      "Pokračujte systematicky podľa ABCDE a neprestávajte myslieť na príčinu zastavenia obehu.",
+    careItems: [
+      "Použite ABCDE prístup",
+      "Cieľová SpO2 94-98 % a normálna PaCO2",
+      "Cieľový systolický TK > 100 mmHg",
+      "12-zvodové EKG",
+      "Identifikujte a liečte príčinu",
+      "Kontrolujte telesnú teplotu",
+    ],
+    infoTitle: "Cieľ",
+    infoDescription:
+      "Udržať oxygenáciu, ventiláciu a perfúziu v bezpečnom rozsahu, odhaliť príčinu zastavenia obehu a predísť sekundárnemu poškodeniu.",
+    backTitle: "Späť na rytmus",
+    backDescription: "Vrátiť sa na zhodnotenie rytmu",
+  },
+  en: {
+    badge: "ROSC",
+    title: "Post-resuscitation care",
+    description:
+      "After return of spontaneous circulation, stabilise the patient, identify the cause of cardiac arrest, and prepare further management.",
+    heroLabel: "Immediately after circulation returns",
+    heroTitle: "ROSC",
+    heroDescription:
+      "Continue systematically using the ABCDE approach and keep looking for the cause of cardiac arrest.",
+    careItems: [
+      "Use the ABCDE approach",
+      "Target SpO2 94-98 % and normal PaCO2",
+      "Target systolic BP > 100 mmHg",
+      "12-lead ECG",
+      "Identify and treat the cause",
+      "Control body temperature",
+    ],
+    infoTitle: "Goal",
+    infoDescription:
+      "Maintain oxygenation, ventilation, and perfusion within a safe range, identify the cause of cardiac arrest, and prevent secondary injury.",
+    backTitle: "Back to rhythm",
+    backDescription: "Return to rhythm assessment",
+  },
+};
+
+const cardColors = {
+  light: {
+    heroBackground: "#D7EDFD",
+    heroBorder: "#8EC3F0",
+    heroLabel: "#075296",
+    heroTitle: "#075296",
+    heroDescription: "#28506F",
+    successIcon: "#19A85B",
+    careBackground: "#FFF5D8",
+    careBorder: "#D2D9E6",
+    careText: "#10243C",
+    backBackground: "#FFFFFF",
+    backBorder: "#CBD3DF",
+    backIconBackground: "#E4EFFD",
+    backIcon: "#075296",
+    backTitle: "#10243C",
+    backDescription: "#5C6574",
+  },
+  dark: {
+    heroBackground: "#102A3F",
+    heroBorder: "#2F7FBE",
+    heroLabel: "#B9DDFF",
+    heroTitle: "#B9DDFF",
+    heroDescription: "#AAB6C7",
+    successIcon: "#157A45",
+    careBackground: "#252312",
+    careBorder: "#5B5124",
+    careText: "#F5F8FC",
+    backBackground: "#101B2B",
+    backBorder: "#31435A",
+    backIconBackground: "#164C80",
+    backIcon: "#B9DDFF",
+    backTitle: "#F5F8FC",
+    backDescription: "#AAB6C7",
+  },
+};
 
 export default function ROSC() {
   const router = useRouter();
+  const { language, themeMode } = useSettings();
+  const text = pageText[language];
+  const colors = cardColors[themeMode];
 
   return (
-    <AlgorithmScreen>
-        <StepHeader
-        badge={"ROSC"}
-        title={"Starostlivosť po obnovení obehu"}
-        description={"Po návrate spontánneho obehu stabilizujte pacienta, hľadajte príčinu zastavenia obehu a pripravte ďalší manažment."}
+    <AlgorithmScreen themeMode={themeMode}>
+      <StepHeader
+        badge={text.badge}
+        title={text.title}
+        description={text.description}
+        themeMode={themeMode}
       />
 
-        <View style={styles.heroCard}>
-          <View style={styles.heroIcon}>
-            <Ionicons name="checkmark" size={28} color="#FFFFFF" />
-          </View>
-          <View style={styles.heroTextContainer}>
-            <Text style={styles.heroLabel}>Ihneď po obnovení obehu</Text>
-            <Text style={styles.heroTitle}>ROSC</Text>
-            <Text style={styles.heroDescription}>
-              Pokračujte systematicky podľa ABCDE a neprestávajte myslieť na
-              príčinu zastavenia obehu.
-            </Text>
-          </View>
-        </View>
-
-        <Pressable
-          style={({ pressed }) => [styles.causeCard, pressed && styles.pressed]}
-          onPress={() =>
-            router.push("/algorithms/adult-resuscitation/als/4h4t")
-          }
+      <View
+        style={[
+          styles.heroCard,
+          {
+            borderColor: colors.heroBorder,
+            backgroundColor: colors.heroBackground,
+          },
+        ]}
+      >
+        <View
+          style={[styles.heroIcon, { backgroundColor: colors.successIcon }]}
         >
-          <View style={styles.causeIcon}>
-            <Ionicons name="search-outline" size={22} color="#075296" />
-          </View>
-          <View style={styles.causeTextContainer}>
-            <Text style={styles.causeTitle}>Reverzibilné príčiny</Text>
-            <Text style={styles.causeDescription}>
-              Otvoriť 4H/4T checklist počas pokračujúcej resuscitácie.
-            </Text>
-          </View>
-          <Ionicons name="arrow-forward" size={22} color="#7A8492" />
-        </Pressable>
+          <Ionicons name="checkmark" size={28} color="#FFFFFF" />
+        </View>
+        <View style={styles.heroTextContainer}>
+          <Text style={[styles.heroLabel, { color: colors.heroLabel }]}>
+            {text.heroLabel}
+          </Text>
+          <Text style={[styles.heroTitle, { color: colors.heroTitle }]}>
+            {text.heroTitle}
+          </Text>
+          <Text
+            style={[
+              styles.heroDescription,
+              { color: colors.heroDescription },
+            ]}
+          >
+            {text.heroDescription}
+          </Text>
+        </View>
+      </View>
 
-        <View style={styles.careList}>
-          {careItems.map((item) => (
-            <View key={item} style={styles.careRow}>
-              <View style={styles.careBullet}>
-                <Ionicons name="checkmark" size={15} color="#FFFFFF" />
-              </View>
-              <Text style={styles.careText}>{item}</Text>
+      <H4T4Button />
+
+      <View
+        style={[
+          styles.careList,
+          {
+            borderColor: colors.careBorder,
+            backgroundColor: colors.careBackground,
+          },
+        ]}
+      >
+        {text.careItems.map((item) => (
+          <View key={item} style={styles.careRow}>
+            <View
+              style={[styles.careBullet, { backgroundColor: colors.successIcon }]}
+            >
+              <Ionicons name="checkmark" size={15} color="#FFFFFF" />
             </View>
-          ))}
-        </View>
-
-        <InfoCard
-          title="Cieľ"
-          description="Udržať oxygenáciu, ventiláciu a perfúziu v bezpečnom rozsahu, odhaliť príčinu zastavenia obehu a predísť sekundárnemu poškodeniu."
-          iconName="pulse-outline"
-        />
-
-        <Pressable
-          style={({ pressed }) => [styles.backCard, pressed && styles.pressed]}
-          onPress={() =>
-            router.push("/algorithms/adult-resuscitation/als/step3")
-          }
-        >
-          <View style={styles.backIcon}>
-            <Ionicons name="arrow-back" size={22} color="#075296" />
-          </View>
-          <View style={styles.backTextContainer}>
-            <Text style={styles.backTitle}>Späť na rytmus</Text>
-            <Text style={styles.backDescription}>
-              Vrátiť sa na zhodnotenie rytmu
+            <Text style={[styles.careText, { color: colors.careText }]}>
+              {item}
             </Text>
           </View>
-        </Pressable>
+        ))}
+      </View>
+
+      <InfoCard
+        title={text.infoTitle}
+        description={text.infoDescription}
+        iconName="pulse-outline"
+        themeMode={themeMode}
+      />
+
+      <Pressable
+        style={({ pressed }) => [
+          styles.backCard,
+          {
+            borderColor: colors.backBorder,
+            backgroundColor: colors.backBackground,
+          },
+          pressed && styles.pressed,
+        ]}
+        onPress={() => router.push("/algorithms/adult-resuscitation/als/step3")}
+      >
+        <View
+          style={[
+            styles.backIcon,
+            { backgroundColor: colors.backIconBackground },
+          ]}
+        >
+          <Ionicons name="arrow-back" size={22} color={colors.backIcon} />
+        </View>
+        <View style={styles.backTextContainer}>
+          <Text style={[styles.backTitle, { color: colors.backTitle }]}>
+            {text.backTitle}
+          </Text>
+          <Text
+            style={[styles.backDescription, { color: colors.backDescription }]}
+          >
+            {text.backDescription}
+          </Text>
+        </View>
+      </Pressable>
     </AlgorithmScreen>
   );
 }
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create({
   heroCard: {
     width: "100%",
     flexDirection: "row",
     alignItems: "center",
     gap: 15,
     padding: 18,
+    borderWidth: 1,
     borderRadius: 12,
     borderCurve: "continuous",
-    backgroundColor: "#D7EDFD",
     boxShadow: "0 2px 4px rgba(15, 35, 60, 0.08)",
   },
   heroIcon: {
@@ -113,26 +224,22 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 27,
-    backgroundColor: "#19A85B",
   },
   heroTextContainer: {
     flex: 1,
     gap: 4,
   },
   heroLabel: {
-    color: "#075296",
     fontSize: 12,
     fontWeight: "800",
     lineHeight: 17,
   },
   heroTitle: {
-    color: "#075296",
     fontSize: 28,
     fontWeight: "900",
     lineHeight: 34,
   },
   heroDescription: {
-    color: "#28506F",
     fontSize: 13,
     lineHeight: 19,
   },
@@ -141,10 +248,8 @@ const styles = StyleSheet.create({
     gap: 10,
     padding: 16,
     borderWidth: 1,
-    borderColor: "#D2D9E6",
     borderRadius: 10,
     borderCurve: "continuous",
-    backgroundColor: "#FFF5D8",
     boxShadow: "0 2px 4px rgba(15, 35, 60, 0.08)",
   },
   careRow: {
@@ -159,11 +264,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 11,
-    backgroundColor: "#19A85B",
   },
   careText: {
     flex: 1,
-    color: "#10243C",
     fontSize: 14,
     fontWeight: "800",
     lineHeight: 21,
@@ -177,10 +280,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     paddingVertical: 14,
     borderWidth: 1,
-    borderColor: "#CBD3DF",
     borderRadius: 10,
     borderCurve: "continuous",
-    backgroundColor: "#FFFFFF",
     boxShadow: "0 2px 4px rgba(15, 35, 60, 0.08)",
   },
   backIcon: {
@@ -189,63 +290,22 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 20,
-    backgroundColor: "#E4EFFD",
   },
   backTextContainer: {
     flex: 1,
     gap: 4,
   },
   backTitle: {
-    color: "#10243C",
     fontSize: 16,
     fontWeight: "900",
     lineHeight: 21,
   },
   backDescription: {
-    color: "#5C6574",
     fontSize: 13,
     lineHeight: 19,
   },
   pressed: {
     opacity: 0.7,
     transform: [{ scale: 0.99 }],
-  },
-  causeCard: {
-    width: "100%",
-    minHeight: 82,
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 14,
-    paddingHorizontal: 15,
-    paddingVertical: 14,
-    borderWidth: 1,
-    borderColor: "#CBD3DF",
-    borderRadius: 10,
-    borderCurve: "continuous",
-    backgroundColor: "#FFFFFF",
-    boxShadow: "0 2px 4px rgba(15, 35, 60, 0.08)",
-  },
-  causeIcon: {
-    width: 40,
-    height: 40,
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 20,
-    backgroundColor: "#E4EFFD",
-  },
-  causeTextContainer: {
-    flex: 1,
-    gap: 4,
-  },
-  causeTitle: {
-    color: "#10243C",
-    fontSize: 16,
-    fontWeight: "900",
-    lineHeight: 21,
-  },
-  causeDescription: {
-    color: "#5C6574",
-    fontSize: 13,
-    lineHeight: 19,
   },
 });

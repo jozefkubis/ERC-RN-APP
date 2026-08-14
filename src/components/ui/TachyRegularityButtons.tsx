@@ -1,5 +1,5 @@
+import { useSettings } from "@/src/context/settings-context";
 import { Ionicons } from "@expo/vector-icons";
-import React from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 
 type TachyRegularityButtonsProps = {
@@ -7,32 +7,92 @@ type TachyRegularityButtonsProps = {
   onRegularPress?: () => void;
 };
 
+const buttonText = {
+  sk: {
+    irregular: "Nepravidelný",
+    regular: "Pravidelný",
+  },
+  en: {
+    irregular: "Irregular",
+    regular: "Regular",
+  },
+};
+
+const buttonColors = {
+  light: {
+    background: "#FFFFFF",
+    border: "#075296",
+    text: "#10243C",
+    primary: "#075296",
+    iconBackground: "#E4EFFD",
+  },
+  dark: {
+    background: "#101B2B",
+    border: "#2F7FBE",
+    text: "#F5F8FC",
+    primary: "#B9DDFF",
+    iconBackground: "#164C80",
+  },
+};
+
 export default function TachyRegularityButtons({
   onIrregularPress,
   onRegularPress,
 }: TachyRegularityButtonsProps) {
+  const { language, themeMode } = useSettings();
+  const text = buttonText[language];
+  const colors = buttonColors[themeMode];
+
   return (
     <View style={styles.container}>
       <Pressable
         onPress={onIrregularPress}
-        style={({ pressed }) => [styles.button, pressed && styles.pressed]}
+        style={({ pressed }) => [
+          styles.button,
+          {
+            borderColor: colors.border,
+            backgroundColor: colors.background,
+          },
+          pressed && styles.pressed,
+        ]}
       >
-        <View style={styles.iconContainer}>
-          <Ionicons name="git-branch" size={24} color="#075296" />
+        <View
+          style={[
+            styles.iconContainer,
+            { backgroundColor: colors.iconBackground },
+          ]}
+        >
+          <Ionicons name="git-branch" size={24} color={colors.primary} />
         </View>
-        <Text style={styles.buttonText}>Nepravidelný</Text>
-        <Ionicons name="arrow-forward" size={26} color="#075296" />
+        <Text style={[styles.buttonText, { color: colors.text }]}>
+          {text.irregular}
+        </Text>
+        <Ionicons name="arrow-forward" size={26} color={colors.primary} />
       </Pressable>
 
       <Pressable
         onPress={onRegularPress}
-        style={({ pressed }) => [styles.button, pressed && styles.pressed]}
+        style={({ pressed }) => [
+          styles.button,
+          {
+            borderColor: colors.border,
+            backgroundColor: colors.background,
+          },
+          pressed && styles.pressed,
+        ]}
       >
-        <View style={styles.iconContainer}>
-          <Ionicons name="reorder-three" size={26} color="#075296" />
+        <View
+          style={[
+            styles.iconContainer,
+            { backgroundColor: colors.iconBackground },
+          ]}
+        >
+          <Ionicons name="reorder-three" size={26} color={colors.primary} />
         </View>
-        <Text style={styles.buttonText}>Pravidelný</Text>
-        <Ionicons name="arrow-forward" size={26} color="#075296" />
+        <Text style={[styles.buttonText, { color: colors.text }]}>
+          {text.regular}
+        </Text>
+        <Ionicons name="arrow-forward" size={26} color={colors.primary} />
       </Pressable>
     </View>
   );
@@ -52,10 +112,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 18,
     paddingVertical: 16,
     borderWidth: 2,
-    borderColor: "#075296",
     borderRadius: 10,
     borderCurve: "continuous",
-    backgroundColor: "#FFFFFF",
     boxShadow: "0 2px 4px rgba(15, 35, 60, 0.08)",
   },
   iconContainer: {
@@ -64,11 +122,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 24,
-    backgroundColor: "#E4EFFD",
   },
   buttonText: {
     flex: 1,
-    color: "#10243C",
     fontSize: 22,
     fontWeight: "800",
     lineHeight: 28,

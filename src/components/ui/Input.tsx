@@ -1,3 +1,4 @@
+import type { AppThemeMode } from "@/src/context/settings-context";
 import { Ionicons } from "@expo/vector-icons";
 import { useState, type ComponentProps } from "react";
 import {
@@ -16,51 +17,92 @@ type InputProps = TextInputProps & {
   iconColor?: string;
   containerStyle?: StyleProp<ViewStyle>;
   clearable?: boolean;
+  clearAccessibilityLabel?: string;
+  themeMode?: AppThemeMode;
+};
+
+const inputColors = {
+  light: {
+    background: "#FFFFFF",
+    border: "#D7DEE8",
+    focusedBorder: "#0877D1",
+    icon: "#6B7483",
+    focusedIcon: "#0877D1",
+    text: "#10243C",
+    placeholder: "#7A8492",
+    clearBackground: "#EEF2F6",
+    clearIcon: "#7A8492",
+  },
+  dark: {
+    background: "#101B2B",
+    border: "#31435A",
+    focusedBorder: "#77B7F2",
+    icon: "#AAB6C7",
+    focusedIcon: "#77B7F2",
+    text: "#F5F8FC",
+    placeholder: "#7F8EA3",
+    clearBackground: "#20334C",
+    clearIcon: "#AAB6C7",
+  },
 };
 
 export default function Input({
   iconName = "search",
   iconSize = 22,
-  iconColor = "#6B7483",
+  iconColor,
   containerStyle,
   clearable = false,
+  clearAccessibilityLabel = "Vymazať text",
+  themeMode = "light",
   style,
   value,
   onChangeText,
   ...textInputProps
 }: InputProps) {
   const [isFocused, setIsFocused] = useState(false);
+  const colors = inputColors[themeMode];
+
   return (
     <View
-      style={[styles.container, containerStyle, isFocused && styles.focused]}
+      style={[
+        styles.container,
+        {
+          borderColor: isFocused ? colors.focusedBorder : colors.border,
+          backgroundColor: colors.background,
+        },
+        containerStyle,
+      ]}
       onFocus={() => setIsFocused(true)}
       onBlur={() => setIsFocused(false)}
     >
       <Ionicons
         name={iconName}
         size={iconSize}
-        color={isFocused ? "#0877D1" : iconColor}
+        color={isFocused ? colors.focusedIcon : (iconColor ?? colors.icon)}
       />
       <TextInput
         {...textInputProps}
         value={value}
         onChangeText={onChangeText}
-        style={[styles.input, style]}
-        placeholderTextColor={textInputProps.placeholderTextColor ?? "#7A8492"}
-        selectionColor={textInputProps.selectionColor ?? "#0877D1"}
+        style={[styles.input, { color: colors.text }, style]}
+        placeholderTextColor={
+          textInputProps.placeholderTextColor ?? colors.placeholder
+        }
+        selectionColor={textInputProps.selectionColor ?? colors.focusedIcon}
       />
       {clearable && value ? (
         <Pressable
-          accessibilityLabel="Vymazať text"
+          accessibilityLabel={clearAccessibilityLabel}
           accessibilityRole="button"
           hitSlop={10}
           onPress={() => onChangeText?.("")}
           style={({ pressed }) => [
             styles.clearButton,
+            { backgroundColor: colors.clearBackground },
             pressed && styles.clearButtonPressed,
           ]}
         >
-          <Ionicons name="close-circle" size={22} color="#7A8492" />
+          <Ionicons name="close-circle" size={22} color={colors.clearIcon} />
         </Pressable>
       ) : null}
     </View>
@@ -76,22 +118,15 @@ const styles = StyleSheet.create({
     gap: 12,
     paddingHorizontal: 16,
     borderWidth: 1,
-    borderColor: "#D7DEE8",
     borderRadius: 18,
     borderCurve: "continuous",
-    backgroundColor: "#FFFFFF",
     boxShadow: "0 5px 18px rgba(15, 35, 60, 0.08)",
   },
   input: {
     flex: 1,
     height: "100%",
-    color: "#10243C",
     fontSize: 16,
     fontWeight: "500",
-  },
-  focused: {
-    borderColor: "#0877D1",
-    boxShadow: "0 5px 18px rgba(8, 119, 209, 0.14)",
   },
   clearButton: {
     width: 30,
@@ -99,7 +134,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 15,
-    backgroundColor: "#EEF2F6",
   },
   clearButtonPressed: {
     opacity: 0.65,

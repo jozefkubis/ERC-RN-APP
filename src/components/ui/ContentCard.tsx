@@ -1,3 +1,4 @@
+import type { AppThemeMode } from "@/src/context/settings-context";
 import { Ionicons } from "@expo/vector-icons";
 import type { ComponentProps } from "react";
 import { StyleSheet, Text, View } from "react-native";
@@ -11,6 +12,42 @@ type ContentCardProps = {
   items: string[];
   lead?: string;
   tone?: CardTone;
+  themeMode?: AppThemeMode;
+};
+
+const cardColors = {
+  light: {
+    defaultBorder: "#CBD3DF",
+    defaultBackground: "#FFFFFF",
+    infoBorder: "#B9D7F2",
+    infoBackground: "#D7EDFD",
+    warningBorder: "#F0DEB4",
+    warningBackground: "#FFF6DC",
+    dangerBorder: "#F3B7BA",
+    dangerBackground: "#FDE7E8",
+    title: "#075296",
+    dangerTitle: "#C8141B",
+    lead: "#10243C",
+    itemText: "#24425F",
+    warningIcon: "#B45309",
+    warningIconBorder: "#D97706",
+  },
+  dark: {
+    defaultBorder: "#31435A",
+    defaultBackground: "#101B2B",
+    infoBorder: "#244E74",
+    infoBackground: "#102C45",
+    warningBorder: "#6A511D",
+    warningBackground: "#2C2516",
+    dangerBorder: "#743038",
+    dangerBackground: "#33191D",
+    title: "#77B7F2",
+    dangerTitle: "#FF9AA1",
+    lead: "#F5F8FC",
+    itemText: "#D7E1EE",
+    warningIcon: "#F7C66B",
+    warningIconBorder: "#C9922E",
+  },
 };
 
 export default function ContentCard({
@@ -19,39 +56,66 @@ export default function ContentCard({
   items,
   lead,
   tone = "default",
+  themeMode = "light",
 }: ContentCardProps) {
   const isDanger = tone === "danger";
+  const colors = cardColors[themeMode];
+  const cardStyle = {
+    default: {
+      borderColor: colors.defaultBorder,
+      backgroundColor: colors.defaultBackground,
+    },
+    info: {
+      borderColor: colors.infoBorder,
+      backgroundColor: colors.infoBackground,
+    },
+    warning: {
+      borderColor: colors.warningBorder,
+      backgroundColor: colors.warningBackground,
+    },
+    danger: {
+      borderColor: colors.dangerBorder,
+      backgroundColor: colors.dangerBackground,
+    },
+  }[tone];
 
   return (
     <View
       style={[
         styles.contentCard,
-        tone === "info" && styles.infoCard,
-        tone === "warning" && styles.warningCard,
-        isDanger && styles.dangerCard,
+        cardStyle,
       ]}
     >
       <View style={styles.cardHeader}>
         <View
           style={[
             styles.cardIcon,
-            tone === "warning" && styles.warningIcon,
+            tone === "warning" && [
+              styles.warningIcon,
+              { borderColor: colors.warningIconBorder },
+            ],
             isDanger && styles.dangerIcon,
           ]}
         >
           <Ionicons
             name={iconName}
             size={23}
-            color={tone === "warning" ? "#B45309" : "#FFFFFF"}
+            color={tone === "warning" ? colors.warningIcon : "#FFFFFF"}
           />
         </View>
-        <Text selectable style={[styles.cardTitle, isDanger && styles.dangerTitle]}>
+        <Text
+          selectable
+          style={[
+            styles.cardTitle,
+            { color: isDanger ? colors.dangerTitle : colors.title },
+          ]}
+        >
           {title}
         </Text>
       </View>
 
       {lead ? (
-        <Text selectable style={styles.cardLead}>
+        <Text selectable style={[styles.cardLead, { color: colors.lead }]}>
           {lead}
         </Text>
       ) : null}
@@ -60,7 +124,7 @@ export default function ContentCard({
         {items.map((item) => (
           <View key={item} style={styles.itemRow}>
             <View style={[styles.bullet, isDanger && styles.dangerBullet]} />
-            <Text selectable style={styles.itemText}>
+            <Text selectable style={[styles.itemText, { color: colors.itemText }]}>
               {item}
             </Text>
           </View>
@@ -76,23 +140,9 @@ const styles = StyleSheet.create({
     gap: 14,
     padding: 17,
     borderWidth: 1,
-    borderColor: "#CBD3DF",
     borderRadius: 12,
     borderCurve: "continuous",
-    backgroundColor: "#FFFFFF",
     boxShadow: "0 2px 4px rgba(15, 35, 60, 0.08)",
-  },
-  infoCard: {
-    borderColor: "#B9D7F2",
-    backgroundColor: "#D7EDFD",
-  },
-  warningCard: {
-    borderColor: "#F0DEB4",
-    backgroundColor: "#FFF6DC",
-  },
-  dangerCard: {
-    borderColor: "#F3B7BA",
-    backgroundColor: "#FDE7E8",
   },
   cardHeader: {
     width: "100%",
@@ -110,7 +160,6 @@ const styles = StyleSheet.create({
   },
   warningIcon: {
     borderWidth: 2,
-    borderColor: "#D97706",
     backgroundColor: "#FFFFFF",
   },
   dangerIcon: {
@@ -118,16 +167,11 @@ const styles = StyleSheet.create({
   },
   cardTitle: {
     flex: 1,
-    color: "#075296",
     fontSize: 18,
     fontWeight: "900",
     lineHeight: 24,
   },
-  dangerTitle: {
-    color: "#C8141B",
-  },
   cardLead: {
-    color: "#10243C",
     fontSize: 15,
     fontWeight: "800",
     lineHeight: 21,
@@ -154,7 +198,6 @@ const styles = StyleSheet.create({
   },
   itemText: {
     flex: 1,
-    color: "#24425F",
     fontSize: 13,
     fontWeight: "700",
     lineHeight: 19,
