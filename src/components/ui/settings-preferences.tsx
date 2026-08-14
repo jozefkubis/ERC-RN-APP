@@ -1,9 +1,10 @@
+import {
+  AppLanguage,
+  AppThemeMode,
+  useSettings,
+} from "@/src/context/settings-context";
 import { Ionicons } from "@expo/vector-icons";
-import { useState } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
-
-type LanguageOption = "en" | "sk";
-type ModeOption = "light" | "dark";
 
 type Option<T extends string> = {
   label: string;
@@ -11,28 +12,26 @@ type Option<T extends string> = {
   iconName: keyof typeof Ionicons.glyphMap;
 };
 
-const languageOptions: Option<LanguageOption>[] = [
+const languageOptions: Option<AppLanguage>[] = [
   { label: "English", value: "en", iconName: "language-outline" },
   { label: "Slovensky", value: "sk", iconName: "chatbubble-ellipses-outline" },
 ];
 
-const modeOptions: Option<ModeOption>[] = [
+const modeOptions: Option<AppThemeMode>[] = [
   { label: "Svetly", value: "light", iconName: "sunny-outline" },
   { label: "Tmavy", value: "dark", iconName: "moon-outline" },
 ];
 
 export default function SettingsPreferences() {
-  const [selectedLanguage, setSelectedLanguage] =
-    useState<LanguageOption>("sk");
-  const [selectedMode, setSelectedMode] = useState<ModeOption>("light");
+  const { language, themeMode, setLanguage, setThemeMode } = useSettings();
 
-  function handleLanguagePress(value: LanguageOption) {
-    setSelectedLanguage(value);
+  function handleLanguagePress(value: AppLanguage) {
+    setLanguage(value);
     console.log(`settings language clicked: ${value}`);
   }
 
-  function handleModePress(value: ModeOption) {
-    setSelectedMode(value);
+  function handleModePress(value: AppThemeMode) {
+    setThemeMode(value);
     console.log(`settings mode clicked: ${value}`);
   }
 
@@ -58,7 +57,7 @@ export default function SettingsPreferences() {
               key={option.value}
               label={option.label}
               iconName={option.iconName}
-              selected={selectedLanguage === option.value}
+              selected={language === option.value}
               onPress={() => handleLanguagePress(option.value)}
             />
           ))}
@@ -73,7 +72,7 @@ export default function SettingsPreferences() {
               key={option.value}
               label={option.label}
               iconName={option.iconName}
-              selected={selectedMode === option.value}
+              selected={themeMode === option.value}
               onPress={() => handleModePress(option.value)}
             />
           ))}
