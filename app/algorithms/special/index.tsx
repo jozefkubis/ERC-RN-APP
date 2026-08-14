@@ -3,6 +3,7 @@ import { useSettings } from "@/src/context/settings-context";
 import { useRouter } from "expo-router";
 import type { ComponentProps } from "react";
 import { ScrollView, StatusBar, StyleSheet, Text, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 type SpecialAlgorithm = ComponentProps<typeof AlgorithmCard> & {
   route:
@@ -567,7 +568,10 @@ export default function SpecialAlgorithms() {
   const colors = screenColors[themeMode];
 
   return (
-    <>
+    <SafeAreaView
+      edges={["bottom"]}
+      style={[styles.safeArea, { backgroundColor: colors.background }]}
+    >
       <StatusBar barStyle={colors.statusBar} />
       <ScrollView
         style={{ backgroundColor: colors.background }}
@@ -599,11 +603,14 @@ export default function SpecialAlgorithms() {
           );
         })}
       </ScrollView>
-    </>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+  },
   container: {
     paddingHorizontal: 30,
     paddingVertical: 16,

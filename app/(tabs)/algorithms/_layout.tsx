@@ -1,14 +1,17 @@
-import { defaultHeaderOptions } from "@/src/navigation/screenOptions";
+import { useSettings } from "@/src/context/settings-context";
+import { getHeaderOptions, navigationColors } from "@/src/navigation/screenOptions";
 import { Ionicons } from "@expo/vector-icons";
 import { Stack, useRouter } from "expo-router";
 
 export default function AlgorithmsLayout() {
   const router = useRouter();
+  const { themeMode } = useSettings();
+  const colors = navigationColors[themeMode];
 
   return (
     <Stack
       screenOptions={{
-        ...defaultHeaderOptions,
+        ...getHeaderOptions(themeMode),
         animation: "slide_from_right",
       }}
     >
@@ -20,7 +23,7 @@ export default function AlgorithmsLayout() {
             <Ionicons
               name="arrow-back"
               size={24}
-              color="black"
+              color={colors.primaryText}
               onPress={() => router.back()}
             />
           ),

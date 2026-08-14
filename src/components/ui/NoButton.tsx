@@ -1,27 +1,65 @@
+import type { AppThemeMode } from "@/src/context/settings-context";
 import { Ionicons } from "@expo/vector-icons";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 
 type NoButtonProps = {
+  title?: string;
   onPress?: () => void;
+  themeMode?: AppThemeMode;
 };
 
-export default function NoButton({ onPress }: NoButtonProps) {
+const buttonColors = {
+  light: {
+    border: "#CBD3DF",
+    background: "#FFFFFF",
+    iconBackground: "#E4EFFD",
+    icon: "#075296",
+    text: "#10243C",
+    arrow: "#7A8492",
+  },
+  dark: {
+    border: "#31435A",
+    background: "#101B2B",
+    iconBackground: "#20334C",
+    icon: "#77B7F2",
+    text: "#F5F8FC",
+    arrow: "#AAB6C7",
+  },
+};
+
+export default function NoButton({
+  title = "Nie",
+  onPress,
+  themeMode = "light",
+}: NoButtonProps) {
+  const colors = buttonColors[themeMode];
+
   return (
     <Pressable
       style={({ pressed }) => [
         styles.answerCard,
-        styles.answerCardLight,
+        {
+          borderColor: colors.border,
+          backgroundColor: colors.background,
+        },
         pressed && styles.pressed,
       ]}
-      onPress={onPress && onPress}
+      onPress={onPress}
     >
-      <View style={styles.answerIconLight}>
-        <Ionicons name="close" size={24} color="#075296" />
+      <View
+        style={[
+          styles.answerIconLight,
+          { backgroundColor: colors.iconBackground },
+        ]}
+      >
+        <Ionicons name="close" size={24} color={colors.icon} />
       </View>
       <View style={styles.answerTextContainer}>
-        <Text style={styles.answerTitleLight}>Nie</Text>
+        <Text style={[styles.answerTitleLight, { color: colors.text }]}>
+          {title}
+        </Text>
       </View>
-      <Ionicons name="arrow-forward" size={22} color="#7A8492" />
+      <Ionicons name="arrow-forward" size={22} color={colors.arrow} />
     </Pressable>
   );
 }
@@ -40,24 +78,18 @@ const styles = StyleSheet.create({
     borderCurve: "continuous",
     boxShadow: "0 2px 4px rgba(15, 35, 60, 0.08)",
   },
-  answerCardLight: {
-    borderColor: "#CBD3DF",
-    backgroundColor: "#FFFFFF",
-  },
   answerIconLight: {
     width: 40,
     height: 40,
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 20,
-    backgroundColor: "#E4EFFD",
   },
   answerTextContainer: {
     flex: 1,
     gap: 3,
   },
   answerTitleLight: {
-    color: "#10243C",
     fontSize: 18,
     fontWeight: "800",
   },

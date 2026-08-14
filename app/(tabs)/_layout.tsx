@@ -1,5 +1,6 @@
+import { useSettings } from "@/src/context/settings-context";
 import {
-  defaultHeaderOptions,
+  getHeaderOptions,
   navigationColors,
 } from "@/src/navigation/screenOptions";
 import { Ionicons } from "@expo/vector-icons";
@@ -15,16 +16,20 @@ const icons: Record<string, TabIconName> = {
 };
 
 export default function TabsLayout() {
+  const { language, themeMode } = useSettings();
+  const colors = navigationColors[themeMode];
+  const text = tabText[language];
+
   return (
     <Tabs
       screenOptions={({ route }) => ({
-        ...defaultHeaderOptions,
+        ...getHeaderOptions(themeMode),
         animation: "shift",
-        tabBarActiveTintColor: navigationColors.primary,
-        tabBarInactiveTintColor: navigationColors.muted,
+        tabBarActiveTintColor: colors.primary,
+        tabBarInactiveTintColor: colors.muted,
         tabBarStyle: {
-          backgroundColor: "#FFFFFF",
-          borderTopColor: navigationColors.border,
+          backgroundColor: colors.background,
+          borderTopColor: colors.border,
         },
         tabBarIcon: ({ color, size }) => (
           <Ionicons
@@ -38,8 +43,8 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: "Domov",
-          tabBarLabel: "Domov",
+          title: text.home,
+          tabBarLabel: text.home,
         }}
       />
       <Tabs.Screen
@@ -54,11 +59,22 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="settings"
         options={{
-          title: "Nastavenia",
-          tabBarLabel: "Nastavenia",
+          title: text.settings,
+          tabBarLabel: text.settings,
           // href: null, // Disable navigation to this tab
         }}
       />
     </Tabs>
   );
 }
+
+const tabText = {
+  sk: {
+    home: "Domov",
+    settings: "Nastavenia",
+  },
+  en: {
+    home: "Home",
+    settings: "Settings",
+  },
+};
