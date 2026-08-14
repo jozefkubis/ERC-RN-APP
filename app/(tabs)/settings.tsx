@@ -1,10 +1,23 @@
-import React from "react";
-import { Text, View } from "react-native";
+import SettingsPreferences from "@/src/components/ui/settings-preferences";
+import { ScrollView, StatusBar, StyleSheet } from "react-native";
 
 export default function Settings() {
   return (
-    <View>
-      <Text>Settings</Text>
-    </View>
+    <>
+      <StatusBar barStyle="dark-content" />
+      <ScrollView
+        contentInsetAdjustmentBehavior="automatic"
+        contentContainerStyle={styles.container}
+      >
+        <SettingsPreferences />
+      </ScrollView>
+    </>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    paddingHorizontal: 30,
+    paddingVertical: 16,
+  },
+});
