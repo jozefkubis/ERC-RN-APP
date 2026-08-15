@@ -95,12 +95,10 @@ export default function SettingsPreferences() {
 
   function handleLanguagePress(value: AppLanguage) {
     setLanguage(value);
-    console.log(`settings language clicked: ${value}`);
   }
 
   function handleModePress(value: AppThemeMode) {
     setThemeMode(value);
-    console.log(`settings mode clicked: ${value}`);
   }
 
   return (
