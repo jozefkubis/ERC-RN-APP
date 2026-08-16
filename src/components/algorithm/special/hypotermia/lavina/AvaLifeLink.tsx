@@ -1,35 +1,75 @@
+import { useSettings } from "@/src/context/settings-context";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 
+const linkText = {
+  sk: {
+    accessibilityLabel: "Otvoriť vysvetlenie algoritmu AvaLife",
+    title: "Algoritmus AvaLife",
+    description:
+      "Otvorte vysvetlenie postupu pri lavínovej nehode s obmedzeným počtom záchrancov.",
+  },
+  en: {
+    accessibilityLabel: "Open the AvaLife algorithm explanation",
+    title: "AvaLife algorithm",
+    description:
+      "Open the pathway explanation for an avalanche accident with a limited number of rescuers.",
+  },
+};
+
+const linkColors = {
+  light: {
+    background: "#FFFFFF",
+    border: "#0877D1",
+    primary: "#075296",
+    description: "#5C6574",
+  },
+  dark: {
+    background: "#101B2B",
+    border: "#2F7FBE",
+    primary: "#B9DDFF",
+    description: "#AAB6C7",
+  },
+};
+
 export default function AvaLifeLink() {
   const router = useRouter();
+  const { language, themeMode } = useSettings();
+  const text = linkText[language];
+  const colors = linkColors[themeMode];
 
   return (
     <Pressable
       accessibilityRole="link"
-      accessibilityLabel="Otvoriť vysvetlenie algoritmu AvaLife"
+      accessibilityLabel={text.accessibilityLabel}
       onPress={() =>
         router.push("/algorithms/special/hypotermia/lavina/avalife")
       }
       style={({ pressed }) => [
         styles.container,
+        {
+          backgroundColor: colors.background,
+          borderColor: colors.border,
+        },
         pressed && styles.pressed,
       ]}
     >
-      <View style={styles.icon}>
+      <View style={[styles.icon, { backgroundColor: colors.border }]}>
         <Ionicons name="git-network-outline" size={24} color="#FFFFFF" />
       </View>
       <View style={styles.textContainer}>
-        <Text selectable style={styles.title}>
-          Algoritmus AvaLife
+        <Text selectable style={[styles.title, { color: colors.primary }]}>
+          {text.title}
         </Text>
-        <Text selectable style={styles.description}>
-          Otvorte vysvetlenie postupu pri lavínovej nehode s obmedzeným
-          počtom záchrancov.
+        <Text
+          selectable
+          style={[styles.description, { color: colors.description }]}
+        >
+          {text.description}
         </Text>
       </View>
-      <Ionicons name="open-outline" size={22} color="#075296" />
+      <Ionicons name="open-outline" size={22} color={colors.primary} />
     </Pressable>
   );
 }
@@ -44,10 +84,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     paddingVertical: 14,
     borderWidth: 2,
-    borderColor: "#0877D1",
     borderRadius: 12,
     borderCurve: "continuous",
-    backgroundColor: "#FFFFFF",
     boxShadow: "0 2px 4px rgba(15, 35, 60, 0.08)",
   },
   icon: {
@@ -56,21 +94,18 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 21,
-    backgroundColor: "#0877D1",
   },
   textContainer: {
     flex: 1,
     gap: 3,
   },
   title: {
-    color: "#075296",
     fontSize: 18,
     fontWeight: "900",
     lineHeight: 23,
     textDecorationLine: "underline",
   },
   description: {
-    color: "#5C6574",
     fontSize: 12,
     lineHeight: 17,
   },

@@ -2,9 +2,6 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { usePathname } from "expo-router";
 import { useEffect } from "react";
 
-import { algorithmSearchItems } from "@/src/data/algorithm-search";
-import { getAlgorithmScreenTitle } from "@/src/navigation/algorithmScreenTitle";
-
 // Názov kľúča, pod ktorým je história uložená v AsyncStorage.
 export const HISTORY_KEY = "viewing_history";
 
@@ -13,26 +10,21 @@ const MAX_HISTORY_ITEMS = 10;
 
 // Tvar jednej uloženej položky histórie.
 export type HistoryItem = {
-  title: string;
-  category: string;
   route: string;
   viewedAt: string;
 };
 
-type AlgorithmForHistory = {
-  title: string;
-  category: string;
-  route: string;
-};
+function isStoredHistoryItem(item: unknown): item is HistoryItem {
+  if (typeof item !== "object" || item === null) {
+    return false;
+  }
 
-// Skúsi nájsť čitateľný názov a kategóriu pre aktuálnu route.
-function getAlgorithmForPathname(pathname: string) {
-  return algorithmSearchItems.find((algorithm) => algorithm.route === pathname);
-}
+  const storedItem = item as Record<string, unknown>;
 
-function getTitleForPathname(pathname: string) {
-  const routeName = pathname.replace(/^\//, "");
-  return getAlgorithmScreenTitle(routeName);
+  return (
+    typeof storedItem.route === "string" &&
+    typeof storedItem.viewedAt === "string"
+  );
 }
 
 export async function loadHistory(): Promise<HistoryItem[]> {
@@ -50,7 +42,12 @@ export async function loadHistory(): Promise<HistoryItem[]> {
       return [];
     }
 
-    return parsedHistory as HistoryItem[];
+    // Staršie záznamy môžu obsahovať aj title a category. Pri načítaní
+    // ponecháme iba stabilnú route a čas otvorenia.
+    return parsedHistory.filter(isStoredHistoryItem).map((item) => ({
+      route: item.route,
+      viewedAt: item.viewedAt,
+    }));
   } catch {
     return [];
   }
@@ -70,17 +67,12 @@ function removeDuplicate(history: HistoryItem[], route: string): HistoryItem[] {
   return historyWithoutDuplicate;
 }
 
-async function addToHistory(algorithm: AlgorithmForHistory): Promise<void> {
+async function addToHistory(route: string): Promise<void> {
   const currentHistory = await loadHistory();
-  const historyWithoutDuplicate = removeDuplicate(
-    currentHistory,
-    algorithm.route,
-  );
+  const historyWithoutDuplicate = removeDuplicate(currentHistory, route);
 
   const newHistoryItem: HistoryItem = {
-    title: algorithm.title,
-    category: algorithm.category,
-    route: algorithm.route,
+    route,
     viewedAt: new Date().toISOString(),
   };
 
@@ -102,14 +94,7 @@ export default function History() {
         return;
       }
 
-      const algorithm = getAlgorithmForPathname(pathname);
-      const algorithmForHistory: AlgorithmForHistory = {
-        title: algorithm?.title ?? getTitleForPathname(pathname),
-        category: algorithm?.category ?? "ERC 2025",
-        route: pathname,
-      };
-
-      await addToHistory(algorithmForHistory);
+      await addToHistory(pathname);
     }
 
     updateHistory();

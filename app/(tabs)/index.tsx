@@ -6,7 +6,11 @@ import {
   type HistoryItem,
 } from "@/src/components/utils/History";
 import { useSettings } from "@/src/context/settings-context";
-import { algorithmSearchItems } from "@/src/data/algorithm-search";
+import {
+  getAlgorithmSearchCategory,
+  getAlgorithmSearchItems,
+} from "@/src/data/algorithm-search";
+import { getAlgorithmScreenTitle } from "@/src/navigation/algorithmScreenTitle";
 import { Ionicons } from "@expo/vector-icons";
 import { useFocusEffect, useRouter, type Href } from "expo-router";
 import { useCallback, useState } from "react";
@@ -83,6 +87,7 @@ export default function HomeScreen() {
   const { language, themeMode } = useSettings();
   const text = homeText[language];
   const colors = homeColors[themeMode];
+  const algorithmSearchItems = getAlgorithmSearchItems(language);
 
   const [filterValue, setFilterValue] = useState("");
   const [viewingHistory, setViewingHistory] = useState<HistoryItem[]>([]);
@@ -103,9 +108,23 @@ export default function HomeScreen() {
       })
     : [];
 
+  const localizedHistory = viewingHistory.map((historyItem) => {
+    const algorithm = algorithmSearchItems.find(
+      (item) => item.route === historyItem.route,
+    );
+
+    return {
+      ...historyItem,
+      title:
+        algorithm?.title ??
+        getAlgorithmScreenTitle(historyItem.route.replace(/^\//, ""), language),
+      category: getAlgorithmSearchCategory(historyItem.route, language),
+    };
+  });
+
   const visibleHistory = showAllHistory
-    ? viewingHistory
-    : viewingHistory.slice(0, 2);
+    ? localizedHistory
+    : localizedHistory.slice(0, 2);
 
   useFocusEffect(
     useCallback(() => {

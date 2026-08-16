@@ -1,4 +1,5 @@
 import type { Href } from "expo-router";
+import type { AppLanguage } from "@/src/context/settings-context";
 
 export type AlgorithmSearchItem = {
   title: string;
@@ -7,7 +8,7 @@ export type AlgorithmSearchItem = {
   route: Href;
 };
 
-export const algorithmSearchItems = [
+const slovakAlgorithmSearchItems = [
   {
     title: "Resuscitácia dospelých",
     category: "Algoritmy ERC 2025",
@@ -774,3 +775,715 @@ export const algorithmSearchItems = [
     route: "/algorithms/special/vyletna-lod/step1",
   },
 ] satisfies readonly AlgorithmSearchItem[];
+
+type EnglishSearchText = {
+  title: string;
+  keywords: readonly string[];
+};
+
+const englishTextByRoute: Record<string, EnglishSearchText> = {
+  "/algorithms/adult-resuscitation": {
+    title: "Adult resuscitation",
+    keywords: ["adult", "resuscitation", "CPR", "cardiac arrest"],
+  },
+  "/algorithms/adult-resuscitation/als/step1": {
+    title: "ALS",
+    keywords: [
+      "advanced life support",
+      "cardiac arrest",
+      "defibrillation",
+      "adrenaline",
+      "amiodarone",
+      "CPR",
+    ],
+  },
+  "/algorithms/adult-resuscitation/bls/step1": {
+    title: "BLS",
+    keywords: [
+      "basic life support",
+      "unconscious",
+      "breathing",
+      "chest compressions",
+      "AED",
+      "CPR",
+    ],
+  },
+  "/algorithms/adult-resuscitation/tachycardia/step1": {
+    title: "Tachycardia",
+    keywords: [
+      "tachyarrhythmia",
+      "fast pulse",
+      "narrow QRS",
+      "broad QRS",
+      "SVT",
+      "ventricular tachycardia",
+    ],
+  },
+  "/algorithms/adult-resuscitation/bradycardia/step1": {
+    title: "Bradycardia",
+    keywords: [
+      "slow pulse",
+      "symptomatic bradycardia",
+      "atropine",
+      "cardiac pacing",
+      "arrhythmia",
+    ],
+  },
+  "/algorithms/adult-resuscitation/als/4h4t": {
+    title: "Reversible causes 4H4T",
+    keywords: [
+      "4H",
+      "4T",
+      "hypoxia",
+      "hypovolaemia",
+      "hypothermia",
+      "hyperkalaemia",
+      "hypokalaemia",
+      "tamponade",
+      "tension pneumothorax",
+      "thrombosis",
+      "toxins",
+    ],
+  },
+  "/algorithms/adult-resuscitation/als/rosc": {
+    title: "Post-resuscitation care",
+    keywords: [
+      "ROSC",
+      "return of spontaneous circulation",
+      "post-resuscitation care",
+      "oxygenation",
+      "ventilation",
+      "perfusion",
+    ],
+  },
+  "/algorithms/adult-resuscitation/tachycardia/synccardioversion": {
+    title: "Synchronised cardioversion",
+    keywords: [
+      "cardioversion",
+      "synchronised shock",
+      "tachycardia",
+      "unstable patient",
+      "defibrillator",
+    ],
+  },
+  "/algorithms/adult-resuscitation/bradycardia/cardiostimulationscreen": {
+    title: "Transcutaneous cardiac pacing",
+    keywords: [
+      "external pacing",
+      "non-invasive pacing",
+      "bradycardia",
+      "pacemaker",
+      "defibrillator",
+    ],
+  },
+  "/algorithms/adult-resuscitation/bradycardia/alternative-medications": {
+    title: "Alternative medicines for bradycardia",
+    keywords: [
+      "bradycardia",
+      "atropine",
+      "isoprenaline",
+      "adrenaline",
+      "aminophylline",
+      "glucagon",
+      "medicines",
+    ],
+  },
+  "/algorithms/epals": {
+    title: "Paediatric resuscitation",
+    keywords: ["child", "children", "paediatrics", "EPALS", "CPR"],
+  },
+  "/algorithms/epals/pals/step1": {
+    title: "PALS",
+    keywords: [
+      "paediatric advanced life support",
+      "pediatric advanced life support",
+      "cardiac arrest",
+      "defibrillation",
+      "adrenaline",
+      "CPR",
+    ],
+  },
+  "/algorithms/epals/pbls/step1": {
+    title: "PBLS",
+    keywords: [
+      "paediatric basic life support",
+      "pediatric basic life support",
+      "five initial breaths",
+      "AED",
+      "CPR",
+    ],
+  },
+  "/algorithms/epals/fbao/step1": {
+    title: "FBAO",
+    keywords: [
+      "foreign body airway obstruction",
+      "choking",
+      "cough",
+      "back blows",
+      "child",
+    ],
+  },
+  "/algorithms/epals/pals/roscpals": {
+    title: "Paediatric post-resuscitation care",
+    keywords: [
+      "ROSC",
+      "return of spontaneous circulation",
+      "post-resuscitation care",
+      "child",
+      "oxygenation",
+      "ventilation",
+    ],
+  },
+  "/algorithms/epals/pals/termination": {
+    title: "Termination of paediatric resuscitation",
+    keywords: ["termination of CPR", "ethics", "team decision", "child"],
+  },
+  "/algorithms/newborn/step1": {
+    title: "Newborn resuscitation",
+    keywords: [
+      "NLS",
+      "newborn life support",
+      "newborn",
+      "birth",
+      "ventilation",
+      "umbilical cord",
+    ],
+  },
+  "/algorithms/special": {
+    title: "Special circumstances",
+    keywords: [
+      "reversible causes",
+      "special setting",
+      "special patient groups",
+      "modified ALS",
+    ],
+  },
+  "/algorithms/special/anafylaxia/step1": {
+    title: "Anaphylaxis",
+    keywords: [
+      "allergy",
+      "anaphylactic shock",
+      "adrenaline",
+      "swelling",
+      "urticaria",
+      "bronchospasm",
+      "hypotension",
+    ],
+  },
+  "/algorithms/special/anafylaxia/refractory": {
+    title: "Refractory anaphylaxis",
+    keywords: [
+      "severe allergy",
+      "anaphylactic shock",
+      "two doses of adrenaline",
+      "adrenaline infusion",
+      "unresponsive",
+    ],
+  },
+  "/algorithms/special/anafylaxia/cardiac-arrest": {
+    title: "Cardiac arrest in anaphylaxis",
+    keywords: ["anaphylaxis", "allergy", "anaphylactic shock", "ALS", "CPR"],
+  },
+  "/algorithms/special/anafylaxia/aftercare": {
+    title: "Care after anaphylaxis",
+    keywords: [
+      "anaphylaxis",
+      "clinical improvement",
+      "monitoring",
+      "biphasic reaction",
+      "aftercare",
+    ],
+  },
+  "/algorithms/special/kalium/intro": {
+    title: "Potassium disorders",
+    keywords: [
+      "potassium",
+      "K+",
+      "electrolytes",
+      "hyperkalaemia",
+      "hypokalaemia",
+      "arrhythmia",
+      "ECG",
+    ],
+  },
+  "/algorithms/special/kalium/hyper/step1": {
+    title: "Hyperkalaemia",
+    keywords: [
+      "high potassium",
+      "calcium",
+      "insulin",
+      "glucose",
+      "dialysis",
+      "ECG",
+    ],
+  },
+  "/algorithms/special/kalium/hypo/step1": {
+    title: "Hypokalaemia",
+    keywords: [
+      "low potassium",
+      "magnesium",
+      "muscle weakness",
+      "arrhythmia",
+      "ECG",
+    ],
+  },
+  "/algorithms/special/hypertermia/intro": {
+    title: "Hyperthermia",
+    keywords: [
+      "overheating",
+      "high temperature",
+      "core temperature",
+      "heat stroke",
+      "malignant hyperthermia",
+      "toxins",
+      "cooling",
+    ],
+  },
+  "/algorithms/special/hypertermia/regular/step1": {
+    title: "Severe hyperthermia",
+    keywords: [
+      "heat stroke",
+      "overheating",
+      "thermoregulatory failure",
+      "core temperature",
+      "active cooling",
+    ],
+  },
+  "/algorithms/special/hypertermia/maligna/step1": {
+    title: "Malignant hyperthermia",
+    keywords: [
+      "anaesthetics",
+      "succinylcholine",
+      "dantrolene",
+      "hypermetabolic state",
+      "high temperature",
+      "cooling",
+    ],
+  },
+  "/algorithms/special/hypertermia/toxic/step1": {
+    title: "Toxin-induced hyperthermia",
+    keywords: [
+      "poisoning",
+      "sympathomimetics",
+      "MDMA",
+      "ecstasy",
+      "agitation",
+      "seizures",
+      "cooling",
+    ],
+  },
+  "/algorithms/special/hypotermia/intro": {
+    title: "Hypothermia",
+    keywords: [
+      "low temperature",
+      "core temperature",
+      "rewarming",
+      "avalanche",
+      "ECPR",
+      "ECLS",
+    ],
+  },
+  "/algorithms/special/hypotermia/regular/step1": {
+    title: "Accidental hypothermia",
+    keywords: [
+      "low temperature",
+      "core temperature",
+      "prolonged assessment",
+      "controlled rewarming",
+      "ECPR",
+      "ECLS",
+    ],
+  },
+  "/algorithms/special/hypotermia/lavina/step1": {
+    title: "Avalanche rescue",
+    keywords: [
+      "avalanche",
+      "burial",
+      "hypothermia",
+      "core temperature",
+      "AvaLife",
+      "airway",
+    ],
+  },
+  "/algorithms/special/hypotermia/lavina/avalife": {
+    title: "AvaLife",
+    keywords: [
+      "avalanche",
+      "buried patient",
+      "triage",
+      "first aid",
+      "avalanche rescue",
+    ],
+  },
+  "/algorithms/special/hypotermia/hope-score": {
+    title: "HOPE score",
+    keywords: [
+      "Hypothermia Outcome Prediction",
+      "hypothermia",
+      "ECLS",
+      "ECPR",
+      "extracorporeal rewarming",
+      "prognosis",
+      "calculator",
+    ],
+  },
+  "/algorithms/special/embolia/intro": {
+    title: "Pulmonary embolism",
+    keywords: [
+      "PE",
+      "embolism",
+      "thrombosis",
+      "dyspnoea",
+      "right ventricle",
+      "haemodynamic instability",
+      "anticoagulation",
+      "fibrinolysis",
+    ],
+  },
+  "/algorithms/special/embolia/PE/step1": {
+    title: "Pulmonary embolism with circulation",
+    keywords: [
+      "PE",
+      "sudden dyspnoea",
+      "haemodynamic instability",
+      "ECG",
+      "echocardiography",
+      "anticoagulation",
+      "thrombolysis",
+    ],
+  },
+  "/algorithms/special/embolia/PEresuscitacia/step1": {
+    title: "Cardiac arrest due to pulmonary embolism",
+    keywords: [
+      "PE",
+      "CPR",
+      "fibrinolysis",
+      "thrombolysis",
+      "embolectomy",
+      "thrombectomy",
+      "ECPR",
+      "ECLS",
+    ],
+  },
+  "/algorithms/special/koronarnatromboza/step1": {
+    title: "Coronary thrombosis",
+    keywords: [
+      "ACS",
+      "acute coronary syndrome",
+      "myocardial infarction",
+      "STEMI",
+      "NSTEMI",
+      "PCI",
+      "coronary occlusion",
+      "chest pain",
+    ],
+  },
+  "/algorithms/special/koronarnatromboza/st-elevation": {
+    title: "Coronary thrombosis with ST elevation",
+    keywords: [
+      "STEMI",
+      "myocardial infarction",
+      "ST elevation",
+      "ACS",
+      "PCI",
+      "catheterisation",
+      "reperfusion",
+    ],
+  },
+  "/algorithms/special/koronarnatromboza/no-st-elevation": {
+    title: "Coronary thrombosis without ST elevation",
+    keywords: [
+      "NSTEMI",
+      "NSTE-ACS",
+      "myocardial infarction",
+      "ACS",
+      "without ST elevation",
+    ],
+  },
+  "/algorithms/special/koronarnatromboza/ongoing-cpr": {
+    title: "Coronary thrombosis during CPR",
+    keywords: [
+      "ongoing CPR",
+      "cardiac arrest",
+      "PCI during CPR",
+      "ECPR",
+      "coronary occlusion",
+    ],
+  },
+  "/algorithms/special/toxic/step1": {
+    title: "Toxic agents",
+    keywords: [
+      "intoxication",
+      "poisoning",
+      "toxin",
+      "overdose",
+      "antidote",
+      "decontamination",
+    ],
+  },
+  "/algorithms/special/trauma/step1": {
+    title: "Trauma",
+    keywords: [
+      "traumatic cardiac arrest",
+      "bleeding",
+      "hypovolaemia",
+      "tension pneumothorax",
+      "tamponade",
+      "TCA",
+      "injury",
+    ],
+  },
+  "/algorithms/special/pregnet/step1": {
+    title: "Pregnancy",
+    keywords: [
+      "pregnant patient",
+      "maternal cardiac arrest",
+      "uterine displacement",
+      "hysterotomy",
+      "perimortem caesarean section",
+      "obstetrician",
+      "neonatologist",
+    ],
+  },
+  "/algorithms/special/astma-chochp/step1": {
+    title: "Asthma and COPD",
+    keywords: [
+      "asthma",
+      "COPD",
+      "bronchospasm",
+      "obstruction",
+      "hypoxia",
+      "tension pneumothorax",
+      "status asthmaticus",
+    ],
+  },
+  "/algorithms/special/hemodialyza/step1": {
+    title: "Haemodialysis",
+    keywords: [
+      "dialysis",
+      "haemodialysis patient",
+      "arteriovenous fistula",
+      "AV fistula",
+      "hyperkalaemia",
+      "cardiac arrest during dialysis",
+    ],
+  },
+  "/algorithms/special/obezita/step1": {
+    title: "Obesity",
+    keywords: [
+      "obese patient",
+      "overweight",
+      "BMI",
+      "resuscitation in obesity",
+      "defibrillation",
+      "CPR",
+    ],
+  },
+  "/algorithms/special/pectus-excavatum/step1": {
+    title: "Pectus excavatum",
+    keywords: [
+      "sunken chest",
+      "chest deformity",
+      "Nuss procedure",
+      "chest compressions",
+      "anteroposterior pads",
+      "ECPR",
+    ],
+  },
+  "/algorithms/special/katetrizacne-pracovisko/step1": {
+    title: "Catheterisation laboratory",
+    keywords: [
+      "cath lab",
+      "coronary intervention",
+      "PCI",
+      "angiography",
+      "three rapid shocks",
+      "cardiac arrest during PCI",
+    ],
+  },
+  "/algorithms/special/topenie/step1": {
+    title: "Drowning",
+    keywords: [
+      "submersion",
+      "water",
+      "asphyxia",
+      "hypoxia",
+      "five initial breaths",
+      "water rescue",
+      "hypothermia",
+    ],
+  },
+  "/algorithms/special/operacna-sala/step1": {
+    title: "Operating room",
+    keywords: [
+      "perioperative cardiac arrest",
+      "surgery",
+      "anaesthesia",
+      "ETCO2",
+      "ultrasound",
+      "surgical team",
+    ],
+  },
+  "/algorithms/special/lokalne-anestetika/step1": {
+    title: "Local anaesthetic systemic toxicity",
+    keywords: [
+      "LAST",
+      "local anaesthetic",
+      "regional anaesthesia",
+      "lipid emulsion",
+      "Intralipid",
+      "seizures",
+      "arrhythmia",
+    ],
+  },
+  "/algorithms/special/kardiochirurgia/step1": {
+    title: "Cardiac arrest following cardiac surgery",
+    keywords: [
+      "after cardiac surgery",
+      "sternotomy",
+      "re-sternotomy",
+      "three rapid shocks",
+      "arterial waveform",
+    ],
+  },
+  "/algorithms/special/lvad/step1": {
+    title: "Patient with an LVAD",
+    keywords: [
+      "left ventricular assist device",
+      "left ventricular support",
+      "heart pump",
+      "mechanical circulatory support",
+      "no pulse",
+      "unconscious patient",
+    ],
+  },
+  "/algorithms/special/sport/step1": {
+    title: "Cardiac arrest in sports",
+    keywords: [
+      "sport",
+      "athlete",
+      "field of play",
+      "stadium",
+      "AED",
+      "sudden cardiac death",
+      "commotio cordis",
+    ],
+  },
+  "/algorithms/special/zzs-transport/step1": {
+    title: "EMS and transport during CPR",
+    keywords: [
+      "emergency medical services",
+      "ambulance",
+      "prehospital resuscitation",
+      "transport during resuscitation",
+      "mechanical compressions",
+      "CPR during transport",
+    ],
+  },
+  "/algorithms/special/pocas-letu/step1": {
+    title: "In-flight cardiac arrest",
+    keywords: [
+      "aircraft",
+      "air travel",
+      "AED on board",
+      "flight diversion",
+      "in-flight resuscitation",
+    ],
+  },
+  "/algorithms/special/mikrogravitacia/step1": {
+    title: "Resuscitation in microgravity",
+    keywords: [
+      "microgravity",
+      "weightlessness",
+      "space",
+      "spacecraft",
+      "astronaut",
+      "mechanical compressions",
+    ],
+  },
+  "/algorithms/special/vyletna-lod/step1": {
+    title: "Resuscitation on a cruise ship",
+    keywords: [
+      "cruise ship",
+      "voyage",
+      "shipboard",
+      "maritime medicine",
+      "AED on board",
+    ],
+  },
+};
+
+const englishCategoryBySlovakCategory: Record<string, string> = {
+  "Algoritmy ERC 2025": "ERC 2025 algorithms",
+  "Resuscitácia dospelých": "Adult resuscitation",
+  "Resuscitácia detí": "Paediatric resuscitation",
+  "Špeciálne okolnosti": "Special circumstances",
+};
+
+export function getAlgorithmSearchItems(
+  language: AppLanguage,
+): readonly AlgorithmSearchItem[] {
+  if (language === "sk") {
+    return slovakAlgorithmSearchItems;
+  }
+
+  return slovakAlgorithmSearchItems.map((item) => {
+    const englishText = englishTextByRoute[item.route.toString()];
+
+    return {
+      ...item,
+      title: englishText?.title ?? item.title,
+      category:
+        englishCategoryBySlovakCategory[item.category] ?? item.category,
+      keywords: englishText?.keywords ?? item.keywords,
+    };
+  });
+}
+
+const fallbackCategoryByLanguage = {
+  sk: {
+    adult: "Resuscitácia dospelých",
+    paediatric: "Resuscitácia detí",
+    newborn: "Resuscitácia novorodencov",
+    special: "Špeciálne okolnosti",
+  },
+  en: {
+    adult: "Adult resuscitation",
+    paediatric: "Paediatric resuscitation",
+    newborn: "Newborn resuscitation",
+    special: "Special circumstances",
+  },
+};
+
+export function getAlgorithmSearchCategory(
+  route: string,
+  language: AppLanguage,
+) {
+  const exactItem = getAlgorithmSearchItems(language).find(
+    (item) => item.route === route,
+  );
+
+  if (exactItem) {
+    return exactItem.category;
+  }
+
+  const categories = fallbackCategoryByLanguage[language];
+
+  if (route.startsWith("/algorithms/adult-resuscitation/")) {
+    return categories.adult;
+  }
+
+  if (route.startsWith("/algorithms/epals/")) {
+    return categories.paediatric;
+  }
+
+  if (route.startsWith("/algorithms/newborn/")) {
+    return categories.newborn;
+  }
+
+  if (route.startsWith("/algorithms/special/")) {
+    return categories.special;
+  }
+
+  return "ERC 2025";
+}

@@ -1,6 +1,7 @@
-import AltMedsBrady from "@/src/components/algorithm/adult-resuscitation/AltMedsBrady";
-import React from "react";
+import { Redirect } from "expo-router";
 
 export default function AltMedsScreen() {
-  return <AltMedsBrady />;
+  return (
+    <Redirect href="/algorithms/adult-resuscitation/bradycardia/alternative-medications" />
+  );
 }
