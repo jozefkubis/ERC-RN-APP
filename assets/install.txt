@@ -8,4 +8,4 @@ npm install --global @openai/codex
 codex mcp add expo --url https://mcp.expo.dev/mcp
 codex mcp login expo
 
-npx eas-cli update --channel preview --message "settings"
+npx eas-cli update --channel preview --message "asyncStorage"

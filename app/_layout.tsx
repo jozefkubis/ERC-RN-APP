@@ -3,6 +3,10 @@ import { SettingsProvider, useSettings } from "@/src/context/settings-context";
 import { getAlgorithmScreenTitle } from "@/src/navigation/algorithmScreenTitle";
 import { getHeaderOptions } from "@/src/navigation/screenOptions";
 import { Stack } from "expo-router";
+import * as SplashScreen from "expo-splash-screen";
+import { useEffect } from "react";
+
+SplashScreen.preventAutoHideAsync();
 
 export const unstable_settings = {
   initialRouteName: "(tabs)",
@@ -11,9 +15,29 @@ export const unstable_settings = {
 export default function RootLayout() {
   return (
     <SettingsProvider>
+      <AppContent />
+    </SettingsProvider>
+  );
+}
+
+function AppContent() {
+  const { isSettingsReady } = useSettings();
+
+  useEffect(() => {
+    if (isSettingsReady) {
+      SplashScreen.hide();
+    }
+  }, [isSettingsReady]);
+
+  if (!isSettingsReady) {
+    return null;
+  }
+
+  return (
+    <>
       <History />
       <RootStack />
-    </SettingsProvider>
+    </>
   );
 }
 

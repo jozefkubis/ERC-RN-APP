@@ -53,6 +53,10 @@ export async function loadHistory(): Promise<HistoryItem[]> {
   }
 }
 
+export async function clearHistory(): Promise<void> {
+  await AsyncStorage.removeItem(HISTORY_KEY);
+}
+
 async function saveHistory(history: HistoryItem[]): Promise<void> {
   const serializedHistory = JSON.stringify(history);
   await AsyncStorage.setItem(HISTORY_KEY, serializedHistory);

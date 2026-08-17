@@ -2,6 +2,7 @@ import BaseCard from "@/src/components/ui/BaseCard";
 import Input from "@/src/components/ui/Input";
 import SmallCard from "@/src/components/ui/SmallCard";
 import {
+  clearHistory,
   loadHistory,
   type HistoryItem,
 } from "@/src/components/utils/History";
@@ -35,6 +36,7 @@ const homeText = {
     historyTitle: "História",
     showAll: "Zobraziť všetko",
     showLess: "Zobraziť menej",
+    deleteHistory: "Vymazať históriu",
     emptyHistory: "História je zatiaľ prázdna.",
   },
   en: {
@@ -48,6 +50,7 @@ const homeText = {
     historyTitle: "History",
     showAll: "Show all",
     showLess: "Show less",
+    deleteHistory: "Delete history",
     emptyHistory: "History is empty for now.",
   },
 };
@@ -59,6 +62,7 @@ const homeColors = {
     title: "#10243C",
     muted: "#6B7483",
     primary: "#075296",
+    danger: "#B42318",
     historyIcon: "#6B7483",
     trailingIcon: "#7A8492",
     cardIcon: "#0868C4",
@@ -69,6 +73,7 @@ const homeColors = {
     title: "#F5F8FC",
     muted: "#AAB6C7",
     primary: "#77B7F2",
+    danger: "#FF8A80",
     historyIcon: "#AAB6C7",
     trailingIcon: "#AAB6C7",
     cardIcon: "#0B5EA8",
@@ -92,6 +97,16 @@ export default function HomeScreen() {
   const [filterValue, setFilterValue] = useState("");
   const [viewingHistory, setViewingHistory] = useState<HistoryItem[]>([]);
   const [showAllHistory, setShowAllHistory] = useState(false);
+
+  async function handleDeleteHistoryPress() {
+    try {
+      await clearHistory();
+      setViewingHistory([]);
+      setShowAllHistory(false);
+    } catch {
+      // Ak mazanie zlyha, povodna historia zostane zobrazena.
+    }
+  }
 
   const searchText = normalizeText(filterValue.trim());
   const isSearching = searchText.length >= 2;
@@ -222,18 +237,38 @@ export default function HomeScreen() {
                   </Text>
                 </View>
 
-                {viewingHistory.length > 2 ? (
+                <View style={styles.sectionActions}>
+                  {viewingHistory.length > 2 ? (
+                    <Pressable
+                      onPress={() => setShowAllHistory((current) => !current)}
+                      style={({ pressed }) =>
+                        pressed && styles.sectionActionPressed
+                      }
+                    >
+                      <Text
+                        style={[styles.sectionAction, { color: colors.primary }]}
+                      >
+                        {showAllHistory ? text.showLess : text.showAll}
+                      </Text>
+                    </Pressable>
+                  ) : null}
+
                   <Pressable
-                    onPress={() => setShowAllHistory((current) => !current)}
-                    style={({ pressed }) =>
-                      pressed && styles.sectionActionPressed
-                    }
+                    accessibilityRole="button"
+                    accessibilityLabel={text.deleteHistory}
+                    onPress={handleDeleteHistoryPress}
+                    style={({ pressed }) => [
+                      styles.deleteHistoryButton,
+                      pressed && styles.sectionActionPressed,
+                    ]}
                   >
-                    <Text style={[styles.sectionAction, { color: colors.primary }]}>
-                      {showAllHistory ? text.showLess : text.showAll}
-                    </Text>
+                    <Ionicons
+                      name="trash-outline"
+                      size={20}
+                      color={colors.danger}
+                    />
                   </Pressable>
-                ) : null}
+                </View>
               </View>
 
               {visibleHistory.length > 0 ? (
@@ -314,11 +349,22 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "800",
   },
+  sectionActions: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
+  },
   sectionAction: {
     fontSize: 13,
     fontWeight: "700",
   },
   sectionActionPressed: {
     opacity: 0.7,
+  },
+  deleteHistoryButton: {
+    width: 44,
+    height: 44,
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
