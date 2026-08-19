@@ -53,6 +53,19 @@ function RootStack() {
       })}
     >
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      <Stack.Screen
+        name="algorithms/epals/pals/calculator"
+        options={{
+          presentation: "formSheet",
+          sheetAllowedDetents: [0.58, 0.9],
+          sheetGrabberVisible: true,
+          sheetCornerRadius: 28,
+          headerShown: false,
+          contentStyle: {
+            backgroundColor: "transparent",
+          },
+        }}
+      />
     </Stack>
   );
 }

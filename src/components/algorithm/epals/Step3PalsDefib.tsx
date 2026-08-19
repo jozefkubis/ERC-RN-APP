@@ -33,6 +33,7 @@ const pageText = {
     infoTitle: "Dôležité",
     infoDescription:
       "Výboje podávajte jednotlivo. Po každom výboji okamžite pokračujte v KPR a reverzibilné príčiny riešte bez zbytočného prerušenia kompresií.",
+    calculatorButton: "Kalkulačka dávok",
   },
   en: {
     badge: "Step 3",
@@ -58,6 +59,7 @@ const pageText = {
     infoTitle: "Important",
     infoDescription:
       "Deliver shocks one at a time. After each shock, immediately resume CPR and treat reversible causes without unnecessary interruption to compressions.",
+    calculatorButton: "Dose calculator",
   },
 };
 
@@ -144,6 +146,19 @@ export default function Step3PalsDefib() {
           >
             {text.shockDescription}
           </Text>
+          <Pressable
+            accessibilityRole="button"
+            onPress={() => router.push("/algorithms/epals/pals/calculator")}
+            style={({ pressed }) => [
+              styles.calculatorButton,
+              pressed && styles.pressed,
+            ]}
+          >
+            <Ionicons name="calculator-outline" size={18} color="#FFFFFF" />
+            <Text style={styles.calculatorButtonText}>
+              {text.calculatorButton}
+            </Text>
+          </Pressable>
         </View>
       </View>
 
@@ -157,7 +172,11 @@ export default function Step3PalsDefib() {
         ]}
       >
         <View style={[styles.cprIcon, { backgroundColor: colors.shockIcon }]}>
-          <MaterialCommunityIcons name="heart-pulse" size={28} color="#FFFFFF" />
+          <MaterialCommunityIcons
+            name="heart-pulse"
+            size={28}
+            color="#FFFFFF"
+          />
         </View>
         <View style={styles.cprTextContainer}>
           <Text style={[styles.cprTitle, { color: colors.cardTitle }]}>
@@ -197,7 +216,9 @@ export default function Step3PalsDefib() {
         <View style={styles.defibInfoList}>
           {text.defibRhythmItems.map((item) => (
             <View key={item} style={styles.defibInfoRow}>
-              <View style={[styles.bullet, { backgroundColor: colors.bullet }]} />
+              <View
+                style={[styles.bullet, { backgroundColor: colors.bullet }]}
+              />
               <Text style={[styles.defibInfoText, { color: colors.infoText }]}>
                 {item}
               </Text>
@@ -286,6 +307,26 @@ const styles = StyleSheet.create({
   shockDescription: {
     fontSize: 13,
     lineHeight: 19,
+  },
+  calculatorButton: {
+    minHeight: 42,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 8,
+    marginTop: 8,
+    paddingHorizontal: 14,
+    paddingVertical: 9,
+    borderWidth: 1,
+    borderColor: "rgba(255, 255, 255, 0.35)",
+    borderRadius: 10,
+    borderCurve: "continuous",
+    backgroundColor: "rgba(255, 255, 255, 0.12)",
+  },
+  calculatorButtonText: {
+    color: "#FFFFFF",
+    fontSize: 14,
+    fontWeight: "800",
   },
   cprCard: {
     width: "100%",
