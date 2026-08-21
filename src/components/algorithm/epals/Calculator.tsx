@@ -61,7 +61,7 @@ const pageText: { sk: CalculatorText; en: CalculatorText } = {
     adrenalineFormula: "10 µg/kg, max. 1 mg",
     amiodaroneLabel: "Amiodarón IV/IO",
     amiodaroneFormula: "5 mg/kg, max. 300 mg",
-    emptyResult: "Zadajte hmotnosť",
+    emptyResult: "0",
     disclaimer: "Pomôcka nenahrádza klinické rozhodnutie.",
   },
   en: {
@@ -77,7 +77,7 @@ const pageText: { sk: CalculatorText; en: CalculatorText } = {
     adrenalineFormula: "10 µg/kg, max. 1 mg",
     amiodaroneLabel: "Amiodarone IV/IO",
     amiodaroneFormula: "5 mg/kg, max. 300 mg",
-    emptyResult: "Enter weight",
+    emptyResult: "0",
     disclaimer: "This aid does not replace clinical judgement.",
   },
 };
