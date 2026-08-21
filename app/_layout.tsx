@@ -54,10 +54,10 @@ function RootStack() {
     >
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
       <Stack.Screen
-        name="algorithms/epals/pals/calculator"
+        name="algorithms/epals/pals/calculatorPals"
         options={{
           presentation: "formSheet",
-          sheetAllowedDetents: [0.58, 0.9],
+          sheetAllowedDetents: [0.9],
           sheetGrabberVisible: true,
           sheetCornerRadius: 28,
           headerShown: false,

@@ -3,8 +3,8 @@ import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import {
-  Pressable,
   Platform,
+  Pressable,
   ScrollView,
   StyleSheet,
   Text,
@@ -111,7 +111,7 @@ const calculatorColors: {
   },
 };
 
-export default function Calculator() {
+export default function CalculatorPals() {
   const router = useRouter();
   const { language, themeMode } = useSettings();
   const [weightText, setWeightText] = useState("");

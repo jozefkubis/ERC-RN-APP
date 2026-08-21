@@ -34,6 +34,7 @@ const pageText = {
     infoTitle: "Dôležité",
     infoDescription:
       "Pri nedefibrilovateľnom rytme nepodávajte výboj. Prioritou je kvalitná KPR, čo najskorší adrenalín, ventilácia kyslíkom a liečba reverzibilných príčin.",
+    calculatorButton: "Kalkulačka dávok",
   },
   en: {
     badge: "Step 3",
@@ -60,6 +61,7 @@ const pageText = {
     infoTitle: "Important",
     infoDescription:
       "Do not deliver a shock for a non-shockable rhythm. Prioritise high-quality CPR, early adrenaline, oxygen ventilation, and treatment of reversible causes.",
+    calculatorButton: "Dose calculator",
   },
 };
 
@@ -183,7 +185,11 @@ export default function Step3PalsNondefib() {
         ]}
       >
         <View style={[styles.cprIcon, { backgroundColor: colors.cprIcon }]}>
-          <MaterialCommunityIcons name="heart-pulse" size={28} color="#FFFFFF" />
+          <MaterialCommunityIcons
+            name="heart-pulse"
+            size={28}
+            color="#FFFFFF"
+          />
         </View>
         <View style={styles.cprTextContainer}>
           <Text style={[styles.cprTitle, { color: colors.cardTitle }]}>
@@ -217,9 +223,7 @@ export default function Step3PalsNondefib() {
           >
             <Ionicons name="flash-off-sharp" size={18} color="#075296" />
           </View>
-          <Text
-            style={[styles.nonDefibInfoTitle, { color: colors.infoTitle }]}
-          >
+          <Text style={[styles.nonDefibInfoTitle, { color: colors.infoTitle }]}>
             {text.nonDefibInfoTitle}
           </Text>
         </View>
@@ -227,13 +231,30 @@ export default function Step3PalsNondefib() {
         <View style={styles.nonDefibInfoList}>
           {text.nonDefibRhythmItems.map((item) => (
             <View key={item} style={styles.nonDefibInfoRow}>
-              <View style={[styles.bullet, { backgroundColor: colors.bullet }]} />
-              <Text style={[styles.nonDefibInfoText, { color: colors.infoText }]}>
+              <View
+                style={[styles.bullet, { backgroundColor: colors.bullet }]}
+              />
+              <Text
+                style={[styles.nonDefibInfoText, { color: colors.infoText }]}
+              >
                 {item}
               </Text>
             </View>
           ))}
         </View>
+        <Pressable
+          accessibilityRole="button"
+          onPress={() => router.push("/algorithms/epals/pals/calculatorPals")}
+          style={({ pressed }) => [
+            styles.calculatorButton,
+            pressed && styles.pressed,
+          ]}
+        >
+          <Ionicons name="calculator-outline" size={18} color="#FFFFFF" />
+          <Text style={styles.calculatorButtonText}>
+            {text.calculatorButton}
+          </Text>
+        </Pressable>
       </View>
 
       <H4T4Button />
@@ -356,6 +377,27 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderCurve: "continuous",
     boxShadow: "0 2px 4px rgba(15, 35, 60, 0.08)",
+  },
+
+  calculatorButton: {
+    minHeight: 42,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 8,
+    marginTop: 8,
+    paddingHorizontal: 14,
+    paddingVertical: 9,
+    borderWidth: 1,
+    borderColor: "rgba(255, 255, 255, 0.35)",
+    borderRadius: 10,
+    borderCurve: "continuous",
+    backgroundColor: "rgba(255, 255, 255, 0.12)",
+  },
+  calculatorButtonText: {
+    color: "#FFFFFF",
+    fontSize: 14,
+    fontWeight: "800",
   },
   nonDefibInfoHeader: {
     width: "100%",

@@ -146,9 +146,9 @@ export default function Step3PalsDefib() {
           >
             {text.shockDescription}
           </Text>
-          <Pressable
+          {/* <Pressable
             accessibilityRole="button"
-            onPress={() => router.push("/algorithms/epals/pals/calculator")}
+            onPress={() => router.push("/algorithms/epals/pals/calculatorPals")}
             style={({ pressed }) => [
               styles.calculatorButton,
               pressed && styles.pressed,
@@ -158,7 +158,7 @@ export default function Step3PalsDefib() {
             <Text style={styles.calculatorButtonText}>
               {text.calculatorButton}
             </Text>
-          </Pressable>
+          </Pressable> */}
         </View>
       </View>
 
@@ -225,6 +225,19 @@ export default function Step3PalsDefib() {
             </View>
           ))}
         </View>
+        <Pressable
+          accessibilityRole="button"
+          onPress={() => router.push("/algorithms/epals/pals/calculatorPals")}
+          style={({ pressed }) => [
+            styles.calculatorButton,
+            pressed && styles.pressed,
+          ]}
+        >
+          <Ionicons name="calculator-outline" size={18} color="#FFFFFF" />
+          <Text style={styles.calculatorButtonText}>
+            {text.calculatorButton}
+          </Text>
+        </Pressable>
       </View>
 
       <ParalelThinkingALS />
