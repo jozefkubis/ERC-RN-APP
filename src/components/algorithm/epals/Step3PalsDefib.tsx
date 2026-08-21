@@ -33,7 +33,7 @@ const pageText = {
     infoTitle: "Dôležité",
     infoDescription:
       "Výboje podávajte jednotlivo. Po každom výboji okamžite pokračujte v KPR a reverzibilné príčiny riešte bez zbytočného prerušenia kompresií.",
-    calculatorButton: "Kalkulačka dávok",
+    calculatorButton: "Kalkulačka dávok/veľkostí",
   },
   en: {
     badge: "Step 3",
@@ -59,7 +59,7 @@ const pageText = {
     infoTitle: "Important",
     infoDescription:
       "Deliver shocks one at a time. After each shock, immediately resume CPR and treat reversible causes without unnecessary interruption to compressions.",
-    calculatorButton: "Dose calculator",
+    calculatorButton: "Dose/size calculator",
   },
 };
 
