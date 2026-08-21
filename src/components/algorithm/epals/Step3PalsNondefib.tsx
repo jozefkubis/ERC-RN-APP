@@ -89,6 +89,9 @@ const cardColors = {
     primaryBorder: "#075296",
     primaryTitle: "#FFFFFF",
     primaryDescription: "#D7E9F8",
+    calculatorBackground: "#075296",
+    calculatorBorder: "#075296",
+    calculatorText: "#FFFFFF",
     nextIcon: "#0877D1",
   },
   dark: {
@@ -114,6 +117,9 @@ const cardColors = {
     primaryBorder: "#2F7FBE",
     primaryTitle: "#FFFFFF",
     primaryDescription: "#D7E9F8",
+    calculatorBackground: "#0E4A80",
+    calculatorBorder: "#2F7FBE",
+    calculatorText: "#FFFFFF",
     nextIcon: "#164C80",
   },
 };
@@ -247,11 +253,24 @@ export default function Step3PalsNondefib() {
           onPress={() => router.push("/algorithms/epals/pals/calculatorPals")}
           style={({ pressed }) => [
             styles.calculatorButton,
+            {
+              backgroundColor: colors.calculatorBackground,
+              borderColor: colors.calculatorBorder,
+            },
             pressed && styles.pressed,
           ]}
         >
-          <Ionicons name="calculator-outline" size={18} color="#FFFFFF" />
-          <Text style={styles.calculatorButtonText}>
+          <Ionicons
+            name="calculator-outline"
+            size={18}
+            color={colors.calculatorText}
+          />
+          <Text
+            style={[
+              styles.calculatorButtonText,
+              { color: colors.calculatorText },
+            ]}
+          >
             {text.calculatorButton}
           </Text>
         </Pressable>
@@ -389,13 +408,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 14,
     paddingVertical: 9,
     borderWidth: 1,
-    borderColor: "rgba(255, 255, 255, 0.35)",
     borderRadius: 10,
     borderCurve: "continuous",
-    backgroundColor: "rgba(255, 255, 255, 0.12)",
   },
   calculatorButtonText: {
-    color: "#FFFFFF",
     fontSize: 14,
     fontWeight: "800",
   },
