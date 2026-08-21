@@ -4,6 +4,7 @@ import { useRouter } from "expo-router";
 import { useState } from "react";
 import {
   Pressable,
+  Platform,
   ScrollView,
   StyleSheet,
   Text,
@@ -143,7 +144,7 @@ export default function Calculator() {
       style={{ backgroundColor: colors.background }}
       contentContainerStyle={styles.container}
     >
-      {process.env.EXPO_OS === "android" ? (
+      {Platform.OS === "android" ? (
         <View style={[styles.handle, { backgroundColor: colors.handle }]} />
       ) : null}
 
