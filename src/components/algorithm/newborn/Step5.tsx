@@ -1,6 +1,7 @@
 import { useSettings } from "@/src/context/settings-context";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
-import { StyleSheet, Text, View } from "react-native";
+import { useRouter } from "expo-router";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import AlgorithmScreen from "../../ui/AlgorithmScreen";
 import FlowConnector from "../../ui/FlowConnector";
 import StepHeader from "../../ui/StepHeader";
@@ -33,6 +34,7 @@ const pageText = {
     ],
     finalTitle: "Informujte rodičov",
     finalDescription: "Debriefing tímu",
+    calculatorButton: "Kalkulačka dávok/veľkostí",
   },
   en: {
     badge: "Step 5",
@@ -61,6 +63,7 @@ const pageText = {
     ],
     finalTitle: "Inform parents",
     finalDescription: "Team debriefing",
+    calculatorButton: "Dose/size calculator",
   },
 };
 
@@ -80,6 +83,9 @@ const cardColors = {
     finalBackground: "#D7EDFD",
     finalBorder: "#075296",
     finalIconBackground: "#FFFFFF",
+    calculatorBackground: "#075296",
+    calculatorBorder: "#075296",
+    calculatorText: "#FFFFFF",
   },
   dark: {
     mainBackground: "#101B2B",
@@ -96,6 +102,9 @@ const cardColors = {
     finalBackground: "#102A3F",
     finalBorder: "#2F7FBE",
     finalIconBackground: "#101B2B",
+    calculatorBackground: "#0E4A80",
+    calculatorBorder: "#2F7FBE",
+    calculatorText: "#FFFFFF",
   },
 };
 
@@ -124,6 +133,8 @@ export default function Step5() {
   const { language, themeMode } = useSettings();
   const text = pageText[language];
   const colors = cardColors[themeMode];
+
+  const router = useRouter();
 
   return (
     <AlgorithmScreen themeMode={themeMode}>
@@ -174,7 +185,10 @@ export default function Step5() {
           },
         ]}
       >
-        <Text selectable style={[styles.conditionText, { color: colors.bodyText }]}>
+        <Text
+          selectable
+          style={[styles.conditionText, { color: colors.bodyText }]}
+        >
           {text.conditionText}
         </Text>
         <BulletList
@@ -194,7 +208,9 @@ export default function Step5() {
             },
           ]}
         >
-          <View style={[styles.infoHeader, { borderBottomColor: colors.divider }]}>
+          <View
+            style={[styles.infoHeader, { borderBottomColor: colors.divider }]}
+          >
             <View
               style={[
                 styles.infoIcon,
@@ -207,7 +223,10 @@ export default function Step5() {
                 color={colors.icon}
               />
             </View>
-            <Text selectable style={[styles.infoTitle, { color: colors.primaryText }]}>
+            <Text
+              selectable
+              style={[styles.infoTitle, { color: colors.primaryText }]}
+            >
               {text.medicationTitle}
             </Text>
           </View>
@@ -216,6 +235,32 @@ export default function Step5() {
             bulletColor={colors.bullet}
             textColor={colors.bodyText}
           />
+          <Pressable
+            accessibilityRole="button"
+            onPress={() => router.push("/algorithms/newborn/calculatorNewborn")}
+            style={({ pressed }) => [
+              styles.calculatorButton,
+              {
+                backgroundColor: colors.calculatorBackground,
+                borderColor: colors.calculatorBorder,
+              },
+              pressed && styles.pressed,
+            ]}
+          >
+            <Ionicons
+              name="calculator-outline"
+              size={18}
+              color={colors.calculatorText}
+            />
+            <Text
+              style={[
+                styles.calculatorButtonText,
+                { color: colors.calculatorText },
+              ]}
+            >
+              {text.calculatorButton}
+            </Text>
+          </Pressable>
         </View>
 
         <View
@@ -227,7 +272,9 @@ export default function Step5() {
             },
           ]}
         >
-          <View style={[styles.infoHeader, { borderBottomColor: colors.divider }]}>
+          <View
+            style={[styles.infoHeader, { borderBottomColor: colors.divider }]}
+          >
             <View
               style={[
                 styles.infoIcon,
@@ -236,7 +283,10 @@ export default function Step5() {
             >
               <Ionicons name="search" size={21} color={colors.icon} />
             </View>
-            <Text selectable style={[styles.infoTitle, { color: colors.primaryText }]}>
+            <Text
+              selectable
+              style={[styles.infoTitle, { color: colors.primaryText }]}
+            >
               {text.causesTitle}
             </Text>
           </View>
@@ -268,7 +318,10 @@ export default function Step5() {
           <Ionicons name="people" size={24} color={colors.icon} />
         </View>
         <View style={styles.cardText}>
-          <Text selectable style={[styles.finalTitle, { color: colors.primaryText }]}>
+          <Text
+            selectable
+            style={[styles.finalTitle, { color: colors.primaryText }]}
+          >
             {text.finalTitle}
           </Text>
           <Text
@@ -318,6 +371,23 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderCurve: "continuous",
     boxShadow: "0 2px 4px rgba(15, 35, 60, 0.08)",
+  },
+  calculatorButton: {
+    minHeight: 42,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 8,
+    marginTop: 8,
+    paddingHorizontal: 14,
+    paddingVertical: 9,
+    borderWidth: 1,
+    borderRadius: 10,
+    borderCurve: "continuous",
+  },
+  calculatorButtonText: {
+    fontSize: 14,
+    fontWeight: "800",
   },
   conditionText: {
     fontSize: 16,
@@ -414,5 +484,9 @@ const styles = StyleSheet.create({
     fontWeight: "900",
     lineHeight: 23,
     textAlign: "center",
+  },
+  pressed: {
+    opacity: 0.7,
+    transform: [{ scale: 0.99 }],
   },
 });

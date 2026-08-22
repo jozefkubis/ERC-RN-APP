@@ -66,6 +66,32 @@ function RootStack() {
           },
         }}
       />
+      <Stack.Screen
+        name="algorithms/newborn/calculatorNewborn"
+        options={{
+          presentation: "formSheet",
+          sheetAllowedDetents: [0.9],
+          sheetGrabberVisible: true,
+          sheetCornerRadius: 28,
+          headerShown: false,
+          contentStyle: {
+            backgroundColor: "transparent",
+          },
+        }}
+      />
+      <Stack.Screen
+        name="algorithms/newborn/sizesNewborn"
+        options={{
+          presentation: "formSheet",
+          sheetAllowedDetents: [0.9],
+          sheetGrabberVisible: true,
+          sheetCornerRadius: 28,
+          headerShown: false,
+          contentStyle: {
+            backgroundColor: "transparent",
+          },
+        }}
+      />
     </Stack>
   );
 }

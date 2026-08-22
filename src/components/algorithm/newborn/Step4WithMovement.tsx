@@ -23,6 +23,7 @@ const pageText = {
       "Zvážte SGA alebo tracheálnu intubáciu",
     ],
     nextTitle: "Ďalší krok",
+    calculatorButton: "Veľkosti pomôcok",
   },
   en: {
     badge: "Step 4",
@@ -40,6 +41,7 @@ const pageText = {
       "Consider SGA or tracheal intubation",
     ],
     nextTitle: "Next step",
+    calculatorButton: "Size of equipment",
   },
 };
 
@@ -57,6 +59,9 @@ const cardColors = {
     nextBorder: "#075296",
     nextIcon: "#ED1C24",
     nextText: "#FFFFFF",
+    calculatorBackground: "#075296",
+    calculatorBorder: "#075296",
+    calculatorText: "#FFFFFF",
   },
   dark: {
     cardBackground: "#101B2B",
@@ -71,6 +76,9 @@ const cardColors = {
     nextBorder: "#2F7FBE",
     nextIcon: "#B7151B",
     nextText: "#FFFFFF",
+    calculatorBackground: "#0E4A80",
+    calculatorBorder: "#2F7FBE",
+    calculatorText: "#FFFFFF",
   },
 };
 
@@ -174,14 +182,46 @@ export default function Step4WithMovement() {
           {text.compressionActions.map((action) => (
             <View key={action} style={styles.actionRow}>
               <View
-                style={[styles.actionBullet, { backgroundColor: colors.bullet }]}
+                style={[
+                  styles.actionBullet,
+                  { backgroundColor: colors.bullet },
+                ]}
               />
-              <Text selectable style={[styles.actionText, { color: colors.bodyText }]}>
+              <Text
+                selectable
+                style={[styles.actionText, { color: colors.bodyText }]}
+              >
                 {action}
               </Text>
             </View>
           ))}
         </View>
+        <Pressable
+          accessibilityRole="button"
+          onPress={() => router.push("/algorithms/newborn/sizesNewborn")}
+          style={({ pressed }) => [
+            styles.calculatorButton,
+            {
+              backgroundColor: colors.calculatorBackground,
+              borderColor: colors.calculatorBorder,
+            },
+            pressed && styles.pressed,
+          ]}
+        >
+          <Ionicons
+            name="calculator-outline"
+            size={18}
+            color={colors.calculatorText}
+          />
+          <Text
+            style={[
+              styles.calculatorButtonText,
+              { color: colors.calculatorText },
+            ]}
+          >
+            {text.calculatorButton}
+          </Text>
+        </Pressable>
       </View>
 
       <Pressable
@@ -249,6 +289,23 @@ const styles = StyleSheet.create({
     fontWeight: "900",
     lineHeight: 23,
     textAlign: "left",
+  },
+  calculatorButton: {
+    minHeight: 42,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 8,
+    marginTop: 8,
+    paddingHorizontal: 14,
+    paddingVertical: 9,
+    borderWidth: 1,
+    borderRadius: 10,
+    borderCurve: "continuous",
+  },
+  calculatorButtonText: {
+    fontSize: 14,
+    fontWeight: "800",
   },
   compressionCard: {
     width: "100%",
