@@ -18,25 +18,17 @@ type CalculatorText = {
   closeButton: string;
   weightLabel: string;
   weightPlaceholder: string;
-  heightLabel: string;
-  heightPlaceholder: string;
   resultsTitle: string;
   shockLabel: string;
   shockFormula: string;
   adrenalineLabel: string;
   adrenalineFormula: string;
-  amiodaroneLabel: string;
-  amiodaroneFormula: string;
   emptyResult: string;
   disclaimer: string;
-  igelSizeLabel: string;
-  igelSizeFormula: string;
-  laryngealMaskSizeLabel: string;
-  laryngealMaskSizeFormula: string;
-  laryngealTubeSizeLabel: string;
-  laryngealTubeSizeFormula: string;
-  endotrachealTubeSizeLabel: string;
-  endotrachealTubeSizeFormula: string;
+  ivVolumeLabel: string;
+  ivVolumeFormula: string;
+  glucoseLabel: string;
+  glucoseFormula: string;
 };
 
 type CalculatorColors = {
@@ -74,23 +66,15 @@ const pageText: { sk: CalculatorText; en: CalculatorText } = {
     closeButton: "Zavrieť kalkulačku",
     weightLabel: "Hmotnosť",
     weightPlaceholder: "kg",
-    heightLabel: "Výška",
-    heightPlaceholder: "cm",
     resultsTitle: "Výsledky",
     shockLabel: "Výboj",
     shockFormula: "4 J/kg",
     adrenalineLabel: "Adrenalín IV/IO",
     adrenalineFormula: "10 µg/kg, max. 1 mg",
-    amiodaroneLabel: "Amiodarón IV/IO",
-    amiodaroneFormula: "5 mg/kg, max. 300 mg",
-    igelSizeLabel: "Veľkosť iGel",
-    igelSizeFormula: "Podľa hmotnosti dieťaťa",
-    laryngealMaskSizeLabel: "Veľkosť laryngeálnej masky",
-    laryngealMaskSizeFormula: "Podľa hmotnosti dieťaťa",
-    laryngealTubeSizeLabel: "Veľkosť laryngeálnej kanyly",
-    laryngealTubeSizeFormula: "Podľa výšky dieťaťa",
-    endotrachealTubeSizeLabel: "Veľkosť endotracheálnej kanyly",
-    endotrachealTubeSizeFormula: "Cuffed / uncuffed podľa výšky",
+    ivVolumeLabel: "Objem IV",
+    ivVolumeFormula: "10 mL/kg",
+    glucoseLabel: "Glukóza 10%",
+    glucoseFormula: "2 mL/kg",
     emptyResult: "0",
     disclaimer: "Pomôcka nenahrádza klinické rozhodnutie.",
   },
@@ -100,23 +84,15 @@ const pageText: { sk: CalculatorText; en: CalculatorText } = {
     closeButton: "Close calculator",
     weightLabel: "Weight",
     weightPlaceholder: "kg",
-    heightLabel: "Height",
-    heightPlaceholder: "cm",
     resultsTitle: "Results",
     shockLabel: "Shock",
     shockFormula: "4 J/kg",
     adrenalineLabel: "Adrenaline IV/IO",
     adrenalineFormula: "10 µg/kg, max. 1 mg",
-    amiodaroneLabel: "Amiodarone IV/IO",
-    amiodaroneFormula: "5 mg/kg, max. 300 mg",
-    igelSizeLabel: "iGel size",
-    igelSizeFormula: "Based on the child's weight",
-    laryngealMaskSizeLabel: "Laryngeal mask size",
-    laryngealMaskSizeFormula: "Based on the child's weight",
-    laryngealTubeSizeLabel: "Laryngeal tube size",
-    laryngealTubeSizeFormula: "Based on the child's height",
-    endotrachealTubeSizeLabel: "Endotracheal tube size",
-    endotrachealTubeSizeFormula: "Cuffed / uncuffed by height",
+    ivVolumeLabel: "IV volume",
+    ivVolumeFormula: "10 mL/kg",
+    glucoseLabel: "Glucose 10%",
+    glucoseFormula: "2 mL/kg",
     emptyResult: "0",
     disclaimer: "This aid does not replace clinical judgement.",
   },
@@ -176,6 +152,16 @@ export default function CalculatorNewborn() {
         adrenalineMicrogramx3 / 1000,
         language,
       )} mg)`
+    : text.emptyResult;
+
+  const ivVolume = hasValidWeight ? weight * 10 : 0;
+  const ivVolumeDose = hasValidWeight
+    ? `${formatNumber(ivVolume, language)} mL`
+    : text.emptyResult;
+
+  const glucose = hasValidWeight ? weight * 2 : 0;
+  const glucoseDose = hasValidWeight
+    ? `${formatNumber(glucose, language)} mL`
     : text.emptyResult;
 
   return (
@@ -254,6 +240,24 @@ export default function CalculatorNewborn() {
             label={text.adrenalineLabel}
             formula={text.adrenalineFormula}
             value={adrenalineDose}
+            colors={colors}
+          />
+          <View
+            style={[styles.separator, { backgroundColor: colors.border }]}
+          />
+          <ResultRow
+            label={text.ivVolumeLabel}
+            formula={text.ivVolumeFormula}
+            value={ivVolumeDose}
+            colors={colors}
+          />
+          <View
+            style={[styles.separator, { backgroundColor: colors.border }]}
+          />
+          <ResultRow
+            label={text.glucoseLabel}
+            formula={text.glucoseFormula}
+            value={glucoseDose}
             colors={colors}
           />
         </View>

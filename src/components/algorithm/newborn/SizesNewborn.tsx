@@ -14,18 +14,7 @@ type CalculatorText = {
   title: string;
   description: string;
   closeButton: string;
-  weightLabel: string;
-  weightPlaceholder: string;
-  heightLabel: string;
-  heightPlaceholder: string;
   resultsTitle: string;
-  shockLabel: string;
-  shockFormula: string;
-  adrenalineLabel: string;
-  adrenalineFormula: string;
-  amiodaroneLabel: string;
-  amiodaroneFormula: string;
-  emptyResult: string;
   disclaimer: string;
   igelSizeLabel: string;
   igelSizeFormula: string;
@@ -61,17 +50,7 @@ const pageText: { sk: CalculatorText; en: CalculatorText } = {
     title: "Kalkulačka dávok",
     description: "Výpočet podľa hmotnosti a výšky dieťaťa",
     closeButton: "Zavrieť kalkulačku",
-    weightLabel: "Hmotnosť",
-    weightPlaceholder: "kg",
-    heightLabel: "Výška",
-    heightPlaceholder: "cm",
     resultsTitle: "Výsledky",
-    shockLabel: "Výboj",
-    shockFormula: "4 J/kg",
-    adrenalineLabel: "Adrenalín IV/IO",
-    adrenalineFormula: "10 µg/kg, max. 1 mg",
-    amiodaroneLabel: "Amiodarón IV/IO",
-    amiodaroneFormula: "5 mg/kg, max. 300 mg",
     igelSizeLabel: "Veľkosť iGel",
     igelSizeFormula: "Podľa hmotnosti dieťaťa",
     laryngealMaskSizeLabel: "Veľkosť laryngeálnej masky",
@@ -80,24 +59,13 @@ const pageText: { sk: CalculatorText; en: CalculatorText } = {
     laryngealTubeSizeFormula: "Podľa výšky dieťaťa",
     endotrachealTubeSizeLabel: "Veľkosť endotracheálnej kanyly",
     endotrachealTubeSizeFormula: "Cuffed / uncuffed podľa výšky",
-    emptyResult: "0",
     disclaimer: "Pomôcka nenahrádza klinické rozhodnutie.",
   },
   en: {
     title: "Dose calculator",
     description: "Calculation based on the child's weight and height",
     closeButton: "Close calculator",
-    weightLabel: "Weight",
-    weightPlaceholder: "kg",
-    heightLabel: "Height",
-    heightPlaceholder: "cm",
     resultsTitle: "Results",
-    shockLabel: "Shock",
-    shockFormula: "4 J/kg",
-    adrenalineLabel: "Adrenaline IV/IO",
-    adrenalineFormula: "10 µg/kg, max. 1 mg",
-    amiodaroneLabel: "Amiodarone IV/IO",
-    amiodaroneFormula: "5 mg/kg, max. 300 mg",
     igelSizeLabel: "iGel size",
     igelSizeFormula: "Based on the child's weight",
     laryngealMaskSizeLabel: "Laryngeal mask size",
@@ -106,7 +74,6 @@ const pageText: { sk: CalculatorText; en: CalculatorText } = {
     laryngealTubeSizeFormula: "Based on the child's height",
     endotrachealTubeSizeLabel: "Endotracheal tube size",
     endotrachealTubeSizeFormula: "Cuffed / uncuffed by height",
-    emptyResult: "0",
     disclaimer: "This aid does not replace clinical judgement.",
   },
 };
@@ -204,9 +171,6 @@ export default function SizesNewborn() {
             },
           ]}
         >
-          <View
-            style={[styles.separator, { backgroundColor: colors.border }]}
-          />
           <ResultRow
             label={text.igelSizeLabel}
             formula={text.igelSizeFormula}
@@ -314,38 +278,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 16,
-  },
-  inputRow: {
-    flexDirection: "row",
-    gap: 10,
-  },
-  inputSection: {
-    flex: 1,
-    gap: 7,
-  },
-  inputLabel: {
-    fontSize: 12,
-    fontWeight: "800",
-  },
-  inputContainer: {
-    height: 48,
-    flexDirection: "row",
-    alignItems: "center",
-    paddingHorizontal: 14,
-    borderWidth: 1,
-    borderRadius: 12,
-    borderCurve: "continuous",
-  },
-  input: {
-    flex: 1,
-    height: "100%",
-    fontSize: 17,
-    fontWeight: "800",
-    fontVariant: ["tabular-nums"],
-  },
-  unit: {
-    fontSize: 14,
-    fontWeight: "700",
   },
   resultsSection: {
     gap: 7,

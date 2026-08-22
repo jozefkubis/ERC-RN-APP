@@ -34,7 +34,7 @@ const pageText = {
     ],
     finalTitle: "Informujte rodičov",
     finalDescription: "Debriefing tímu",
-    calculatorButton: "Kalkulačka dávok/veľkostí",
+    calculatorButton: "Kalkulačka dávok",
   },
   en: {
     badge: "Step 5",
@@ -63,7 +63,7 @@ const pageText = {
     ],
     finalTitle: "Inform parents",
     finalDescription: "Team debriefing",
-    calculatorButton: "Dose/size calculator",
+    calculatorButton: "Dose calculator",
   },
 };
 
