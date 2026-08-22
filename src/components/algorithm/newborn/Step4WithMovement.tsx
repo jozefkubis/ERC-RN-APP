@@ -209,7 +209,7 @@ export default function Step4WithMovement() {
           ]}
         >
           <Ionicons
-            name="calculator-outline"
+            name="resize-outline"
             size={18}
             color={colors.calculatorText}
           />

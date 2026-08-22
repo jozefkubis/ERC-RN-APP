@@ -1,16 +1,12 @@
 import { type AppLanguage, useSettings } from "@/src/context/settings-context";
-import { Ionicons } from "@expo/vector-icons";
-import { useRouter } from "expo-router";
+import CalculatorSheet, {
+  ResultsCard,
+  calculatorSheetColors,
+  type CalculatorResultItem,
+  type CalculatorSheetColors,
+} from "@/src/components/ui/CalculatorSheet";
 import { useState } from "react";
-import {
-  Platform,
-  Pressable,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-} from "react-native";
+import { StyleSheet, Text, TextInput, View } from "react-native";
 
 type CalculatorText = {
   title: string;
@@ -39,32 +35,13 @@ type CalculatorText = {
   endotrachealTubeSizeFormula: string;
 };
 
-type CalculatorColors = {
-  background: string;
-  cardBackground: string;
-  border: string;
-  title: string;
-  description: string;
-  primary: string;
-  inputBackground: string;
-  resultBackground: string;
-  handle: string;
-};
-
 type InputFieldProps = {
   label: string;
   placeholder: string;
   unit: string;
   value: string;
   onChangeText: (value: string) => void;
-  colors: CalculatorColors;
-};
-
-type ResultRowProps = {
-  label: string;
-  formula: string;
-  value: string;
-  colors: CalculatorColors;
+  colors: CalculatorSheetColors;
 };
 
 const pageText: { sk: CalculatorText; en: CalculatorText } = {
@@ -122,46 +99,16 @@ const pageText: { sk: CalculatorText; en: CalculatorText } = {
   },
 };
 
-const calculatorColors: {
-  light: CalculatorColors;
-  dark: CalculatorColors;
-} = {
-  light: {
-    background: "#e6e7ee",
-    cardBackground: "#FFFFFF",
-    border: "#CBD3DF",
-    title: "#10243C",
-    description: "#5C6574",
-    primary: "#075296",
-    inputBackground: "#FFFFFF",
-    resultBackground: "#EAF4FD",
-    handle: "#AEB7C4",
-  },
-  dark: {
-    background: "#1c5499",
-    cardBackground: "#101B2B",
-    border: "#31435A",
-    title: "#F5F8FC",
-    description: "#AAB6C7",
-    primary: "#77B7F2",
-    inputBackground: "#101B2B",
-    resultBackground: "#102A42",
-    handle: "#65758A",
-  },
-};
-
 export default function CalculatorPals() {
-  const router = useRouter();
   const { language, themeMode } = useSettings();
   const [weightText, setWeightText] = useState("");
   const [heightText, setHeightText] = useState("");
 
   const text = pageText[language];
-  const colors = calculatorColors[themeMode];
+  const colors = calculatorSheetColors[themeMode];
   const weight = Number(weightText.replace(",", "."));
   const height = Number(heightText.replace(",", "."));
   const hasValidWeight = Number.isFinite(weight) && weight > 0;
-  const hasValidHeight = Number.isFinite(height) && height > 0;
 
   const shockDose = hasValidWeight
     ? `${formatNumber(weight * 4, language)} J`
@@ -179,40 +126,8 @@ export default function CalculatorPals() {
     ? `${formatNumber(Math.min(weight * 5, 300), language)} mg`
     : text.emptyResult;
 
-  const IGelSize =
-    hasValidWeight && weight >= 2
-      ? weight < 5
-        ? "1"
-        : weight < 12
-          ? "1.5"
-          : weight < 25
-            ? "2"
-            : weight < 35
-              ? "2.5"
-              : weight < 60
-                ? "3"
-                : weight < 90
-                  ? "4"
-                  : "5"
-      : text.emptyResult;
-
-  const laryngealMaskSize =
-    hasValidWeight && weight > 0
-      ? weight < 5
-        ? "1"
-        : weight < 10
-          ? "1.5"
-          : weight < 20
-            ? "2"
-            : weight < 30
-              ? "2.5"
-              : weight < 50
-                ? "3"
-                : weight < 70
-                  ? "4"
-                  : "5"
-      : text.emptyResult;
-
+  const igelSize = getIGelSize(weight, text.emptyResult);
+  const laryngealMaskSize = getLaryngealMaskSize(weight, text.emptyResult);
   const laryngealTubeSize = getLaryngealTubeSize(height, text.emptyResult);
   const endotrachealTubeSize = getEndotrachealTubeSize(
     height,
@@ -220,45 +135,51 @@ export default function CalculatorPals() {
     text.emptyResult,
   );
 
+  const results: CalculatorResultItem[] = [
+    {
+      label: text.shockLabel,
+      formula: text.shockFormula,
+      value: shockDose,
+    },
+    {
+      label: text.adrenalineLabel,
+      formula: text.adrenalineFormula,
+      value: adrenalineDose,
+    },
+    {
+      label: text.amiodaroneLabel,
+      formula: text.amiodaroneFormula,
+      value: amiodaroneDose,
+    },
+    {
+      label: text.igelSizeLabel,
+      formula: text.igelSizeFormula,
+      value: igelSize,
+    },
+    {
+      label: text.laryngealMaskSizeLabel,
+      formula: text.laryngealMaskSizeFormula,
+      value: laryngealMaskSize,
+    },
+    {
+      label: text.laryngealTubeSizeLabel,
+      formula: text.laryngealTubeSizeFormula,
+      value: laryngealTubeSize,
+    },
+    {
+      label: text.endotrachealTubeSizeLabel,
+      formula: text.endotrachealTubeSizeFormula,
+      value: endotrachealTubeSize,
+    },
+  ];
+
   return (
-    <ScrollView
-      contentInsetAdjustmentBehavior="automatic"
-      keyboardShouldPersistTaps="handled"
-      style={{ backgroundColor: colors.background }}
-      contentContainerStyle={styles.container}
+    <CalculatorSheet
+      title={text.title}
+      description={text.description}
+      closeButton={text.closeButton}
+      themeMode={themeMode}
     >
-      {Platform.OS === "android" ? (
-        <View style={[styles.handle, { backgroundColor: colors.handle }]} />
-      ) : null}
-
-      <View style={styles.header}>
-        <View style={styles.headerText}>
-          <Text selectable style={[styles.title, { color: colors.title }]}>
-            {text.title}
-          </Text>
-          <Text
-            selectable
-            style={[styles.description, { color: colors.description }]}
-          >
-            {text.description}
-          </Text>
-        </View>
-
-        <Pressable
-          accessibilityLabel={text.closeButton}
-          accessibilityRole="button"
-          hitSlop={10}
-          onPress={() => router.back()}
-          style={({ pressed }) => [
-            styles.closeButton,
-            { backgroundColor: colors.cardBackground },
-            pressed && styles.pressed,
-          ]}
-        >
-          <Ionicons name="close" size={19} color={colors.title} />
-        </Pressable>
-      </View>
-
       <View style={styles.inputRow}>
         <InputField
           label={text.weightLabel}
@@ -278,81 +199,7 @@ export default function CalculatorPals() {
         />
       </View>
 
-      <View style={styles.resultsSection}>
-        <Text style={[styles.resultsTitle, { color: colors.primary }]}>
-          {text.resultsTitle}
-        </Text>
-        <View
-          style={[
-            styles.resultsCard,
-            {
-              backgroundColor: colors.cardBackground,
-              borderColor: colors.border,
-            },
-          ]}
-        >
-          <ResultRow
-            label={text.shockLabel}
-            formula={text.shockFormula}
-            value={shockDose}
-            colors={colors}
-          />
-          <View
-            style={[styles.separator, { backgroundColor: colors.border }]}
-          />
-          <ResultRow
-            label={text.adrenalineLabel}
-            formula={text.adrenalineFormula}
-            value={adrenalineDose}
-            colors={colors}
-          />
-          <View
-            style={[styles.separator, { backgroundColor: colors.border }]}
-          />
-          <ResultRow
-            label={text.amiodaroneLabel}
-            formula={text.amiodaroneFormula}
-            value={amiodaroneDose}
-            colors={colors}
-          />
-          <View
-            style={[styles.separator, { backgroundColor: colors.border }]}
-          />
-          <ResultRow
-            label={text.igelSizeLabel}
-            formula={text.igelSizeFormula}
-            value={IGelSize}
-            colors={colors}
-          />
-          <View
-            style={[styles.separator, { backgroundColor: colors.border }]}
-          />
-          <ResultRow
-            label={text.laryngealMaskSizeLabel}
-            formula={text.laryngealMaskSizeFormula}
-            value={laryngealMaskSize}
-            colors={colors}
-          />
-          <View
-            style={[styles.separator, { backgroundColor: colors.border }]}
-          />
-          <ResultRow
-            label={text.laryngealTubeSizeLabel}
-            formula={text.laryngealTubeSizeFormula}
-            value={hasValidHeight ? laryngealTubeSize : text.emptyResult}
-            colors={colors}
-          />
-          <View
-            style={[styles.separator, { backgroundColor: colors.border }]}
-          />
-          <ResultRow
-            label={text.endotrachealTubeSizeLabel}
-            formula={text.endotrachealTubeSizeFormula}
-            value={hasValidHeight ? endotrachealTubeSize : text.emptyResult}
-            colors={colors}
-          />
-        </View>
-      </View>
+      <ResultsCard title={text.resultsTitle} items={results} colors={colors} />
 
       <Text
         selectable
@@ -360,7 +207,7 @@ export default function CalculatorPals() {
       >
         {text.disclaimer}
       </Text>
-    </ScrollView>
+    </CalculatorSheet>
   );
 }
 
@@ -404,37 +251,68 @@ function InputField({
   );
 }
 
-function ResultRow({ label, formula, value, colors }: ResultRowProps) {
-  return (
-    <View style={styles.resultRow}>
-      <View style={styles.resultText}>
-        <Text selectable style={[styles.resultLabel, { color: colors.title }]}>
-          {label}
-        </Text>
-        <Text
-          selectable
-          style={[styles.resultFormula, { color: colors.description }]}
-        >
-          {formula}
-        </Text>
-      </View>
-      <View
-        style={[
-          styles.resultValueContainer,
-          { backgroundColor: colors.resultBackground },
-        ]}
-      >
-        <Text
-          selectable
-          adjustsFontSizeToFit
-          numberOfLines={2}
-          style={[styles.resultValue, { color: colors.primary }]}
-        >
-          {value}
-        </Text>
-      </View>
-    </View>
-  );
+function getIGelSize(weight: number, emptyResult: string) {
+  if (!Number.isFinite(weight) || weight < 2) {
+    return emptyResult;
+  }
+
+  if (weight < 5) {
+    return "1";
+  }
+
+  if (weight < 12) {
+    return "1.5";
+  }
+
+  if (weight < 25) {
+    return "2";
+  }
+
+  if (weight < 35) {
+    return "2.5";
+  }
+
+  if (weight < 60) {
+    return "3";
+  }
+
+  if (weight < 90) {
+    return "4";
+  }
+
+  return "5";
+}
+
+function getLaryngealMaskSize(weight: number, emptyResult: string) {
+  if (!Number.isFinite(weight) || weight <= 0) {
+    return emptyResult;
+  }
+
+  if (weight < 5) {
+    return "1";
+  }
+
+  if (weight < 10) {
+    return "1.5";
+  }
+
+  if (weight < 20) {
+    return "2";
+  }
+
+  if (weight < 30) {
+    return "2.5";
+  }
+
+  if (weight < 50) {
+    return "3";
+  }
+
+  if (weight < 70) {
+    return "4";
+  }
+
+  return "5";
 }
 
 function getLaryngealTubeSize(height: number, emptyResult: string) {
@@ -523,43 +401,6 @@ function formatNumber(value: number, language: AppLanguage) {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    gap: 17,
-    paddingHorizontal: 17,
-    paddingTop: 12,
-    paddingBottom: 31,
-  },
-  handle: {
-    width: 32,
-    height: 4,
-    alignSelf: "center",
-    borderRadius: 3,
-  },
-  header: {
-    flexDirection: "row",
-    alignItems: "flex-start",
-    gap: 10,
-  },
-  headerText: {
-    flex: 1,
-    gap: 3,
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: "900",
-    lineHeight: 25,
-  },
-  description: {
-    fontSize: 11,
-    lineHeight: 16,
-  },
-  closeButton: {
-    width: 32,
-    height: 32,
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 16,
-  },
   inputRow: {
     flexDirection: "row",
     gap: 10,
@@ -592,66 +433,9 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: "700",
   },
-  resultsSection: {
-    gap: 7,
-  },
-  resultsTitle: {
-    fontSize: 10,
-    fontWeight: "900",
-    letterSpacing: 0.7,
-    textTransform: "uppercase",
-  },
-  resultsCard: {
-    borderWidth: 1,
-    borderRadius: 14,
-    borderCurve: "continuous",
-    overflow: "hidden",
-  },
-  resultRow: {
-    minHeight: 65,
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 10,
-    padding: 12,
-  },
-  resultText: {
-    flex: 1,
-    gap: 3,
-  },
-  resultLabel: {
-    fontSize: 13,
-    fontWeight: "900",
-    lineHeight: 17,
-  },
-  resultFormula: {
-    fontSize: 10,
-    lineHeight: 14,
-  },
-  resultValueContainer: {
-    minWidth: 78,
-    maxWidth: 132,
-    paddingHorizontal: 9,
-    paddingVertical: 8,
-    borderRadius: 9,
-    borderCurve: "continuous",
-  },
-  resultValue: {
-    textAlign: "center",
-    fontSize: 13,
-    fontWeight: "900",
-    fontVariant: ["tabular-nums"],
-  },
-  separator: {
-    height: StyleSheet.hairlineWidth,
-    marginHorizontal: 12,
-  },
   disclaimer: {
     textAlign: "center",
     fontSize: 9,
     lineHeight: 14,
-  },
-  pressed: {
-    opacity: 0.65,
-    transform: [{ scale: 0.94 }],
   },
 });
