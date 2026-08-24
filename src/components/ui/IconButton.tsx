@@ -29,11 +29,13 @@ export default function IconButton({
 
 const styles = StyleSheet.create({
   buttonContainer: {
-    borderRadius: 50,
-    padding: 9,
+    width: 38,
+    height: 38,
+    borderRadius: 19,
+    // padding: 9,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#eae6e6c0",
+    backgroundColor: "rgba(105, 162, 219, 0.18)",
   },
   onPress: {
     opacity: 0.5,
