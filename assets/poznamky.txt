@@ -16,3 +16,91 @@
   → zobrazí karty
 
   Toto je už dobrý kus React Native/Expo logiky naraz, takže dáva zmysel si to rozobrať pomaly.
+
+  //////////////////////////////////////////////////////////////
+
+   Jasné, Jožko. Urobil by som to jednoducho: nastavíme rovnakú dark farbu na všetky vrstvy, ktoré sa môžu ukázať počas animácie.
+
+  Tvoje hlavné pozadie je pravdepodobne:
+
+  "#07111F"
+
+  1. Začni v src/navigation/screenOptions.ts
+
+  Tam máš spoločné farby navigácie. Pridal by som tam zvlášť screenBackground, aby bolo jasné, čo je pozadie obrazovky.
+
+  dark: {
+    background: "#0B1828",       // header / tab bar
+    screenBackground: "#07111F", // pozadie obrazoviek a animácie
+    primaryText: "#F5F8FC",
+    primary: "#77B7F2",
+    muted: "#AAB6C7",
+    border: "#31435A",
+  }
+
+  2. V getHeaderOptions() pridaj contentStyle
+
+  Toto je najdôležitejšie. contentStyle nastavuje podklad navigátora pod obrazovkami.
+
+  export function getHeaderOptions(themeMode: AppThemeMode) {
+    const colors = navigationColors[themeMode];
+
+    return {
+      headerStyle: { backgroundColor: colors.background },
+
+      // Toto je farba, ktorú uvidíš medzi slide animáciami.
+      contentStyle: {
+        backgroundColor: colors.screenBackground,
+      },
+
+      headerTintColor: colors.primaryText,
+      headerTitleStyle: {
+        color: colors.primaryText,
+        fontWeight: "bold" as const,
+      },
+      headerTitleAlign: "center" as const,
+    };
+  }
+
+  3. Skontroluj root stack
+
+  V app/_layout.tsx už používaš:
+
+  ...getHeaderOptions(themeMode),
+  animation: "slide_from_right",
+
+  Čiže keď pridáš contentStyle do getHeaderOptions, root stack to automaticky dostane.
+
+  4. Skontroluj vnorený algorithms stack
+
+  V app/(tabs)/algorithms/_layout.tsx tiež používaš:
+
+  ...getHeaderOptions(themeMode),
+  animation: "slide_from_right",
+
+  Čiže aj tam sa to opraví automaticky.
+
+  5. Potom zjednoť obrazovky
+
+  Obrazovky ako Home, Settings, AlgorithmsScreen majú vlastné:
+
+  style={{ backgroundColor: colors.background }}
+
+  Tam by dark farba mala ostať rovnaká:
+
+  background: "#07111F"
+
+  6. Najprv nerieš sheet/modaly
+
+  Kalkulačky a formSheet by som teraz nechal tak. Najprv oprav len biele prebliknutie pri klasickom slide späť. Keď to bude fungovať, až potom
+  riešiť modaly.
+
+  Najjednoduchší postup teda:
+
+  1. Pridať screenBackground do navigationColors
+  2. Pridať contentStyle do getHeaderOptions()
+  3. Nemenit ostatné obrazovky
+  4. Otestovať dark mode + späť animáciu
+
+  Toto je čisté riešenie, lebo nemeníš každú obrazovku zvlášť. Nastavíš farbu na spoločnom mieste, presne tam, kde vzniká biely podklad medzi
+  slidami.
