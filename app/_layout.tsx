@@ -1,8 +1,9 @@
+import IconButton from "@/src/components/ui/IconButton";
 import History from "@/src/components/utils/History";
 import { SettingsProvider, useSettings } from "@/src/context/settings-context";
 import { getAlgorithmScreenTitle } from "@/src/navigation/algorithmScreenTitle";
 import { getHeaderOptions } from "@/src/navigation/screenOptions";
-import { Stack } from "expo-router";
+import { Stack, useRouter } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 
@@ -42,6 +43,7 @@ function AppContent() {
 }
 
 function RootStack() {
+  const router = useRouter();
   const { language, themeMode } = useSettings();
 
   return (
@@ -50,6 +52,16 @@ function RootStack() {
         ...getHeaderOptions(themeMode),
         animation: "slide_from_right",
         title: getAlgorithmScreenTitle(route.name, language),
+        headerRight: ({ tintColor }) => (
+          <IconButton
+            name="git-network-sharp"
+            size={20}
+            color={tintColor}
+            onPress={() => {
+              router.navigate("/algorithms");
+            }}
+          />
+        ),
       })}
     >
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
