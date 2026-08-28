@@ -50,8 +50,8 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="algorithms"
         options={{
-          title: "ERC 2025",
-          tabBarLabel: "ERC 2025",
+          title: text.algorithms,
+          tabBarLabel: text.algorithms,
           headerShown: false,
         }}
       />
@@ -71,10 +71,12 @@ export default function TabsLayout() {
 const tabText = {
   sk: {
     home: "Domov",
+    algorithms: "Algoritmy",
     settings: "Nastavenia",
   },
   en: {
     home: "Home",
+    algorithms: "Algorithms",
     settings: "Settings",
   },
 };
