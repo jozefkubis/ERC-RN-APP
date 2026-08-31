@@ -104,3 +104,76 @@
 
   Toto je čisté riešenie, lebo nemeníš každú obrazovku zvlášť. Nastavíš farbu na spoločnom mieste, presne tam, kde vzniká biely podklad medzi
   slidami.
+
+  ////////////////////////////////////////////////////////////////////////////////////////
+
+  • Jasné, Jožko. Teoreticky, ako skúsený vývojár aj používateľ v strese pri zásahu, by som appku nezväčšoval ďalšími obrazovkami. Skôr by som z
+  nej spravil rýchlejší rozhodovací nástroj: menej čítania, jasnejší hlavný ďalší krok, kalkulačky dostupné presne tam, kde sa dávkuje.
+
+  Hlavný UX problém
+  Appka má dobrý obsah, ale miestami je príliš „kartičková“. Napríklad LAST má po sebe viac informačných boxov a až dole akciu „Otvoriť dospelý
+  ALS“: src/components/algorithm/special/lokalne-anestetika/Step1.tsx:116. Pri reálnom použití by som chcel okamžite vidieť:
+
+  1. čo spraviť teraz,
+  2. čo stlačiť ďalej,
+  3. doplňujúce detaily až pod tým.
+
+  Najväčšie zmeny, ktoré by som navrhol
+
+  1. Na každej obrazovke mať jeden dominantný ďalší krok.
+     Tlačidlo typu „Pokračovať: zhodnoť rytmus“, „Áno: pacient je v ZO“, „Nie: pokračuj v liečbe“ by malo byť vždy vizuálne hlavná vec. Nie iba
+     všeobecné „Ďalší krok“.
+
+  2. Oddeliť rozhodnutia od informácií.
+     DecisionCard + Yes/No funguje dobre napr. pri hyperkaliémii: src/components/algorithm/special/kalium/hyper/Step1.tsx:97. Tento vzor by som
+     používal viac. Informačné karty by boli až druhotné.
+
+  3. Špeciálne okolnosti rozdeliť na sekcie.
+     Teraz je to dlhý zoznam mnohých kariet: app/algorithms/special/index.tsx:44. Dal by som hore prepínače:
+     Príčina, Pacient, Prostredie, prípadne Najčastejšie.
+     Užívateľ by nemusel scrollovať cez všetko.
+
+  4. Domovská obrazovka by mohla mať rýchle vstupy.
+     Teraz má vyhľadávanie, ERC 2025 a históriu: app/(tabs)/index.tsx:173. Pridal by som malé rýchle tlačidlá:
+     ALS, PALS, Novorodenec, Lieky, 4H4T.
+     Vyhľadávanie nechať, ale v urgentnej appke nechcem vždy písať.
+
+  5. Kalkulačku dať do globálne dostupného miesta.
+     Aktuálne existuje PALS kalkulačka dávok/veľkostí: src/components/algorithm/epals/CalculatorPals.tsx:49, a novorodenecká dávková kalkulačka:
+     src/components/algorithm/newborn/CalculatorNewborn.tsx:42.
+     Navrhol by som novú sekciu/tab Kalkulačky, alebo plávajúce tlačidlo v algoritmoch.
+
+  Kalkulačka, ktorá by dávala najväčší zmysel
+  Najpraktickejšia by bola „Lieky a dávky podľa hmotnosti“:
+
+   Modul                            Vstup    Výstup
+  ━━━━━━━━━━━━━━━  ━━━━━━━━━━━━━━━━━━━━━━━  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Dieťa PALS                      kg, cm    výboj, adrenalín, amiodarón, pomôcky DC
+  ───────────────  ───────────────────────  ───────────────────────────────────────────
+   Novorodenec                         kg    adrenalín, glukóza, objem, výboj
+  ───────────────  ───────────────────────  ───────────────────────────────────────────
+   Anafylaxia       kg / veková kategória    adrenalín i.m., tekutiny
+  ───────────────  ───────────────────────  ───────────────────────────────────────────
+   LAST                                kg    lipidový bolus, infúzia, max. dávka
+
+  Najskôr by som pridal LAST lipidovú kalkulačku, lebo v texte už sú jasné hmotnostné dávky a výpočet je pre používateľa otravný v strese: src/
+  components/algorithm/special/lokalne-anestetika/Step1.tsx:30. Klinické hodnoty by som ale nemenil bez kontroly podľa slovenských RLP/RZP
+  štandardov a zdroja.
+
+  Textovo by som čistil takto
+
+  - Nadpis: krátky príkaz, napr. „Podajte lipidovú emulziu“.
+  - Popis: max. 1 veta.
+  - Body: max. 3 najdôležitejšie veci.
+  - Detaily typu „pri refraktérnom priebehu“ dať pod rozbaľovací blok Viac.
+  - Nepoužívať tri podobné boxy za sebou, keď stačí jeden blok „Teraz“ a jeden blok „Ak sa nezlepší“.
+
+  Moje poradie krokov
+
+  1. Najprv zjednotiť UX pravidlo: každá obrazovka = hlavná akcia hore + rozhodnutie + doplnky.
+  2. Potom upratať špeciálne okolnosti na sekcie.
+  3. Potom pridať globálny vstup Kalkulačky.
+  4. Ako prvú novú kalkulačku spraviť LAST alebo anafylaxiu.
+  5. Až potom riešiť väčšie vizuálne zmeny.
+
+  Nič som neupravoval, ani nespúšťal testy, lebo si chcel zatiaľ iba teóriu bez refaktoringu.

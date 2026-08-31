@@ -16,6 +16,8 @@ const pageText = {
     question: "Potrebuje KPR?",
     yes: "Áno",
     no: "Nie",
+    yesDescription: "Otvoriť univerzálny ALS postup",
+    noDescription: "Pokračovať hodnotením teploty jadra",
   },
   en: {
     badge: "Step 1",
@@ -25,6 +27,8 @@ const pageText = {
     question: "Does the patient need CPR?",
     yes: "Yes",
     no: "No",
+    yesDescription: "Open the universal ALS algorithm",
+    noDescription: "Continue with core temperature assessment",
   },
 };
 
@@ -49,6 +53,7 @@ export default function Step1() {
 
       <YesButton
         title={text.yes}
+        description={text.yesDescription}
         themeMode={themeMode}
         onPress={() =>
           router.push("/algorithms/adult-resuscitation/als/step1")
@@ -56,6 +61,7 @@ export default function Step1() {
       />
       <NoButton
         title={text.no}
+        description={text.noDescription}
         themeMode={themeMode}
         onPress={() =>
           router.push("/algorithms/special/hypertermia/regular/step2")

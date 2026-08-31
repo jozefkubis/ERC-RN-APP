@@ -15,6 +15,8 @@ const pageText = {
     question: "Silne dehydrovaný?",
     yes: "Áno",
     no: "Nie",
+    yesDescription: "Prejsť na rehydratáciu",
+    noDescription: "Pokračovať posúdením ďalších príznakov",
   },
   en: {
     badge: "Step 7",
@@ -23,6 +25,8 @@ const pageText = {
     question: "Severely dehydrated?",
     yes: "Yes",
     no: "No",
+    yesDescription: "Go to rehydration",
+    noDescription: "Continue with other symptoms assessment",
   },
 };
 
@@ -46,6 +50,7 @@ export default function Step7() {
 
       <YesButton
         title={text.yes}
+        description={text.yesDescription}
         themeMode={themeMode}
         onPress={() =>
           router.push("/algorithms/special/hypertermia/regular/step8")
@@ -53,6 +58,7 @@ export default function Step7() {
       />
       <NoButton
         title={text.no}
+        description={text.noDescription}
         themeMode={themeMode}
         onPress={() =>
           router.push("/algorithms/special/hypertermia/regular/step9")

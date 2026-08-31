@@ -16,6 +16,8 @@ const pageText = {
     question: "Sodík v krvi < 130 mEq·l⁻¹?",
     yes: "Áno",
     no: "Nie",
+    yesDescription: "Prejsť na liečbu hyponatriémie",
+    noDescription: "Pokračovať posúdením hydratácie",
   },
   en: {
     badge: "Step 5",
@@ -25,6 +27,8 @@ const pageText = {
     question: "Blood sodium < 130 mEq·l⁻¹?",
     yes: "Yes",
     no: "No",
+    yesDescription: "Go to hyponatraemia treatment",
+    noDescription: "Continue with hydration assessment",
   },
 };
 
@@ -48,6 +52,7 @@ export default function Step5() {
 
       <YesButton
         title={text.yes}
+        description={text.yesDescription}
         themeMode={themeMode}
         onPress={() =>
           router.push("/algorithms/special/hypertermia/regular/step6")
@@ -55,6 +60,7 @@ export default function Step5() {
       />
       <NoButton
         title={text.no}
+        description={text.noDescription}
         themeMode={themeMode}
         onPress={() =>
           router.push("/algorithms/special/hypertermia/regular/step7")

@@ -32,6 +32,8 @@ const pageText = {
       "Pretrvávajúca dychová alebo obehová nestabilita znamená refraktérnu anafylaxiu.",
     yes: "Áno",
     no: "Nie",
+    yesDescription: "Otvoriť refraktérnu anafylaxiu",
+    noDescription: "Prejsť na následnú starostlivosť",
     arrestTitle: "Zastavenie obehu",
     arrestDescription: "Okamžite začnite štandardný ALS postup",
   },
@@ -56,6 +58,8 @@ const pageText = {
       "Persistent breathing or circulatory instability means refractory anaphylaxis.",
     yes: "Yes",
     no: "No",
+    yesDescription: "Open refractory anaphylaxis",
+    noDescription: "Go to aftercare",
     arrestTitle: "Cardiac arrest",
     arrestDescription: "Start the standard ALS algorithm immediately",
   },
@@ -103,11 +107,13 @@ export default function Step3() {
 
       <YesButton
         title={text.yes}
+        description={text.yesDescription}
         themeMode={themeMode}
         onPress={() => router.push("/algorithms/special/anafylaxia/refractory")}
       />
       <NoButton
         title={text.no}
+        description={text.noDescription}
         themeMode={themeMode}
         onPress={() => router.push("/algorithms/special/anafylaxia/aftercare")}
       />

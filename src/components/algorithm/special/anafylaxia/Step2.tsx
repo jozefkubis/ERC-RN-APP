@@ -1,6 +1,7 @@
 import AlgorithmScreen from "@/src/components/ui/AlgorithmScreen";
 import ContentCard from "@/src/components/ui/ContentCard";
 import DecisionCard from "@/src/components/ui/DecisionCard";
+import FlowActionButton from "@/src/components/ui/FlowActionButton";
 import HeroCard from "@/src/components/ui/HeroCard";
 import NoButton from "@/src/components/ui/NoButton";
 import StepHeader from "@/src/components/ui/StepHeader";
@@ -41,11 +42,15 @@ const pageText = {
       "Dospelý: 500 - 1 000 ml",
       "Dieťa: 10 ml/kg",
     ],
+    calculatorTitle: "Otvoriť kalkulačku dávok",
+    calculatorDescription: "Adrenalín i.m. a tekutiny podľa hmotnosti",
     question: "Zlepšenie do 5 minút?",
     questionDescription:
       "Znovu posúďte najmä pretrvávanie problémov s dýchaním alebo obehom.",
     yes: "Áno",
     no: "Nie",
+    yesDescription: "Prejsť na sledovanie po zlepšení",
+    noDescription: "Pokračovať ďalším krokom liečby",
   },
   en: {
     badge: "Step 2",
@@ -79,11 +84,15 @@ const pageText = {
       "Adult: 500 - 1 000 ml",
       "Child: 10 ml/kg",
     ],
+    calculatorTitle: "Open dose calculator",
+    calculatorDescription: "IM adrenaline and fluids by weight",
     question: "Improvement within 5 minutes?",
     questionDescription:
       "Reassess especially for ongoing breathing or circulation problems.",
     yes: "Yes",
     no: "No",
+    yesDescription: "Go to monitoring after improvement",
+    noDescription: "Continue to the next treatment step",
   },
 };
 
@@ -134,6 +143,17 @@ export default function Step2() {
         themeMode={themeMode}
       />
 
+      <FlowActionButton
+        title={text.calculatorTitle}
+        description={text.calculatorDescription}
+        iconName="calculator-outline"
+        variant="light"
+        themeMode={themeMode}
+        onPress={() =>
+          router.push("/algorithms/special/anafylaxia/calculatorAnaphylaxis")
+        }
+      />
+
       <DecisionCard
         question={text.question}
         description={text.questionDescription}
@@ -142,11 +162,13 @@ export default function Step2() {
 
       <YesButton
         title={text.yes}
+        description={text.yesDescription}
         themeMode={themeMode}
         onPress={() => router.push("/algorithms/special/anafylaxia/aftercare")}
       />
       <NoButton
         title={text.no}
+        description={text.noDescription}
         themeMode={themeMode}
         onPress={() => router.push("/algorithms/special/anafylaxia/step3")}
       />

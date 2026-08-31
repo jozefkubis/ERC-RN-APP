@@ -25,6 +25,7 @@ const pageText = {
     noTitle: "Nie – pravdepodobnosť je nižšia ako 10 %",
     noItems: ["Zvážte ukončenie KPR."],
     yes: "Áno",
+    yesDescription: "Pokračovať ohrievaním a resuscitáciou",
   },
   en: {
     badge: "Step 4",
@@ -42,6 +43,7 @@ const pageText = {
     noTitle: "No – probability is below 10%",
     noItems: ["Consider terminating CPR."],
     yes: "Yes",
+    yesDescription: "Continue with rewarming and resuscitation",
   },
 };
 
@@ -85,6 +87,7 @@ export default function Step4NoVitals() {
 
       <YesButton
         title={text.yes}
+        description={text.yesDescription}
         themeMode={themeMode}
         onPress={() =>
           router.push("/algorithms/special/hypotermia/regular/step5-novitals")

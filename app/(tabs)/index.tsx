@@ -33,6 +33,13 @@ const homeText = {
     recommendations: "Odporúčania",
     currentBadge: "Aktuálne",
     ercDescription: "European Resuscitation Council",
+    calculatorsTitle: "Kalkulačky",
+    palsCalculatorTitle: "PALS dávky a veľkosti",
+    palsCalculatorSubtitle: "Hmotnosť, výška, lieky a pomôcky DC",
+    newbornCalculatorTitle: "Novorodenec dávky",
+    newbornCalculatorSubtitle: "Hmotnosť, adrenalín, glukóza a objem",
+    anaphylaxisCalculatorTitle: "Anafylaxia dávky",
+    anaphylaxisCalculatorSubtitle: "Adrenalín i.m. a tekutinový bolus",
     historyTitle: "História",
     showAll: "Zobraziť všetko",
     showLess: "Zobraziť menej",
@@ -47,6 +54,13 @@ const homeText = {
     recommendations: "Recommendations",
     currentBadge: "Current",
     ercDescription: "European Resuscitation Council",
+    calculatorsTitle: "Calculators",
+    palsCalculatorTitle: "PALS doses and sizes",
+    palsCalculatorSubtitle: "Weight, height, medicines, and airway sizes",
+    newbornCalculatorTitle: "Newborn doses",
+    newbornCalculatorSubtitle: "Weight, adrenaline, glucose, and volume",
+    anaphylaxisCalculatorTitle: "Anaphylaxis doses",
+    anaphylaxisCalculatorSubtitle: "IM adrenaline and fluid bolus",
     historyTitle: "History",
     showAll: "Show all",
     showLess: "Show less",
@@ -66,6 +80,9 @@ const homeColors = {
     historyIcon: "#6B7483",
     trailingIcon: "#7A8492",
     cardIcon: "#0868C4",
+    calculatorIcon: "#0F766E",
+    newbornIcon: "#B42318",
+    anaphylaxisIcon: "#CC6238",
   },
   dark: {
     background: "#07111F",
@@ -77,6 +94,9 @@ const homeColors = {
     historyIcon: "#AAB6C7",
     trailingIcon: "#AAB6C7",
     cardIcon: "#0B5EA8",
+    calculatorIcon: "#16796F",
+    newbornIcon: "#B84A4A",
+    anaphylaxisIcon: "#C96F46",
   },
 };
 
@@ -93,6 +113,32 @@ export default function HomeScreen() {
   const text = homeText[language];
   const colors = homeColors[themeMode];
   const algorithmSearchItems = getAlgorithmSearchItems(language);
+  const calculatorLinks = [
+    {
+      id: "pals-calculator",
+      title: text.palsCalculatorTitle,
+      subtitle: text.palsCalculatorSubtitle,
+      iconName: "calculator-outline" as const,
+      iconBackgroundColor: colors.calculatorIcon,
+      route: "/algorithms/epals/pals/calculatorPals" as Href,
+    },
+    {
+      id: "newborn-calculator",
+      title: text.newbornCalculatorTitle,
+      subtitle: text.newbornCalculatorSubtitle,
+      iconName: "medical-outline" as const,
+      iconBackgroundColor: colors.newbornIcon,
+      route: "/algorithms/newborn/calculatorNewborn" as Href,
+    },
+    {
+      id: "anaphylaxis-calculator",
+      title: text.anaphylaxisCalculatorTitle,
+      subtitle: text.anaphylaxisCalculatorSubtitle,
+      iconName: "medkit-outline" as const,
+      iconBackgroundColor: colors.anaphylaxisIcon,
+      route: "/algorithms/special/anafylaxia/calculatorAnaphylaxis" as Href,
+    },
+  ];
 
   const [filterValue, setFilterValue] = useState("");
   const [viewingHistory, setViewingHistory] = useState<HistoryItem[]>([]);
@@ -223,6 +269,33 @@ export default function HomeScreen() {
               themeMode={themeMode}
               onPress={() => router.push("/algorithms")}
             />
+
+            <View style={styles.listSection}>
+              <View style={styles.sectionTitleRow}>
+                <Ionicons
+                  name="calculator-outline"
+                  size={22}
+                  color={colors.primary}
+                />
+                <Text style={[styles.sectionTitle, { color: colors.title }]}>
+                  {text.calculatorsTitle}
+                </Text>
+              </View>
+
+              {calculatorLinks.map((calculator) => (
+                <SmallCard
+                  key={calculator.id}
+                  title={calculator.title}
+                  subtitle={calculator.subtitle}
+                  iconName={calculator.iconName}
+                  iconBackgroundColor={calculator.iconBackgroundColor}
+                  trailingIcon="chevron-forward"
+                  trailingIconColor={colors.trailingIcon}
+                  themeMode={themeMode}
+                  onPress={() => router.push(calculator.route)}
+                />
+              ))}
+            </View>
 
             <View style={styles.listSection}>
               <View style={styles.sectionHeader}>

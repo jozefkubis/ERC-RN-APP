@@ -2,8 +2,23 @@ import AlgorithmCard from "@/src/components/ui/algorithm-card";
 import { useSettings } from "@/src/context/settings-context";
 import { useRouter } from "expo-router";
 import type { ComponentProps } from "react";
-import { ScrollView, StatusBar, StyleSheet, Text, View } from "react-native";
+import { useState } from "react";
+import {
+  Pressable,
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+
+type SpecialFilter = "all" | "cause" | "patient" | "environment";
+
+type FilterOption = {
+  value: SpecialFilter;
+  label: string;
+};
 
 type SpecialAlgorithm = ComponentProps<typeof AlgorithmCard> & {
   route:
@@ -38,6 +53,10 @@ const specialText = {
     title: "Špeciálne okolnosti",
     description:
       "Úpravy ALS pri reverzibilných príčinách, špeciálnych prostrediach a vybraných skupinách pacientov.",
+    allFilter: "Všetko",
+    causeFilter: "Príčina",
+    patientFilter: "Pacient",
+    environmentFilter: "Prostredie",
     algorithms: [
       {
         badgeText: "Príčina",
@@ -293,6 +312,10 @@ const specialText = {
     title: "Special Circumstances",
     description:
       "ALS modifications for reversible causes, special environments, and selected patient groups.",
+    allFilter: "All",
+    causeFilter: "Cause",
+    patientFilter: "Patient",
+    environmentFilter: "Environment",
     algorithms: [
       {
         badgeText: "Cause",
@@ -552,20 +575,48 @@ const screenColors = {
     statusBar: "dark-content" as const,
     title: "#10243C",
     description: "#5C6574",
+    filterBorder: "#CBD3DF",
+    filterBackground: "#FFFFFF",
+    filterText: "#24425F",
+    activeFilterBackground: "#075296",
+    activeFilterText: "#FFFFFF",
   },
   dark: {
     background: "#07111F",
     statusBar: "light-content" as const,
     title: "#F5F8FC",
     description: "#AAB6C7",
+    filterBorder: "#31435A",
+    filterBackground: "#101B2B",
+    filterText: "#D7E1EE",
+    activeFilterBackground: "#0E4A80",
+    activeFilterText: "#FFFFFF",
   },
 };
 
 export default function SpecialAlgorithms() {
   const router = useRouter();
   const { language, themeMode } = useSettings();
+  const [activeFilter, setActiveFilter] = useState<SpecialFilter>("all");
   const text = specialText[language];
   const colors = screenColors[themeMode];
+  const filterOptions: FilterOption[] = [
+    { value: "all", label: text.allFilter },
+    { value: "cause", label: text.causeFilter },
+    { value: "patient", label: text.patientFilter },
+    { value: "environment", label: text.environmentFilter },
+  ];
+  const badgeTextByFilter = {
+    cause: text.causeFilter,
+    patient: text.patientFilter,
+    environment: text.environmentFilter,
+  };
+  const visibleAlgorithms =
+    activeFilter === "all"
+      ? text.algorithms
+      : text.algorithms.filter(
+          (algorithm) => algorithm.badgeText === badgeTextByFilter[activeFilter],
+        );
 
   return (
     <SafeAreaView
@@ -590,7 +641,49 @@ export default function SpecialAlgorithms() {
           </Text>
         </View>
 
-        {text.algorithms.map((algorithm) => {
+        <View style={styles.filterContainer}>
+          {[0, 2].map((startIndex) => (
+            <View key={startIndex} style={styles.filterRow}>
+              {filterOptions
+                .slice(startIndex, startIndex + 2)
+                .map((filterOption) => {
+                  const isActive = activeFilter === filterOption.value;
+
+                  return (
+                    <Pressable
+                      key={filterOption.value}
+                      accessibilityRole="button"
+                      onPress={() => setActiveFilter(filterOption.value)}
+                      style={({ pressed }) => [
+                        styles.filterButton,
+                        {
+                          borderColor: colors.filterBorder,
+                          backgroundColor: colors.filterBackground,
+                        },
+                        isActive && {
+                          borderColor: colors.activeFilterBackground,
+                          backgroundColor: colors.activeFilterBackground,
+                        },
+                        pressed && styles.filterButtonPressed,
+                      ]}
+                    >
+                      <Text
+                        style={[
+                          styles.filterButtonText,
+                          { color: colors.filterText },
+                          isActive && { color: colors.activeFilterText },
+                        ]}
+                      >
+                        {filterOption.label}
+                      </Text>
+                    </Pressable>
+                  );
+                })}
+            </View>
+          ))}
+        </View>
+
+        {visibleAlgorithms.map((algorithm) => {
           const { route, ...cardProps } = algorithm;
 
           return (
@@ -612,7 +705,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   container: {
-    paddingHorizontal: 30,
+    paddingHorizontal: 18,
     paddingVertical: 16,
     gap: 15,
   },
@@ -626,5 +719,33 @@ const styles = StyleSheet.create({
   },
   descriptionText: {
     fontSize: 14,
+  },
+  filterContainer: {
+    width: "100%",
+    gap: 8,
+    marginBottom: 2,
+  },
+  filterRow: {
+    width: "100%",
+    flexDirection: "row",
+    gap: 8,
+  },
+  filterButton: {
+    flex: 1,
+    minHeight: 58,
+    alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: 12,
+    paddingVertical: 11,
+    borderWidth: 1,
+    borderRadius: 10,
+    borderCurve: "continuous",
+  },
+  filterButtonText: {
+    fontSize: 14,
+    fontWeight: "800",
+  },
+  filterButtonPressed: {
+    opacity: 0.75,
   },
 });

@@ -31,6 +31,8 @@ const pageText = {
       "Ak nereaguje a nedýcha normálne, postupujte súčasne podľa ALS a liečte hyperkaliémiu ako reverzibilnú príčinu.",
     yes: "Áno",
     no: "Nie",
+    yesDescription: "Prejsť na postup pri ZO z hyperkaliémie",
+    noDescription: "Pokračovať v liečbe hyperkaliémie s obehom",
     alsTitle: "Otvoriť ALS",
     alsDescription:
       "Pri potvrdenom ZO prejdite priamo na okamžitú resuscitáciu",
@@ -55,6 +57,8 @@ const pageText = {
       "If unresponsive and not breathing normally, follow ALS while treating hyperkalaemia as a reversible cause.",
     yes: "Yes",
     no: "No",
+    yesDescription: "Go to cardiac arrest due to hyperkalaemia",
+    noDescription: "Continue treatment of hyperkalaemia with circulation",
     alsTitle: "Open ALS",
     alsDescription:
       "For confirmed cardiac arrest, go directly to immediate resuscitation",
@@ -102,6 +106,7 @@ export default function Step1() {
 
       <YesButton
         title={text.yes}
+        description={text.yesDescription}
         themeMode={themeMode}
         onPress={() =>
           router.push("/algorithms/special/kalium/hyper/cardiac-arrest")
@@ -109,6 +114,7 @@ export default function Step1() {
       />
       <NoButton
         title={text.no}
+        description={text.noDescription}
         themeMode={themeMode}
         onPress={() => router.push("/algorithms/special/kalium/hyper/step2")}
       />

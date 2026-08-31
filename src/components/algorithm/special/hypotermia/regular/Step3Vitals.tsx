@@ -36,6 +36,7 @@ const pageText = {
     ],
     arrestQuestion: "Spozorované hypotermické zastavenie srdca?",
     yes: "Áno",
+    yesDescription: "Otvoriť KPR pri hypotermii",
   },
   en: {
     badge: "Step 3",
@@ -65,6 +66,7 @@ const pageText = {
     ],
     arrestQuestion: "Witnessed hypothermic cardiac arrest?",
     yes: "Yes",
+    yesDescription: "Open CPR in hypothermia",
   },
 };
 
@@ -127,6 +129,7 @@ export default function Step3Vitals() {
 
       <YesButton
         title={text.yes}
+        description={text.yesDescription}
         themeMode={themeMode}
         onPress={() =>
           router.push("/algorithms/special/hypotermia/regular/cpr")

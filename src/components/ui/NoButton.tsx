@@ -4,6 +4,7 @@ import { Pressable, StyleSheet, Text, View } from "react-native";
 
 type NoButtonProps = {
   title?: string;
+  description?: string;
   onPress?: () => void;
   themeMode?: AppThemeMode;
 };
@@ -15,6 +16,7 @@ const buttonColors = {
     iconBackground: "#E4EFFD",
     icon: "#075296",
     text: "#10243C",
+    description: "#5C6574",
     arrow: "#7A8492",
   },
   dark: {
@@ -23,6 +25,7 @@ const buttonColors = {
     iconBackground: "#20334C",
     icon: "#77B7F2",
     text: "#F5F8FC",
+    description: "#AAB6C7",
     arrow: "#AAB6C7",
   },
 };
@@ -30,6 +33,7 @@ const buttonColors = {
 export default function NoButton({
   title = "Nie",
   onPress,
+  description,
   themeMode = "light",
 }: NoButtonProps) {
   const colors = buttonColors[themeMode];
@@ -58,6 +62,16 @@ export default function NoButton({
         <Text style={[styles.answerTitleLight, { color: colors.text }]}>
           {title}
         </Text>
+        {description ? (
+          <Text
+            style={[
+              styles.answerDescriptionLight,
+              { color: colors.description },
+            ]}
+          >
+            {description}
+          </Text>
+        ) : null}
       </View>
       <Ionicons name="arrow-forward" size={22} color={colors.arrow} />
     </Pressable>
@@ -92,6 +106,10 @@ const styles = StyleSheet.create({
   answerTitleLight: {
     fontSize: 18,
     fontWeight: "800",
+  },
+  answerDescriptionLight: {
+    fontSize: 12,
+    lineHeight: 17,
   },
   pressed: {
     opacity: 0.7,

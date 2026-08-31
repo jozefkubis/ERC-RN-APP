@@ -26,6 +26,8 @@ const pageText = {
       "Ak áno, resuscitačná hysterotómia je časovo kritická intervencia na zlepšenie resuscitácie matky.",
     yes: "Áno",
     no: "Nie",
+    yesDescription: "Prejsť na prípravu hysterotómie",
+    noDescription: "Pokračovať štandardným ALS postupom",
   },
   en: {
     badge: "Decision",
@@ -44,6 +46,8 @@ const pageText = {
       "If yes, resuscitative hysterotomy is a time-sensitive intervention to improve maternal resuscitation.",
     yes: "Yes",
     no: "No",
+    yesDescription: "Go to hysterotomy preparation",
+    noDescription: "Continue with standard ALS",
   },
 };
 
@@ -80,11 +84,13 @@ export default function Step2() {
 
       <YesButton
         title={text.yes}
+        description={text.yesDescription}
         themeMode={themeMode}
         onPress={() => router.push("/algorithms/special/pregnet/step3")}
       />
       <NoButton
         title={text.no}
+        description={text.noDescription}
         themeMode={themeMode}
         onPress={() =>
           router.push("/algorithms/adult-resuscitation/als/step1")

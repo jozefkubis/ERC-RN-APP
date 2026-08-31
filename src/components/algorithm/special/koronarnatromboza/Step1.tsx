@@ -23,6 +23,8 @@ const pageText = {
       "Rozhodnite podľa pretrvávajúcej obnovy spontánnej cirkulácie.",
     yes: "Áno",
     no: "Nie",
+    yesDescription: "Pokračovať 12-zvodovým EKG",
+    noDescription: "Otvoriť postup počas KPR",
     readinessTitle: "Pripravenosť systému",
     readinessItems: [
       "Podporujte zdravotnú výchovu na rozpoznávanie príznakov a minimalizáciu oneskorení pri vyhľadávaní lekárskej starostlivosti.",
@@ -44,6 +46,8 @@ const pageText = {
       "Determine whether return of spontaneous circulation is sustained.",
     yes: "Yes",
     no: "No",
+    yesDescription: "Continue with 12-lead ECG",
+    noDescription: "Open ongoing CPR pathway",
     readinessTitle: "System preparedness",
     readinessItems: [
       "Enhance health education to recognise symptoms and minimise delays in seeking medical care.",
@@ -84,6 +88,7 @@ export default function Step1() {
 
       <YesButton
         title={text.yes}
+        description={text.yesDescription}
         themeMode={themeMode}
         onPress={() =>
           router.push("/algorithms/special/koronarnatromboza/step2")
@@ -91,6 +96,7 @@ export default function Step1() {
       />
       <NoButton
         title={text.no}
+        description={text.noDescription}
         themeMode={themeMode}
         onPress={() =>
           router.push("/algorithms/special/koronarnatromboza/ongoing-cpr")

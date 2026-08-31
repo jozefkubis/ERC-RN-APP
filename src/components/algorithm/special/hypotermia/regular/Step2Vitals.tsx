@@ -15,6 +15,7 @@ const pageText = {
       "Pri zachovaných vitálnych funkciách skontrolujte, či dochádza k zhoršeniu stavu vedomia.",
     question: "Zhoršenie stavu vedomia?",
     yes: "Áno",
+    yesDescription: "Pokračovať posúdením rizika ZO",
     noTitle: "Nie – postup podľa prítomnosti zranenia",
     noItems: [
       "V prípade zranenia transportujte pacienta do najbližšej nemocnice.",
@@ -36,6 +37,7 @@ const pageText = {
       "If vital signs are present, check whether the level of consciousness is deteriorating.",
     question: "Deteriorating level of consciousness?",
     yes: "Yes",
+    yesDescription: "Continue with cardiac arrest risk assessment",
     noTitle: "No – proceed according to the presence of injury",
     noItems: [
       "If injured, transport the patient to the nearest hospital.",
@@ -72,6 +74,7 @@ export default function Step2Vitals() {
 
       <YesButton
         title={text.yes}
+        description={text.yesDescription}
         themeMode={themeMode}
         onPress={() =>
           router.push("/algorithms/special/hypotermia/regular/step3-vitals")

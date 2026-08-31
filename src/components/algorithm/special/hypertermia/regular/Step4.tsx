@@ -17,6 +17,8 @@ const pageText = {
     questionDescription: "Použite teplotnú sondu.",
     yes: "Áno",
     no: "Nie",
+    yesDescription: "Prejsť na rýchle aktívne chladenie",
+    noDescription: "Pokračovať kontrolou sodíka",
   },
   en: {
     badge: "Step 4",
@@ -27,6 +29,8 @@ const pageText = {
     questionDescription: "Use a temperature probe.",
     yes: "Yes",
     no: "No",
+    yesDescription: "Go to rapid active cooling",
+    noDescription: "Continue with sodium check",
   },
 };
 
@@ -54,6 +58,7 @@ export default function Step4() {
 
       <YesButton
         title={text.yes}
+        description={text.yesDescription}
         themeMode={themeMode}
         onPress={() =>
           router.push("/algorithms/special/hypertermia/regular/step3")
@@ -61,6 +66,7 @@ export default function Step4() {
       />
       <NoButton
         title={text.no}
+        description={text.noDescription}
         themeMode={themeMode}
         onPress={() =>
           router.push("/algorithms/special/hypertermia/regular/step5")

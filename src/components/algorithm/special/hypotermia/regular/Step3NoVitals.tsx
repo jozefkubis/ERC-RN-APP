@@ -27,6 +27,7 @@ const pageText = {
       "Transportujte pacienta do najbližšej vhodnej nemocnice alebo pokračujte podľa pokynov supervízora.",
     ],
     no: "Nie",
+    noDescription: "Pokračovať transportom do centra s ECLS",
   },
   en: {
     badge: "Step 3",
@@ -47,6 +48,7 @@ const pageText = {
       "Transport the patient to the nearest suitable hospital or follow the supervisor's instructions.",
     ],
     no: "No",
+    noDescription: "Continue with transport to an ECLS centre",
   },
 };
 
@@ -87,6 +89,7 @@ export default function Step3NoVitals() {
 
       <NoButton
         title={text.no}
+        description={text.noDescription}
         themeMode={themeMode}
         onPress={() =>
           router.push("/algorithms/special/hypotermia/regular/step4-novitals")

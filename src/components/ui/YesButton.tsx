@@ -4,6 +4,7 @@ import { Pressable, StyleSheet, Text, View } from "react-native";
 
 type YesButtonProps = {
   title?: string;
+  description?: string;
   onPress?: () => void;
   themeMode?: AppThemeMode;
 };
@@ -26,6 +27,7 @@ const buttonColors = {
 export default function YesButton({
   title = "Áno",
   onPress,
+  description,
   themeMode = "light",
 }: YesButtonProps) {
   const colors = buttonColors[themeMode];
@@ -54,6 +56,9 @@ export default function YesButton({
         <Text style={[styles.answerTitlePrimary, { color: colors.text }]}>
           {title}
         </Text>
+        {description ? (
+          <Text style={styles.answerDescriptionPrimary}>{description}</Text>
+        ) : null}
       </View>
       <Ionicons name="arrow-forward" size={22} color={colors.text} />
     </Pressable>
@@ -88,6 +93,11 @@ const styles = StyleSheet.create({
   answerTitlePrimary: {
     fontSize: 18,
     fontWeight: "800",
+  },
+  answerDescriptionPrimary: {
+    color: "#D7E9F8",
+    fontSize: 12,
+    lineHeight: 17,
   },
   pressed: {
     opacity: 0.7,

@@ -17,6 +17,8 @@ const pageText = {
     question: "Pravdepodobné netraumatické zastavenie obehu?",
     yes: "Áno",
     no: "Nie",
+    yesDescription: "Otvoriť štandardný ALS postup",
+    noDescription: "Pokračovať traumatickým algoritmom",
   },
   en: {
     badge: "Step 1",
@@ -26,6 +28,8 @@ const pageText = {
     question: "Likely non-traumatic cardiac arrest?",
     yes: "Yes",
     no: "No",
+    yesDescription: "Open the standard ALS algorithm",
+    noDescription: "Continue with the trauma algorithm",
   },
 };
 
@@ -50,6 +54,7 @@ export default function Step1() {
 
       <YesButton
         title={text.yes}
+        description={text.yesDescription}
         themeMode={themeMode}
         onPress={() =>
           router.push("/algorithms/adult-resuscitation/als/step1")
@@ -57,6 +62,7 @@ export default function Step1() {
       />
       <NoButton
         title={text.no}
+        description={text.noDescription}
         themeMode={themeMode}
         onPress={() => router.push("/algorithms/special/trauma/step2")}
       />

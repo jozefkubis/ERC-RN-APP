@@ -15,6 +15,8 @@ const pageText = {
     question: "Sú na EKG prítomné ST elevácie?",
     yes: "Áno",
     no: "Nie",
+    yesDescription: "Otvoriť STEMI postup",
+    noDescription: "Otvoriť postup bez ST elevácie",
   },
   en: {
     badge: "Step 2",
@@ -24,6 +26,8 @@ const pageText = {
     question: "Is ST-elevation present on the ECG?",
     yes: "Yes",
     no: "No",
+    yesDescription: "Open STEMI pathway",
+    noDescription: "Open non-ST-elevation pathway",
   },
 };
 
@@ -45,6 +49,7 @@ export default function Step2() {
 
       <YesButton
         title={text.yes}
+        description={text.yesDescription}
         themeMode={themeMode}
         onPress={() =>
           router.push("/algorithms/special/koronarnatromboza/st-elevation")
@@ -52,6 +57,7 @@ export default function Step2() {
       />
       <NoButton
         title={text.no}
+        description={text.noDescription}
         themeMode={themeMode}
         onPress={() =>
           router.push("/algorithms/special/koronarnatromboza/no-st-elevation")

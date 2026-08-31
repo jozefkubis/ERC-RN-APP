@@ -32,6 +32,7 @@ const pageText = {
         iconFamily: "ion" as const,
       },
     ],
+    actionTitle: "Čo urobiť počas cyklu",
     nextTitle: "Po 2 minútach",
     nextDescription: "Znovu zhodnoťte rytmus",
     infoTitle: "Dôležité",
@@ -61,6 +62,7 @@ const pageText = {
         iconFamily: "ion" as const,
       },
     ],
+    actionTitle: "What to do during the cycle",
     nextTitle: "After 2 minutes",
     nextDescription: "Reassess the rhythm",
     infoTitle: "Important",
@@ -149,54 +151,65 @@ export default function Step4Nondefib() {
         </View>
       </View>
 
-      <View style={styles.actionList}>
-        {text.actionItems.map((item) => (
+      <View
+        style={[
+          styles.actionSummaryCard,
+          {
+            borderColor: colors.cardBorder,
+            backgroundColor: colors.cardBackground,
+          },
+        ]}
+      >
+        <View style={styles.actionSummaryHeader}>
           <View
-            key={item.title}
-            style={[
-              styles.actionCard,
-              {
-                borderColor: colors.cardBorder,
-                backgroundColor: colors.cardBackground,
-              },
-            ]}
+            style={[styles.actionIcon, { backgroundColor: colors.softIcon }]}
           >
-            <View
-              style={[styles.actionIcon, { backgroundColor: colors.softIcon }]}
-            >
+            <MaterialCommunityIcons
+              name="heart-pulse"
+              size={24}
+              color={colors.softIconText}
+            />
+          </View>
+          <Text
+            style={[styles.actionSummaryTitle, { color: colors.cardTitle }]}
+          >
+            {text.actionTitle}
+          </Text>
+        </View>
+
+        <View style={styles.actionList}>
+          {text.actionItems.map((item) => (
+            <View key={item.title} style={styles.actionRow}>
               {item.iconFamily === "material" ? (
                 <MaterialCommunityIcons
                   name={item.iconName}
-                  size={24}
+                  size={18}
                   color={colors.softIconText}
                 />
               ) : (
                 <Ionicons
                   name={item.iconName}
-                  size={22}
+                  size={18}
                   color={colors.softIconText}
                 />
               )}
+              <View style={styles.actionTextContainer}>
+                <Text style={[styles.actionTitle, { color: colors.cardTitle }]}>
+                  {item.title}
+                </Text>
+                <Text
+                  style={[
+                    styles.actionDescription,
+                    { color: colors.cardDescription },
+                  ]}
+                >
+                  {item.description}
+                </Text>
+              </View>
             </View>
-            <View style={styles.actionTextContainer}>
-              <Text style={[styles.actionTitle, { color: colors.cardTitle }]}>
-                {item.title}
-              </Text>
-              <Text
-                style={[
-                  styles.actionDescription,
-                  { color: colors.cardDescription },
-                ]}
-              >
-                {item.description}
-              </Text>
-            </View>
-          </View>
-        ))}
+          ))}
+        </View>
       </View>
-
-      <ParalelThinkingALS />
-      <H4T4Button />
 
       <Pressable
         style={({ pressed }) => [
@@ -227,6 +240,9 @@ export default function Step4Nondefib() {
         </View>
         <Ionicons name="arrow-forward" size={22} color="#FFFFFF" />
       </Pressable>
+
+      <H4T4Button />
+      <ParalelThinkingALS />
 
       <InfoCard
         title={text.infoTitle}
@@ -277,20 +293,22 @@ const styles = StyleSheet.create({
   },
   actionList: {
     width: "100%",
-    gap: 10,
+    gap: 12,
   },
-  actionCard: {
+  actionSummaryCard: {
     width: "100%",
-    minHeight: 82,
-    flexDirection: "row",
-    alignItems: "center",
     gap: 14,
-    paddingHorizontal: 15,
-    paddingVertical: 14,
+    padding: 16,
     borderWidth: 1,
     borderRadius: 10,
     borderCurve: "continuous",
     boxShadow: "0 2px 4px rgba(15, 35, 60, 0.08)",
+  },
+  actionSummaryHeader: {
+    width: "100%",
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 12,
   },
   actionIcon: {
     width: 40,
@@ -298,6 +316,18 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 20,
+  },
+  actionSummaryTitle: {
+    flex: 1,
+    fontSize: 16,
+    fontWeight: "900",
+    lineHeight: 22,
+  },
+  actionRow: {
+    width: "100%",
+    flexDirection: "row",
+    alignItems: "flex-start",
+    gap: 10,
   },
   actionTextContainer: {
     flex: 1,

@@ -34,6 +34,7 @@ const pageText = {
         iconName: "flask-outline" as const,
       },
     ],
+    medicationTitle: "Lieky pri pretrvávaní rytmu",
     nextTitle: "Po 2 minútach",
     nextDescription: "Znovu zhodnoťte rytmus",
     infoTitle: "Dôležité",
@@ -65,6 +66,7 @@ const pageText = {
         iconName: "flask-outline" as const,
       },
     ],
+    medicationTitle: "Medicines if the rhythm persists",
     nextTitle: "After 2 minutes",
     nextDescription: "Reassess the rhythm",
     infoTitle: "Important",
@@ -175,52 +177,6 @@ export default function Step4Defib() {
         </View>
       </View>
 
-      <View style={styles.medicationList}>
-        {text.medicationItems.map((item) => (
-          <View
-            key={item.title}
-            style={[
-              styles.medicationCard,
-              {
-                borderColor: colors.cardBorder,
-                backgroundColor: colors.cardBackground,
-              },
-            ]}
-          >
-            <View
-              style={[
-                styles.medicationIcon,
-                { backgroundColor: colors.softIcon },
-              ]}
-            >
-              <Ionicons
-                name={item.iconName}
-                size={22}
-                color={colors.softIconText}
-              />
-            </View>
-            <View style={styles.medicationTextContainer}>
-              <Text
-                style={[styles.medicationTitle, { color: colors.cardTitle }]}
-              >
-                {item.title}
-              </Text>
-              <Text
-                style={[
-                  styles.medicationDescription,
-                  { color: colors.cardDescription },
-                ]}
-              >
-                {item.description}
-              </Text>
-            </View>
-          </View>
-        ))}
-      </View>
-
-      <ParalelThinkingALS />
-      <H4T4Button />
-
       <Pressable
         style={({ pressed }) => [
           styles.nextCard,
@@ -250,6 +206,69 @@ export default function Step4Defib() {
         </View>
         <Ionicons name="arrow-forward" size={22} color="#FFFFFF" />
       </Pressable>
+
+      <View
+        style={[
+          styles.medicationSummaryCard,
+          {
+            borderColor: colors.cardBorder,
+            backgroundColor: colors.cardBackground,
+          },
+        ]}
+      >
+        <View style={styles.medicationSummaryHeader}>
+          <View
+            style={[
+              styles.medicationIcon,
+              { backgroundColor: colors.softIcon },
+            ]}
+          >
+            <Ionicons
+              name="medical-outline"
+              size={22}
+              color={colors.softIconText}
+            />
+          </View>
+          <Text
+            style={[
+              styles.medicationSummaryTitle,
+              { color: colors.cardTitle },
+            ]}
+          >
+            {text.medicationTitle}
+          </Text>
+        </View>
+
+        <View style={styles.medicationList}>
+          {text.medicationItems.map((item) => (
+            <View key={item.title} style={styles.medicationRow}>
+              <Ionicons
+                name={item.iconName}
+                size={18}
+                color={colors.softIconText}
+              />
+              <View style={styles.medicationTextContainer}>
+                <Text
+                  style={[styles.medicationTitle, { color: colors.cardTitle }]}
+                >
+                  {item.title}
+                </Text>
+                <Text
+                  style={[
+                    styles.medicationDescription,
+                    { color: colors.cardDescription },
+                  ]}
+                >
+                  {item.description}
+                </Text>
+              </View>
+            </View>
+          ))}
+        </View>
+      </View>
+
+      <ParalelThinkingALS />
+      <H4T4Button />
 
       <InfoCard
         title={text.infoTitle}
@@ -331,20 +350,22 @@ const styles = StyleSheet.create({
   },
   medicationList: {
     width: "100%",
-    gap: 10,
+    gap: 12,
   },
-  medicationCard: {
+  medicationSummaryCard: {
     width: "100%",
-    minHeight: 82,
-    flexDirection: "row",
-    alignItems: "center",
     gap: 14,
-    paddingHorizontal: 15,
-    paddingVertical: 14,
+    padding: 16,
     borderWidth: 1,
     borderRadius: 10,
     borderCurve: "continuous",
     boxShadow: "0 2px 4px rgba(15, 35, 60, 0.08)",
+  },
+  medicationSummaryHeader: {
+    width: "100%",
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 12,
   },
   medicationIcon: {
     width: 40,
@@ -352,6 +373,18 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 20,
+  },
+  medicationSummaryTitle: {
+    flex: 1,
+    fontSize: 16,
+    fontWeight: "900",
+    lineHeight: 22,
+  },
+  medicationRow: {
+    width: "100%",
+    flexDirection: "row",
+    alignItems: "flex-start",
+    gap: 10,
   },
   medicationTextContainer: {
     flex: 1,

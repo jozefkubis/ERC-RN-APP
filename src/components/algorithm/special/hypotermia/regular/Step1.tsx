@@ -21,6 +21,8 @@ const pageText = {
     question: "Sú prítomné vitálne funkcie?",
     yes: "Áno",
     no: "Nie",
+    yesDescription: "Pokračovať pri zachovaných vitálnych funkciách",
+    noDescription: "Prejsť na vetvu bez vitálnych funkcií",
   },
   en: {
     badge: "Step 1",
@@ -34,6 +36,8 @@ const pageText = {
     question: "Are vital signs present?",
     yes: "Yes",
     no: "No",
+    yesDescription: "Continue with vital signs present",
+    noDescription: "Go to the no vital signs pathway",
   },
 };
 
@@ -66,6 +70,7 @@ export default function Step1() {
 
       <YesButton
         title={text.yes}
+        description={text.yesDescription}
         themeMode={themeMode}
         onPress={() =>
           router.push("/algorithms/special/hypotermia/regular/step2-vitals")
@@ -73,6 +78,7 @@ export default function Step1() {
       />
       <NoButton
         title={text.no}
+        description={text.noDescription}
         themeMode={themeMode}
         onPress={() =>
           router.push("/algorithms/special/hypotermia/regular/step2-novitals")
