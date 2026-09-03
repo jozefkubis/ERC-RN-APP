@@ -35,7 +35,7 @@ const homeText = {
     ercDescription: "European Resuscitation Council",
     calculatorsTitle: "Kalkulačky",
     palsCalculatorTitle: "PALS dávky a veľkosti",
-    palsCalculatorSubtitle: "Hmotnosť, lieky a pomôcky DC",
+    palsCalculatorSubtitle: "Hmotnosť, lieky a DC/i-gel",
     newbornCalculatorTitle: "Novorodenec dávky",
     newbornCalculatorSubtitle: "Hmotnosť, adrenalín, glukóza a objem",
     anaphylaxisCalculatorTitle: "Anafylaxia dávky",
@@ -56,7 +56,7 @@ const homeText = {
     ercDescription: "European Resuscitation Council",
     calculatorsTitle: "Calculators",
     palsCalculatorTitle: "PALS doses and sizes",
-    palsCalculatorSubtitle: "Weight, medicines, and airway sizes",
+    palsCalculatorSubtitle: "Weight, medicines, and airways/i-gel",
     newbornCalculatorTitle: "Newborn doses",
     newbornCalculatorSubtitle: "Weight, adrenaline, glucose, and volume",
     anaphylaxisCalculatorTitle: "Anaphylaxis doses",
@@ -319,7 +319,10 @@ export default function HomeScreen() {
                       }
                     >
                       <Text
-                        style={[styles.sectionAction, { color: colors.primary }]}
+                        style={[
+                          styles.sectionAction,
+                          { color: colors.primary },
+                        ]}
                       >
                         {showAllHistory ? text.showLess : text.showAll}
                       </Text>
