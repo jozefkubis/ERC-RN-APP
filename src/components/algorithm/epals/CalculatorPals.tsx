@@ -21,8 +21,10 @@ type CalculatorText = {
   shockFormula: string;
   adrenalineLabel: string;
   adrenalineFormula: string;
-  amiodaroneLabel: string;
-  amiodaroneFormula: string;
+  amiodaroneThirdShockLabel: string;
+  amiodaroneThirdShockFormula: string;
+  amiodaroneFifthShockLabel: string;
+  amiodaroneFifthShockFormula: string;
   emptyResult: string;
   disclaimer: string;
   igelSizeLabel: string;
@@ -58,8 +60,10 @@ const pageText: { sk: CalculatorText; en: CalculatorText } = {
     shockFormula: "4 J/kg",
     adrenalineLabel: "Adrenalín IV/IO",
     adrenalineFormula: "10 µg/kg, max. 1 mg",
-    amiodaroneLabel: "Amiodarón IV/IO",
-    amiodaroneFormula: "5 mg/kg, max. 300 mg",
+    amiodaroneThirdShockLabel: "Amiodarón IV/IO - po 3. výboji",
+    amiodaroneThirdShockFormula: "5 mg/kg, max. 300 mg",
+    amiodaroneFifthShockLabel: "Amiodarón IV/IO - po 5. výboji",
+    amiodaroneFifthShockFormula: "5 mg/kg, max. 150 mg",
     igelSizeLabel: "Veľkosť iGel",
     igelSizeFormula: "Podľa hmotnosti dieťaťa",
     laryngealMaskSizeLabel: "Veľkosť laryngeálnej masky",
@@ -84,8 +88,10 @@ const pageText: { sk: CalculatorText; en: CalculatorText } = {
     shockFormula: "4 J/kg",
     adrenalineLabel: "Adrenaline IV/IO",
     adrenalineFormula: "10 µg/kg, max. 1 mg",
-    amiodaroneLabel: "Amiodarone IV/IO",
-    amiodaroneFormula: "5 mg/kg, max. 300 mg",
+    amiodaroneThirdShockLabel: "Amiodarone IV/IO - after 3rd shock",
+    amiodaroneThirdShockFormula: "5 mg/kg, max. 300 mg",
+    amiodaroneFifthShockLabel: "Amiodarone IV/IO - after 5th shock",
+    amiodaroneFifthShockFormula: "5 mg/kg, max. 150 mg",
     igelSizeLabel: "iGel size",
     igelSizeFormula: "Based on the child's weight",
     laryngealMaskSizeLabel: "Laryngeal mask size",
@@ -122,8 +128,11 @@ export default function CalculatorPals() {
       )} mg)`
     : text.emptyResult;
 
-  const amiodaroneDose = hasValidWeight
+  const amiodaroneThirdShockDose = hasValidWeight
     ? `${formatNumber(Math.min(weight * 5, 300), language)} mg`
+    : text.emptyResult;
+  const amiodaroneFifthShockDose = hasValidWeight
+    ? `${formatNumber(Math.min(weight * 5, 150), language)} mg`
     : text.emptyResult;
 
   const igelSize = getIGelSize(weight, text.emptyResult);
@@ -147,9 +156,14 @@ export default function CalculatorPals() {
       value: adrenalineDose,
     },
     {
-      label: text.amiodaroneLabel,
-      formula: text.amiodaroneFormula,
-      value: amiodaroneDose,
+      label: text.amiodaroneThirdShockLabel,
+      formula: text.amiodaroneThirdShockFormula,
+      value: amiodaroneThirdShockDose,
+    },
+    {
+      label: text.amiodaroneFifthShockLabel,
+      formula: text.amiodaroneFifthShockFormula,
+      value: amiodaroneFifthShockDose,
     },
     {
       label: text.igelSizeLabel,
@@ -390,8 +404,7 @@ function getEndotrachealTubeSize(
 }
 
 function formatNumber(value: number, language: AppLanguage) {
-  const roundedValue = Math.round(value * 100) / 100;
-  const formattedValue = String(roundedValue);
+  const formattedValue = value.toFixed(10).replace(/\.?0+$/, "");
 
   if (language === "sk") {
     return formattedValue.replace(".", ",");

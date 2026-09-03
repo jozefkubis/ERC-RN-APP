@@ -207,8 +207,7 @@ function InputField({
 }
 
 function formatNumber(value: number, language: AppLanguage) {
-  const roundedValue = Math.round(value * 100) / 100;
-  const formattedValue = String(roundedValue);
+  const formattedValue = value.toFixed(10).replace(/\.?0+$/, "");
 
   if (language === "sk") {
     return formattedValue.replace(".", ",");
