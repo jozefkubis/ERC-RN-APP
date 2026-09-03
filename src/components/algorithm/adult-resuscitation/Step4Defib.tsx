@@ -24,8 +24,7 @@ const pageText = {
     medicationItems: [
       {
         title: "Adrenalín 1 mg",
-        description:
-          "Prvú dávku podajte po 3. výboji, potom každé 3-5 minút.",
+        description: "Prvú dávku podajte po 3. výboji, potom každé 3-5 minút.",
         iconName: "medical-outline" as const,
       },
       {
@@ -36,13 +35,13 @@ const pageText = {
     ],
     medicationTitle: "Lieky pri pretrvávaní rytmu",
     padPositionTitle: "Po 3 neúspešných výbojoch",
-    padPositionDescription:
-      "Pri refraktérnej KF/bezpulzovej KT zvážte zmenu polohy elektród na predozadnú.\nOverte správnu anterolaterálnu polohu. Pri pretrvávajúcej KF pripravte nový pár elektród na predozadné umiestnenie pri nasledujúcej kontrole rytmu. Minimalizujte prerušenie kompresií.",
+    // padPositionDescription:
+    //   "Pri refraktérnej KF/bezpulzovej KT zvážte zmenu polohy elektród na predozadnú.\nOverte správnu anterolaterálnu polohu. Pri pretrvávajúcej KF pripravte nový pár elektród na predozadné umiestnenie pri nasledujúcej kontrole rytmu. Minimalizujte prerušenie kompresií.",
     nextTitle: "Po 2 minútach",
     nextDescription: "Znovu zhodnoťte rytmus",
     infoTitle: "Dôležité",
     infoDescription:
-      "Defibrilačné výboje podávajte po jednom. Po každom výboji okamžite obnovte kompresie hrudníka.",
+      "Defibrilačné výboje podávajte po jednom. Po každom výboji okamžite obnovte kompresie hrudníka. Pri refraktérnej KF/bezpulzovej KT zvážte zmenu polohy elektród na predozadnú po troch neúspešných výbojoch.",
   },
   en: {
     badge: "Step 4",
@@ -65,19 +64,20 @@ const pageText = {
       },
       {
         title: "Amiodarone",
-        description: "300 mg after the 3rd shock, then 150 mg after the 5th shock.",
+        description:
+          "300 mg after the 3rd shock, then 150 mg after the 5th shock.",
         iconName: "flask-outline" as const,
       },
     ],
     medicationTitle: "Medicines if the rhythm persists",
     padPositionTitle: "After 3 unsuccessful shocks",
-    padPositionDescription:
-      "For refractory VF/pulseless VT, consider changing the pads to an antero-posterior position.\nConfirm correct antero-lateral placement. For persistent VF, prepare a fresh set of pads for antero-posterior placement at the next rhythm check. Minimise interruptions to chest compressions.",
+    // padPositionDescription:
+    //   "For refractory VF/pulseless VT, consider changing the pads to an antero-posterior position.\nConfirm correct antero-lateral placement. For persistent VF, prepare a fresh set of pads for antero-posterior placement at the next rhythm check. Minimise interruptions to chest compressions.",
     nextTitle: "After 2 minutes",
     nextDescription: "Reassess the rhythm",
     infoTitle: "Important",
     infoDescription:
-      "Deliver defibrillation shocks one at a time. After each shock, immediately resume chest compressions.",
+      "Deliver defibrillation shocks one at a time. After each shock, immediately resume chest compressions. For refractory VF/pulseless VT, consider changing the pads to an antero-posterior position after three unsuccessful shocks.",
   },
 };
 
@@ -169,7 +169,11 @@ export default function Step4Defib() {
         ]}
       >
         <View style={[styles.cprIcon, { backgroundColor: colors.shockIcon }]}>
-          <MaterialCommunityIcons name="heart-pulse" size={28} color="#FFFFFF" />
+          <MaterialCommunityIcons
+            name="heart-pulse"
+            size={28}
+            color="#FFFFFF"
+          />
         </View>
         <View style={styles.cprTextContainer}>
           <Text style={[styles.cprTitle, { color: colors.cardTitle }]}>
@@ -236,10 +240,7 @@ export default function Step4Defib() {
             />
           </View>
           <Text
-            style={[
-              styles.medicationSummaryTitle,
-              { color: colors.cardTitle },
-            ]}
+            style={[styles.medicationSummaryTitle, { color: colors.cardTitle }]}
           >
             {text.medicationTitle}
           </Text>
@@ -273,12 +274,12 @@ export default function Step4Defib() {
         </View>
       </View>
 
-      <InfoCard
+      {/* <InfoCard
         title={text.padPositionTitle}
         description={text.padPositionDescription}
         iconName="resize-outline"
-        themeMode={themeMode}
-      />
+        themeMode={themeMode} 
+      /> */}
 
       <ParalelThinkingALS />
       <H4T4Button />
