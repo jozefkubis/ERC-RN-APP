@@ -34,7 +34,7 @@ const pageText = {
     infoTitle: "Dôležité",
     infoDescription:
       "Pri nedefibrilovateľnom rytme nepodávajte výboj. Prioritou je kvalitná KPR, čo najskorší adrenalín, ventilácia kyslíkom a liečba reverzibilných príčin.",
-    calculatorButton: "Kalkulačka dávok/veľkostí",
+    calculatorButton: "Kalkulačka dávok/i-gel",
   },
   en: {
     badge: "Step 3",
@@ -61,7 +61,7 @@ const pageText = {
     infoTitle: "Important",
     infoDescription:
       "Do not deliver a shock for a non-shockable rhythm. Prioritise high-quality CPR, early adrenaline, oxygen ventilation, and treatment of reversible causes.",
-    calculatorButton: "Dose/size calculator",
+    calculatorButton: "Dose/i-gel size calculator",
   },
 };
 

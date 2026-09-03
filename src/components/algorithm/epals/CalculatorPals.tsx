@@ -165,24 +165,24 @@ export default function CalculatorPals() {
       formula: text.igelSizeFormula,
       value: igelSize,
     },
-    {
-      label: text.laryngealMaskSizeLabel,
-      formula: text.laryngealMaskSizeFormula,
-      value: text.selectByProtocolValue,
-      valueStyle: "text",
-    },
-    {
-      label: text.laryngealTubeSizeLabel,
-      formula: text.laryngealTubeSizeFormula,
-      value: text.laryngealTubeSizeValue,
-      valueStyle: "text",
-    },
-    {
-      label: text.endotrachealTubeSizeLabel,
-      formula: text.endotrachealTubeSizeFormula,
-      value: text.selectByProtocolValue,
-      valueStyle: "text",
-    },
+    // {
+    //   label: text.laryngealMaskSizeLabel,
+    //   formula: text.laryngealMaskSizeFormula,
+    //   value: text.selectByProtocolValue,
+    //   valueStyle: "text",
+    // },
+    // {
+    //   label: text.laryngealTubeSizeLabel,
+    //   formula: text.laryngealTubeSizeFormula,
+    //   value: text.laryngealTubeSizeValue,
+    //   valueStyle: "text",
+    // },
+    // {
+    //   label: text.endotrachealTubeSizeLabel,
+    //   formula: text.endotrachealTubeSizeFormula,
+    //   value: text.selectByProtocolValue,
+    //   valueStyle: "text",
+    // },
   ];
 
   return (
