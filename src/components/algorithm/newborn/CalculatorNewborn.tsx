@@ -16,8 +16,6 @@ type CalculatorText = {
   weightLabel: string;
   weightPlaceholder: string;
   resultsTitle: string;
-  shockLabel: string;
-  shockFormula: string;
   adrenalineLabel: string;
   adrenalineFormula: string;
   emptyResult: string;
@@ -39,38 +37,36 @@ type InputFieldProps = {
 
 const pageText: { sk: CalculatorText; en: CalculatorText } = {
   sk: {
-    title: "Kalkulačka dávok",
-    description: "Výpočet podľa hmotnosti a výšky dieťaťa",
+    title: "Novorodenec pri narodení",
+    description: "Výpočet podľa hmotnosti novorodenca.",
     closeButton: "Zavrieť kalkulačku",
     weightLabel: "Hmotnosť",
     weightPlaceholder: "kg",
     resultsTitle: "Výsledky",
-    shockLabel: "Výboj",
-    shockFormula: "4 J/kg",
-    adrenalineLabel: "Adrenalín IV/IO",
-    adrenalineFormula: "10 µg/kg, max. 1 mg",
-    ivVolumeLabel: "Objem IV",
-    ivVolumeFormula: "10 mL/kg",
+    adrenalineLabel: "Adrenalín UVC/IO",
+    adrenalineFormula:
+      "10-30 µg/kg; UVC/IO (umbilikálny venózny katéter / intraoseálny prístup); opakovať každé 4 min, ak SF < 60/min",
+    ivVolumeLabel: "Objem pri strate krvi/šoku",
+    ivVolumeFormula: "10 mL/kg; krv 0 Rh- alebo izotonický kryštaloid",
     glucoseLabel: "Glukóza 10%",
-    glucoseFormula: "2 mL/kg",
+    glucoseFormula: "Pri nízkej glykémii; 2 mL/kg",
     emptyResult: "0",
     disclaimer: "Pomôcka nenahrádza klinické rozhodnutie.",
   },
   en: {
-    title: "Dose calculator",
-    description: "Calculation based on the child's weight and height",
+    title: "Newborn at birth",
+    description: "Calculation based on the newborn's weight.",
     closeButton: "Close calculator",
     weightLabel: "Weight",
     weightPlaceholder: "kg",
     resultsTitle: "Results",
-    shockLabel: "Shock",
-    shockFormula: "4 J/kg",
-    adrenalineLabel: "Adrenaline IV/IO",
-    adrenalineFormula: "10 µg/kg, max. 1 mg",
-    ivVolumeLabel: "IV volume",
-    ivVolumeFormula: "10 mL/kg",
+    adrenalineLabel: "Adrenaline UVC/IO",
+    adrenalineFormula:
+      "10-30 µg/kg; UVC/IO (umbilical venous catheter / intraosseous access); repeat every 4 min if HR < 60/min",
+    ivVolumeLabel: "Volume for blood loss/shock",
+    ivVolumeFormula: "10 mL/kg; group O Rh-negative blood or isotonic crystalloid",
     glucoseLabel: "Glucose 10%",
-    glucoseFormula: "2 mL/kg",
+    glucoseFormula: "For low blood glucose; 2 mL/kg",
     emptyResult: "0",
     disclaimer: "This aid does not replace clinical judgement.",
   },
@@ -85,14 +81,8 @@ export default function CalculatorNewborn() {
   const weight = Number(weightText.replace(",", "."));
   const hasValidWeight = Number.isFinite(weight) && weight > 0;
 
-  const shockDose = hasValidWeight
-    ? `${formatNumber(weight * 4, language)} J`
-    : text.emptyResult;
-
-  const adrenalineMicrograms = hasValidWeight ? Math.min(weight * 10, 1000) : 0;
-  const adrenalineMicrogramx3 = hasValidWeight
-    ? Math.min(weight * 30, 1000)
-    : 0;
+  const adrenalineMicrograms = hasValidWeight ? weight * 10 : 0;
+  const adrenalineMicrogramx3 = hasValidWeight ? weight * 30 : 0;
   const adrenalineDose = hasValidWeight
     ? `${formatNumber(adrenalineMicrograms, language)} µg (${formatNumber(
         adrenalineMicrograms / 1000,
@@ -114,11 +104,6 @@ export default function CalculatorNewborn() {
     : text.emptyResult;
 
   const results: NewbornResultItem[] = [
-    {
-      label: text.shockLabel,
-      formula: text.shockFormula,
-      value: shockDose,
-    },
     {
       label: text.adrenalineLabel,
       formula: text.adrenalineFormula,

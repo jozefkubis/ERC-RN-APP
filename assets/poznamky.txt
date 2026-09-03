@@ -107,73 +107,143 @@
 
   ////////////////////////////////////////////////////////////////////////////////////////
 
-  • Jasné, Jožko. Teoreticky, ako skúsený vývojár aj používateľ v strese pri zásahu, by som appku nezväčšoval ďalšími obrazovkami. Skôr by som z
-  nej spravil rýchlejší rozhodovací nástroj: menej čítania, jasnejší hlavný ďalší krok, kalkulačky dostupné presne tam, kde sa dávkuje.
+  3.9.2026
 
-  Hlavný UX problém
-  Appka má dobrý obsah, ale miestami je príliš „kartičková“. Napríklad LAST má po sebe viac informačných boxov a až dole akciu „Otvoriť dospelý
-  ALS“: src/components/algorithm/special/lokalne-anestetika/Step1.tsx:116. Pri reálnom použití by som chcel okamžite vidieť:
+  Pokračujeme v projekte ERC-RN-APP:
+https://github.com/jozefkubis/ERC-RN-APP
 
-  1. čo spraviť teraz,
-  2. čo stlačiť ďalej,
-  3. doplňujúce detaily až pod tým.
+Som Jožko, zdravotnícky záchranár a začínajúci programátor. Komunikuj po slovensky, jednoducho a krok za krokom. Implementáciu robím cez Codex v mojom lokálnom projekte; v tomto vlákne spolu kontrolujeme výsledky a pripravujeme konkrétne prompty pre Codex.
 
-  Najväčšie zmeny, ktoré by som navrhol
+Cieľ
+Pripraviť jednoduchú bezplatnú Android aplikáciu s algoritmami ERC 2025 na predstavenie ERC/SRR a žiadosť o povolenie použitia materiálov. Appka má SK/EN, svetlý/tmavý režim, vyhľadávanie, históriu a integrované kalkulačky.
 
-  1. Na každej obrazovke mať jeden dominantný ďalší krok.
-     Tlačidlo typu „Pokračovať: zhodnoť rytmus“, „Áno: pacient je v ZO“, „Nie: pokračuj v liečbe“ by malo byť vždy vizuálne hlavná vec. Nie iba
-     všeobecné „Ďalší krok“.
+Nepridávame ďalšie funkcie ani veľký refaktor. Priorita: rýchlo otvoriť algoritmus a nasledovať kroky, minimum textu a čitateľné výsledky.
 
-  2. Oddeliť rozhodnutia od informácií.
-     DecisionCard + Yes/No funguje dobre napr. pri hyperkaliémii: src/components/algorithm/special/kalium/hyper/Step1.tsx:97. Tento vzor by som
-     používal viac. Informačné karty by boli až druhotné.
+Stav Gitu
 
-  3. Špeciálne okolnosti rozdeliť na sekcie.
-     Teraz je to dlhý zoznam mnohých kariet: app/algorithms/special/index.tsx:44. Dal by som hore prepínače:
-     Príčina, Pacient, Prostredie, prípadne Najčastejšie.
-     Užívateľ by nemusel scrollovať cez všetko.
+* Vetvy boli bezpečne zjednotené do main fast-forwardom.
+* Vzdialený master bol odstránený; história zostala zachovaná.
+* Lokálny main sleduje origin/main.
+* Posledný potvrdený pushnutý commit:
+  6a30ce4957dadae3087885bb2ac806d533cb79ab
+  „fix: improve calculator dose display“
+* Tento commit opravuje presnosť µg/mg/ml a rozlišuje amiodarón po 3. a po 5. výboji.
+* Formátovanie používa toFixed(10) a odstránenie koncových núl. Nie je to matematicky neobmedzená presnosť; uvedené kontrolné príklady však prešli.
+* Aktuálne je podľa posledného reportu ďalších 8 súborov zmenených IBA LOKÁLNE. Nie sú commitnuté ani pushnuté.
+* Z GitHubu preto nemožno posúdiť tieto nové lokálne úpravy. Vyžiadaj si aktuálny diff alebo kontrolu cez lokálny Codex, ak ich potrebuješ vidieť.
+* Nesnaž sa lokálny stav nahradiť starším obsahom z GitHubu.
 
-  4. Domovská obrazovka by mohla mať rýchle vstupy.
-     Teraz má vyhľadávanie, ERC 2025 a históriu: app/(tabs)/index.tsx:173. Pridal by som malé rýchle tlačidlá:
-     ALS, PALS, Novorodenec, Lieky, 4H4T.
-     Vyhľadávanie nechať, ale v urgentnej appke nechcem vždy písať.
+Osem lokálne zmenených súborov
 
-  5. Kalkulačku dať do globálne dostupného miesta.
-     Aktuálne existuje PALS kalkulačka dávok/veľkostí: src/components/algorithm/epals/CalculatorPals.tsx:49, a novorodenecká dávková kalkulačka:
-     src/components/algorithm/newborn/CalculatorNewborn.tsx:42.
-     Navrhol by som novú sekciu/tab Kalkulačky, alebo plávajúce tlačidlo v algoritmoch.
+1. src/components/algorithm/epals/CalculatorPals.tsx
+2. src/components/algorithm/newborn/SizesNewborn.tsx
+3. src/components/ui/CalculatorSheet.tsx
+4. src/components/algorithm/newborn/NewbornSheet.tsx
+5. app/(tabs)/index.tsx
+6. src/components/algorithm/adult-resuscitation/Step4Defib.tsx
+7. src/components/algorithm/newborn/CalculatorNewborn.tsx
+8. src/components/algorithm/newborn/Step5.tsx
 
-  Kalkulačka, ktorá by dávala najväčší zmysel
-  Najpraktickejšia by bola „Lieky a dávky podľa hmotnosti“:
+Čo bolo podľa reportov upravené
 
-   Modul                            Vstup    Výstup
-  ━━━━━━━━━━━━━━━  ━━━━━━━━━━━━━━━━━━━━━━━  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   Dieťa PALS                      kg, cm    výboj, adrenalín, amiodarón, pomôcky DC
-  ───────────────  ───────────────────────  ───────────────────────────────────────────
-   Novorodenec                         kg    adrenalín, glukóza, objem, výboj
-  ───────────────  ───────────────────────  ───────────────────────────────────────────
-   Anafylaxia       kg / veková kategória    adrenalín i.m., tekutiny
-  ───────────────  ───────────────────────  ───────────────────────────────────────────
-   LAST                                kg    lipidový bolus, infúzia, max. dávka
+A. Pomôcky
 
-  Najskôr by som pridal LAST lipidovú kalkulačku, lebo v texte už sú jasné hmotnostné dávky a výpočet je pre používateľa otravný v strese: src/
-  components/algorithm/special/lokalne-anestetika/Step1.tsx:30. Klinické hodnoty by som ale nemenil bez kontroly podľa slovenských RLP/RZP
-  štandardov a zdroja.
+* Neoverená výšková tabuľka ETT bola odstránená.
+* Pevné novorodenecké ETT 3,5–4,0 bolo odstránené.
+* ETT a generická laryngeálna maska namiesto nepodložených čísel zobrazujú pokyn:
+  „Veľkosť zvoľte podľa lokálneho protokolu a návodu výrobcu.“
+* PALS vstup výšky a súvisiace nepoužívané funkcie boli odstránené.
+* Úvodná obrazovka už nesľubuje výpočet podľa výšky.
+* Intersurgical i-gel zostal podľa hmotnosti s označením výrobku a zdroja.
+* Novorodenecký i-gel 1 je výslovne označený rozsahom 2–5 kg.
+* VBM LTS-D má iba statický prehľad potvrdený fotografiami obalov:
+  veľkosť 1: 5–12 kg;
+  veľkosť 2: 12–25 kg.
+* Nebolo vytvorené vlastné pravidlo pre prekrývajúcu sa hranicu 12 kg.
+* Fotografie ETT identifikovali Covidien Curity cuffed, nie VBM. Fotografie však nepotvrdzujú výber veľkosti podľa výšky.
+* V SRR materiáloch ani priloženom súhrne sme nenašli podklad pre pôvodnú výškovú tabuľku. To nie je dôkaz nesprávnosti všetkých hodnôt, ale tabuľku nemáme overenú.
 
-  Textovo by som čistil takto
+B. ALS dospelého
+Do Step4Defib.tsx pribudla karta:
+„Po 3 neúspešných výbojoch“
 
-  - Nadpis: krátky príkaz, napr. „Podajte lipidovú emulziu“.
-  - Popis: max. 1 veta.
-  - Body: max. 3 najdôležitejšie veci.
-  - Detaily typu „pri refraktérnom priebehu“ dať pod rozbaľovací blok Viac.
-  - Nepoužívať tri podobné boxy za sebou, keď stačí jeden blok „Teraz“ a jeden blok „Ak sa nezlepší“.
+Text:
+„Pri refraktérnej KF/bezpulzovej KT zvážte zmenu polohy elektród na predozadnú. Overte správnu anterolaterálnu polohu. Pri pretrvávajúcej KF pripravte nový pár elektród na predozadné umiestnenie pri nasledujúcej kontrole rytmu. Minimalizujte prerušenie kompresií.“
 
-  Moje poradie krokov
+Je doplnený aj anglický ekvivalent.
 
-  1. Najprv zjednotiť UX pravidlo: každá obrazovka = hlavná akcia hore + rozhodnutie + doplnky.
-  2. Potom upratať špeciálne okolnosti na sekcie.
-  3. Potom pridať globálny vstup Kalkulačky.
-  4. Ako prvú novú kalkulačku spraviť LAST alebo anafylaxiu.
-  5. Až potom riešiť väčšie vizuálne zmeny.
+* Zachované „zvážte“, refraktérny kontext a okamžité pokračovanie KPR.
+* Nepridaná dvojitá sekvenčná defibrilácia.
+* Zmena je iba v ALS dospelého.
+* Kartu som na telefóne videl a jej text/vzhľad sa mi nepáči: je príliš hutný. Chcem ju neskôr upraviť na stručný hlavný bod a menšie doplnenie bez straty klinického významu.
 
-  Nič som neupravoval, ani nespúšťal testy, lebo si chcel zatiaľ iba teóriu bez refaktoringu.
+C. NLS kalkulačka – posledný dokončený krok
+Podľa Codex reportu:
+
+* Názov: „Novorodenec pri narodení“ / „Newborn at birth“.
+* Popis: výpočet podľa hmotnosti novorodenca.
+* Odstránená položka výboja 4 J/kg.
+* Adrenalín označený UVC/IO, rozsah 10–30 µg/kg.
+* Detail: opakovať každé 4 min, ak SF <60/min.
+* Odstránené maximum 1 mg z výpočtu aj popisu.
+* Objem: „Objem pri strate krvi/šoku“, 10 ml/kg, krv 0 Rh− alebo izotonický kryštaloid.
+* Glukóza 10 %: pri nízkej glykémii, 2 ml/kg.
+* Step5 bol textovo zosúladený.
+* Presné formátovanie µg/mg/ml zostalo zachované.
+
+Kontrolné výpočty podľa reportu
+
+* 0,5 kg: adrenalín 5–15 µg; objem 5 ml; glukóza 1 ml.
+* 1,5 kg: adrenalín 15–45 µg = 0,015–0,045 mg; objem 15 ml; glukóza 3 ml.
+* 3,5 kg: adrenalín 35–105 µg; objem 35 ml; glukóza 7 ml.
+* 5 kg: adrenalín 50–150 µg; objem 50 ml; glukóza 10 ml.
+  Tieto hodnoty sú kontrolou aritmetiky, nie odporúčaním podať všetky látky.
+
+Dôležité obmedzenie posledného overenia
+Lokálny Codex opakovane nedokázal prečítať PDF. Pri odstránení maxima adrenalínu 1 mg vychádzal zo skoršej kontroly a online odborného textu. Nepovažuj to automaticky za uzavretý klinický audit.
+Pred uzavretím NLS zmien over priamo príslušnú časť ERC/SRR: dávku, cestu, podmienky podania/opakovania, odstránenie maxima a indikácie tekutín.
+Samotné nenájdenie maxima vo vyhľadávacom úryvku nie je dostatočný dôkaz.
+
+Dostupné zdroje
+Priložím ERCSRR_Odporucania_2025_Zhrnutie2.pdf.
+Predchádzajúca kontrola v tomto chate vedela PDF prečítať:
+
+* strana 74: NLS adrenalín,
+* strana 71: tracheálna intubácia novorodenca,
+* strana 81: tracheálna intubácia detí.
+  Strany a presné znenie pred použitím over.
+
+Oficiálne zdroje:
+
+* https://www.srr.sk/erc-odporucania/
+* https://www.erc.edu/download-centre/
+* https://www.resuscitationjournal.com/article/S0300-9572(25)00278-3/fulltext
+* https://www.resuscitationjournal.com/article/S0300-9572(25)00281-3/fulltext
+* https://www.intersurgical.com/products/airway-management/i-gel-supraglottic-airway
+
+Codex pri NLS uviedol tiež:
+https://link.springer.com/article/10.1007/s00112-026-02378-y
+
+Rozlišuj pôvodné ERC a národné úpravy RCUK; nezamieňaj ich dávkovanie automaticky.
+
+Doterajšie kontroly
+Podľa reportov prešli:
+
+* tsc --noEmit
+* npm run lint
+* git diff --check, s upozorneniami LF/CRLF.
+  Posledné NLS zmeny ešte nemajú potvrdenú mobilnú vizuálnu kontrolu.
+  Technické kontroly ani naše cielené opravy nepredstavujú úplný klinický audit appky.
+
+Čo chceme robiť ďalej
+
+1. Overiť posledné NLS zmeny a pozrieť ich na telefóne.
+2. Zjednodušiť vzhľad ALS karty bez odstránenia dôležitých podmienok.
+3. Skontrolovať finálny diff a potom uložiť odsúhlasené zmeny do Gitu.
+4. Doplniť „O aplikácii a zdroje“: autor, kontakt, účel, nezávislosť, verzie odporúčaní, zdroje a primerané obmedzenia.
+5. Pripraviť README, screenshoty a skúšobné APK.
+6. Pripraviť žiadosť ERC/SRR o podmienky použitia obsahu, slovenského prekladu a označenia ERC.
+
+Nezamieňaj povolenie na použitie materiálov za odborné schválenie aplikácie. Netvrď, že appka už bola kompletne klinicky overená alebo pripravená na verejné vydanie.
+
+Začni stručným nadviazaním a prvým potrebným krokom. Neopakuj celý tento súhrn, nepridávaj nové funkcie a nerob všetky ďalšie kroky naraz. Bez výslovného zadania nič neposielaj ERC/SRR ani nepublikuj aplikáciu.

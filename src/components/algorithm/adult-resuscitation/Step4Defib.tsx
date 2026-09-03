@@ -35,6 +35,9 @@ const pageText = {
       },
     ],
     medicationTitle: "Lieky pri pretrvávaní rytmu",
+    padPositionTitle: "Po 3 neúspešných výbojoch",
+    padPositionDescription:
+      "Pri refraktérnej KF/bezpulzovej KT zvážte zmenu polohy elektród na predozadnú.\nOverte správnu anterolaterálnu polohu. Pri pretrvávajúcej KF pripravte nový pár elektród na predozadné umiestnenie pri nasledujúcej kontrole rytmu. Minimalizujte prerušenie kompresií.",
     nextTitle: "Po 2 minútach",
     nextDescription: "Znovu zhodnoťte rytmus",
     infoTitle: "Dôležité",
@@ -67,6 +70,9 @@ const pageText = {
       },
     ],
     medicationTitle: "Medicines if the rhythm persists",
+    padPositionTitle: "After 3 unsuccessful shocks",
+    padPositionDescription:
+      "For refractory VF/pulseless VT, consider changing the pads to an antero-posterior position.\nConfirm correct antero-lateral placement. For persistent VF, prepare a fresh set of pads for antero-posterior placement at the next rhythm check. Minimise interruptions to chest compressions.",
     nextTitle: "After 2 minutes",
     nextDescription: "Reassess the rhythm",
     infoTitle: "Important",
@@ -266,6 +272,13 @@ export default function Step4Defib() {
           ))}
         </View>
       </View>
+
+      <InfoCard
+        title={text.padPositionTitle}
+        description={text.padPositionDescription}
+        iconName="resize-outline"
+        themeMode={themeMode}
+      />
 
       <ParalelThinkingALS />
       <H4T4Button />

@@ -27,6 +27,7 @@ export type CalculatorResultItem = {
   label: string;
   formula: string;
   value: string;
+  valueStyle?: "number" | "text";
 };
 
 type CalculatorSheetProps = {
@@ -182,9 +183,13 @@ function ResultRow({ item, colors }: ResultRowProps) {
       >
         <Text
           selectable
-          adjustsFontSizeToFit
-          numberOfLines={2}
-          style={[styles.resultValue, { color: colors.primary }]}
+          adjustsFontSizeToFit={item.valueStyle !== "text"}
+          numberOfLines={item.valueStyle === "text" ? 4 : 2}
+          style={[
+            styles.resultValue,
+            item.valueStyle === "text" && styles.resultTextValue,
+            { color: colors.primary },
+          ]}
         >
           {item.value}
         </Text>
@@ -279,6 +284,13 @@ const styles = StyleSheet.create({
     fontSize: 13,
     fontWeight: "900",
     fontVariant: ["tabular-nums"],
+  },
+  resultTextValue: {
+    textAlign: "left",
+    fontSize: 10,
+    fontWeight: "700",
+    lineHeight: 14,
+    fontVariant: [],
   },
   separator: {
     height: StyleSheet.hairlineWidth,

@@ -14,8 +14,6 @@ type CalculatorText = {
   closeButton: string;
   weightLabel: string;
   weightPlaceholder: string;
-  heightLabel: string;
-  heightPlaceholder: string;
   resultsTitle: string;
   shockLabel: string;
   shockFormula: string;
@@ -33,8 +31,10 @@ type CalculatorText = {
   laryngealMaskSizeFormula: string;
   laryngealTubeSizeLabel: string;
   laryngealTubeSizeFormula: string;
+  laryngealTubeSizeValue: string;
   endotrachealTubeSizeLabel: string;
   endotrachealTubeSizeFormula: string;
+  selectByProtocolValue: string;
 };
 
 type InputFieldProps = {
@@ -49,12 +49,10 @@ type InputFieldProps = {
 const pageText: { sk: CalculatorText; en: CalculatorText } = {
   sk: {
     title: "Kalkulačka dávok/veľkostí",
-    description: "Výpočet podľa hmotnosti a výšky dieťaťa",
+    description: "Dávky podľa hmotnosti a veľkosti pomôcok",
     closeButton: "Zavrieť kalkulačku",
     weightLabel: "Hmotnosť",
     weightPlaceholder: "kg",
-    heightLabel: "Výška",
-    heightPlaceholder: "cm",
     resultsTitle: "Výsledky",
     shockLabel: "Výboj",
     shockFormula: "4 J/kg",
@@ -64,25 +62,27 @@ const pageText: { sk: CalculatorText; en: CalculatorText } = {
     amiodaroneThirdShockFormula: "5 mg/kg, max. 300 mg",
     amiodaroneFifthShockLabel: "Amiodarón IV/IO - po 5. výboji",
     amiodaroneFifthShockFormula: "5 mg/kg, max. 150 mg",
-    igelSizeLabel: "Veľkosť iGel",
-    igelSizeFormula: "Podľa hmotnosti dieťaťa",
+    igelSizeLabel: "Veľkosť Intersurgical i-gel",
+    igelSizeFormula: "Podľa hmotnosti dieťaťa, tabuľka výrobcu",
     laryngealMaskSizeLabel: "Veľkosť laryngeálnej masky",
-    laryngealMaskSizeFormula: "Podľa hmotnosti dieťaťa",
-    laryngealTubeSizeLabel: "Veľkosť laryngeálnej kanyly",
-    laryngealTubeSizeFormula: "Podľa výšky dieťaťa",
+    laryngealMaskSizeFormula: "Lokálny protokol + návod výrobcu",
+    laryngealTubeSizeLabel: "VBM LTS-D",
+    laryngealTubeSizeFormula: "Údaje z obalu výrobcu",
+    laryngealTubeSizeValue:
+      "Veľkosť 1: 5-12 kg; veľkosť 2: 12-25 kg. Veľkosť zvoľte podľa lokálneho protokolu a návodu výrobcu.",
     endotrachealTubeSizeLabel: "Veľkosť endotracheálnej kanyly",
-    endotrachealTubeSizeFormula: "Cuffed / uncuffed podľa výšky",
+    endotrachealTubeSizeFormula: "Lokálny protokol + návod výrobcu",
+    selectByProtocolValue:
+      "Veľkosť zvoľte podľa lokálneho protokolu a návodu výrobcu.",
     emptyResult: "0",
     disclaimer: "Pomôcka nenahrádza klinické rozhodnutie.",
   },
   en: {
     title: "Dose/size calculator",
-    description: "Calculation based on the child's weight and height",
+    description: "Weight-based doses and equipment sizes",
     closeButton: "Close calculator",
     weightLabel: "Weight",
     weightPlaceholder: "kg",
-    heightLabel: "Height",
-    heightPlaceholder: "cm",
     resultsTitle: "Results",
     shockLabel: "Shock",
     shockFormula: "4 J/kg",
@@ -92,14 +92,18 @@ const pageText: { sk: CalculatorText; en: CalculatorText } = {
     amiodaroneThirdShockFormula: "5 mg/kg, max. 300 mg",
     amiodaroneFifthShockLabel: "Amiodarone IV/IO - after 5th shock",
     amiodaroneFifthShockFormula: "5 mg/kg, max. 150 mg",
-    igelSizeLabel: "iGel size",
-    igelSizeFormula: "Based on the child's weight",
+    igelSizeLabel: "Intersurgical i-gel size",
+    igelSizeFormula: "Based on the child's weight, manufacturer table",
     laryngealMaskSizeLabel: "Laryngeal mask size",
-    laryngealMaskSizeFormula: "Based on the child's weight",
-    laryngealTubeSizeLabel: "Laryngeal tube size",
-    laryngealTubeSizeFormula: "Based on the child's height",
+    laryngealMaskSizeFormula: "Local protocol + manufacturer instructions",
+    laryngealTubeSizeLabel: "VBM LTS-D",
+    laryngealTubeSizeFormula: "Data from the manufacturer's package",
+    laryngealTubeSizeValue:
+      "Size 1: 5-12 kg; size 2: 12-25 kg. Select the size according to the local protocol and the manufacturer's instructions.",
     endotrachealTubeSizeLabel: "Endotracheal tube size",
-    endotrachealTubeSizeFormula: "Cuffed / uncuffed by height",
+    endotrachealTubeSizeFormula: "Local protocol + manufacturer instructions",
+    selectByProtocolValue:
+      "Select the size according to the local protocol and the manufacturer's instructions.",
     emptyResult: "0",
     disclaimer: "This aid does not replace clinical judgement.",
   },
@@ -108,12 +112,10 @@ const pageText: { sk: CalculatorText; en: CalculatorText } = {
 export default function CalculatorPals() {
   const { language, themeMode } = useSettings();
   const [weightText, setWeightText] = useState("");
-  const [heightText, setHeightText] = useState("");
 
   const text = pageText[language];
   const colors = calculatorSheetColors[themeMode];
   const weight = Number(weightText.replace(",", "."));
-  const height = Number(heightText.replace(",", "."));
   const hasValidWeight = Number.isFinite(weight) && weight > 0;
 
   const shockDose = hasValidWeight
@@ -136,13 +138,6 @@ export default function CalculatorPals() {
     : text.emptyResult;
 
   const igelSize = getIGelSize(weight, text.emptyResult);
-  const laryngealMaskSize = getLaryngealMaskSize(weight, text.emptyResult);
-  const laryngealTubeSize = getLaryngealTubeSize(height, text.emptyResult);
-  const endotrachealTubeSize = getEndotrachealTubeSize(
-    height,
-    language,
-    text.emptyResult,
-  );
 
   const results: CalculatorResultItem[] = [
     {
@@ -173,17 +168,20 @@ export default function CalculatorPals() {
     {
       label: text.laryngealMaskSizeLabel,
       formula: text.laryngealMaskSizeFormula,
-      value: laryngealMaskSize,
+      value: text.selectByProtocolValue,
+      valueStyle: "text",
     },
     {
       label: text.laryngealTubeSizeLabel,
       formula: text.laryngealTubeSizeFormula,
-      value: laryngealTubeSize,
+      value: text.laryngealTubeSizeValue,
+      valueStyle: "text",
     },
     {
       label: text.endotrachealTubeSizeLabel,
       formula: text.endotrachealTubeSizeFormula,
-      value: endotrachealTubeSize,
+      value: text.selectByProtocolValue,
+      valueStyle: "text",
     },
   ];
 
@@ -194,21 +192,13 @@ export default function CalculatorPals() {
       closeButton={text.closeButton}
       themeMode={themeMode}
     >
-      <View style={styles.inputRow}>
+      <View>
         <InputField
           label={text.weightLabel}
           placeholder={text.weightPlaceholder}
           unit="kg"
           value={weightText}
           onChangeText={setWeightText}
-          colors={colors}
-        />
-        <InputField
-          label={text.heightLabel}
-          placeholder={text.heightPlaceholder}
-          unit="cm"
-          value={heightText}
-          onChangeText={setHeightText}
           colors={colors}
         />
       </View>
@@ -297,112 +287,6 @@ function getIGelSize(weight: number, emptyResult: string) {
   return "5";
 }
 
-function getLaryngealMaskSize(weight: number, emptyResult: string) {
-  if (!Number.isFinite(weight) || weight <= 0) {
-    return emptyResult;
-  }
-
-  if (weight < 5) {
-    return "1";
-  }
-
-  if (weight < 10) {
-    return "1.5";
-  }
-
-  if (weight < 20) {
-    return "2";
-  }
-
-  if (weight < 30) {
-    return "2.5";
-  }
-
-  if (weight < 50) {
-    return "3";
-  }
-
-  if (weight < 70) {
-    return "4";
-  }
-
-  return "5";
-}
-
-function getLaryngealTubeSize(height: number, emptyResult: string) {
-  if (!Number.isFinite(height) || height <= 0 || height < 90) {
-    return emptyResult;
-  }
-
-  if (height < 115) {
-    return "2";
-  }
-
-  if (height < 122) {
-    return "2.5";
-  }
-
-  if (height < 155) {
-    return "3";
-  }
-
-  if (height < 180) {
-    return "4";
-  }
-
-  return "5";
-}
-
-function getEndotrachealTubeSize(
-  height: number,
-  language: AppLanguage,
-  emptyResult: string,
-) {
-  if (!Number.isFinite(height) || height <= 0 || height < 46) {
-    return emptyResult;
-  }
-
-  const separator = " / ";
-
-  if (height < 54) {
-    return `3.0${separator}3.0-3.5`;
-  }
-
-  if (height < 63) {
-    return `3.0${separator}3.5`;
-  }
-
-  if (height < 75) {
-    return `3.5${separator}4.0`;
-  }
-
-  if (height < 85) {
-    return `3.5${separator}4.0-4.5`;
-  }
-
-  if (height < 98) {
-    return `4.0${separator}4.5-5.0`;
-  }
-
-  if (height < 110) {
-    return `4.5${separator}5.0-5.5`;
-  }
-
-  if (height < 119) {
-    return `5.0${separator}5.5-6.0`;
-  }
-
-  if (height < 132) {
-    return `5.5${separator}6.0-6.5`;
-  }
-
-  if (height <= 143) {
-    return `6.0${separator}6.5`;
-  }
-
-  return language === "sk" ? "podľa veku" : "by age";
-}
-
 function formatNumber(value: number, language: AppLanguage) {
   const formattedValue = value.toFixed(10).replace(/\.?0+$/, "");
 
@@ -414,10 +298,6 @@ function formatNumber(value: number, language: AppLanguage) {
 }
 
 const styles = StyleSheet.create({
-  inputRow: {
-    flexDirection: "row",
-    gap: 10,
-  },
   inputSection: {
     flex: 1,
     gap: 7,

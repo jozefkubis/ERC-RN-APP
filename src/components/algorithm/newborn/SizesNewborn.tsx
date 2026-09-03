@@ -19,6 +19,7 @@ type SizesText = {
   laryngealMaskSizeFormula: string;
   endotrachealTubeSizeLabel: string;
   endotrachealTubeSizeFormula: string;
+  selectByProtocolValue: string;
 };
 
 const pageText: { sk: SizesText; en: SizesText } = {
@@ -27,12 +28,14 @@ const pageText: { sk: SizesText; en: SizesText } = {
     description: "Prehľad veľkostí pre novorodenca",
     closeButton: "Zavrieť veľkosti pomôcok",
     resultsTitle: "Výsledky",
-    igelSizeLabel: "Veľkosť iGel",
-    igelSizeFormula: "Podľa hmotnosti dieťaťa",
+    igelSizeLabel: "Intersurgical i-gel veľkosť 1",
+    igelSizeFormula: "Podľa výrobcu: 2-5 kg",
     laryngealMaskSizeLabel: "Veľkosť laryngeálnej masky",
-    laryngealMaskSizeFormula: "Podľa hmotnosti dieťaťa",
+    laryngealMaskSizeFormula: "Lokálny protokol + návod výrobcu",
     endotrachealTubeSizeLabel: "Veľkosť endotracheálnej kanyly",
-    endotrachealTubeSizeFormula: "Cuffed / uncuffed podľa výšky",
+    endotrachealTubeSizeFormula: "Lokálny protokol + návod výrobcu",
+    selectByProtocolValue:
+      "Veľkosť zvoľte podľa lokálneho protokolu a návodu výrobcu.",
     disclaimer: "Pomôcka nenahrádza klinické rozhodnutie.",
   },
   en: {
@@ -40,12 +43,14 @@ const pageText: { sk: SizesText; en: SizesText } = {
     description: "Size overview for a newborn",
     closeButton: "Close equipment sizes",
     resultsTitle: "Results",
-    igelSizeLabel: "iGel size",
-    igelSizeFormula: "Based on the child's weight",
+    igelSizeLabel: "Intersurgical i-gel size 1",
+    igelSizeFormula: "Manufacturer range: 2-5 kg",
     laryngealMaskSizeLabel: "Laryngeal mask size",
-    laryngealMaskSizeFormula: "Based on the child's weight",
+    laryngealMaskSizeFormula: "Local protocol + manufacturer instructions",
     endotrachealTubeSizeLabel: "Endotracheal tube size",
-    endotrachealTubeSizeFormula: "Cuffed / uncuffed by height",
+    endotrachealTubeSizeFormula: "Local protocol + manufacturer instructions",
+    selectByProtocolValue:
+      "Select the size according to the local protocol and the manufacturer's instructions.",
     disclaimer: "This aid does not replace clinical judgement.",
   },
 };
@@ -65,12 +70,14 @@ export default function SizesNewborn() {
     {
       label: text.laryngealMaskSizeLabel,
       formula: text.laryngealMaskSizeFormula,
-      value: "1",
+      value: text.selectByProtocolValue,
+      valueStyle: "text",
     },
     {
       label: text.endotrachealTubeSizeLabel,
       formula: text.endotrachealTubeSizeFormula,
-      value: "3.5-4.0",
+      value: text.selectByProtocolValue,
+      valueStyle: "text",
     },
   ];
 

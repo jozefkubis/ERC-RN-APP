@@ -15,15 +15,15 @@ const pageText = {
     reassessmentText: "Prehodnoťte každých 30 sekúnd",
     conditionText: "Ak srdcová frekvencia zostáva < 60/min:",
     escalationActions: [
-      "Cievny prístup (umbilikálny katéter / IO)",
+      "Cievny prístup (umbilikálny venózny katéter / IO)",
       "Zvážte lieky a tekutiny",
       "Zvážte ďalšie faktory",
     ],
     medicationTitle: "Lieky a tekutiny",
     medicationActions: [
-      "Adrenalín: 10-30 mikrogramov/kg každé 4 minúty",
-      "Intravaskulárny objem (krv / tekutiny): 10 ml/kg",
-      "Glukóza 10 % (ak je hladina glukózy v krvi nízka): 2 ml/kg",
+      "Adrenalín UVC/IO: 10-30 mikrogramov/kg; opakovať každé 4 minúty, ak SF zostáva < 60/min",
+      "Objem pri strate krvi/šoku: 10 ml/kg krvi 0 Rh- alebo izotonického kryštaloidu",
+      "Glukóza 10 % pri nízkej glykémii: 2 ml/kg",
     ],
     causesTitle: "Faktory na zváženie",
     reversibleCauses: [
@@ -44,15 +44,15 @@ const pageText = {
     reassessmentText: "Reassess every 30 seconds",
     conditionText: "If the heart rate remains < 60/min:",
     escalationActions: [
-      "Vascular access (umbilical catheter / IO)",
+      "Vascular access (umbilical venous catheter / IO)",
       "Consider medicines and fluids",
       "Consider other factors",
     ],
     medicationTitle: "Medicines and fluids",
     medicationActions: [
-      "Adrenaline: 10-30 micrograms/kg every 4 minutes",
-      "Intravascular volume (blood / fluids): 10 ml/kg",
-      "Glucose 10 % (if blood glucose is low): 2 ml/kg",
+      "Adrenaline UVC/IO: 10-30 micrograms/kg; repeat every 4 minutes if HR remains < 60/min",
+      "Volume for blood loss/shock: 10 ml/kg group O Rh-negative blood or isotonic crystalloid",
+      "Glucose 10 % for low blood glucose: 2 ml/kg",
     ],
     causesTitle: "Factors to consider",
     reversibleCauses: [
