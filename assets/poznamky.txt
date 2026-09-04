@@ -1,249 +1,85 @@
- Najdôležitejšie si zapamätaj takto:
-
-  - History v _layout.tsx = tichý sledovač, ktorý zapisuje navštívené algoritmy.
-  - loadViewingHistory() = funkcia, ktorá vie históriu načítať z mobilu.
-  - index.tsx = domovská stránka, ktorá si tú históriu načíta a zobrazí ako karty.
-  - usePathname() = povie, na akej route práve si.
-  - useFocusEffect() = spustí sa, keď sa vrátiš späť na home screen.
-
-  Čiže tok je:
-
-  klikneš algoritmus
-  → zmení sa route
-  → History ju uloží
-  → vrátiš sa na home
-  → index načíta históriu
-  → zobrazí karty
-
-  Toto je už dobrý kus React Native/Expo logiky naraz, takže dáva zmysel si to rozobrať pomaly.
-
-  //////////////////////////////////////////////////////////////
-
-   Jasné, Jožko. Urobil by som to jednoducho: nastavíme rovnakú dark farbu na všetky vrstvy, ktoré sa môžu ukázať počas animácie.
-
-  Tvoje hlavné pozadie je pravdepodobne:
-
-  "#07111F"
-
-  1. Začni v src/navigation/screenOptions.ts
-
-  Tam máš spoločné farby navigácie. Pridal by som tam zvlášť screenBackground, aby bolo jasné, čo je pozadie obrazovky.
-
-  dark: {
-    background: "#0B1828",       // header / tab bar
-    screenBackground: "#07111F", // pozadie obrazoviek a animácie
-    primaryText: "#F5F8FC",
-    primary: "#77B7F2",
-    muted: "#AAB6C7",
-    border: "#31435A",
-  }
-
-  2. V getHeaderOptions() pridaj contentStyle
-
-  Toto je najdôležitejšie. contentStyle nastavuje podklad navigátora pod obrazovkami.
-
-  export function getHeaderOptions(themeMode: AppThemeMode) {
-    const colors = navigationColors[themeMode];
-
-    return {
-      headerStyle: { backgroundColor: colors.background },
-
-      // Toto je farba, ktorú uvidíš medzi slide animáciami.
-      contentStyle: {
-        backgroundColor: colors.screenBackground,
-      },
-
-      headerTintColor: colors.primaryText,
-      headerTitleStyle: {
-        color: colors.primaryText,
-        fontWeight: "bold" as const,
-      },
-      headerTitleAlign: "center" as const,
-    };
-  }
-
-  3. Skontroluj root stack
-
-  V app/_layout.tsx už používaš:
-
-  ...getHeaderOptions(themeMode),
-  animation: "slide_from_right",
-
-  Čiže keď pridáš contentStyle do getHeaderOptions, root stack to automaticky dostane.
-
-  4. Skontroluj vnorený algorithms stack
-
-  V app/(tabs)/algorithms/_layout.tsx tiež používaš:
-
-  ...getHeaderOptions(themeMode),
-  animation: "slide_from_right",
-
-  Čiže aj tam sa to opraví automaticky.
-
-  5. Potom zjednoť obrazovky
-
-  Obrazovky ako Home, Settings, AlgorithmsScreen majú vlastné:
-
-  style={{ backgroundColor: colors.background }}
-
-  Tam by dark farba mala ostať rovnaká:
-
-  background: "#07111F"
-
-  6. Najprv nerieš sheet/modaly
-
-  Kalkulačky a formSheet by som teraz nechal tak. Najprv oprav len biele prebliknutie pri klasickom slide späť. Keď to bude fungovať, až potom
-  riešiť modaly.
-
-  Najjednoduchší postup teda:
-
-  1. Pridať screenBackground do navigationColors
-  2. Pridať contentStyle do getHeaderOptions()
-  3. Nemenit ostatné obrazovky
-  4. Otestovať dark mode + späť animáciu
-
-  Toto je čisté riešenie, lebo nemeníš každú obrazovku zvlášť. Nastavíš farbu na spoločnom mieste, presne tam, kde vzniká biely podklad medzi
-  slidami.
-
-  ////////////////////////////////////////////////////////////////////////////////////////
-
-  3.9.2026
-
-  Pokračujeme v projekte ERC-RN-APP:
-https://github.com/jozefkubis/ERC-RN-APP
-
-Som Jožko, zdravotnícky záchranár a začínajúci programátor. Komunikuj po slovensky, jednoducho a krok za krokom. Implementáciu robím cez Codex v mojom lokálnom projekte; v tomto vlákne spolu kontrolujeme výsledky a pripravujeme konkrétne prompty pre Codex.
-
-Cieľ
-Pripraviť jednoduchú bezplatnú Android aplikáciu s algoritmami ERC 2025 na predstavenie ERC/SRR a žiadosť o povolenie použitia materiálov. Appka má SK/EN, svetlý/tmavý režim, vyhľadávanie, históriu a integrované kalkulačky.
-
-Nepridávame ďalšie funkcie ani veľký refaktor. Priorita: rýchlo otvoriť algoritmus a nasledovať kroky, minimum textu a čitateľné výsledky.
-
-Stav Gitu
-
-* Vetvy boli bezpečne zjednotené do main fast-forwardom.
-* Vzdialený master bol odstránený; história zostala zachovaná.
-* Lokálny main sleduje origin/main.
-* Posledný potvrdený pushnutý commit:
-  6a30ce4957dadae3087885bb2ac806d533cb79ab
-  „fix: improve calculator dose display“
-* Tento commit opravuje presnosť µg/mg/ml a rozlišuje amiodarón po 3. a po 5. výboji.
-* Formátovanie používa toFixed(10) a odstránenie koncových núl. Nie je to matematicky neobmedzená presnosť; uvedené kontrolné príklady však prešli.
-* Aktuálne je podľa posledného reportu ďalších 8 súborov zmenených IBA LOKÁLNE. Nie sú commitnuté ani pushnuté.
-* Z GitHubu preto nemožno posúdiť tieto nové lokálne úpravy. Vyžiadaj si aktuálny diff alebo kontrolu cez lokálny Codex, ak ich potrebuješ vidieť.
-* Nesnaž sa lokálny stav nahradiť starším obsahom z GitHubu.
-
-Osem lokálne zmenených súborov
-
-1. src/components/algorithm/epals/CalculatorPals.tsx
-2. src/components/algorithm/newborn/SizesNewborn.tsx
-3. src/components/ui/CalculatorSheet.tsx
-4. src/components/algorithm/newborn/NewbornSheet.tsx
-5. app/(tabs)/index.tsx
-6. src/components/algorithm/adult-resuscitation/Step4Defib.tsx
-7. src/components/algorithm/newborn/CalculatorNewborn.tsx
-8. src/components/algorithm/newborn/Step5.tsx
-
-Čo bolo podľa reportov upravené
-
-A. Pomôcky
-
-* Neoverená výšková tabuľka ETT bola odstránená.
-* Pevné novorodenecké ETT 3,5–4,0 bolo odstránené.
-* ETT a generická laryngeálna maska namiesto nepodložených čísel zobrazujú pokyn:
-  „Veľkosť zvoľte podľa lokálneho protokolu a návodu výrobcu.“
-* PALS vstup výšky a súvisiace nepoužívané funkcie boli odstránené.
-* Úvodná obrazovka už nesľubuje výpočet podľa výšky.
-* Intersurgical i-gel zostal podľa hmotnosti s označením výrobku a zdroja.
-* Novorodenecký i-gel 1 je výslovne označený rozsahom 2–5 kg.
-* VBM LTS-D má iba statický prehľad potvrdený fotografiami obalov:
-  veľkosť 1: 5–12 kg;
-  veľkosť 2: 12–25 kg.
-* Nebolo vytvorené vlastné pravidlo pre prekrývajúcu sa hranicu 12 kg.
-* Fotografie ETT identifikovali Covidien Curity cuffed, nie VBM. Fotografie však nepotvrdzujú výber veľkosti podľa výšky.
-* V SRR materiáloch ani priloženom súhrne sme nenašli podklad pre pôvodnú výškovú tabuľku. To nie je dôkaz nesprávnosti všetkých hodnôt, ale tabuľku nemáme overenú.
-
-B. ALS dospelého
-Do Step4Defib.tsx pribudla karta:
-„Po 3 neúspešných výbojoch“
-
-Text:
-„Pri refraktérnej KF/bezpulzovej KT zvážte zmenu polohy elektród na predozadnú. Overte správnu anterolaterálnu polohu. Pri pretrvávajúcej KF pripravte nový pár elektród na predozadné umiestnenie pri nasledujúcej kontrole rytmu. Minimalizujte prerušenie kompresií.“
-
-Je doplnený aj anglický ekvivalent.
-
-* Zachované „zvážte“, refraktérny kontext a okamžité pokračovanie KPR.
-* Nepridaná dvojitá sekvenčná defibrilácia.
-* Zmena je iba v ALS dospelého.
-* Kartu som na telefóne videl a jej text/vzhľad sa mi nepáči: je príliš hutný. Chcem ju neskôr upraviť na stručný hlavný bod a menšie doplnenie bez straty klinického významu.
-
-C. NLS kalkulačka – posledný dokončený krok
-Podľa Codex reportu:
-
-* Názov: „Novorodenec pri narodení“ / „Newborn at birth“.
-* Popis: výpočet podľa hmotnosti novorodenca.
-* Odstránená položka výboja 4 J/kg.
-* Adrenalín označený UVC/IO, rozsah 10–30 µg/kg.
-* Detail: opakovať každé 4 min, ak SF <60/min.
-* Odstránené maximum 1 mg z výpočtu aj popisu.
-* Objem: „Objem pri strate krvi/šoku“, 10 ml/kg, krv 0 Rh− alebo izotonický kryštaloid.
-* Glukóza 10 %: pri nízkej glykémii, 2 ml/kg.
-* Step5 bol textovo zosúladený.
-* Presné formátovanie µg/mg/ml zostalo zachované.
-
-Kontrolné výpočty podľa reportu
-
-* 0,5 kg: adrenalín 5–15 µg; objem 5 ml; glukóza 1 ml.
-* 1,5 kg: adrenalín 15–45 µg = 0,015–0,045 mg; objem 15 ml; glukóza 3 ml.
-* 3,5 kg: adrenalín 35–105 µg; objem 35 ml; glukóza 7 ml.
-* 5 kg: adrenalín 50–150 µg; objem 50 ml; glukóza 10 ml.
-  Tieto hodnoty sú kontrolou aritmetiky, nie odporúčaním podať všetky látky.
-
-Dôležité obmedzenie posledného overenia
-Lokálny Codex opakovane nedokázal prečítať PDF. Pri odstránení maxima adrenalínu 1 mg vychádzal zo skoršej kontroly a online odborného textu. Nepovažuj to automaticky za uzavretý klinický audit.
-Pred uzavretím NLS zmien over priamo príslušnú časť ERC/SRR: dávku, cestu, podmienky podania/opakovania, odstránenie maxima a indikácie tekutín.
-Samotné nenájdenie maxima vo vyhľadávacom úryvku nie je dostatočný dôkaz.
-
-Dostupné zdroje
-Priložím ERCSRR_Odporucania_2025_Zhrnutie2.pdf.
-Predchádzajúca kontrola v tomto chate vedela PDF prečítať:
-
-* strana 74: NLS adrenalín,
-* strana 71: tracheálna intubácia novorodenca,
-* strana 81: tracheálna intubácia detí.
-  Strany a presné znenie pred použitím over.
-
-Oficiálne zdroje:
-
-* https://www.srr.sk/erc-odporucania/
-* https://www.erc.edu/download-centre/
-* https://www.resuscitationjournal.com/article/S0300-9572(25)00278-3/fulltext
-* https://www.resuscitationjournal.com/article/S0300-9572(25)00281-3/fulltext
-* https://www.intersurgical.com/products/airway-management/i-gel-supraglottic-airway
-
-Codex pri NLS uviedol tiež:
-https://link.springer.com/article/10.1007/s00112-026-02378-y
-
-Rozlišuj pôvodné ERC a národné úpravy RCUK; nezamieňaj ich dávkovanie automaticky.
-
-Doterajšie kontroly
-Podľa reportov prešli:
-
-* tsc --noEmit
-* npm run lint
-* git diff --check, s upozorneniami LF/CRLF.
-  Posledné NLS zmeny ešte nemajú potvrdenú mobilnú vizuálnu kontrolu.
-  Technické kontroly ani naše cielené opravy nepredstavujú úplný klinický audit appky.
-
-Čo chceme robiť ďalej
-
-1. Overiť posledné NLS zmeny a pozrieť ich na telefóne.
-2. Zjednodušiť vzhľad ALS karty bez odstránenia dôležitých podmienok.
-3. Skontrolovať finálny diff a potom uložiť odsúhlasené zmeny do Gitu.
-4. Doplniť „O aplikácii a zdroje“: autor, kontakt, účel, nezávislosť, verzie odporúčaní, zdroje a primerané obmedzenia.
-5. Pripraviť README, screenshoty a skúšobné APK.
-6. Pripraviť žiadosť ERC/SRR o podmienky použitia obsahu, slovenského prekladu a označenia ERC.
-
-Nezamieňaj povolenie na použitie materiálov za odborné schválenie aplikácie. Netvrď, že appka už bola kompletne klinicky overená alebo pripravená na verejné vydanie.
-
-Začni stručným nadviazaním a prvým potrebným krokom. Neopakuj celý tento súhrn, nepridávaj nové funkcie a nerob všetky ďalšie kroky naraz. Bez výslovného zadania nič neposielaj ERC/SRR ani nepublikuj aplikáciu.
+Pokračujeme v projekte ERC-RN-APP.
+
+  Som Jožko, Bc. Jozef Kubis, zdravotnícky záchranár a začínajúci programátor. Komunikuj po slovensky, jednoducho,
+  priateľsky a krok za krokom. Kód píš čo najjednoduchšie, čitateľne, „ako pre debila“, bez zbytočných abstrakcií,
+  typovej mágie a veľkých refaktorov. Medicínsky obsah, dávky, rozsahy a odporúčania nemeň bez môjho výslovného
+  súhlasu.
+
+  Projekt:
+  C:\Users\kubis\Desktop\ERC-RN-APP
+
+  Tech stack:
+  - Expo SDK 54
+  - Expo Router
+  - React Native
+  - TypeScript
+  - SK/EN
+  - svetlý/tmavý režim
+  - cieľ: mobilná aplikácia pre iOS aj Android
+
+  Pred kódením:
+  - podľa AGENTS.md najprv čítaj Expo SDK 54 docs: https://docs.expo.dev/versions/v54.0.0/
+  - najprv ukáž krátky návrh/kúsok kódu s vysvetlením
+  - potom rob iba jeden malý krok naraz
+  - po kroku spusti:
+    - cmd.exe /c npx.cmd tsc --noEmit
+    - cmd.exe /c npm.cmd run lint
+    - git diff --check
+  - nepushuj na GitHub bez môjho výslovného zadania
+  - commit nerob automaticky, najprv sa ma opýtaj
+
+  Aktuálny stav:
+  - Pridaná obrazovka „O aplikácii a zdroje“ / „About and sources“.
+  - Je dostupná cez Nastavenia.
+  - Autor má byť uvedený ako: Bc. Jozef Kubis, bez mäkčeňa.
+  - V obsahu je uvedené, že aplikácia zatiaľ nie je oficiálne schválená ERC/SRR a nenahrádza odborné rozhodnutie ani
+  lokálne protokoly.
+  - V novorodeneckej časti som zakomentoval tlačidlo na veľkosti pomôcok/kanyl; zatiaľ nechcem dávať veľkosti kanyl,
+  ponechať iba i-gel tam, kde je podložený.
+  - Posledný commit bol lokálne aj pushnutý/synchronizovaný, vetva je main, nie master.
+
+  Čo ideme robiť teraz:
+  1. Pripraviť nový README.md namiesto Expo template.
+  2. README nemá tvrdiť, že appka je iba pre Android. Píš ju ako Expo / React Native mobilnú aplikáciu pripravovanú
+  pre iOS a Android.
+  3. Pridať jednoduchú dokumentáciu:
+     - docs/clinical-review.md
+     - docs/sources.md
+     - docs/release-checklist.md
+     - docs/screenshots.md
+  4. Dokumentácia má byť stručná, jasná, použiteľná pre predstavenie ERC/SRR.
+  5. Screenshoty zatiaľ len naplánovať, nie nutne vytvárať, ak sa nedohodneme inak.
+
+  Navrhovaný obsah README:
+  - názov ERC-RN-APP
+  - krátky popis aplikácie
+  - aktuálny stav: pracovná/prezentačná verzia
+  - hlavné funkcie:
+    - algoritmy ERC 2025
+    - dospelí, deti, novorodenec, špeciálne okolnosti
+    - SK/EN
+    - svetlý/tmavý režim
+    - vyhľadávanie
+    - história
+    - vybrané kalkulačky
+  - medicínske a právne obmedzenia:
+    - nie je oficiálne schválená ERC/SRR
+    - nenahrádza odborné rozhodnutie
+    - nenahrádza lokálne protokoly RLP/RZP/pracoviska
+    - pred verejným použitím treba nezávislý klinický audit
+    - povolenie na použitie materiálov ERC/SRR nie je odborné schválenie aplikácie
+  - zdroje
+  - lokálne spustenie projektu
+  - technické info:
+    - Expo SDK 54
+    - Expo Router
+    - React Native
+    - TypeScript
+    - iOS a Android
+  - screenshoty: zatiaľ plán/placeholder
+
+  Dôležité:
+  - Nerob veľký refaktor.
+  - Nezasahuj do medicínskych textov algoritmov.
+  - Nezavádzaj nové funkcie.
+  - Najprv priprav README a docs ako prvý návrh, potom spolu doladíme text.

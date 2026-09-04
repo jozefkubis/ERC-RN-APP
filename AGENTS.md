@@ -31,3 +31,14 @@ Komponenty a funkcie maju byt kratke a zrozumitelne. Ak sa nieco opakuje, vytiah
 Medicínske hodnoty, davky, rozsahy a odporucania nemen bez jasneho zadania. Pri upratovani kodu upravuj formu zapisu, nie klinicky obsah.
 
 Pri React Native / Expo kodovani dodrzuj existujuci styl projektu a nepremiestnuj subory alebo logiku zbytocne.
+
+# Prompty na buduce seansy
+
+Ak Jožko požiada o prompt na buducu seansu, najprv sa ho opytaj, ako ho chce ulozit do `assets/poznamky.txt`.
+
+Ponukni dve jednoduche moznosti:
+
+1. Pridat prompt pod posledny prompt. Oddel ho viditelnym oddelovacom a hore uveď aktualny datum.
+2. Vymazat obsah `assets/poznamky.txt` a vlozit tam iba novy prompt.
+
+Bez jasneho potvrdenia od Jožka `assets/poznamky.txt` neupravuj.
