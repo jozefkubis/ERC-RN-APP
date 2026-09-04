@@ -196,7 +196,7 @@ export default function Step4WithMovement() {
             </View>
           ))}
         </View>
-        <Pressable
+        {/* <Pressable
           accessibilityRole="button"
           onPress={() => router.push("/algorithms/newborn/sizesNewborn")}
           style={({ pressed }) => [
@@ -221,7 +221,7 @@ export default function Step4WithMovement() {
           >
             {text.calculatorButton}
           </Text>
-        </Pressable>
+        </Pressable> */}
       </View>
 
       <Pressable

@@ -4,6 +4,7 @@ import {
   useSettings,
 } from "@/src/context/settings-context";
 import { Ionicons } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 
 type Option<T extends string> = {
@@ -46,12 +47,16 @@ const settingsText = {
     subtitle: "Výber jazyka a režimu zobrazenia.",
     languageTitle: "Jazyk",
     modeTitle: "Režim zobrazenia",
+    aboutTitle: "O aplikácii a zdroje",
+    aboutSubtitle: "Autor, účel, zdroje a dôležité obmedzenia.",
   },
   en: {
     title: "App settings",
     subtitle: "Choose language and display mode.",
     languageTitle: "Language",
     modeTitle: "Display mode",
+    aboutTitle: "About and sources",
+    aboutSubtitle: "Author, purpose, sources, and important limitations.",
   },
 };
 
@@ -89,6 +94,7 @@ const settingsColors = {
 };
 
 export default function SettingsPreferences() {
+  const router = useRouter();
   const { language, themeMode, setLanguage, setThemeMode } = useSettings();
   const text = settingsText[language];
   const colors = settingsColors[themeMode];
@@ -165,6 +171,13 @@ export default function SettingsPreferences() {
           ))}
         </View>
       </View>
+
+      <SettingsLinkCard
+        title={text.aboutTitle}
+        subtitle={text.aboutSubtitle}
+        colors={colors}
+        onPress={() => router.push("/about")}
+      />
     </View>
   );
 }
@@ -227,6 +240,47 @@ function PreferenceOption({
         size={22}
         color={selected ? colors.primary : colors.mutedIcon}
       />
+    </Pressable>
+  );
+}
+
+type SettingsLinkCardProps = {
+  title: string;
+  subtitle: string;
+  colors: (typeof settingsColors)[AppThemeMode];
+  onPress: () => void;
+};
+
+function SettingsLinkCard({
+  title,
+  subtitle,
+  colors,
+  onPress,
+}: SettingsLinkCardProps) {
+  return (
+    <Pressable
+      onPress={onPress}
+      style={({ pressed }) => [
+        styles.linkCard,
+        {
+          borderColor: colors.optionBorder,
+          backgroundColor: colors.optionBackground,
+        },
+        pressed && styles.pressedOption,
+      ]}
+    >
+      <View style={[styles.optionIcon, { backgroundColor: colors.primary }]}>
+        <Ionicons name="information-circle-outline" size={22} color="#FFFFFF" />
+      </View>
+      <View style={styles.linkText}>
+        <Text style={[styles.optionLabel, { color: colors.optionText }]}>
+          {title}
+        </Text>
+        <Text style={[styles.linkSubtitle, { color: colors.subtitle }]}>
+          {subtitle}
+        </Text>
+      </View>
+      <Ionicons name="chevron-forward" size={22} color={colors.primary} />
     </Pressable>
   );
 }
@@ -303,5 +357,25 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 15,
     fontWeight: "800",
+  },
+  linkCard: {
+    minHeight: 72,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 12,
+    paddingHorizontal: 14,
+    paddingVertical: 12,
+    borderWidth: 1,
+    borderRadius: 10,
+    borderCurve: "continuous",
+  },
+  linkText: {
+    flex: 1,
+    gap: 3,
+  },
+  linkSubtitle: {
+    fontSize: 12,
+    fontWeight: "700",
+    lineHeight: 17,
   },
 });

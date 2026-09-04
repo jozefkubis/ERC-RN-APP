@@ -11,6 +11,7 @@ const exactTitles: Record<AppLanguage, Record<string, string>> = {
     "adult-resuscitation/bradycardia/altmeds": "Alternatívne lieky",
     "adult-resuscitation/bradycardia/cardiostimulationscreen":
       "Kardiostimulácia",
+    about: "O aplikácii a zdroje",
     epals: "Resuscitácia dieťaťa",
     "epals/index": "Resuscitácia dieťaťa",
     "epals/pals/roscpals": "Poresuscitačná starostlivosť",
@@ -41,6 +42,7 @@ const exactTitles: Record<AppLanguage, Record<string, string>> = {
     "adult-resuscitation/bradycardia/altmeds": "Alternative medicines",
     "adult-resuscitation/bradycardia/cardiostimulationscreen":
       "Cardiac pacing",
+    about: "About and sources",
     epals: "Paediatric Resuscitation",
     "epals/index": "Paediatric Resuscitation",
     "epals/pals/roscpals": "Post-resuscitation care",
