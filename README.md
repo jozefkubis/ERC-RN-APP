@@ -1,50 +1,83 @@
-# Welcome to your Expo app 👋
+# ERC-RN-APP
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+ERC-RN-APP je pracovná a prezentačná verzia mobilnej aplikácie pre rýchle otvorenie resuscitačných algoritmov a vybraných pomôcok.
 
-## Get started
+Aplikácia je pripravená v Expo / React Native a je smerovaná pre iOS aj Android.
 
-1. Install dependencies
+## Aktuálny Stav
+
+Projekt je vo fáze pracovnej a prezentačnej verzie.
+
+Aplikácia zatiaľ nie je oficiálne schválená European Resuscitation Council (ERC) ani Slovenskou resuscitačnou radou (SRR). Pred verejným používaním je potrebná nezávislá klinická kontrola / audit celého medicínskeho obsahu.
+
+## Prezentačný Stav
+
+K 2026-09-06 je pripravený základný prezentačný balík:
+
+- vlastný README namiesto Expo template
+- stručná dokumentácia v priečinku `docs/`
+- obrazovka "O aplikácii a zdroje" / "About and sources"
+- základné screenshoty v angličtine v tmavom režime
+- základné screenshoty v slovenčine vo svetlom režime
+
+## Hlavné Funkcie
+
+- algoritmy podľa ERC 2025
+- sekcie pre dospelých, deti, novorodenca a špeciálne okolnosti
+- slovenský a anglický jazyk
+- svetlý a tmavý režim
+- vyhľadávanie v obsahu
+- história naposledy otvorených položiek
+- vybrané kalkulačky
+
+## Cieľová Skupina
+
+Aplikácia je pripravovaná najmä pre zdravotníckych záchranárov, lekárov urgentnej medicíny a ďalších zdravotníkov, ktorí sa stretávajú s resuscitačnými situáciami.
+
+Môže slúžiť aj ako študijná a prezentačná pomôcka pre výučbu, interné predstavenie projektu alebo odbornú diskusiu.
+
+## Medicínske A Právne Obmedzenia
+
+- Aplikácia zatiaľ nie je oficiálne schválená ERC ani SRR.
+- Aplikácia nenahrádza odborné rozhodnutie zdravotníckeho pracovníka.
+- Aplikácia nenahrádza lokálne protokoly RLP, RZP ani konkrétneho pracoviska.
+- Pred verejným použitím je potrebná nezávislá klinická kontrola / audit.
+- Povolenie na použitie materiálov ERC/SRR nie je odborné schválenie aplikácie.
+- Používateľ musí vždy zohľadniť aktuálnu klinickú situáciu, kompetencie posádky a lokálne dostupné vybavenie.
+
+## Zdroje
+
+Základné zdroje a plán kontroly sú uvedené v dokumentácii:
+
+- [Klinická kontrola](docs/clinical-review.md)
+- [Zdroje](docs/sources.md)
+- [Release checklist](docs/release-checklist.md)
+- [Screenshoty](docs/screenshots.md)
+
+## Lokálne Spustenie
+
+1. Nainštaluj závislosti:
 
    ```bash
    npm install
    ```
 
-2. Start the app
+2. Spusti Expo:
 
    ```bash
    npx expo start
    ```
 
-In the output, you'll find options to open the app in a
+3. Podľa potreby otvor aplikáciu v Expo Go, vývojovom builde, Android emulátore alebo iOS simulátore.
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## Technické Informácie
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+- Expo SDK 54
+- Expo Router
+- React Native
+- TypeScript
+- pripravované pre iOS a Android
 
-## Get a fresh project
+## Screenshoty
 
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Základné screenshoty sú uložené v priečinku `docs/screenshots/`. Ich prehľad a plán ďalších obrazoviek je v súbore [docs/screenshots.md](docs/screenshots.md).

@@ -13,6 +13,8 @@ type AboutText = {
   authorItems: string[];
   purposeTitle: string;
   purposeItems: string[];
+  audienceTitle: string;
+  audienceItems: string[];
   sourcesTitle: string;
   sourcesItems: string[];
   limitsTitle: string;
@@ -51,8 +53,13 @@ const aboutText: Record<AppLanguage, AboutText> = {
     purposeTitle: "Účel aplikácie",
     purposeItems: [
       "Aplikácia slúži ako jednoduchá pomôcka na rýchle otvorenie algoritmov ERC 2025.",
-      "Je pripravovaná ako prezentačná a študijná aplikácia pre Android a iOS.",
+      "Je pripravovaná ako prezentačná a študijná aplikácia pre iOS aj Android.",
       "Cieľom je prehľadné zobrazenie krokov, vyhľadávanie, história a vybrané kalkulačky.",
+    ],
+    audienceTitle: "Cieľová skupina",
+    audienceItems: [
+      "Aplikácia je pripravovaná najmä pre zdravotníckych záchranárov, lekárov urgentnej medicíny a ďalších zdravotníkov.",
+      "Môže slúžiť aj ako študijná a prezentačná pomôcka pre výučbu, interné predstavenie projektu alebo odbornú diskusiu.",
     ],
     sourcesTitle: "Použité zdroje",
     sourcesItems: [
@@ -64,8 +71,8 @@ const aboutText: Record<AppLanguage, AboutText> = {
     limitsTitle: "Dôležité obmedzenia",
     limitsItems: [
       "Aplikácia zatiaľ nie je oficiálne schválená ERC ani SRR.",
-      "Obsah aplikácie nenahrádza odborné rozhodnutie, lokálny protokol ani aktuálne odporúčania pracoviska.",
-      "Pred verejným použitím je potrebná nezávislá klinická kontrola medicínskeho obsahu.",
+      "Obsah aplikácie nenahrádza odborné rozhodnutie, lokálne protokoly RLP/RZP ani aktuálne odporúčania pracoviska.",
+      "Pred verejným použitím je potrebná nezávislá klinická kontrola / audit medicínskeho obsahu.",
       "Povolenie na použitie materiálov ERC/SRR nie je to isté ako odborné schválenie aplikácie.",
     ],
     versionTitle: "Verzia a kontrola",
@@ -88,8 +95,13 @@ const aboutText: Record<AppLanguage, AboutText> = {
     purposeTitle: "App purpose",
     purposeItems: [
       "The app is intended as a simple aid for quickly opening ERC 2025 algorithms.",
-      "It is being prepared as a presentation and study Android and iOS app.",
+      "It is being prepared as a presentation and study app for iOS and Android.",
       "The goal is clear step-by-step display, search, history, and selected calculators.",
+    ],
+    audienceTitle: "Target audience",
+    audienceItems: [
+      "The app is being prepared mainly for paramedics, emergency medicine physicians, and other healthcare professionals.",
+      "It can also serve as a study and presentation aid for teaching, internal project presentation, or professional discussion.",
     ],
     sourcesTitle: "Sources used",
     sourcesItems: [
@@ -101,8 +113,8 @@ const aboutText: Record<AppLanguage, AboutText> = {
     limitsTitle: "Important limitations",
     limitsItems: [
       "The app has not yet been officially approved by ERC or SRR.",
-      "The app content does not replace professional judgement, local protocols, or current workplace guidance.",
-      "An independent clinical review of the medical content is required before public use.",
+      "The app content does not replace professional judgement, local EMS protocols, or current workplace guidance.",
+      "An independent clinical review / audit of the medical content is required before public use.",
       "Permission to use ERC/SRR materials is not the same as clinical endorsement of the app.",
     ],
     versionTitle: "Version and review",
@@ -189,6 +201,11 @@ export default function AboutApp() {
         <AboutSection
           title={text.purposeTitle}
           items={text.purposeItems}
+          colors={colors}
+        />
+        <AboutSection
+          title={text.audienceTitle}
+          items={text.audienceItems}
           colors={colors}
         />
         <AboutSection

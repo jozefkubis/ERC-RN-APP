@@ -4,7 +4,7 @@
     "slug": "ERC-RN-APP",
     "version": "1.0.0",
     "orientation": "portrait",
-    "platforms": ["android"],
+    "platforms": ["ios", "android"],
     "scheme": "ercrnapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,

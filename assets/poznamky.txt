@@ -1,85 +1,94 @@
+6.9.2026
+
 Pokračujeme v projekte ERC-RN-APP.
 
-  Som Jožko, Bc. Jozef Kubis, zdravotnícky záchranár a začínajúci programátor. Komunikuj po slovensky, jednoducho,
-  priateľsky a krok za krokom. Kód píš čo najjednoduchšie, čitateľne, „ako pre debila“, bez zbytočných abstrakcií,
-  typovej mágie a veľkých refaktorov. Medicínsky obsah, dávky, rozsahy a odporúčania nemeň bez môjho výslovného
-  súhlasu.
+Som Jožko, Bc. Jozef Kubis, zdravotnícky záchranár a začínajúci programátor.
+Komunikuj po slovensky, jednoducho, priateľsky a krok za krokom.
+Kód píš čo najjednoduchšie, čitateľne, "ako pre debila", bez zbytočných abstrakcií,
+typovej mágie a veľkých refaktorov.
+Medicínske hodnoty, dávky, rozsahy a odporúčania nemeň bez môjho výslovného súhlasu.
 
-  Projekt:
-  C:\Users\kubis\Desktop\ERC-RN-APP
+Projekt:
+C:\Users\kubis\Desktop\ERC-RN-APP
 
-  Tech stack:
-  - Expo SDK 54
-  - Expo Router
-  - React Native
-  - TypeScript
-  - SK/EN
-  - svetlý/tmavý režim
-  - cieľ: mobilná aplikácia pre iOS aj Android
+Tech stack:
+- Expo SDK 54
+- Expo Router
+- React Native
+- TypeScript
+- SK/EN
+- svetlý/tmavý režim
+- mobilná aplikácia pripravovaná pre iOS aj Android
 
-  Pred kódením:
-  - podľa AGENTS.md najprv čítaj Expo SDK 54 docs: https://docs.expo.dev/versions/v54.0.0/
-  - najprv ukáž krátky návrh/kúsok kódu s vysvetlením
-  - potom rob iba jeden malý krok naraz
-  - po kroku spusti:
-    - cmd.exe /c npx.cmd tsc --noEmit
-    - cmd.exe /c npm.cmd run lint
-    - git diff --check
-  - nepushuj na GitHub bez môjho výslovného zadania
-  - commit nerob automaticky, najprv sa ma opýtaj
+Pred kódením:
+- podľa AGENTS.md najprv čítaj Expo SDK 54 docs:
+  https://docs.expo.dev/versions/v54.0.0/
+- najprv ukáž krátky návrh/kúsok kódu s vysvetlením
+- rob iba jeden malý krok naraz
+- po každom kroku spusti:
+  - cmd.exe /c npx.cmd tsc --noEmit
+  - cmd.exe /c npm.cmd run lint
+  - git diff --check
+- nepushuj na GitHub bez môjho výslovného zadania
+- commit nerob automaticky, najprv sa ma opýtaj
 
-  Aktuálny stav:
-  - Pridaná obrazovka „O aplikácii a zdroje“ / „About and sources“.
-  - Je dostupná cez Nastavenia.
-  - Autor má byť uvedený ako: Bc. Jozef Kubis, bez mäkčeňa.
-  - V obsahu je uvedené, že aplikácia zatiaľ nie je oficiálne schválená ERC/SRR a nenahrádza odborné rozhodnutie ani
-  lokálne protokoly.
-  - V novorodeneckej časti som zakomentoval tlačidlo na veľkosti pomôcok/kanyl; zatiaľ nechcem dávať veľkosti kanyl,
-  ponechať iba i-gel tam, kde je podložený.
-  - Posledný commit bol lokálne aj pushnutý/synchronizovaný, vetva je main, nie master.
+Aktuálny stav k 2026-09-06:
+- README.md je nahradený vlastným projektovým README namiesto Expo template.
+- README popisuje aplikáciu ako Expo / React Native mobilnú aplikáciu pre iOS aj Android.
+- app.json obsahuje platformy ios aj android.
+- Pridaná dokumentácia:
+  - docs/clinical-review.md
+  - docs/sources.md
+  - docs/release-checklist.md
+  - docs/screenshots.md
+- Dokumentácia je stručná, jasná a pripravená ako prvý podklad pre predstavenie ERC/SRR.
+- Pridaná obrazovka "O aplikácii a zdroje" / "About and sources".
+- Obrazovka je dostupná cez Nastavenia.
+- Autor má byť uvedený ako: Bc. Jozef Kubis, bez mäkčeňa.
+- V obsahu je uvedené, že aplikácia zatiaľ nie je oficiálne schválená ERC/SRR.
+- V obsahu je uvedené, že aplikácia nenahrádza odborné rozhodnutie ani lokálne protokoly RLP/RZP/pracoviska.
+- Doplnili sme cieľovú skupinu / target audience.
+- V novorodeneckej časti je zakomentované tlačidlo na veľkosti pomôcok/kanyl.
+- Zatiaľ nechceme uvádzať veľkosti kanyl; ponechať iba i-gel tam, kde je podložený.
+- Základné screenshoty sú uložené v docs/screenshots/.
 
-  Čo ideme robiť teraz:
-  1. Pripraviť nový README.md namiesto Expo template.
-  2. README nemá tvrdiť, že appka je iba pre Android. Píš ju ako Expo / React Native mobilnú aplikáciu pripravovanú
-  pre iOS a Android.
-  3. Pridať jednoduchú dokumentáciu:
-     - docs/clinical-review.md
-     - docs/sources.md
-     - docs/release-checklist.md
-     - docs/screenshots.md
-  4. Dokumentácia má byť stručná, jasná, použiteľná pre predstavenie ERC/SRR.
-  5. Screenshoty zatiaľ len naplánovať, nie nutne vytvárať, ak sa nedohodneme inak.
+Aktuálne screenshoty:
+- docs/screenshots/home-en-dark.png
+- docs/screenshots/home-sk-light.png
+- docs/screenshots/algorithms-en-dark.png
+- docs/screenshots/algorithms-sk-light.png
+- docs/screenshots/settings-en-dark.png
+- docs/screenshots/settings-sk-light.png
+- docs/screenshots/about-sources-en-dark.png
+- docs/screenshots/about-sources-sk-light.png
 
-  Navrhovaný obsah README:
-  - názov ERC-RN-APP
-  - krátky popis aplikácie
-  - aktuálny stav: pracovná/prezentačná verzia
-  - hlavné funkcie:
-    - algoritmy ERC 2025
-    - dospelí, deti, novorodenec, špeciálne okolnosti
-    - SK/EN
-    - svetlý/tmavý režim
-    - vyhľadávanie
-    - história
-    - vybrané kalkulačky
-  - medicínske a právne obmedzenia:
-    - nie je oficiálne schválená ERC/SRR
-    - nenahrádza odborné rozhodnutie
-    - nenahrádza lokálne protokoly RLP/RZP/pracoviska
-    - pred verejným použitím treba nezávislý klinický audit
-    - povolenie na použitie materiálov ERC/SRR nie je odborné schválenie aplikácie
-  - zdroje
-  - lokálne spustenie projektu
-  - technické info:
-    - Expo SDK 54
-    - Expo Router
-    - React Native
-    - TypeScript
-    - iOS a Android
-  - screenshoty: zatiaľ plán/placeholder
+Posledné kontroly po úpravách prešli:
+- cmd.exe /c npx.cmd tsc --noEmit
+- cmd.exe /c npm.cmd run lint
+- git diff --check
 
-  Dôležité:
-  - Nerob veľký refaktor.
-  - Nezasahuj do medicínskych textov algoritmov.
-  - Nezavádzaj nové funkcie.
-  - Najprv priprav README a docs ako prvý návrh, potom spolu doladíme text.
+Dôležité:
+- Nerob veľký refaktor.
+- Nezasahuj do medicínskych textov algoritmov.
+- Nezavádzaj nové funkcie bez dohody.
+- Nepíš, že aplikácia je oficiálne schválená ERC/SRR.
+- Nepíš, že aplikácia nahrádza odborné rozhodnutie alebo lokálne protokoly.
+- Povolenie na použitie materiálov ERC/SRR nie je odborné schválenie aplikácie.
+- Pred verejným použitím treba nezávislý klinický audit/review.
+- Commit a push si Jožko chce robiť sám, pokiaľ výslovne nepovie inak.
+
+Plán nabudúce:
+1. Najprv zhrnúť, čo je aktuálne hotové:
+   - README.md
+   - dokumentácia v docs/
+   - obrazovka O aplikácii a zdroje
+   - základné screenshoty EN/dark a SK/light
+2. Prejsť README.md a docs ako text pre prezentáciu ERC/SRR.
+3. Upraviť iba formulácie, ak niečo znie nejasne alebo príliš odvážne.
+4. Skontrolovať, či dokumentácia jasne hovorí:
+   - appka je pracovná/prezentačná verzia
+   - nie je oficiálne schválená ERC/SRR
+   - nenahrádza odborné rozhodnutie
+   - nenahrádza lokálne protokoly RLP/RZP/pracoviska
+   - pred verejným použitím treba nezávislý klinický audit/review
+5. Ak bude Jožko spokojný, môže manuálne spraviť commit a push.
