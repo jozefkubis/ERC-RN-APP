@@ -3,6 +3,7 @@
     "name": "ERC-RN-APP",
     "slug": "ERC-RN-APP",
     "version": "1.0.0",
+    "icon": "./assets/icon-final.png",
     "orientation": "portrait",
     "platforms": ["ios", "android"],
     "scheme": "ercrnapp",
@@ -14,7 +15,11 @@
     "android": {
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
-      "package": "com.jozefkubis.ERCRNAPP"
+      "package": "com.jozefkubis.ERCRNAPP",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon-final.png",
+        "backgroundColor": "#071A2D"
+      }
     },
     "web": {
       "output": "static"
