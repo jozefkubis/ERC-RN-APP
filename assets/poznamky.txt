@@ -1,12 +1,8 @@
-6.9.2026
+PROMPT NA 8. 9. 2026
 
-Pokračujeme v projekte ERC-RN-APP.
+Pokračujeme v projekte mobilnej aplikácie ResusFlow (repozitár ERC-RN-APP).
 
-Som Jožko, Bc. Jozef Kubis, zdravotnícky záchranár a začínajúci programátor.
-Komunikuj po slovensky, jednoducho, priateľsky a krok za krokom.
-Kód píš čo najjednoduchšie, čitateľne, "ako pre debila", bez zbytočných abstrakcií,
-typovej mágie a veľkých refaktorov.
-Medicínske hodnoty, dávky, rozsahy a odporúčania nemeň bez môjho výslovného súhlasu.
+Som Jožko, Bc. Jozef Kubis, zdravotnícky záchranár a začínajúci až mierne pokročilý programátor. Komunikuj po slovensky, jednoducho, priateľsky a krok za krokom. Kód píš čo najjednoduchšie a čitateľne, bez zbytočných abstrakcií, veľkých refaktorov a typovej mágie.
 
 Projekt:
 C:\Users\kubis\Desktop\ERC-RN-APP
@@ -16,79 +12,95 @@ Tech stack:
 - Expo Router
 - React Native
 - TypeScript
-- SK/EN
-- svetlý/tmavý režim
-- mobilná aplikácia pripravovaná pre iOS aj Android
+- slovenský a anglický jazyk
+- svetlý a tmavý režim
+- Android a iOS
 
-Pred kódením:
-- podľa AGENTS.md najprv čítaj Expo SDK 54 docs:
-  https://docs.expo.dev/versions/v54.0.0/
-- najprv ukáž krátky návrh/kúsok kódu s vysvetlením
-- rob iba jeden malý krok naraz
-- po každom kroku spusti:
-  - cmd.exe /c npx.cmd tsc --noEmit
-  - cmd.exe /c npm.cmd run lint
-  - git diff --check
-- nepushuj na GitHub bez môjho výslovného zadania
-- commit nerob automaticky, najprv sa ma opýtaj
+Pravidlá práce:
+- Najprv si prečítaj AGENTS.md a skontroluj aktuálny stav pracovného stromu.
+- Pri Expo používaj dokumentáciu presne pre SDK 54: https://docs.expo.dev/versions/v54.0.0/
+- Pred zmenou najprv stručne povedz, čo chceš upraviť a prečo.
+- Rob iba jeden menší logický krok naraz a po ňom mi ukáž výsledok.
+- Medicínske hodnoty, dávky, intervaly a rozhodovacie body nemeň bez môjho výslovného potvrdenia.
+- Nerob veľký refaktor a nepridávaj nové funkcie bez dohody.
+- Commit, push, EAS Update, EAS Build ani publikovanie nerob bez môjho výslovného zadania.
+- Zachovaj všetky moje existujúce rozpracované zmeny.
+- Po úpravách spusti: npx tsc --noEmit, npm run lint a git diff --check.
 
-Aktuálny stav k 2026-09-06:
-- README.md je nahradený vlastným projektovým README namiesto Expo template.
-- README popisuje aplikáciu ako Expo / React Native mobilnú aplikáciu pre iOS aj Android.
-- app.json obsahuje platformy ios aj android.
-- Pridaná dokumentácia:
-  - docs/clinical-review.md
-  - docs/sources.md
-  - docs/release-checklist.md
-  - docs/screenshots.md
-- Dokumentácia je stručná, jasná a pripravená ako prvý podklad pre predstavenie ERC/SRR.
-- Pridaná obrazovka "O aplikácii a zdroje" / "About and sources".
-- Obrazovka je dostupná cez Nastavenia.
-- Autor má byť uvedený ako: Bc. Jozef Kubis, bez mäkčeňa.
-- V obsahu je uvedené, že aplikácia zatiaľ nie je oficiálne schválená ERC/SRR.
-- V obsahu je uvedené, že aplikácia nenahrádza odborné rozhodnutie ani lokálne protokoly RLP/RZP/pracoviska.
-- Doplnili sme cieľovú skupinu / target audience.
-- V novorodeneckej časti je zakomentované tlačidlo na veľkosti pomôcok/kanyl.
-- Zatiaľ nechceme uvádzať veľkosti kanyl; ponechať iba i-gel tam, kde je podložený.
-- Základné screenshoty sú uložené v docs/screenshots/.
+Účel aplikácie:
+- Jednoduchá pomôcka na rýchle otvorenie a nasledovanie resuscitačných algoritmov krok za krokom.
+- Veľké tlačidlá, minimum textu a jasné vizuálne rozlíšenie kritických krokov.
+- Nie je to komplexná tréningová platforma a zatiaľ nechcem PRO verziu.
+- Kalkulačky majú zostať priamo v príslušných algoritmoch a zároveň môžu byť zhrnuté na domovskej obrazovke.
 
-Aktuálne screenshoty:
-- docs/screenshots/home-en-dark.png
-- docs/screenshots/home-sk-light.png
-- docs/screenshots/algorithms-en-dark.png
-- docs/screenshots/algorithms-sk-light.png
-- docs/screenshots/settings-en-dark.png
-- docs/screenshots/settings-sk-light.png
-- docs/screenshots/about-sources-en-dark.png
-- docs/screenshots/about-sources-sk-light.png
+Dnešné dokončené zmeny:
+- Verejný názov aplikácie sme zmenili na ResusFlow cez pole name v app.json.
+- Slug ERC-RN-APP, Android package a EAS projectId zostali nezmenené.
+- Finálna ikona pre iOS a všeobecné použitie je assets/icon-final.png.
+- Android adaptive foreground je assets/adaptive-icon-v3.png.
+- app.json používa icon-final.png ako hlavnú ikonu a adaptive-icon-v3.png ako Android foreground.
+- Android adaptiveIcon má backgroundColor #071A2D.
+- Ikona aj názov ResusFlow boli overené v reálnom Android preview APK a vyzerajú dobre.
+- Android systémová navigačná lišta bola v samostatnom APK svetlá, hoci aplikácia bola v tmavom režime.
+- Nainštaloval sa balík expo-navigation-bar.
+- V app/_layout.tsx sa do AppContent doplnilo sledovanie themeMode a NavigationBar.setStyle(themeMode) iba pre Android.
+- expo-doctor po úprave prešiel.
+- Opravu systémovej lišty ešte treba definitívne overiť v najbližšom spoločnom APK builde; nerob kvôli nej samostatný build.
 
-Posledné kontroly po úpravách prešli:
-- cmd.exe /c npx.cmd tsc --noEmit
-- cmd.exe /c npm.cmd run lint
-- git diff --check
-
-Dôležité:
-- Nerob veľký refaktor.
-- Nezasahuj do medicínskych textov algoritmov.
-- Nezavádzaj nové funkcie bez dohody.
-- Nepíš, že aplikácia je oficiálne schválená ERC/SRR.
-- Nepíš, že aplikácia nahrádza odborné rozhodnutie alebo lokálne protokoly.
+Dôležité rozhodnutia:
+- Do sekcie Špeciálne okolnosti nepridávaj ďalšie vyhľadávanie. Hlavné vyhľadávanie na domovskej obrazovke stačí a v sekcii je rýchlejšie filtrovanie, preklikávanie a scrollovanie.
+- Medicínsky obsah budem kontrolovať ja ako autor a zdravotnícky záchranár.
+- Nepoužívaj formuláciu nezávislý klinický kontrolór, ak žiadny nezávislý človek kontrolu nevykonal.
+- Vhodná transparentná formulácia: „Medicínsky obsah skontroloval Bc. Jozef Kubis, zdravotnícky záchranár, dňa ...“
+- Aplikácia nesmie tvrdiť, že je oficiálne schválená ERC alebo SRR.
 - Povolenie na použitie materiálov ERC/SRR nie je odborné schválenie aplikácie.
-- Pred verejným použitím treba nezávislý klinický audit/review.
-- Commit a push si Jožko chce robiť sám, pokiaľ výslovne nepovie inak.
+- Aplikácia nenahrádza odborné rozhodnutie ani lokálne protokoly RLP/RZP alebo pracoviska.
 
-Plán nabudúce:
-1. Najprv zhrnúť, čo je aktuálne hotové:
-   - README.md
-   - dokumentácia v docs/
-   - obrazovka O aplikácii a zdroje
-   - základné screenshoty EN/dark a SK/light
-2. Prejsť README.md a docs ako text pre prezentáciu ERC/SRR.
-3. Upraviť iba formulácie, ak niečo znie nejasne alebo príliš odvážne.
-4. Skontrolovať, či dokumentácia jasne hovorí:
-   - appka je pracovná/prezentačná verzia
-   - nie je oficiálne schválená ERC/SRR
-   - nenahrádza odborné rozhodnutie
-   - nenahrádza lokálne protokoly RLP/RZP/pracoviska
-   - pred verejným použitím treba nezávislý klinický audit/review
-5. Ak bude Jožko spokojný, môže manuálne spraviť commit a push.
+Hlavný plán dolaďovania v tomto poradí:
+
+1. Opraviť známu nezhodu v hypotermii.
+   V aplikácii je uvedené, že pri teplote jadra pod 30 °C sa adrenalín nepodáva. Priložené slovenské zhrnutie ERC 2025 uvádza jednu dávku adrenalínu 1 mg i.v., pokiaľ sa neplánuje okamžitá eKPR; presné znenie najprv porovnaj so zdrojom a navrhni opravu SK aj EN na moje schválenie.
+
+2. Skontrolovať resuscitáciu dospelých.
+   Postupne porovnať ALS, BLS, tachykardiu, bradykardiu, ROSC a súvisiace obrazovky s ERC 2025.
+
+3. Skontrolovať detské algoritmy.
+   Overiť PALS, PBLS, FBAO, dávky liekov, energie výbojov a intervaly.
+
+4. Skontrolovať resuscitáciu novorodenca.
+   Overiť ventiláciu, kompresie, adrenalín, glukózu, objem a podložené veľkosti pomôcok.
+
+5. Skontrolovať špeciálne okolnosti.
+   Prechádzať ich postupne podľa poradia v aplikácii bez pridávania ďalšieho searchu.
+
+6. Skontrolovať všetky kalkulačky.
+   Otestovať nízke, bežné a vysoké hmotnosti a výsledky porovnať s ručným výpočtom.
+
+7. Porovnať slovenskú a anglickú verziu.
+   Obe verzie musia mať rovnaký medicínsky význam, dávky, intervaly a rozhodovacie body.
+
+8. Zjednodušiť najdlhšie urgentné obrazovky.
+   Hlavný úkon, dávka a ďalšie rozhodnutie majú byť viditeľné okamžite; doplňujúce vysvetlenia môžu byť vizuálne menej výrazné.
+
+9. Zväčšiť najmenšie texty.
+   Najmä texty s veľkosťou 10 až 11 px v kalkulačkách posúdiť na reálnom telefóne a podľa potreby zväčšiť približne na 12 až 14 px.
+
+10. Otestovať navigáciu.
+    Prejsť všetky vetvy Áno/Nie, návraty, históriu, hlavné vyhľadávanie, odkazy a kalkulačky.
+
+11. Otestovať všetky režimy.
+    Skontrolovať SK/EN, svetlý/tmavý režim, Android a neskôr iOS.
+
+12. Doplniť údaje v časti O aplikácii a zdroje.
+    Doplniť kontakt, dátum poslednej obsahovej kontroly, formuláciu o kontrole autorom a presnejšie odkazy na zdroje.
+
+13. Dokončiť dokumentáciu a prezentáciu pre SRR/ERC.
+    Pripraviť stručný opis, screenshoty, zoznam zdrojov a transparentné vyhlásenie o stave aplikácie a kontrole obsahu.
+
+14. Urobiť spoločný preview build.
+    Až po viacerých úpravách vytvoriť nový Android APK, overiť systémovú lištu, ikonu, názov a základné funkcie; následne pripraviť iOS test.
+
+15. Publikovanie riešiť až nakoniec.
+    Po obsahovej kontrole, testovaní a vyriešení povolenia materiálov pripraviť finálny Android AAB a iOS build.
+
+Začni zajtra iba bodom 1: otvor príslušné súbory hypotermie, porovnaj ich s priloženým slovenským zhrnutím ERC 2025 a ukáž mi presný návrh zmien bez ich automatického vykonania.
