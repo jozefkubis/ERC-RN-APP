@@ -3,9 +3,11 @@ import History from "@/src/components/utils/History";
 import { SettingsProvider, useSettings } from "@/src/context/settings-context";
 import { getAlgorithmScreenTitle } from "@/src/navigation/algorithmScreenTitle";
 import { getHeaderOptions } from "@/src/navigation/screenOptions";
+import * as NavigationBar from "expo-navigation-bar";
 import { Stack, useRouter } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
+import { Platform } from "react-native";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -22,13 +24,20 @@ export default function RootLayout() {
 }
 
 function AppContent() {
-  const { isSettingsReady } = useSettings();
+  const { isSettingsReady, themeMode } = useSettings();
 
   useEffect(() => {
     if (isSettingsReady) {
       SplashScreen.hide();
     }
   }, [isSettingsReady]);
+
+  useEffect(() => {
+    // Farbu spodnej systémovej lišty nastavujeme iba na Androide.
+    if (Platform.OS === "android") {
+      NavigationBar.setStyle(themeMode);
+    }
+  }, [themeMode]);
 
   if (!isSettingsReady) {
     return null;
@@ -65,6 +74,7 @@ function RootStack() {
       })}
     >
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+
       <Stack.Screen
         name="algorithms/epals/pals/calculatorPals"
         options={{
@@ -78,6 +88,7 @@ function RootStack() {
           },
         }}
       />
+
       <Stack.Screen
         name="algorithms/newborn/calculatorNewborn"
         options={{
@@ -91,6 +102,7 @@ function RootStack() {
           },
         }}
       />
+
       <Stack.Screen
         name="algorithms/newborn/sizesNewborn"
         options={{
@@ -104,6 +116,7 @@ function RootStack() {
           },
         }}
       />
+
       <Stack.Screen
         name="algorithms/special/anafylaxia/calculatorAnaphylaxis"
         options={{
