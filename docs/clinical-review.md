@@ -22,8 +22,6 @@ K 2026-09-06 je pripravený základný prezentačný balík:
 
 Aplikácia je pripravovaná najmä pre zdravotníckych záchranárov, lekárov urgentnej medicíny a ďalších zdravotníkov, ktorí potrebujú rýchlo otvoriť resuscitačný algoritmus alebo súvisiacu pomôcku.
 
-Pri klinickej kontrole / audite treba posúdiť aj to, či je obsah vhodne formulovaný pre RLP, RZP, pracoviskové protokoly a výučbové použitie.
-
 ## Čo Treba Skontrolovať
 
 - súlad algoritmov s ERC Guidelines 2025
@@ -32,7 +30,6 @@ Pri klinickej kontrole / audite treba posúdiť aj to, či je obsah vhodne formu
 - rozdiely medzi slovenskou a anglickou verziou
 - kalkulačky a ich výstupy
 - texty obmedzení a právnych upozornení
-- vhodnosť použitia pre RLP, RZP a pracoviskové protokoly
 
 ## Odporúčaný Postup
 
@@ -40,14 +37,3 @@ Pri klinickej kontrole / audite treba posúdiť aj to, či je obsah vhodne formu
 2. Porovnať každú medicínsku časť so zdrojovým dokumentom.
 3. Zapísať nejasnosti a rozdiely do samostatného zoznamu.
 4. Nechať obsah posúdiť klinicky skúseným odborníkom.
-5. Po zapracovaní pripomienok doplniť dátum poslednej obsahovej kontroly.
-
-## Výstup Auditu
-
-Pred verejným použitím by mal vzniknúť krátky záznam:
-
-- kto kontrolu vykonal
-- dátum kontroly
-- kontrolované zdroje
-- nájdené pripomienky
-- stav po zapracovaní pripomienok

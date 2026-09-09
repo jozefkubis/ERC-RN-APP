@@ -38,5 +38,4 @@ Tento súbor sumarizuje hlavné zdroje, ktoré sa majú používať pri kontrole
 
 - doplniť presné citácie použitých kapitol po klinickom audite
 - doplniť dátum poslednej kontroly zdrojov
-- doplniť meno osoby, ktorá vykonala odbornú kontrolu
 - pred verejným použitím znovu overiť aktuálnosť zdrojov

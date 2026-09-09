@@ -20,7 +20,6 @@ Tento checklist slúži ako jednoduchá kontrola pred odovzdaním prezentačnej 
 - Autor je uvedený ako `Bc. Jozef Kubis`.
 - Cieľová skupina aplikácie je jasne popísaná.
 - Aplikácia netvrdí, že je oficiálne schválená ERC alebo SRR.
-- Medicínsky obsah prešiel nezávislou klinickou kontrolou / auditom.
 
 ## Technická Kontrola
 
@@ -49,5 +48,4 @@ git diff --check
 - pripraviť stručný popis projektu
 - pripraviť a skontrolovať screenshoty hlavných obrazoviek
 - pripraviť zoznam použitých zdrojov
-- pripraviť záznam klinickej kontroly / auditu
 - pripraviť jasné vyhlásenie, že ide o žiadosť o posúdenie alebo povolenie, nie o tvrdenie schválenia
