@@ -48,7 +48,7 @@ const aboutText: Record<AppLanguage, AboutText> = {
     authorItems: [
       "Bc. Jozef Kubis",
       "zdravotnícky záchranár",
-      "email: kubis.jozef1980@gmail.com",
+      "email: jozefk.admin@gmail.com",
     ],
     purposeTitle: "Účel aplikácie",
     purposeItems: [
@@ -90,7 +90,7 @@ const aboutText: Record<AppLanguage, AboutText> = {
     authorItems: [
       "Bc. Jozef Kubis",
       "paramedic",
-      "contact details will be added before contacting ERC/SRR",
+      "email: jozefk.admin@gmail.com",
     ],
     purposeTitle: "App purpose",
     purposeItems: [
