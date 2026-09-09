@@ -1,10 +1,10 @@
-import { type AppLanguage, useSettings } from "@/src/context/settings-context";
 import CalculatorSheet, {
   ResultsCard,
   calculatorSheetColors,
   type CalculatorResultItem,
   type CalculatorSheetColors,
 } from "@/src/components/ui/CalculatorSheet";
+import { useSettings, type AppLanguage } from "@/src/context/settings-context";
 import { useState } from "react";
 import { StyleSheet, Text, TextInput, View } from "react-native";
 
@@ -328,7 +328,7 @@ const styles = StyleSheet.create({
   },
   disclaimer: {
     textAlign: "center",
-    fontSize: 9,
+    fontSize: 12,
     lineHeight: 14,
   },
 });

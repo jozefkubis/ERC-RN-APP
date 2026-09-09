@@ -1,4 +1,4 @@
-import { type AppLanguage, useSettings } from "@/src/context/settings-context";
+import { useSettings, type AppLanguage } from "@/src/context/settings-context";
 import { useState } from "react";
 import { StyleSheet, Text, TextInput, View } from "react-native";
 import {
@@ -64,7 +64,8 @@ const pageText: { sk: CalculatorText; en: CalculatorText } = {
     adrenalineFormula:
       "10-30 µg/kg; UVC/IO (umbilical venous catheter / intraosseous access); repeat every 4 min if HR < 60/min",
     ivVolumeLabel: "Volume for blood loss/shock",
-    ivVolumeFormula: "10 mL/kg; group O Rh-negative blood or isotonic crystalloid",
+    ivVolumeFormula:
+      "10 mL/kg; group O Rh-negative blood or isotonic crystalloid",
     glucoseLabel: "Glucose 10%",
     glucoseFormula: "For low blood glucose; 2 mL/kg",
     emptyResult: "0",
@@ -236,7 +237,7 @@ const styles = StyleSheet.create({
   },
   disclaimer: {
     textAlign: "center",
-    fontSize: 9,
+    fontSize: 12,
     lineHeight: 14,
   },
 });
