@@ -80,12 +80,7 @@ export default function ContentCard({
   }[tone];
 
   return (
-    <View
-      style={[
-        styles.contentCard,
-        cardStyle,
-      ]}
-    >
+    <View style={[styles.contentCard, cardStyle]}>
       <View style={styles.cardHeader}>
         <View
           style={[
@@ -124,7 +119,10 @@ export default function ContentCard({
         {items.map((item) => (
           <View key={item} style={styles.itemRow}>
             <View style={[styles.bullet, isDanger && styles.dangerBullet]} />
-            <Text selectable style={[styles.itemText, { color: colors.itemText }]}>
+            <Text
+              selectable
+              style={[styles.itemText, { color: colors.itemText }]}
+            >
               {item}
             </Text>
           </View>
@@ -172,8 +170,8 @@ const styles = StyleSheet.create({
     lineHeight: 24,
   },
   cardLead: {
-    fontSize: 15,
-    fontWeight: "800",
+    fontSize: 13,
+    fontWeight: "700",
     lineHeight: 21,
   },
   itemList: {
@@ -198,8 +196,8 @@ const styles = StyleSheet.create({
   },
   itemText: {
     flex: 1,
-    fontSize: 13,
-    fontWeight: "700",
+    fontSize: 15,
+    fontWeight: "800",
     lineHeight: 19,
   },
 });

@@ -12,7 +12,7 @@ const pageText = {
     description:
       "Pri spozorovanom hypotermickom zastavení srdca začnite okamžite kardiopulmonálnu resuscitáciu.",
     actionTitle: "Začnite KPR",
-    actionDescription: "Spustite kardiopulmonálnu resuscitáciu.",
+    actionDescription: "Začnite kardiopulmonálnu resuscitáciu.",
   },
   en: {
     badge: "CPR",
