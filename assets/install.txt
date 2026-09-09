@@ -8,5 +8,5 @@ npm install --global @openai/codex
 codex mcp add expo --url https://mcp.expo.dev/mcp
 codex mcp login expo
 
-npx eas-cli update --channel preview --message "ikona"
+npx eas-cli update --channel preview --message "upravy"
 npx eas-cli build --platform android --profile preview

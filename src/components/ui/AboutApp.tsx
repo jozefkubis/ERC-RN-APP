@@ -48,7 +48,7 @@ const aboutText: Record<AppLanguage, AboutText> = {
     authorItems: [
       "Bc. Jozef Kubis",
       "zdravotnícky záchranár",
-      "kontakt doplníme pred odoslaním žiadosti ERC/SRR",
+      "email: kubis.jozef1980@gmail.com",
     ],
     purposeTitle: "Účel aplikácie",
     purposeItems: [
@@ -79,7 +79,7 @@ const aboutText: Record<AppLanguage, AboutText> = {
     versionItems: [
       "Odporúčania: ERC 2025",
       "Verzia aplikácie: pracovná verzia",
-      "Dátum poslednej obsahovej kontroly doplníme po finálnom audite.",
+      // "Dátum poslednej obsahovej kontroly doplníme po finálnom audite.",
     ],
   },
   en: {
@@ -121,7 +121,7 @@ const aboutText: Record<AppLanguage, AboutText> = {
     versionItems: [
       "Guidelines: ERC 2025",
       "App version: work in progress",
-      "Date of the last content review will be added after the final audit.",
+      // "Date of the last content review will be added after the final audit.",
     ],
   },
 };
