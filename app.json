@@ -10,9 +10,11 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "buildNumber": "1.0.0"
     },
     "android": {
+      "versionCode": 1,
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
       "package": "com.jozefkubis.ERCRNAPP",
@@ -24,7 +26,20 @@
     "web": {
       "output": "static"
     },
-    "plugins": ["expo-router"],
+    "plugins": [
+      "expo-router",
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#F7EED6",
+          "image": "./assets/adaptive-icon-final.png",
+          "dark": {
+            "image": "./assets/adaptive-icon-final.png",
+            "backgroundColor": "#071A2D"
+          }
+        }
+      ]
+    ],
     "extra": {
       "router": {},
       "eas": {

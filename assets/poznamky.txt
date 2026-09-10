@@ -55,7 +55,7 @@ Dôležité aktuálne informácie:
 - Verejný názov aplikácie je ResusFlow.
 - Slug ERC-RN-APP, Android package a EAS projectId zostali nezmenené.
 - Hlavná iOS a všeobecná ikona je assets/icon-final.png.
-- Android adaptive foreground je assets/adaptive-icon-v3.png.
+- Android adaptive foreground je assets/adaptive-icon-final.png.
 - Android adaptiveIcon používa backgroundColor #071A2D.
 - Balík expo-navigation-bar je nainštalovaný.
 - app/_layout.tsx nastavuje NavigationBar.setStyle(themeMode) iba na Androide.
@@ -63,3 +63,19 @@ Dôležité aktuálne informácie:
 - Aktuálna chyba Expo Go hovorí, že nainštalovaná aplikácia Expo Go je pre SDK 57, zatiaľ čo projekt používa SDK 54.
 
 Začni kontrolou pracovného stromu a aktuálnych súborov. Potom mi navrhni krátke poradie dnešných krokov. Nevytváraj commit, build ani nič nepublikuj, kým ti to výslovne nepotvrdím.
+
+============================================================
+
+PROMPT NA ĎALŠIU KONTROLU – 10. 9. 2026
+
+Pokračujeme v kontrole konfigurácie aplikácie ResusFlow pre Expo SDK 54. Najprv si prečítaj AGENTS.md a zachovaj všetky existujúce rozpracované zmeny.
+
+Skontroluj tieto body:
+- `userInterfaceStyle` je nastavené na `automatic`, ale v `package.json` nie je priamo uvedený balík `expo-system-ui`. Over podľa dokumentácie Expo SDK 54, či ho treba doinštalovať, a pred každou zmenou si vypýtaj moje potvrdenie.
+- Prever nezhody verzií React Navigation balíkov, ktoré hlási `npx expo-doctor`, a navrhni najmenšiu bezpečnú opravu. Bez potvrdenia balíky neupravuj.
+- Skontroluj, či sú `ios.buildNumber: "1.0.0"` a `android.versionCode: 1` vhodné pre prvý preview a neskorší produkčný build.
+- Over Android adaptive ikonu `assets/adaptive-icon-final.png`, všeobecnú/iOS ikonu `assets/icon-final.png` a farbu pozadia `#071A2D`.
+- Over splash screen v spoločnom preview alebo release builde, pretože Expo Go ho nemusí zobraziť správne.
+- Pri Android preview builde znova skontroluj svetlý a tmavý režim, status bar, navigačnú lištu a edge-to-edge správanie.
+
+Zatiaľ nerob upgrade Expo SDK, commit, build, upload ani publikovanie bez môjho výslovného potvrdenia.
