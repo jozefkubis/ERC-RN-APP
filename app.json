@@ -23,6 +23,9 @@
         "backgroundColor": "#071A2D"
       }
     },
+    "androidNavigationBar": {
+      "enforceContrast": false
+    },
     "web": {
       "output": "static"
     },
@@ -31,11 +34,11 @@
       [
         "expo-splash-screen",
         {
-          "backgroundColor": "#F7EED6",
+          "backgroundColor": "#F7F8FC",
           "image": "./assets/adaptive-icon-final.png",
           "dark": {
             "image": "./assets/adaptive-icon-final.png",
-            "backgroundColor": "#071A2D"
+            "backgroundColor": "#07111F"
           }
         }
       ]

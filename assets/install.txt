@@ -3,6 +3,7 @@ npx expo install react-native-screens react-native-safe-area-context
 npm install @react-navigation/native-stack
 npm install @react-navigation/bottom-tabs
 npx expo install @react-native-async-storage/async-storage
+npx expo install expo-system-ui
 
 npm install --global @openai/codex
 codex mcp add expo --url https://mcp.expo.dev/mcp
