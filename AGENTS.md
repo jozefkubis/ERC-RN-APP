@@ -1,6 +1,11 @@
+# Zaciatok kazdej seansy
+
+Pri kazdom spusteni agenta, pred zacatim prace, si precitaj `assets/poznamky.txt`. Venuj pozornost najma najnovsiemu zapisu a nadviaz na rozpracovane ulohy. Aktualne pokyny od Jozka maju prednost pred starsimi poznamkami.
+
 # Expo HAS CHANGED
 
 Read the exact versioned docs at https://docs.expo.dev/versions/v54.0.0/ before writing any code.
+
 
 # Style pisania kodu
 
