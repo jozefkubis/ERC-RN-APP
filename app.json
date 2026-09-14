@@ -10,7 +10,8 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true,
+      "bundleIdentifier": "com.jozefkubis.resusflow",
+      "supportsTablet": false,
       "buildNumber": "1.0.0"
     },
     "android": {
@@ -28,6 +29,7 @@
     },
     "plugins": [
       "expo-router",
+      "expo-system-ui",
       [
         "expo-splash-screen",
         {
