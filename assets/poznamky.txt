@@ -1,63 +1,145 @@
-PROMPT NA ĎALŠIU SEANSU – 11. 9. 2026
+PROMPT NA ĎALŠIU SEANSU – 14. 9. 2026
 
-Pokračujeme v projekte mobilnej aplikácie ResusFlow (ERC-RN-APP).
+Pokračujeme v projekte mobilnej aplikácie ResusFlow (repozitár ERC-RN-APP).
 
-Som Jožko, Bc. Jozef Kubis, zdravotnícky záchranár a začínajúci až mierne pokročilý programátor. Komunikuj po slovensky, jednoducho, priateľsky a krok za krokom. Kód píš priamočiaro, bez zbytočných abstrakcií a veľkých refaktorov.
+Som Jožko, Bc. Jozef Kubis, zdravotnícky záchranár a začínajúci až mierne pokročilý programátor. Komunikuj po slovensky, jednoducho, priateľsky a krok za krokom. Kód píš čo najjednoduchšie, priamočiaro a čitateľne, bez zbytočných abstrakcií, veľkých refaktorov a typovej mágie.
 
-Pracovný priečinok na Ubuntu:
-/home/jozefk/Projekty/ERC-RN-APP
+Projekt na Windows:
+C:\Users\kubis\Desktop\ERC-RN-APP
 
-PRAVIDLÁ
+TECH STACK
 
-- Na začiatku si prečítaj AGENTS.md a tieto poznámky. Skontroluj git status a zachovaj existujúce rozpracované zmeny.
-- Expo SDK 54, Expo Router, React Native, TypeScript, SK/EN, svetlá/tmavá téma.
-- Pred písaním kódu čítaj dokumentáciu presne pre SDK 54: https://docs.expo.dev/versions/v54.0.0/
-- Pred úpravou stručne vysvetli, čo meníš a prečo. Postupuj po menších logických krokoch.
-- Medicínske hodnoty, dávky, intervaly a rozhodovacie body nemeň bez môjho výslovného potvrdenia.
-- Balíky ani Expo SDK nemeň bez dohody. Nepridávaj nové funkcie bez dohody.
-- Commit, push, build, upload, publikovanie ani odosielanie správ iným ľuďom nerob bez môjho výslovného potvrdenia pre danú akciu.
-- Po zmenách kódu alebo konfigurácie spusti npx tsc --noEmit, npm run lint a git diff --check.
-- Pri budúcom ukladaní promptu dodrž pravidlo v AGENTS.md o voľbe pridať/nahradiť poznámky. Tento súbor bol teraz celý nahradený na moje výslovné želanie.
+- Expo SDK 54
+- Expo Router
+- React Native
+- TypeScript
+- slovenský a anglický jazyk
+- svetlý a tmavý režim
+- Android a iOS, ale najbližšie pokračujeme najmä s Androidom a Google Play
 
-HOTOVÉ V SEANSE 11. 9. 2026
+PRAVIDLÁ PRÁCE
 
-- Doplnený expo-system-ui ~6.0.9 pre userInterfaceStyle: automatic na Androide.
-- Zosúladené deklarované rozsahy React Navigation s kontrolou Expo SDK 54:
-  @react-navigation/bottom-tabs ^7.4.0
-  @react-navigation/native ^7.1.8
-  @react-navigation/native-stack ^7.3.16
-  Nainštalované verzie zostali 7.18.18, 7.3.18 a 7.18.10; nešlo o downgrade.
-- Expo-doctor po zosúladení prešiel 18/18 kontrol. Posledné kontroly TypeScriptu, lintu a git diff --check prešli.
-- assets/icon-final.png má 1024 × 1024, RGB bez priehľadnosti a pozadie #071A2D. Pozadie sa doplnilo cez Python so súhlasom Jožka, pôvodné logo a jeho poloha/veľkosť zostali zachované. Nepoužíva sa návrh z obrazového generátora.
-- assets/adaptive-icon-final.png zostáva priehľadné popredie Android ikony. Logo sa podľa merania zmestí do bezpečnej oblasti Android adaptive ikony.
-- Splash používa adaptive-icon-final.png; svetlé pozadie #F7F8FC a tmavé #07111F zodpovedajú domovskej obrazovke. Pôvodná krémová bola iba dočasná.
-- Pre rozdielny odtieň systémovej Android lišty pod tabmi pridané expo.androidNavigationBar.enforceContrast: false.
-- app/_layout.tsx už nastavuje NavigationBar.setStyle(themeMode) na Androide.
-- AGENTS.md doplnené: pri každom spustení agenta čítať assets/poznamky.txt, najmä najnovší zápis; aktuálne pokyny Jožka majú prednosť.
-- Jožko vytvoril Android preview sám a následne oznámil: preview hotové a nedostatky odstránené. Ber to ako jeho potvrdenie výsledku; agent nemá vlastný záznam jednotlivých testov ani odkaz na konkrétny build. Nezačínaj opäť riešiť starý problém Expo Go alebo lišty bez nového dôvodu.
+- Najprv si prečítaj AGENTS.md a celý tento súbor. Potom skontroluj git status a zachovaj všetky existujúce rozpracované zmeny.
+- Pred písaním Expo kódu čítaj presnú dokumentáciu pre SDK 54: https://docs.expo.dev/versions/v54.0.0/
+- Pri požiadavkách Google Play over aktuálne informácie v oficiálnej dokumentácii Google Play. Požiadavky obchodov sa môžu meniť.
+- Pred každou zmenou stručne povedz, čo chceš upraviť a prečo.
+- Postupuj po malých logických krokoch a vysvetľuj riešenie primerane začiatočníkovi.
+- Medicínske hodnoty, dávky, intervaly, algoritmy ani rozhodovacie body nemeň bez môjho výslovného potvrdenia.
+- Expo SDK neupgraduj ani nedowngraduj bez môjho výslovného potvrdenia.
+- Nové balíky inštaluj iba po vysvetlení ich účelu a mojom potvrdení. Pri Expo balíkoch používaj npx expo install.
+- Commit, push, EAS Update, EAS Build, upload ani publikovanie do Google Play alebo App Store nevykonaj bez môjho samostatného výslovného potvrdenia pre konkrétnu akciu.
+- Pri push notifikáciách neposielaj testovacie ani reálne správy bez môjho výslovného potvrdenia.
+- Po úpravách kódu alebo konfigurácie spusti npx tsc --noEmit, npm run lint, npx expo-doctor a git diff --check.
+- Pri budúcom ukladaní promptu dodrž pravidlo v AGENTS.md. Tento súbor bol 14. 9. 2026 celý nahradený na moje výslovné želanie.
 
-AKTUÁLNA KONFIGURÁCIA
+AKTUÁLNY STAV PROJEKTU
 
-- Verejný názov ResusFlow, verzia 1.0.0.
-- Slug ERC-RN-APP, scheme ercrnapp.
-- Android package com.jozefkubis.ERCRNAPP – zachovať.
-- EAS projectId 9f745607-4511-4c71-ae10-b65e2d208d3d.
-- Android adaptive pozadie #071A2D; edgeToEdgeEnabled: true.
-- EAS appVersionSource: remote. Preview profil: internal, APK, channel preview. Production: autoIncrement: true.
-- Vzdialený Android versionCode bol cez EAS overený ako 1 PRED Jožkovým posledným preview buildom. Pred produkciou over aktuálny stav; lokálne android.versionCode: 1 nie je rozhodujúci údaj pri remote verziovaní.
-- runtimeVersion.policy: appVersion, updates.url zodpovedá EAS projectId.
-- iOS ZATIAĽ ODLOŽENÉ podľa Jožka. Neskôr doriešiť chýbajúci bundleIdentifier, supportsTablet: true a samostatné iOS testovanie. ios.buildNumber je zatiaľ 1.0.0.
-- npm pri inštalácii hlásil 35 bezpečnostných nálezov (20 moderate, 15 high); ich dosah zatiaľ nebol preskúmaný. Nespúšťaj automaticky npm audit fix --force.
-- Na konci seansy existovali necommitnuté zmeny v AGENTS.md, app.json, assets/icon-final.png, assets/install.txt, package.json a package-lock.json; teraz pribudla výmena assets/poznamky.txt. Over skutočný stav, nič neprepisuj naslepo.
+- Aktívna vetva je main.
+- Posledný známy commit po vyriešení merge konfliktu je ae47729 s názvom „merge: spojenie lokalnych a vzdialenych zmien“.
+- Jožko vytvoril a otestoval nový Android preview build. Oznámil, že build aj aplikácia fungujú dobre.
+- Neopakuj staré riešenie Expo Go ani predchádzajúce merge konflikty, ak na to nevznikne nový dôvod.
+- Verejný názov aplikácie je ResusFlow, verzia 1.0.0.
+- Android package je com.jozefkubis.ERCRNAPP – bez výslovného potvrdenia ho nemeň.
+- iOS bundleIdentifier je com.jozefkubis.resusflow a supportsTablet je false.
+- EAS projectId je 9f745607-4511-4c71-ae10-b65e2d208d3d – nemeň ho.
+- appVersionSource je remote. Preview profil vytvára interný Android APK na kanáli preview. Production profil používa autoIncrement a kanál production.
+- runtimeVersion používa policy appVersion a updates.url zodpovedá EAS projectId.
+- expo-system-ui ~6.0.9 je nainštalovaný a zapojený ako config plugin.
+- expo-navigation-bar ~5.0.10 je nainštalovaný. app/_layout.tsx nastavuje štýl navigačnej lišty podľa témy iba na Androide.
+- androidNavigationBar.enforceContrast je false.
+- Posledné kontroly npx tsc --noEmit, npm run lint, npx expo-doctor a git diff --check prešli. Expo Doctor mal výsledok 18/18.
+- npm audit predtým hlásil nepriame bezpečnostné nálezy. Nespúšťaj npm audit fix --force, pretože navrhoval aj nekompatibilný prechod na Expo SDK 57.
 
-ĎALŠÍ CIEĽ: PRÍPRAVA PUBLIKOVANIA ANDROIDU NA GOOGLE PLAY
+AKTUÁLNE IKONY A SPLASH SCREEN
 
-1. Prečítaj README.md a existujúce docs/release-checklist.md, docs/clinical-review.md, docs/sources.md, docs/screenshots.md a podklady v docs/screenshots/.
-2. Zisti, čo je už pripravené a čo ešte chýba pre Google Play. Release checklist obsahuje stav zo 6. 9. 2026 a môže byť zastaraný. Klinická kontrola tam bola uvedená ako neuzavretá; technické preview nie je potvrdením klinického auditu.
-3. Over aktuálne oficiálne požiadavky Google Play relevantné pre túto aplikáciu. Priprav konkrétny zoznam chýbajúcich podkladov: texty obchodu, screenshoty/grafika, kontakty, zásady ochrany súkromia, Data safety, obsahový rating a príslušné vyhlásenia pre zdravotnú aplikáciu. Tvrdenia o dátach over podľa kódu a služieb, nevymýšľaj ich.
-4. Skontroluj obsahové, technické a právne podmienky vrátane zdrojov a povolení. Netvrď, že ResusFlow je oficiálne schválené ERC/SRR. Odlíš povolenie použiť materiály od odborného schválenia aplikácie. Medicínsku kontrolu autorom opisuj pravdivo podľa dostupných podkladov.
-5. Zachovaj vyhlásenie, že aplikácia nenahrádza odborné rozhodnutie ani lokálne protokoly RLP/RZP alebo pracoviska. Ak treba doplniť prezentačné podklady pre SRR/ERC, nadviaž na existujúcu dokumentáciu.
-6. Priprav kontrolný zoznam pre produkčný Android AAB a vhodnú testovaciu cestu v Google Play podľa stavu účtu. Údaje o účte, ktoré nevieš zistiť, si stručne vypýtaj.
-7. Finálny build, upload ani publikovanie nespúšťaj bez samostatného výslovného súhlasu. Jožko si posledný preview build spustil sám.
+- assets/icon-final.png je normálna štvorcová ikona 1024 × 1024 s nepriehľadným modrým pozadím a nápisom ResusFlow.
+- assets/adaptive-icon-final.png je Android adaptive foreground 1024 × 1024 so skutočne transparentnými okrajmi. Obsahuje hviezdu života, sanitku a postavu bez nápisu.
+- Motív adaptive ikony bol kvôli bezpečnej Android maske zmenšený a vycentrovaný približne na 594 × 571 px.
+- Android adaptiveIcon používa backgroundColor #071A2D.
+- Splash screen používa assets/adaptive-icon-final.png. Svetlé pozadie je #F7F8FC a tmavé pozadie #07111F.
+- Config plugin expo-splash-screen momentálne nemá zadané vlastné imageWidth, takže používa predvolenú veľkosť.
 
-Začni kontrolou pracovného stromu a dokumentácie. Potom stručne povedz, čo konkrétne zostáva pre Android publikovanie, a navrhni prvý malý krok. iOS teraz nerieš.
+JOŽKOVE ZISTENIE Z REÁLNEHO PREVIEW BUILDU
+
+- Pri otváraní aplikácie je obrázok uprostred splash screenu príliš malý.
+- Nainštalovaná ikona aplikácie má tmavé pozadie, ktoré chce Jožko doladiť.
+- Ostatné časti buildu sú podľa Jožka v poriadku.
+
+HLAVNÁ ÚLOHA 1 – DOLADENIE IKONY A SPLASH SCREENU
+
+1. Najprv skontroluj aktuálne app.json, obe PNG ikony a presnú dokumentáciu Expo SDK 54 pre app icon, adaptive icon a expo-splash-screen.
+2. Rozlišuj tri samostatné veci:
+   - normálnu iOS/všeobecnú ikonu,
+   - Android adaptive launcher ikonu,
+   - obrázok zobrazený na splash screene.
+3. Pravdepodobná príčina malej splash ikony je kombinácia veľkej transparentnej rezervy v adaptive-icon-final.png a predvolenej hodnoty imageWidth. Najprv to over, potom navrhni najmenšiu bezpečnú úpravu.
+4. Zváž samostatný PNG súbor pre splash screen s menšou vnútornou rezervou, aby zmena splash screenu nenarušila bezpečnú oblasť Android adaptive ikony.
+5. Pri splash screene navrhni konkrétnu hodnotu imageWidth podľa SDK 54 dokumentácie a vysvetli jej vizuálny účinok. Neupravuj ju naslepo bez návrhu.
+6. Pri tmavom pozadí launcher ikony najprv ukáž možnosti:
+   - zachovať #071A2D,
+   - použiť modrú farbu pôvodného návrhu,
+   - použiť inú farbu odsúhlasenú Jožkom.
+7. Pred zmenou farby alebo grafiky si vypýtaj Jožkovo potvrdenie. Nevytváraj ďalší build iba na skúšku bez potvrdenia.
+8. iOS ikone napevno nevyrezávaj ani nezaobľuj rohy. Operačný systém aplikuje vlastnú masku.
+9. Adaptive foreground musí zostať transparentný a celý dôležitý motív musí zostať v bezpečnej stredovej oblasti pre kruhovú aj zaoblenú masku.
+10. Po úpravách over rozmery, alfa kanál, cesty v app.json a výslednú Expo konfiguráciu.
+
+HLAVNÁ ÚLOHA 2 – PUSH NOTIFIKÁCIE
+
+1. Najprv sa Jožka opýtaj, na čo presne majú push notifikácie slúžiť, kto ich bude odosielať a aký typ obsahu majú obsahovať.
+2. Zisti, či Jožko chce:
+   - iba lokálne notifikácie naplánované v zariadení,
+   - vzdialené push notifikácie posielané používateľom,
+   - alebo obidve možnosti.
+3. Pred implementáciou si prečítaj presnú dokumentáciu expo-notifications pre Expo SDK 54 a aktuálnu dokumentáciu EAS pre push notifikácie.
+4. Skontroluj, či expo-notifications už je nainštalovaný. Ak nie je, vysvetli balík a pred inštaláciou si vypýtaj potvrdenie.
+5. Pre vzdialené push notifikácie priprav jednoduchý návrh celej cesty:
+   - vyžiadanie povolenia používateľa,
+   - vytvorenie Android notification channel,
+   - získanie Expo Push Tokenu s aktuálnym EAS projectId,
+   - bezpečné uloženie tokenu,
+   - backend alebo služba, ktorá správu odošle,
+   - spracovanie prijatej notifikácie a otvorenia aplikácie.
+6. Over požiadavky Androidu a Firebase Cloud Messaging vrátane FCM V1 credentials. Žiadne tajné kľúče nevkladaj priamo do repozitára ani do aplikácie.
+7. Počítaj s tým, že vzdialené push notifikácie treba testovať na fyzickom zariadení a po pridaní natívneho balíka bude potrebný nový build.
+8. Navrhni najjednoduchšiu architektúru primeranú malej aplikácii. Nepridávaj zbytočný backend alebo platenú službu bez dohody.
+9. Keďže ide o zdravotnícku aplikáciu, neposielaj v texte notifikácie citlivé zdravotné alebo osobné údaje viditeľné na uzamknutej obrazovke.
+10. Pred odoslaním akejkoľvek testovacej správy si vypýtaj výslovné potvrdenie.
+
+HLAVNÁ ÚLOHA 3 – POKRAČOVANIE PUBLIKOVANIA CELEJ APLIKÁCIE NA GOOGLE PLAY
+
+1. ResusFlow je v procese prípravy na publikovanie celej aplikácie na Google Play. Nejde už iba o technický preview build.
+2. Prečítaj README.md a existujúce súbory:
+   - docs/release-checklist.md,
+   - docs/clinical-review.md,
+   - docs/sources.md,
+   - docs/screenshots.md,
+   - podklady v docs/screenshots/.
+3. Over, čo je už hotové a čo ešte chýba. Staršie checklisty môžu byť zastarané, preto ich porovnaj s aktuálnym stavom projektu a aktuálnymi oficiálnymi požiadavkami Google Play.
+4. Priprav konkrétny kontrolný zoznam pre:
+   - produkčný Android AAB,
+   - názov a texty Google Play listing-u,
+   - ikonu, feature graphic a screenshoty,
+   - kontaktné údaje a verejnú URL zásad ochrany súkromia,
+   - Data safety formulár,
+   - obsahový rating,
+   - cieľovú skupinu a prípadné reklamy,
+   - App access,
+   - vyhlásenia a pravidlá relevantné pre zdravotnícku aplikáciu,
+   - interné alebo uzavreté testovanie podľa aktuálneho stavu Jožkovho Google Play účtu.
+5. Push notifikácie môžu ovplyvniť zásady ochrany súkromia a Data safety. Po navrhnutí ich architektúry znovu vyhodnoť, aké údaje sa skutočne zbierajú, prenášajú alebo ukladajú. Nič si nevymýšľaj; tvrdenia over podľa kódu a použitých služieb.
+6. Jasne odlišuj povolenie použiť materiály od odborného schválenia aplikácie. Netvrď, že ResusFlow je oficiálne schválené ERC alebo SRR.
+7. Zachovaj pravdivú formuláciu o medicínskej kontrole autorom a upozornenie, že aplikácia nenahrádza odborné rozhodnutie ani lokálne protokoly RLP/RZP alebo pracoviska.
+8. Pred produkčným buildom over aktuálne vzdialené Android versionCode v EAS. Lokálna hodnota android.versionCode: 1 nemusí byť pri remote verziovaní rozhodujúca.
+9. Finálny AAB, upload do Google Play Console, odoslanie na kontrolu ani publikovanie nevykonaj bez Jožkovho samostatného výslovného potvrdenia.
+
+ODPORÚČANÉ PORADIE ĎALŠEJ SEANSY
+
+1. Skontroluj git status a aktuálne súbory.
+2. Zhrň Jožkovi zistený stav najviac v niekoľkých bodoch.
+3. Najprv navrhni konkrétne riešenie malej splash ikony a tmavého pozadia launcher ikony.
+4. Po Jožkovom potvrdení uprav a over ikony/splash konfiguráciu.
+5. Potom si vyjasni účel push notifikácií a priprav minimálny technický návrh bez unáhlenej implementácie.
+6. Nakoniec aktualizuj zoznam chýbajúcich krokov pre Google Play s ohľadom na zvolenú push architektúru.
+
+Začni iba kontrolou a krátkym návrhom prvého kroku. Nevytváraj build, commit, push, EAS Update ani nič nepublikuj, kým ti to Jožko výslovne nepotvrdí.
