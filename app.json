@@ -38,9 +38,11 @@
         {
           "backgroundColor": "#F7F8FC",
           "image": "./assets/adaptive-icon-final.png",
+          "imageWidth": 200,
+          "imageHeight": 200,
           "dark": {
             "image": "./assets/adaptive-icon-final.png",
-            "backgroundColor": "#07111F"
+            "backgroundColor": "#F7F8FC"
           }
         }
       ]
