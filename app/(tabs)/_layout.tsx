@@ -31,6 +31,7 @@ export default function TabsLayout() {
           backgroundColor: colors.background,
           borderTopColor: colors.border,
         },
+        headerShown: true,
         tabBarIcon: ({ color, size }) => (
           <Ionicons
             name={icons[route.name] ?? "ellipse"}
