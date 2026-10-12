@@ -1,4 +1,5 @@
 import { useSettings } from "@/src/context/settings-context";
+import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import React from "react";
 import { Pressable, Text, View } from "react-native";
@@ -55,18 +56,23 @@ export default function ABCDE() {
         onPress={() => router.push("algorithms/abcde-als-adult/airway")}
       >
         <Text>{text.airway}</Text>
+        <Ionicons name="arrow-forward" size={22} color={colors.text} />
       </Pressable>
       <Pressable onPress={() => console.log("Breathing pressed")}>
         <Text>{text.breathing}</Text>
+        <Ionicons name="arrow-forward" size={22} color={colors.text} />
       </Pressable>
       <Pressable onPress={() => console.log("Circulation pressed")}>
         <Text>{text.circulation}</Text>
+        <Ionicons name="arrow-forward" size={22} color={colors.text} />
       </Pressable>
       <Pressable onPress={() => console.log("Disability pressed")}>
         <Text>{text.disability}</Text>
+        <Ionicons name="arrow-forward" size={22} color={colors.text} />
       </Pressable>
       <Pressable onPress={() => console.log("Exposure pressed")}>
         <Text>{text.exposure}</Text>
+        <Ionicons name="arrow-forward" size={22} color={colors.text} />
       </Pressable>
     </View>
   );

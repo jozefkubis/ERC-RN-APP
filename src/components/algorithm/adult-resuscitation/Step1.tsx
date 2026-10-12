@@ -114,7 +114,7 @@ export default function Step1() {
             },
             pressed && styles.pressed,
           ]}
-          onPress={() => router.push("/algorithms/abcde/abcde")}
+          onPress={() => router.push("/algorithms/abcde-als-adult/abcde")}
         >
           <View
             style={[
