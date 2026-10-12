@@ -1,7 +1,7 @@
 import { useSettings } from "@/src/context/settings-context";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import { StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import AlgorithmScreen from "../../ui/AlgorithmScreen";
 import InfoCard from "../../ui/info-card";
 import StepHeader from "../../ui/StepHeader";
@@ -105,14 +105,16 @@ export default function Step1() {
             router.push("/algorithms/adult-resuscitation/als/step2")
           }
         />
-        <View
-          style={[
+        <Pressable
+          style={({ pressed }) => [
             styles.answerCard,
             {
               borderColor: colors.answerBorder,
               backgroundColor: colors.answerBackground,
             },
+            pressed && styles.pressed,
           ]}
+          onPress={() => router.push("/algorithms/abcde/abcde")}
         >
           <View
             style={[
@@ -120,14 +122,12 @@ export default function Step1() {
               { backgroundColor: colors.answerIconBackground },
             ]}
           >
-            <Ionicons
-              name="checkmark"
-              size={24}
-              color={colors.answerIcon}
-            />
+            <Ionicons name="checkmark" size={24} color={colors.answerIcon} />
           </View>
           <View style={styles.answerTextContainer}>
-            <Text style={[styles.answerTitleLight, { color: colors.answerTitle }]}>
+            <Text
+              style={[styles.answerTitleLight, { color: colors.answerTitle }]}
+            >
               {text.no}
             </Text>
             <Text
@@ -139,7 +139,7 @@ export default function Step1() {
               {text.noDescription}
             </Text>
           </View>
-        </View>
+        </Pressable>
       </View>
 
       <InfoCard
@@ -211,5 +211,9 @@ const styles = StyleSheet.create({
   answerDescriptionLight: {
     fontSize: 13,
     lineHeight: 19,
+  },
+  pressed: {
+    opacity: 0.7,
+    transform: [{ scale: 0.99 }],
   },
 });
