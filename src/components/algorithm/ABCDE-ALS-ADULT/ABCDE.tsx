@@ -1,7 +1,6 @@
 import AlgorithmScreen from "@/src/components/ui/AlgorithmScreen";
 import { useSettings } from "@/src/context/settings-context";
 import { Ionicons } from "@expo/vector-icons";
-import Fontisto from "@expo/vector-icons/Fontisto";
 import { useRouter } from "expo-router";
 import type { ComponentProps } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
@@ -157,7 +156,9 @@ export default function ABCDE() {
               pressed && styles.cardPressed,
             ]}
           >
-            <View style={[styles.letterPanel, { backgroundColor: accentColor }]}>
+            <View
+              style={[styles.letterPanel, { backgroundColor: accentColor }]}
+            >
               <Text style={styles.letter}>{section.letter}</Text>
               <Ionicons name={section.iconName} size={25} color="#FFFFFF" />
             </View>

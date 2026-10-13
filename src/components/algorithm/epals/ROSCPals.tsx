@@ -115,14 +115,17 @@ export default function ROSCPals() {
         themeMode={themeMode}
       />
 
-      <View
-        style={[
+      <Pressable
+        accessibilityRole="button"
+        style={({ pressed }) => [
           styles.heroCard,
           {
             borderColor: colors.heroBorder,
             backgroundColor: colors.heroBackground,
           },
+          pressed && styles.pressed,
         ]}
+        onPress={() => router.push("/algorithms/abcde-pals/abcde-pals")}
       >
         <View
           style={[styles.heroIcon, { backgroundColor: colors.successIcon }]}
@@ -137,15 +140,13 @@ export default function ROSCPals() {
             {text.heroTitle}
           </Text>
           <Text
-            style={[
-              styles.heroDescription,
-              { color: colors.heroDescription },
-            ]}
+            style={[styles.heroDescription, { color: colors.heroDescription }]}
           >
             {text.heroDescription}
           </Text>
         </View>
-      </View>
+        <Ionicons name="arrow-forward" size={22} color={colors.heroTitle} />
+      </Pressable>
 
       <View
         style={[
@@ -173,7 +174,9 @@ export default function ROSCPals() {
         <View style={styles.careList}>
           {text.careItems.map((item) => (
             <View key={item} style={styles.careRow}>
-              <View style={[styles.bullet, { backgroundColor: colors.bullet }]} />
+              <View
+                style={[styles.bullet, { backgroundColor: colors.bullet }]}
+              />
               <Text style={[styles.careText, { color: colors.careText }]}>
                 {item}
               </Text>

@@ -114,13 +114,16 @@ export default function Step1Pbls() {
       </View>
 
       <View style={styles.answersContainer}>
-        <View
-          style={[
+        <Pressable
+          accessibilityRole="button"
+          onPress={() => router.push("/algorithms/abcde-pals/abcde-pals")}
+          style={({ pressed }) => [
             styles.answerCard,
             {
               borderColor: colors.lightBorder,
               backgroundColor: colors.lightBackground,
             },
+            pressed && styles.pressed,
           ]}
         >
           <View
@@ -144,7 +147,8 @@ export default function Step1Pbls() {
               {text.yesDescription}
             </Text>
           </View>
-        </View>
+          <Ionicons name="arrow-forward" size={22} color={colors.lightIcon} />
+        </Pressable>
 
         <Pressable
           accessibilityRole="button"

@@ -18,6 +18,12 @@ const exactTitles: Record<AppLanguage, Record<string, string>> = {
     "abcde-als-adult/circulation": "C - Krvný obeh",
     "abcde-als-adult/disability": "D - Neurologický stav",
     "abcde-als-adult/exposure": "E - Expozícia",
+    "abcde-pals/abcde-pals": "ABCDE PRÍSTUP K DIEŤAŤU",
+    "abcde-pals/airway-pals": "A - Dýchacie cesty",
+    "abcde-pals/breathing-pals": "B - Dýchanie",
+    "abcde-pals/circulation-pals": "C - Krvný obeh",
+    "abcde-pals/disability-pals": "D - Neurologický stav",
+    "abcde-pals/exposure-pals": "E - Expozícia",
     epals: "Resuscitácia dieťaťa",
     "epals/index": "Resuscitácia dieťaťa",
     "epals/pals/roscpals": "Poresuscitačná starostlivosť",
@@ -34,8 +40,7 @@ const exactTitles: Record<AppLanguage, Record<string, string>> = {
     "special/hypotermia/lavina/step1": "Záchrana z lavíny",
     "special/hypotermia/lavina/avalife": "AvaLife",
     "special/embolia/PEresuscitacia/step1": "Pľúcna embólia - ZO",
-    "special/koronarnatromboza/st-elevation":
-      "Koronárna trombóza - STEMI",
+    "special/koronarnatromboza/st-elevation": "Koronárna trombóza - STEMI",
     "special/koronarnatromboza/ongoing-cpr": "Koronárna trombóza - KPR",
   },
   en: {
@@ -46,8 +51,7 @@ const exactTitles: Record<AppLanguage, Record<string, string>> = {
     "adult-resuscitation/bradycardia/alternative-medications":
       "Alternative medicines",
     "adult-resuscitation/bradycardia/altmeds": "Alternative medicines",
-    "adult-resuscitation/bradycardia/cardiostimulationscreen":
-      "Cardiac pacing",
+    "adult-resuscitation/bradycardia/cardiostimulationscreen": "Cardiac pacing",
     about: "About and sources",
     epals: "Paediatric Resuscitation",
     "epals/index": "Paediatric Resuscitation",
@@ -57,6 +61,12 @@ const exactTitles: Record<AppLanguage, Record<string, string>> = {
     "abcde-als-adult/circulation": "C - Circulation",
     "abcde-als-adult/disability": "D - Disability",
     "abcde-als-adult/exposure": "E - Exposure",
+    "abcde-pals/abcde-pals": "ABCDE APPROACH TO THE CHILD",
+    "abcde-pals/airway-pals": "A - Airway",
+    "abcde-pals/breathing-pals": "B - Breathing",
+    "abcde-pals/circulation-pals": "C - Circulation",
+    "abcde-pals/disability-pals": "D - Disability",
+    "abcde-pals/exposure-pals": "E - Exposure",
     "epals/pals/roscpals": "Post-resuscitation care",
     "epals/pals/termination": "Termination of resuscitation",
     special: "Special Circumstances",
@@ -71,13 +81,15 @@ const exactTitles: Record<AppLanguage, Record<string, string>> = {
     "special/hypotermia/lavina/step1": "Avalanche rescue",
     "special/hypotermia/lavina/avalife": "AvaLife",
     "special/embolia/PEresuscitacia/step1": "Pulmonary embolism - arrest",
-    "special/koronarnatromboza/st-elevation":
-      "Coronary thrombosis - STEMI",
+    "special/koronarnatromboza/st-elevation": "Coronary thrombosis - STEMI",
     "special/koronarnatromboza/ongoing-cpr": "Coronary thrombosis - CPR",
   },
 };
 
-const prefixTitles: Record<AppLanguage, readonly [prefix: string, title: string][]> = {
+const prefixTitles: Record<
+  AppLanguage,
+  readonly [prefix: string, title: string][]
+> = {
   sk: [
     ["adult-resuscitation/als/", "Rozšírená resuscitácia"],
     ["adult-resuscitation/bls/", "Základná resuscitácia"],
