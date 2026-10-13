@@ -1,6 +1,7 @@
 import { useSettings } from "@/src/context/settings-context";
 import { Ionicons } from "@expo/vector-icons";
-import { StyleSheet, Text, View } from "react-native";
+import { useRouter } from "expo-router";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import AlgorithmScreen from "../../ui/AlgorithmScreen";
 import StepHeader from "../../ui/StepHeader";
 import InfoCard from "../../ui/info-card";
@@ -146,6 +147,7 @@ const cardColors = {
 };
 
 export default function Cardiostimulation() {
+  const router = useRouter();
   const { language, themeMode } = useSettings();
   const text = pageText[language];
   const colors = cardColors[themeMode];
@@ -220,7 +222,41 @@ export default function Cardiostimulation() {
             </Text>
           </View>
           <View style={styles.numberedList}>
-            {text.preparationSteps.map((item, index) => (
+            <Pressable
+              onPress={() => router.push("/algorithms/abcde-als-adult/abcde")}
+              style={({ pressed }) => [
+                styles.numberedItem,
+                pressed && styles.pressed,
+              ]}
+            >
+              <View
+                style={[
+                  styles.numberBadgeLight,
+                  {
+                    borderColor: colors.primary,
+                    backgroundColor: colors.numberLightBackground,
+                  },
+                ]}
+              >
+                <Text
+                  style={[styles.numberTextLight, { color: colors.primary }]}
+                >
+                  1
+                </Text>
+              </View>
+              <Text
+                style={[styles.listText, { color: colors.text }]}
+              >
+                {text.preparationSteps[0]}
+              </Text>
+              <Ionicons
+                name="arrow-forward"
+                size={20}
+                color={colors.primary}
+              />
+            </Pressable>
+
+            {text.preparationSteps.slice(1).map((item, index) => (
               <View key={item} style={styles.numberedItem}>
                 <View
                   style={[
@@ -232,7 +268,7 @@ export default function Cardiostimulation() {
                   ]}
                 >
                   <Text style={[styles.numberTextLight, { color: colors.primary }]}>
-                    {index + 1}
+                    {index + 2}
                   </Text>
                 </View>
                 <Text style={[styles.listText, { color: colors.text }]}>
@@ -462,6 +498,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "flex-start",
     gap: 8,
+  },
+  pressed: {
+    opacity: 0.7,
+    transform: [{ scale: 0.99 }],
   },
   numberBadge: {
     width: 22,

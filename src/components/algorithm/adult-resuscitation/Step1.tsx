@@ -139,6 +139,7 @@ export default function Step1() {
               {text.noDescription}
             </Text>
           </View>
+          <Ionicons name="arrow-forward" size={22} color={colors.answerIcon} />
         </Pressable>
       </View>
 

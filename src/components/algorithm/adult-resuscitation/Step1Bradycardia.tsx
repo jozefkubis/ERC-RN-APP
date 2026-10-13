@@ -121,13 +121,15 @@ export default function Step1Bradycardia() {
         themeMode={themeMode}
       />
 
-      <View
-        style={[
+      <Pressable
+        onPress={() => router.push("/algorithms/abcde-als-adult/abcde")}
+        style={({ pressed }) => [
           styles.assessmentCard,
           {
             borderColor: colors.softBorder,
             backgroundColor: colors.softBackground,
           },
+          pressed && styles.pressed,
         ]}
       >
         <View style={styles.cardHeader}>
@@ -137,6 +139,7 @@ export default function Step1Bradycardia() {
           <Text style={[styles.cardTitle, { color: colors.primary }]}>
             {text.assessmentTitle}
           </Text>
+          <Ionicons name="arrow-forward" size={22} color={colors.primary} />
         </View>
 
         <View style={styles.list}>
@@ -149,7 +152,7 @@ export default function Step1Bradycardia() {
             </View>
           ))}
         </View>
-      </View>
+      </Pressable>
 
       <View
         style={[

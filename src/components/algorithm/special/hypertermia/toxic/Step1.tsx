@@ -3,6 +3,8 @@ import ContentCard from "@/src/components/ui/ContentCard";
 import HeroCard from "@/src/components/ui/HeroCard";
 import StepHeader from "@/src/components/ui/StepHeader";
 import { useSettings } from "@/src/context/settings-context";
+import { useRouter } from "expo-router";
+import { Pressable, StyleSheet } from "react-native";
 
 const pageText = {
   sk: {
@@ -62,6 +64,7 @@ const pageText = {
 };
 
 export default function Step1() {
+  const router = useRouter();
   const { language, themeMode } = useSettings();
   const text = pageText[language];
 
@@ -100,12 +103,27 @@ export default function Step1() {
         themeMode={themeMode}
       />
 
-      <ContentCard
-        title={text.abcdeTitle}
-        iconName="medkit-outline"
-        items={text.abcdeItems}
-        themeMode={themeMode}
-      />
+      <Pressable
+        onPress={() => router.push("/algorithms/abcde-als-adult/abcde")}
+        style={({ pressed }) => [styles.abcdeLink, pressed && styles.pressed]}
+      >
+        <ContentCard
+          title={text.abcdeTitle}
+          iconName="medkit-outline"
+          items={text.abcdeItems}
+          themeMode={themeMode}
+        />
+      </Pressable>
     </AlgorithmScreen>
   );
 }
+
+const styles = StyleSheet.create({
+  abcdeLink: {
+    width: "100%",
+  },
+  pressed: {
+    opacity: 0.7,
+    transform: [{ scale: 0.99 }],
+  },
+});

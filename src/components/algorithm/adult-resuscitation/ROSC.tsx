@@ -108,13 +108,15 @@ export default function ROSC() {
         themeMode={themeMode}
       />
 
-      <View
-        style={[
+      <Pressable
+        onPress={() => router.push("/algorithms/abcde-als-adult/abcde")}
+        style={({ pressed }) => [
           styles.heroCard,
           {
             borderColor: colors.heroBorder,
             backgroundColor: colors.heroBackground,
           },
+          pressed && styles.pressed,
         ]}
       >
         <View
@@ -138,7 +140,8 @@ export default function ROSC() {
             {text.heroDescription}
           </Text>
         </View>
-      </View>
+        <Ionicons name="arrow-forward" size={22} color={colors.heroTitle} />
+      </Pressable>
 
       <H4T4Button />
 

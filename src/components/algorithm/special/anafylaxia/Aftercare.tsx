@@ -6,6 +6,7 @@ import InfoCard from "@/src/components/ui/info-card";
 import StepHeader from "@/src/components/ui/StepHeader";
 import { useSettings } from "@/src/context/settings-context";
 import { useRouter } from "expo-router";
+import { Pressable, StyleSheet } from "react-native";
 
 const pageText = {
   sk: {
@@ -70,13 +71,18 @@ export default function Aftercare() {
         themeMode={themeMode}
       />
 
-      <HeroCard
-        eyebrow={text.heroEyebrow}
-        title={text.heroTitle}
-        description={text.heroDescription}
-        iconName="pulse"
-        themeMode={themeMode}
-      />
+      <Pressable
+        onPress={() => router.push("/algorithms/abcde-als-adult/abcde")}
+        style={({ pressed }) => [styles.abcdeLink, pressed && styles.pressed]}
+      >
+        <HeroCard
+          eyebrow={text.heroEyebrow}
+          title={text.heroTitle}
+          description={text.heroDescription}
+          iconName="pulse"
+          themeMode={themeMode}
+        />
+      </Pressable>
 
       <ContentCard
         title={text.beforeTitle}
@@ -103,3 +109,13 @@ export default function Aftercare() {
     </AlgorithmScreen>
   );
 }
+
+const styles = StyleSheet.create({
+  abcdeLink: {
+    width: "100%",
+  },
+  pressed: {
+    opacity: 0.7,
+    transform: [{ scale: 0.99 }],
+  },
+});

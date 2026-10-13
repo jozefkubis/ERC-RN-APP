@@ -115,13 +115,15 @@ export default function Step1bls() {
       </View>
 
       <View style={styles.answersContainer}>
-        <View
-          style={[
+        <Pressable
+          onPress={() => router.push("/algorithms/abcde-als-adult/abcde")}
+          style={({ pressed }) => [
             styles.answerCard,
             {
               borderColor: colors.lightBorder,
               backgroundColor: colors.lightBackground,
             },
+            pressed && styles.pressed,
           ]}
         >
           <View
@@ -145,7 +147,8 @@ export default function Step1bls() {
               {text.yesDescription}
             </Text>
           </View>
-        </View>
+          <Ionicons name="arrow-forward" size={22} color={colors.lightIcon} />
+        </Pressable>
 
         <Pressable
           onPress={() =>

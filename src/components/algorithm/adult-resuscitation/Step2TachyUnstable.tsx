@@ -198,12 +198,20 @@ export default function Step2TachyUnstable() {
         </Pressable>
       </View>
 
-      <InfoCard
-        title={text.infoTitle}
-        description={text.infoDescription}
-        iconName="pulse-outline"
-        themeMode={themeMode}
-      />
+      <Pressable
+        onPress={() => router.push("/algorithms/abcde-als-adult/abcde")}
+        style={({ pressed }) => [
+          styles.abcdeLink,
+          pressed && styles.pressed,
+        ]}
+      >
+        <InfoCard
+          title={text.infoTitle}
+          description={text.infoDescription}
+          iconName="pulse-outline"
+          themeMode={themeMode}
+        />
+      </Pressable>
     </AlgorithmScreen>
   );
 }
@@ -239,6 +247,13 @@ const styles = StyleSheet.create({
   flowContainer: {
     width: "100%",
     gap: 12,
+  },
+  abcdeLink: {
+    width: "100%",
+  },
+  pressed: {
+    opacity: 0.7,
+    transform: [{ scale: 0.99 }],
   },
   actionCard: {
     width: "100%",
